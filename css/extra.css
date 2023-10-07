@@ -1,0 +1,196 @@
+img.emoticon {
+	vertical-align: bottom;
+}
+
+.spoiler {
+	display: inline-block;
+	background-color: #000000 !important;
+	color: #ffffff !important;
+	border: 1px solid #ffffff;
+	border-radius: 2px;
+	
+}
+.spoiler .spoilerInner {
+	display: inline-block;
+	visibility: hidden !important;
+	padding: 0 2px;
+}
+.spoiler:hover .spoilerInner {
+	visibility: visible !important;
+}
+tr.hide {
+	display: none;
+}
+.userscore-plus-10, .userscore-plus-5, .userscore-plus-1 {
+	color: #00ff00;
+	font-weight: bold;
+	font-size: 10px;
+}
+.userscore-minus-10,.userscore-minus-5, .userscore-minus-1 {
+	color: #ff0000;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+#social h3, #affiliates h3 {
+	font-size: 10pt;
+	text-align: center;
+	margin: 24px 0 8px 0;
+}
+#affiliates ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+#affiliates li {
+	text-align: center;
+	margin-bottom: 8px;
+}
+#social ul {
+	margin: 0 auto;
+	padding: 0;
+	list-style-type: none;
+	display: table;
+}
+#social li {
+	float: left;
+	margin: 0 1px;
+}
+
+.rate, .rate_outline{
+	width: 15px;
+	height: 16px;
+	margin: 0;
+	padding: 0;
+	float: left;
+	cursor:pointer;
+}
+
+.hide {
+	display: none;
+}
+
+.postsidebar > .un {
+	display: inline-block;
+	max-width: 150px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	vertical-align: bottom;
+}
+
+#row-email {
+	/* spambot trap */
+	display: none;
+}
+
+div.avatar {
+	max-width: 150px;
+	max-height: 150px;
+	overflow: hidden;
+}
+
+table.gallery .screenshot {
+	max-width: 256px;
+	max-height: 224px;
+	margin: 0 auto;
+	text-align: center;
+}
+table.gallery img {
+	max-width: 100%;
+}
+table.gallery td {
+	position: relative;
+}
+table.gallery input[type="checkbox"] {
+	position: absolute;
+	top: 0.25em;
+	left: 0.25em;
+	opacity: 0;
+	filter: drop-shadow(1.5px 1.5px 2px rgba(0, 0, 0, 0.8));
+	transition: opacity 220ms;
+}
+table.gallery td:hover input[type="checkbox"],
+table.gallery input[type="checkbox"]:checked {
+	opacity: 1;
+}
+
+.namecolorpicker {
+	display: inline-block;
+	min-width: 150px;
+	max-height: 200px;
+	overflow-y: scroll;
+	border: 1px solid #909090;
+	list-style-type: none;
+	padding: 0 0 1px 0;
+	margin: 0;
+	white-space: nowrap;
+}
+.namecolorpicker li {
+	display: block;
+	margin-bottom: -1px;
+}
+.namecolorpicker li.header {
+	margin-top: 7px;
+	border: 1px solid #405060;
+	background-color: #121a22;
+	border-radius: 3px;
+	padding: 6px 6px 12px 6px;
+	margin-bottom: -6px;
+	font-weight: bold;
+}
+.namecolorpicker li:first-child {
+	margin-top: 0;
+}
+.namecolorpicker li.item input {
+	display: none;
+}
+.namecolorpicker li.item label {
+	display: block;
+	border: 1px solid #405060;
+	background-color: #233241;
+	border-radius: 3px;
+	padding: 6px;
+	color: #ffffff;
+	position: relative;
+}
+.namecolorpicker li.item label:hover {
+	background-color: #1c5167;
+	border-color: #336980;
+	z-index: 1;
+}
+.namecolorpicker li.item span {
+	display: inline-block;
+	height: 20px;
+	width: 20px;
+	border-radius: 3px;
+	border: 1px solid #000000;
+	vertical-align: -6px;
+	margin-right: 6px;
+}
+.namecolorpicker li.item input:checked + label {
+	background-color: #4f5b34;
+	border-color: #66734d;
+	z-index: 2;
+}
+
+/*
+     FILE ARCHIVED ON 07:07:44 Sep 19, 2018 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 07:52:56 Oct 01, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 106.404
+  exclusion.robots: 0.066
+  exclusion.robots.policy: 0.059
+  cdx.remote: 0.051
+  esindex: 0.006
+  LoadShardBlock: 79.056 (3)
+  PetaboxLoader3.datanode: 95.374 (5)
+  load_resource: 266.323 (2)
+  PetaboxLoader3.resolve: 141.437 (2)
+*/

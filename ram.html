@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+  <head>
+    <title>SMB3 Memory Map</title>
+    <link rel="stylesheet" href="./css/smw.css">
+    <link rel="stylesheet" href="./css/newcss.css">
+  </head>
+  <body>
+    <table cellpadding="0" cellspacing="0" width="100%">
+      <tbody>
+        <tr>
+          <td align="center" height="180"><a href=".."><img src="./images/banner.png" alt="Banner"></a>
+            <br>
+          </td>
+        </tr>
+        <tr>
+          <td height="10"></td>
+        </tr>
+        <tr>
+          <td>
+            <table cellpadding="0" cellspacing="0" width="100%">
+              <tbody>
+                <tr>
+                  <td width="16" height="16"><img src="./images/tree_top_left.gif" alt=""></td>
+                  <td height="16" style="background-image: url('./images/tree_top.gif');"></td>
+                  <td width="16" height="16"><img src="./images/tree_top_right.gif" alt=""></td>
+                </tr>
+                <tr>
+                  <td width="16" style="background-image: url('./images/tree_left.gif');"></td>
+                  <td class="pad text">
+                    <table cellpadding="0" class="generic">
+                      <tbody><tr><td class="header">SMB3 RAM Map</td></tr>
+                        <tr>
+                          <td class="cell1">
+                            <table class="grid" cellspacing="0">
+                              <tbody>
+                                <tr>
+                                  <td>Displaying <span id="addr_count" class="stats">?</span> addresses.  (approximately <span class="stats">x%</span> complete) </td>
+                                  <td class="space"></td>
+                                  <td class="right">
+                                    <!--
+                                      <a href="">Show waiting addresses</a>
+                                      - <a href="" class="user">Submit address</a>
+                                    -->
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                        <tr><td class="space"></td></tr>
+                      </tbody>
+                    </table>
+                    <a href="./data/ram.json" download="ram.json">Download RAM Map as JSON</a>
+                    <table cellpadding="0" class="generic">
+                      <tbody id="table_main">
+                        <tr><td class="space"></td></tr>
+                        <tr>
+                          <td class="header">NES Address</td>
+                          <td class="header">NES Label</td>
+                          <td class="header">NES Length</td>
+                          <td class="header">SNES Address</td>
+                          <td class="header">SNES Label</td>
+                          <td class="header">SNES Length</td>
+                          <td class="header">GBA Address</td>
+                          <td class="header">GBA Label</td>
+                          <td class="header">GBA Length</td>
+                          <td class="header">Type</td>
+                          <td class="header">Description</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td width="16" style="background-image: url('./images/tree_right.gif');"></td>
+                </tr>
+                <tr>
+                  <td width="16" height="16"><img src="./images/tree_bottom_left.gif" alt=""></td>
+                  <td height="16" style="background-image: url('./images/tree_bottom.gif');"></td>
+                  <td width="16" height="16"><img src="./images/tree_bottom_right.gif" alt=""></td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      const type_list = [
+              "Misc.",//0
+              "Empty",//1
+              "Hardware Mirror",//2
+              "Level",//3
+              "Overworld",//4
+              "Title Screen/Ending",//5
+              "Bonus Game",//6
+              "Battle Mode",//7
+              "Graphics",//8
+              "Camera",//9
+              "Sprites",//10
+              "Player",//11
+              "Flag",//12
+              "Counter",//13
+              "I/O",//14
+              "Palettes",//15
+              "Video",//16
+              "Audio"//17
+            ]
+
+      function table_write(json){
+              var i
+              var table_main = document.getElementById("table_main")
+              var addr_count= document.getElementById("addr_count")
+              var base_elm
+              var col_elm
+
+              addr_count.innerText = json.length;
+
+              for (i=0;i<json.length;++i){
+
+                      base_elm = document.createElement("tr")
+
+                      col_elm = document.createElement("td")
+                      col_elm.className = "cell1 mono"
+                      col_elm.innerText = "$"+json[i].nes_address
+                      base_elm.appendChild(col_elm)
+
+                      col_elm = document.createElement("td")
+                      col_elm.className = "cell1 nowrap"
+                      col_elm.innerText = json[i].nes_label
+                      base_elm.appendChild(col_elm)
+
+                      col_elm = document.createElement("td")
+                      col_elm.className = "cell1 nowrap"
+                      col_elm.innerText = format_bytes(json[i].nes_size)
+                      base_elm.appendChild(col_elm)
+
+                      col_elm = document.createElement("td")
+                      col_elm.className = "cell1 mono"
+                      col_elm.innerText = "$"+json[i].snes_address
+                      base_elm.appendChild(col_elm)
+
+                      col_elm = document.createElement("td")
+                      col_elm.className = "cell1 nowrap"
+                      col_elm.innerText = json[i].snes_label
+                      base_elm.appendChild(col_elm)
+
+                      col_elm = document.createElement("td")
+                      col_elm.className = "cell1 nowrap"
+                      col_elm.innerText = format_bytes(json[i].snes_size)
+                      base_elm.appendChild(col_elm)
+
+                      col_elm = document.createElement("td")
+                      col_elm.className = "cell1 mono"
+                      col_elm.innerText = "$"+json[i].gba_address
+                      base_elm.appendChild(col_elm)
+
+                      col_elm = document.createElement("td")
+                      col_elm.className = "cell1 nowrap"
+                      col_elm.innerText = json[i].gba_label
+                      base_elm.appendChild(col_elm)
+
+                      col_elm = document.createElement("td")
+                      col_elm.className = "cell1 nowrap"
+                      col_elm.innerText = format_bytes(json[i].gba_size)
+                      base_elm.appendChild(col_elm)
+
+                      col_elm = document.createElement("td")
+                      col_elm.className = "cell1"
+                      col_elm.innerText = type_list[json[i].type]
+                      base_elm.appendChild(col_elm)
+
+                      col_elm = document.createElement("td")
+                      col_elm.className = "cell1"
+                      col_elm.innerText = json[i].description
+                      base_elm.appendChild(col_elm)
+
+                      table_main.appendChild(base_elm)
+                    }
+            }
+
+      function format_bytes(num){
+              return num + " byte"+(num!=1 ? "s" : "")
+      }
+
+      var xml = new XMLHttpRequest()
+      xml.open("GET","./data/ram.json",true)
+      xml.onreadystatechange = ()=>{
+              if (xml.readyState == 4 && xml.status == 200) {
+                      table_write(JSON.parse(xml.responseText));
+                    }
+      }
+      xml.send();
+    </script>
+  </body>
+</html>

@@ -52,7 +52,7 @@
                         <tr><td class="space"></td></tr>
                       </tbody>
                     </table>
-                    <a href="./data/ram.json" download="ram.json">Download RAM Map as JSON</a>
+                    <a href="./data/ram.csv" download="ram.csv">Download RAM Map as CSV</a>
                     <table cellpadding="0" class="generic">
                       <tbody id="table_main">
                         <tr><td class="space"></td></tr>
@@ -85,8 +85,11 @@
         </tr>
       </tbody>
     </table>
-
+    <script src="./lib/papaparse.min.js"></script>
     <script>
+
+      const ram_file = "./data/ram.csv";
+
       const type_list = [
               "Misc.",//0
               "Empty",//1
@@ -108,90 +111,107 @@
               "Audio"//17
             ]
 
-      function table_write(json){
-              var i
-              var table_main = document.getElementById("table_main")
-              var addr_count= document.getElementById("addr_count")
-              var base_elm
-              var col_elm
+      function table_write(){
+	      var rows_found;
+	      var table_main = document.getElementById("table_main");
+	      var addr_count = document.getElementById("addr_count");
+	      var base_elm;
+	      var col_elm;
+	      var col_link;
 
-              addr_count.innerText = json.length;
+	      rows_found = 0;
 
-              for (i=0;i<json.length;++i){
+	      Papa.parse(ram_file,{
+		      header:true,
+		      download:true,
+		      //worker:true,
+		      step:function(row){
 
-                      base_elm = document.createElement("tr")
+			      base_elm = document.createElement("tr")
 
-                      col_elm = document.createElement("td")
-                      col_elm.className = "cell1 mono"
-                      col_elm.innerText = "$"+json[i].nes_address
-                      base_elm.appendChild(col_elm)
+			      col_elm = document.createElement("td")
+			      col_elm.className = "cell1 mono"
+			      col_link = document.createElement("a")
+			      col_link.href = "#NES_"+row.data.nes_address;
+			      col_link.innerText = "$"+row.data.nes_address
+			      col_elm.appendChild(col_link)
+			      col_elm.id = "#NES_"+row.data.nes_address;
+			      base_elm.appendChild(col_elm)
 
-                      col_elm = document.createElement("td")
-                      col_elm.className = "cell1 nowrap"
-                      col_elm.innerText = json[i].nes_label
-                      base_elm.appendChild(col_elm)
+			      col_elm = document.createElement("td")
+			      col_elm.className = "cell1 nowrap"
+			      col_elm.innerText = row.data.nes_label
+			      base_elm.appendChild(col_elm)
 
-                      col_elm = document.createElement("td")
-                      col_elm.className = "cell1 nowrap"
-                      col_elm.innerText = format_bytes(json[i].nes_size)
-                      base_elm.appendChild(col_elm)
+			      col_elm = document.createElement("td")
+			      col_elm.className = "cell1 nowrap"
+			      col_elm.innerText = format_bytes(row.data.nes_size)
+			      base_elm.appendChild(col_elm)
 
-                      col_elm = document.createElement("td")
-                      col_elm.className = "cell1 mono"
-                      col_elm.innerText = "$"+json[i].snes_address
-                      base_elm.appendChild(col_elm)
+			      col_elm = document.createElement("td")
+			      col_elm.className = "cell1 mono"
+			      col_link = document.createElement("a")
+			      col_link.href = "#SNES_"+row.data.snes_address;
+			      col_link.innerText = "$"+row.data.snes_address
+			      col_elm.appendChild(col_link)
+			      col_elm.id = "#SNES_"+row.data.snes_address;
+			      base_elm.appendChild(col_elm)
 
-                      col_elm = document.createElement("td")
-                      col_elm.className = "cell1 nowrap"
-                      col_elm.innerText = json[i].snes_label
-                      base_elm.appendChild(col_elm)
+			      col_elm = document.createElement("td")
+			      col_elm.className = "cell1 nowrap"
+			      col_elm.innerText = row.data.snes_label
+			      base_elm.appendChild(col_elm)
 
-                      col_elm = document.createElement("td")
-                      col_elm.className = "cell1 nowrap"
-                      col_elm.innerText = format_bytes(json[i].snes_size)
-                      base_elm.appendChild(col_elm)
+			      col_elm = document.createElement("td")
+			      col_elm.className = "cell1 nowrap"
+			      col_elm.innerText = format_bytes(row.data.snes_size)
+			      base_elm.appendChild(col_elm)
 
-                      col_elm = document.createElement("td")
-                      col_elm.className = "cell1 mono"
-                      col_elm.innerText = "$"+json[i].gba_address
-                      base_elm.appendChild(col_elm)
+			      col_elm = document.createElement("td")
+			      col_elm.className = "cell1 mono"
+			      col_link = document.createElement("a")
+			      col_link.href = "#GBA_"+row.data.gba_address;
+			      col_link.innerText = "$"+row.data.gba_address
+			      col_elm.appendChild(col_link)
+			      col_elm.id = "#GBA_"+row.data.gba_address
+			      base_elm.appendChild(col_elm)
 
-                      col_elm = document.createElement("td")
-                      col_elm.className = "cell1 nowrap"
-                      col_elm.innerText = json[i].gba_label
-                      base_elm.appendChild(col_elm)
+			      col_elm = document.createElement("td")
+			      col_elm.className = "cell1 nowrap"
+			      col_elm.innerText = row.data.gba_label
+			      base_elm.appendChild(col_elm)
 
-                      col_elm = document.createElement("td")
-                      col_elm.className = "cell1 nowrap"
-                      col_elm.innerText = format_bytes(json[i].gba_size)
-                      base_elm.appendChild(col_elm)
+			      col_elm = document.createElement("td")
+			      col_elm.className = "cell1 nowrap"
+			      col_elm.innerText = format_bytes(row.data.gba_size)
+			      base_elm.appendChild(col_elm)
 
-                      col_elm = document.createElement("td")
-                      col_elm.className = "cell1"
-                      col_elm.innerText = type_list[json[i].type]
-                      base_elm.appendChild(col_elm)
+			      col_elm = document.createElement("td")
+			      col_elm.className = "cell1"
+			      col_elm.innerText = type_list[row.data.type]
+			      base_elm.appendChild(col_elm)
 
-                      col_elm = document.createElement("td")
-                      col_elm.className = "cell1"
-                      col_elm.innerText = json[i].description
-                      base_elm.appendChild(col_elm)
+			      col_elm = document.createElement("td")
+			      col_elm.className = "cell1"
+			      col_elm.innerText = row.data.description
+			      base_elm.appendChild(col_elm)
 
-                      table_main.appendChild(base_elm)
-                    }
-            }
+			      table_main.appendChild(base_elm)
+
+			      ++rows_found;
+		      },
+		      complete:function(){
+			      addr_count.innerText = rows_found;
+		      }
+	      });
+      }
 
       function format_bytes(num){
-              return num + " byte"+(num!=1 ? "s" : "")
+	      return num + " byte"+(num!=1 ? "s" : "")
       }
 
-      var xml = new XMLHttpRequest()
-      xml.open("GET","./data/ram.json",true)
-      xml.onreadystatechange = ()=>{
-              if (xml.readyState == 4 && xml.status == 200) {
-                      table_write(JSON.parse(xml.responseText));
-                    }
-      }
-      xml.send();
+      table_write();
+
     </script>
   </body>
 </html>

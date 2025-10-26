@@ -12880,7 +12880,7 @@
     "gba_size": 0,
     "gba_label": "",
     "type": 4,
-    "description": "Stores \"rows\" of completed levels or other map alterations (e.g. rock break, mini-fortress lock removal, etc.) for a given column, from the leftmost. Rows 1-7 use decending bits from $80, and row 9 uses bit $01.  This makes row 8 invalid for hosting a level panel ever!\n\nAllows a MAX of 4 map screens (64 columns total each player, 16 columns per map screen)\n$7D00-$7D3F (Mario), $7D40-$7D7F (Luigi)"
+    "description": "Stores \"rows\" of completed levels or other map alterations (e.g. rock break, mini-fortress lock removal, etc.) for a given column, from the leftmost. Rows 1-7 use decending bits from $80, and both row 8 and row 9 use bit $01. Row 8 is prioritized over row 9 should two level panels in these rows share the same column.\n\nAllows a MAX of 4 map screens (64 columns total each player, 16 columns per map screen)\n$7D00-$7D3F (Mario), $7D40-$7D7F (Luigi)"
   },
   {
     "nes_address": "7D80",

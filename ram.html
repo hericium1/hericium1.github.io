@@ -111,10 +111,10 @@
 			      col_elm = document.createElement("td")
 			      col_elm.className = "cell1 mono"
 			      col_link = document.createElement("a")
-			      col_link.href = "#NES_"+row.data.nes_address;
-			      col_link.innerText = "$"+row.data.nes_address
+			      col_link.href = "#NES_"+slice_hex_prefix(row.data.nes_address)
+			      col_link.innerText = row.data.nes_address;
 			      col_elm.appendChild(col_link)
-			      col_elm.id = "#NES_"+row.data.nes_address;
+			      col_elm.id = "#NES_"+slice_hex_prefix(row.data.nes_address)
 			      base_elm.appendChild(col_elm)
 
 			      col_elm = document.createElement("td")
@@ -130,10 +130,10 @@
 			      col_elm = document.createElement("td")
 			      col_elm.className = "cell1 mono"
 			      col_link = document.createElement("a")
-			      col_link.href = "#SNES_"+row.data.snes_address;
-			      col_link.innerText = "$"+row.data.snes_address
+			      col_link.href = "#SNES_"+slice_hex_prefix(row.data.snes_address)
+			      col_link.innerText = row.data.snes_address
 			      col_elm.appendChild(col_link)
-			      col_elm.id = "#SNES_"+row.data.snes_address;
+			      col_elm.id = "#SNES_"+slice_hex_prefix(row.data.snes_address)
 			      base_elm.appendChild(col_elm)
 
 			      col_elm = document.createElement("td")
@@ -149,10 +149,10 @@
 			      col_elm = document.createElement("td")
 			      col_elm.className = "cell1 mono"
 			      col_link = document.createElement("a")
-			      col_link.href = "#GBA_"+row.data.gba_address;
-			      col_link.innerText = "$"+row.data.gba_address
+			      col_link.href = "#GBA_"+slice_hex_prefix(row.data.gba_address)
+			      col_link.innerText = row.data.gba_address
 			      col_elm.appendChild(col_link)
-			      col_elm.id = "#GBA_"+row.data.gba_address
+			      col_elm.id = "#GBA_"+slice_hex_prefix(row.data.gba_address)
 			      base_elm.appendChild(col_elm)
 
 			      col_elm = document.createElement("td")
@@ -187,6 +187,9 @@
 
       function format_bytes(num){
 	      return num + " byte"+(num!=1 ? "s" : "")
+      }
+      function slice_hex_prefix(num){
+	      return num.slice(1);
       }
 
       table_write();

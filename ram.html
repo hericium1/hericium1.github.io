@@ -90,27 +90,6 @@
 
       const ram_file = "./data/ram.csv";
 
-      const type_list = [
-              "Misc.",//0
-              "Empty",//1
-              "Hardware Mirror",//2
-              "Level",//3
-              "Overworld",//4
-              "Title Screen/Ending",//5
-              "Bonus Game",//6
-              "Battle Mode",//7
-              "Graphics",//8
-              "Camera",//9
-              "Sprites",//10
-              "Player",//11
-              "Flag",//12
-              "Counter",//13
-              "I/O",//14
-              "Palettes",//15
-              "Video",//16
-              "Audio"//17
-            ]
-
       function table_write(){
 	      var rows_found;
 	      var table_main = document.getElementById("table_main");
@@ -188,7 +167,7 @@
 
 			      col_elm = document.createElement("td")
 			      col_elm.className = "cell1"
-			      col_elm.innerText = type_list[row.data.type]
+			      col_elm.innerText = row.data.type
 			      base_elm.appendChild(col_elm)
 
 			      col_elm = document.createElement("td")

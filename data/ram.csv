@@ -18,9 +18,11 @@ Temp_Var16,$000F,1,$7E000F,1,,0,Misc.,Temporary storage variable
 VBlank_Tick,$0010,1,,0,,0,Flag,"Can be used for timing, or knowing when an NMI just fired off"
 ,$0011,1,$7E0010,2,,0,Empty,Unused.
 Horz_Scroll_Hi,$0012,1,$7E0012,1,,0,Camera,"Provides a ""High"" byte for horizontally scrolling, or could be phrased as ""current screen""
-SNES note: RAM address $7E0211 is usually set in conjunction with this"
+
+SNES: SNES_Horz_Scroll_Hi_Copy should also be set in conjunction with this."
 Vert_Scroll_Hi,$0013,1,$7E0013,1,,0,Camera,"Provides a ""High"" byte for vertically scrolling (only used during vertical levels!)
-SNES note: RAM address $7E0217 is usually set in conjunction with this"
+
+SNES note: SNES_Vert_Scroll_Hi_Copy should also be set in conjunction with this."
 PPU_CTL1_Mod,$0013,0,,0,,0,Hardware Mirror,"NOT DURING GAMEPLAY, this is used as an additional modifier to PPU_CTL1"
 Level_ExitToMap,$0014,1,$7E0014,1,,0,Level,"When non-zero, kicks back to map (OR to event when Player_FallToKing or Player_RescuePrincess is nonzero!)"
 Counter_1,$0015,1,$7E0015,1,,0,Counter,"This value simply increments every frame, used for timing various things"
@@ -32,20 +34,20 @@ Roulette_RowIdx,$0019,1,$7E0019,1,,0,Bonus Game,Roulette Bonus Game only obvious
 Pal_Force_Set12,$001A,1,,0,,0,Palettes,"This overrides the normal palette routine of selecting by Level_Tileset and loading the color sets PalSel_Tile_Colors/PalSel_Obj_Colors.
 Setting Pal_Force_Set12 to a non-zero value will select as the index instead of Level_Tileset, and then it will copy the first two sets of 16 colors from the palette data as bg / sprite colors."
 PlantInfest_ACnt,$001B,1,,0,,0,Counter,Plant infestation level animation counter
-VBlank_TickEn,$001C,1,,0,,0,Flag,Enables the VBlank_Tick decrement and typically other things like joypad reading
+VBlank_TickEn,$001C,1,$7E001C,1,,0,Flag,Enables the VBlank_Tick decrement and typically other things like joypad reading
 Map_Enter2PFlag,$001D,1,,0,,0,Flag,"If $00, entering level, otherwise set if entering 2P VS mode"
 Map_EnterViaID,$001E,1,,0,,0,Overworld,Overrides whatever spot on the map you entered with something special (see Map_DoEnterViaID)
 ,$001F,1,,0,,0,Empty,Unused.
 Map_IntBoxErase,$0020,1,,0,,0,Overworld,"Used for determining where in erasing the ""World X"" intro box we are"
 Map_ClearLevelFXCnt,$0020,1,,0,,0,Counter,"Counter for ""clear level"" FX occurring (1-6: Poof, 7-9: Flip) (""poof""/""panel flip"")"
-Map_EnterLevelFX,$0020,1,,0,,0,Video,"When entering a level on the map, dictates the status of the entry (0=None, 1=Boxing in, 2=Boxing out [J only])"
+Map_EnterLevelFX,$0020,1,$7E0020,1,,0,Video,"When entering a level on the map, dictates the status of the entry (0=None, 1=Boxing in, 2=Boxing out [J only])"
 Map_ScrollOddEven,$0020,1,,0,,0,Camera,Toggles odd/even column as it scrolls
 ,$0021,1,,0,,0,Empty,Unused.
-Level_Width,$0022,1,,0,,0,Level,"Width of current level, in screens (0 = don't move at all, max is 15H/16V)"
+Level_Width,$0022,1,$7E0022,1,,0,Level,"Width of current level, in screens (0 = don't move at all, max is 15H/16V)"
 Scroll_VOffsetT,$0023,1,,0,,0,Camera,Current tile offset (every 16px) of top of screen (vertical level style ONLY)
-Scroll_ColumnR,$0023,1,,0,,0,Camera,Current tile column (every 16px) of right side of screen (non-vertical level style ONLY)
+Scroll_ColumnR,$0023,1,$7E0023,1,,0,Camera,Current tile column (every 16px) of right side of screen (non-vertical level style ONLY)
 Scroll_VOffsetB,$0024,1,,0,,0,Camera,Current tile offset (every 16px) of bottom of screen (vertical level style ONLY)
-Scroll_ColumnL,$0024,1,,0,,0,Camera,Current tile column (every 16px) of left side of screen (non-vertical level style ONLY)
+Scroll_ColumnL,$0024,1,$7E0024,1,,0,Camera,Current tile column (every 16px) of left side of screen (non-vertical level style ONLY)
 Scroll_ColorStrip,$0025,54,,0,,0,Graphics,"This stores a strip of just the upper 2 bits of a tile ($00, $40, $80, $C0) to produce attribute info"
 Scroll_LastDir,$005B,1,,0,,0,Camera,"0=screen last moved right (or up, if vertical), 1=screen last moved left (or down, if vertical)"
 Scroll_RightUpd,$005C,1,,0,,0,Camera,"Indicates every 8 pixels update going to the right, or $FF if screen moves left"
@@ -54,11 +56,12 @@ Scroll_LeftUpd,$005D,1,,0,,0,Camera,"Indicates every 8 pixels update going to th
 Graphics_Queue,$005E,1,,0,,0,Misc.,"Prepares to perform a Video_Update when possible, indexes the ""Video_Upd_Table"" in PRG030 OR Video_Upd_Table2 in PRG025 (whichever is currently in context)
 Also resets the graphics buffer afterward, since the RAM buffer is constantly being called to possibly perform its own updates after this value resets to zero."
 ,$005F,2,,0,,0,Empty,Unused.
-Level_LayPtr_AddrL,$0061,1,,0,,0,Level,Low byte of address to tile layout (ORIGINAL stored in Level_LayPtrOrig_AddrL)
-Level_LayPtr_AddrH,$0062,1,,0,,0,Level,High byte of address to tile layout (ORIGINAL stored in Level_LayPtrOrig_AddrH)
-Map_Tile_AddrL,$0063,1,,0,,0,Level,Low byte of tile address
+Level_LayPtr_AddrL,$0061,1,$7E002B,1,,0,Level,Low byte of address to tile layout (ORIGINAL stored in Level_LayPtrOrig_AddrL)
+Level_LayPtr_AddrH,$0062,1,$7E002C,1,,0,Level,High byte of address to tile layout (ORIGINAL stored in Level_LayPtrOrig_AddrH)
+SNES_Level_LayPtr_AddrB,,0,$7E002D,1,,0,Level,SNES: High byte of address to tile layout (ORIGINAL stored in SNES_Level_LayPtrOrig_AddrB)
+Map_Tile_AddrL,$0063,1,$7E002E,1,,0,Level,Low byte of tile address
 BonusText_BaseL,$0063,1,,0,,0,Bonus Game,Instruction text base address low
-Map_Tile_AddrH,$0064,1,,0,,0,Level,High byte of tile address
+Map_Tile_AddrH,$0064,1,$7E002F,1,,0,Level,High byte of tile address
 BonusText_BaseH,$0064,1,,0,,0,Bonus Game,Instruction text base address high
 Level_ObjPtr_AddrL,$0065,1,,0,,0,Level,Low byte of address to object set (ORIGINAL stored in Level_ObjPtrOrig_AddrL)
 Level_ObjPtr_AddrH,$0066,1,,0,,0,Level,High byte of address to object set (ORIGINAL stored in Level_ObjPtrOrig_AddrH)
@@ -79,10 +82,10 @@ Ending2_PicState,$0075,1,,0,,0,Title Screen/Ending,Ending part 2 picture loader 
 Title_XPosHi,$0075,8,,0,,0,Title Screen/Ending,"""High"" part of the extended precision X position for all objects"
 World_Map_Y,$0075,2,,0,,0,Overworld,(Mario/Luigi) Y pixel coordinate position of Mario on world map
 Vs_State,$0075,1,,0,,0,Battle Mode,2P Vs Mode state
-Player_XHi,$0075,1,,0,,0,Player,Player X Hi
+Player_XHi,$0075,1,$7E0043,1,,0,Player,Player X Hi
 Ending2_ClearLen,$0076,1,,0,,0,Title Screen/Ending,Length of clear run
 Vs_IsPaused,$0076,1,,0,,0,Battle Mode,"If set, 2P Vs is paused"
-Objects_XHi,$0076,8,,0,,0,Sprites,Other object's X Hi positions
+Objects_XHi,$0076,8,$7E0044,8,,0,Sprites,Other object's X Hi positions
 Ending2_ClearPat,$0077,1,,0,,0,Title Screen/Ending,Pattern to clear the screen with
 World_Map_XHi,$0077,2,,0,,0,Overworld,(Mario/Luigi) X pixel (hi byte) coordinate position of Mario on world map
 Ending2_PicVRAMH,$0078,1,,0,,0,Title Screen/Ending,Ending part 2 picture VRAM Hi
@@ -106,10 +109,10 @@ Pipe_PlayerX,$0084,1,,0,,0,Player,Stores Player's X when they went into pipe (no
 Title_ObjX,$0085,0,,0,,0,Misc.,Title screen object X positions
 Pipe_PlayerY,$0085,1,,0,,0,Player,"Stores Player's Y when they went into pipe (non-transit, aligned to nearest 16, minus 1)"
 Map_WWOrHT_Y,$0086,1,,0,,0,Overworld,Warp Whistle wind or Hand Trap Y position
-Player_YHi,$0087,1,,0,,0,Player,Player Y Hi
+Player_YHi,$0087,1,$7E0055,1,,0,Player,Player Y Hi
 Map_HandTrap_XHi,$0087,1,,0,,0,Overworld,"Hand Trap X Hi (most vars are shared with warp wind, but technically not this one!)"
 Map_WWOrHT_X,$0088,1,,0,,0,Overworld,Warp Whistle wind or Hand Trap X position
-Objects_YHi,$0088,8,,0,,0,Sprites,Other object's Y Hi positions
+Objects_YHi,$0088,8,$7E0056,8,,0,Sprites,Other object's Y Hi positions
 Map_WWOrHT_Cnt,$0089,1,,0,,0,Overworld,Warp Whistle wind or Hand Trap counter
 Map_WWOrHT_Dir,$008A,1,,0,,0,Overworld,"Direction the Warp Whistle wind travels (0 = right, 1 = left)"
 Map_StarFX_State,$008B,1,,0,,0,Overworld,0 - 2 NOTE: Shared with Map_WarpWind_FX
@@ -119,9 +122,9 @@ World_Map_Twirl,$008C,0,,0,,0,Misc.,"If set, Mario is ""twirling"""
 Title_ObjY,$008D,8,,0,,0,Title Screen/Ending,Title screen object Y positions
 Map_Skid_DeltaY,$008E,1,,0,,0,Overworld,Delta applied directly to Y
 Map_Skid_DeltaFracY,$008F,1,,0,,0,Overworld,Fractional delta Y
-Player_X,$0090,1,,0,,0,Player,Player X
+Player_X,$0090,1,$7E005E,1,,0,Player,Player X
 Map_Skid_FracY,$0090,1,,0,,0,Overworld,Fractional Y accumulator
-Objects_X,$0091,8,,0,,0,Sprites,Other object's X positions
+Objects_X,$0091,8,$7E005F,8,,0,Sprites,Other object's X positions
 Map_Skid_DeltaX,$0092,1,,0,,0,Overworld,Delta applied directly to X
 Map_Skid_DeltaFracX,$0093,1,,0,,0,Overworld,Fractional delta X
 Map_Skid_FracX,$0094,1,,0,,0,Overworld,Fractional X accumulator
@@ -132,26 +135,26 @@ Map_Skid_Counter,$0097,1,,0,,0,Overworld,Just a ticker controlling the display f
 Map_Skid_TravDirs,$0098,1,,0,,0,Overworld,"specifies which way Player must ""twirl"" to get to the destination
 Bit 0 Set = Player must travel to the right versus the left
 Bit 1 Set = Player must travel downward versus upward"
-Objects_Var5,$009A,8,,0,,0,Sprites,Generic variable 5 for objects
+Objects_Var5,$009A,8,$7E0068,8,,0,Sprites,Generic variable 5 for objects
 CineKing_Var,$009A,1,,0,,0,Level,General variable
 Map_StarsX,$009B,8,,0,,0,Overworld,"During World Intro, X position of each star"
 Title_ObjYVel,$009D,8,,0,,0,Title Screen/Ending,Y velocities of title screen objects
 Player_Y,$00A2,1,,0,,0,Player,Player Y
-Objects_Y,$00A3,8,,0,,0,Sprites,Other object's Y positions
+Objects_Y,$00A3,8,$7E0071,8,,0,Sprites,Other object's Y positions
 Map_StarsY,$00A3,8,,0,,0,Overworld,"During World Intro, Y position of each star"
 Title_XPosFrac,$00A5,8,,0,,0,Title Screen/Ending,X position extended precision of objects (provides 4-bit fixed point)
 Map_StarsOutRad,$00AB,1,,0,,0,Overworld,"During World Intro, stars take off radius (0 = smallest, increments for larger)"
 Player_SpriteX,$00AB,1,,0,,0,Player,Player's sprite X
-Objects_SpriteX,$00AC,8,,0,,0,Sprites,Other object's sprite X positions
+Objects_SpriteX,$00AC,8,$7E007A,8,,0,Sprites,Other object's sprite X positions
 Title_YPosFrac,$00AD,8,,0,,0,Title Screen/Ending,Y position extended precision of objects (provides 4-bit fixed point)
 Map_StarsXSteps,$00AF,1,,0,,0,Overworld,"During World Intro, number of ""steps"" remaining in the X position adjustment"
 Map_StarsRadCnt,$00B0,1,,0,,0,Overworld,"During World Intro, adds $70 per display frame and adds 1 to the radius when it overflows"
 Map_StarsCenterX,$00B1,1,,0,,0,Overworld,"During World Intro, X center of stars"
 Map_StarsCenterY,$00B2,1,,0,,0,Overworld,"During World Intro, Y center of stars"
 Map_StarsDeltaR,$00B3,1,,0,,0,Overworld,"During World Intro, delta to the star radii"
-Player_SpriteY,$00B4,1,,0,,0,Player,Player's sprite Y
+Player_SpriteY,$00B4,1,$7E0082,1,,0,Player,Player's sprite Y
 Map_StarsConst9,$00B4,1,,0,,0,Overworld,"During World Intro, ... Constant 9?"
-Objects_SpriteY,$00B5,8,,0,,0,Sprites,Other object's sprite Y positions
+Objects_SpriteY,$00B5,8,$7E0083,8,,0,Sprites,Other object's sprite Y positions
 Title_ObjYVelChng,$00B5,2,,0,,0,Title Screen/Ending,Mario / Luigi change in Y velocity flag
 Map_StarsAnimCnt,$00B6,1,,0,,0,Overworld,"During World Intro, a simple counter that adds 32 per frame and toggles Map_StarsFrame when it overflows"
 Map_StarsFrame,$00B7,1,,0,,0,Overworld,"During World Intro, ""frame"" of stars (0/1)"
@@ -164,8 +167,8 @@ Map_StarsYSteps,$00BA,1,,0,,0,Overworld,"During World Intro, number of ""steps""
 Title_ObjMLAnimFrame,$00BB,2,,0,,0,Title Screen/Ending,Mario / Luigi animation frame
 Map_StarsRadius,$00BC,8,,0,,0,Overworld,"During World Intro, each star's ""radius"" position (each radius position is 0-31)"
 Title_ObjMLDirTicks,$00BD,2,,0,,0,Title Screen/Ending,Mario / Luigi animation ticks
-Player_XVel,$00BD,1,,0,,0,Player,Player's X Velocity (negative values to the left) (max value is $38)
-Objects_XVel,$00BE,8,,0,,0,Sprites,Other object's X velocities
+Player_XVel,$00BD,1,$7E008B,1,,0,Player,Player's X Velocity (negative values to the left) (max value is $38)
+Objects_XVel,$00BE,8,$7E008C,8,,0,Sprites,Other object's X velocities
 Title_ObjMLSprite,$00BF,2,,0,,0,Title Screen/Ending,Mario / Luigi next sprite to display
 Title_ObjMLPower,$00C1,2,,0,,0,Title Screen/Ending,"Mario / Luigi current powerup (0 = Small, 1 = Big, 2 = Leaf)"
 Title_ObjMLSprRAMOff,$00C3,2,,0,,0,Title Screen/Ending,Mario / Luigi Defines a Sprite_RAM offset for Mario / Luigi
@@ -174,7 +177,7 @@ Title_ObjMLSprVis,$00C5,2,,0,,0,Title Screen/Ending,Mario / Luigi sprite sliver 
 Map_SkidBack,$00C5,1,,0,,0,Overworld,Player is skidding back (Map_Player_SkidBack stores whether they skidded on their last turn at all)
 Objects_VarBSS,$00C6,7,,0,,0,Sprites,OBJECT SLOTS 0 - 5 ONLY ... uncleared var??
 Title_ObjMLTailTick,$00C7,2,,0,,0,Title Screen/Ending,Mario / Luigi tail wagging tick
-Map_UnusedGOFlag,$00C7,1,,0,,0,Overworld,"Set at map initialization or if Player gets Game Over and selects CONTINUE/END, no apparent purpose"
+Map_UnusedGOFlag,$00C7,1,$7E0090,1,,0,Overworld,"Set at map initialization or if Player gets Game Over and selects CONTINUE/END, no apparent purpose"
 BonusDie_Y,$00C7,1,,0,,0,Bonus Game,UNUSED Bonus Game Die (1-6) Y position
 BonusDie_X,$00C8,1,,0,,0,Bonus Game,UNUSED Bonus Game Die (1-6) X position
 BonusDie_YVel,$00C9,1,,0,,0,Bonus Game,UNUSED Bonus Game Die Y Velocity (when it departs)
@@ -183,15 +186,15 @@ BonusDie_YVelFrac,$00CA,1,,0,,0,Bonus Game,UNUSED Bonus Game Die Y Velocity frac
 Title_ObjMLBonkTick,$00CB,2,,0,,0,Title Screen/Ending,"Mario / Luigi use ""bonked"" frame while > 0"
 Map_Intro_CurStripe,$00CC,1,,0,,0,Overworld,"Current stripe of the ""World X"" intro box to be erased (0 - 7)"
 Map_Intro_NTOff,$00CD,1,,0,,0,Overworld,"Offset into nametable for erasing the ""World X"" intro box"
-SlotIndexBackup,$00CD,1,,0,,0,Level,"Used as a backup for the slot index (e.g. current object, current score, etc.)"
+SlotIndexBackup,$00CD,1,$7E009B,1,,0,Level,"Used as a backup for the slot index (e.g. current object, current score, etc.)"
 Title_ObjMLKickTick,$00CD,2,,0,,0,Title Screen/Ending,Mario / Luigi use kicking frame while > 0
-Player_HaltGame,$00CE,1,,0,,0,Level,"Player is halting game (e.g. dying, shrinking/growing, etc.)"
+Player_HaltGame,$00CE,1,$7E009C,1,,0,Level,"Player is halting game (e.g. dying, shrinking/growing, etc.)"
 Map_Intro_ATOff,$00CE,1,,0,,0,Overworld,"Offset into the attribute table for erasing the ""World X"" intro box"
 Map_Airship_DC,$00CF,1,,0,,0,Overworld,Set to 1 when the Airship knows where it's going
-Player_YVel,$00CF,1,,0,,0,Player,Player's Y Velocity (negative values upward)
+Player_YVel,$00CF,1,$7E009D,1,,0,Player,Player's Y Velocity (negative values upward)
 Title_ObjMPowerDown,$00CF,1,,0,,0,Title Screen/Ending,Mario power down animation counter
 Title_ObjMLStop,$00D0,1,,0,,0,Title Screen/Ending,"Flag used briefly to ""hold"" Mario/Luigi from moving so they get a ""running start"""
-Objects_YVel,$00D0,8,,0,,0,Sprites,Other object's Y velocities
+Objects_YVel,$00D0,8,$7E009E,8,,0,Sprites,Other object's Y velocities
 Map_Airship_DY,$00D0,1,,0,,0,Overworld,Airship delta between current and target Y coordinate
 Map_Airship_YNib,$00D1,1,,0,,0,Overworld,Map_Airship_DY shifts out its lower 4 bits as upper 4 bits to this value
 Title_CurMLIndex,$00D1,1,,0,,0,Title Screen/Ending,"0 for Mario, 1 for Luigi"
@@ -208,13 +211,13 @@ Map_Airship_Dir,$00D6,1,,0,,0,Overworld,"Airship horizontal travel direction in 
 Map_HideObj,$00D7,1,,0,,0,Overworld,used for completion) (TOFIX)
 EndText_VH,$00D7,1,,0,,0,Title Screen/Ending,Princess speech VRAM Address High
 EndText_CPos,$00D8,1,,0,,0,Title Screen/Ending,Princess speech Character Position
-Player_InAir,$00D8,1,,0,,0,Player,"When set, Player is in the air"
+Player_InAir,$00D8,1,$7E00A6,1,,0,Player,"When set, Player is in the air"
 Title_ObjStates,$00D8,6,,0,,0,Title Screen/Ending,Title screen array of states for the individual objects (NOT including Mario/Luigi)
 MapPoof_Y,$00D8,1,,0,,0,Overworld,"When using a power-up, ""poof"" appears at this Y coordinate"
 EndText_State,$00D9,1,,0,,0,Title Screen/Ending,Princess speech state variable
 CineKing_Frame2,$00D9,1,,0,,0,Level,"Used only by the World 6 King (Seal juggling a crown, the crown's frame)"
 MapPoof_X,$00D9,1,,0,,0,Overworld,"When using a power-up, ""poof"" appears at this X coordinate"
-Objects_DetStat,$00D9,8,,0,,0,Sprites,"Object's detection bits:
+Objects_DetStat,$00D9,8,$7E00A7,8,,0,Sprites,"Object's detection bits:
  $01-hit wall right
  $02-hit wall left
  $04-hit ground
@@ -242,10 +245,10 @@ Title_MActScriptDirSet,$00E8,1,,0,,0,Title Screen/Ending,"Mario's action script 
 Scroll_Temp,$00E9,1,,0,,0,Overworld,Scroll hold value
 Title_LActScriptDirSet,$00E9,1,,0,,0,Title Screen/Ending,"Luigi's action script Buffer for last queue command (sets respective ""Title_ObjMLDir"" variable)"
 Title_ObjMLDir,$00EA,2,,0,,0,Title Screen/Ending,"Mario / Luigi vector direction bitfield (1 = Left, 2 = Right, 4 = Down, 8 = Up, $10 = Sprite behind BG, $80 = Tail wagging)"
-Player_XStart,$00EB,1,,0,,0,Player,Set to Player's original starting X position (also used to check if level has initialized)
+Player_XStart,$00EB,1,$7E00B9,1,,0,Player,Set to Player's original starting X position (also used to check if level has initialized)
 Player_WalkFrame,$00EC,1,,0,,0,Overworld,"Relative, not the same as Player_Frame"
 Title_ObjMLQueue,$00EC,2,,0,,0,Title Screen/Ending,"Mario / Luigi queue to do something ($04 = Luigi's rebound off Mario, $10 = Kick shell, $20 = Begin carrying, $40 = Clear carry/bonk, do kick)"
-Player_Suit,$00ED,1,,0,,0,Player,"Player's active powerup (see also: Player_QueueSuit)
+Player_Suit,$00ED,1,$7E00BB,1,,0,Player,"Player's active powerup (see also: Player_QueueSuit)
 Small = 0
 Big = 1
 Fire Flower = 2
@@ -256,7 +259,7 @@ Hammer Suit = 6"
 Player_Frame,$00EE,1,,0,,0,Player,Player display frame
 Title_EventIndex,$00EE,1,,0,,0,Title Screen/Ending,Title background event index (dynamic jump index for events on the title
 Title_EventGrafX,$00EF,1,,0,,0,Title Screen/Ending,Title background current graphic index to load (loads items from Video_Upd_Table2 in PRG025)
-Player_FlipBits,$00EF,1,,0,,0,Player,"Set to $00 for Player to face left, Set to $40 for Player to face right"
+Player_FlipBits,$00EF,1,$7E00BD,1,,0,Player,"Set to $00 for Player to face left, Set to $40 for Player to face right"
 Title_ObjInitIdx,$00F0,1,,0,,0,Title Screen/Ending,"Current title screen ""event"" ID during the intro scene with Mario and Luigi"
 Player_WagCount,$00F0,1,,0,,0,Player,"After wagging raccoon tail, until this hits zero, holding 'A' keeps your fall rate low"
 Title_ObjInitDly,$00F1,1,,0,,0,Title Screen/Ending,Timer count before next object init
@@ -264,18 +267,29 @@ Player_IsDying,$00F1,1,,0,,0,Player,"0 = Not dying, 1 = Dying, 2 = Dropped off s
 Title_3GlowFlag,$00F2,1,,0,,0,Title Screen/Ending,"When non-zero, begins the ""glowing"" effect for the big '3'"
 Title_3GlowIndex,$00F3,1,,0,,0,Title Screen/Ending,Index into an array of colors to cause the big '3' on the title screen to glow
 Obj01_Flag,$00F3,1,,0,,0,Sprites,Not sure what Obj01 is!! This blocks its left/right handler logic.
-Scroll_OddEven,$00F4,1,,0,,0,Camera,"0 or 1, depending on what part of 8 pixels has crossed (need better description) (TOFIX)"
+Scroll_OddEven,$00F4,1,$7E00C2,0,,0,Camera,"0 or 1, depending on what part of 8 pixels has crossed (need better description) (TOFIX)"
 Ending2_IntCmd,$00F4,1,,0,,0,Title Screen/Ending,"Used during ending to buffer out the ending picture data on the interrupt.
 Triggers ""Do_Ending2_IntCmd"" in PRG024 in interrupt context."
-Controller1Press,$00F5,1,,0,,0,I/O,"Player 1's controller ""pressed this frame only"" (see Controller1 for values)"
-Controller2Press,$00F6,1,,0,,0,I/O,"Player 2's controller ""pressed this frame only"" (see Controller2 for values)"
-Controller1,$00F7,1,,0,,0,I/O,"Player 1's controller inputs
+SNES_TempPointerL,,0,$7E00D8,1,,0,Misc.,SNES: Temporary pointer used for various purposes. 
+SNES_TempPointerH,,0,$7E00D9,1,,0,Misc.,SNES: Temporary pointer used for various purposes. 
+SNES_TempPointerB,,0,$7E00DA,1,,0,Misc.,SNES: Temporary pointer used for various purposes. 
+SNES_SpriteBank,,0,$7E00DE,1,,0,Sprites,"SNES: Current ""Bank"" of sprite (in #$24 increments)"
+SNES_SpecialObj_XHi,,0,$7E00E2,0,,0,Sprites,SNES:  X high coordinate of special object
+Controller1Press,$00F5,1,$7E00F6,0,,0,I/O,"Player 1's controller ""pressed this frame only"" (see Controller1 for values)"
+Controller2Press,$00F6,1,$7E00F7,0,,0,I/O,"Player 2's controller ""pressed this frame only"" (see Controller2 for values)"
+Controller1,$00F7,1,$7E00F2,0,,0,I/O,"Player 1's controller inputs
 NES -- R01 L02 D04 U08 S10 E20 B40 A80"
-Controller2,$00F8,1,,0,,0,I/O,"Player 2's controller inputs
+Controller2,$00F8,1,$7E00F3,0,,0,I/O,"Player 2's controller inputs
 NES -- R01 L02 D04 U08 S10 E20 B40 A80"
 ,$00F9,3,,0,,0,Empty,Unused.
-Vert_Scroll,$00FC,1,$7E0216,2,,0,Camera,"Vertical scroll of name table; typically at $EF (239, basically showing the bottom half)"
-Horz_Scroll,$00FD,1,$7E0210,2,,0,Camera,Horizontal scroll of name table
+Vert_Scroll,$00FC,1,$7E0216,1,,0,Camera,"Vertical scroll of name table; typically at $EF (239, basically showing the bottom half)
+
+SNES: Mirror of hardware register BG1VOFS ($210E), low byte"
+SNES_Vert_Scroll_Hi_Copy,,0,$7E0217,1,,0,Camera,"SNES: Mirror of hardware register BG1VOFS ($210E), high byte. Vert_Scroll_Hi should also be set in conjunction with this."
+Horz_Scroll,$00FD,1,$7E0210,1,,0,Camera,"Horizontal scroll of name table
+
+SNES: Mirror of hardware register BG1HOFS ($210D), low byte."
+SNES_Horz_Scroll_Hi_Copy,,0,$7E0211,1,,0,Camera,"SNES: Mirror of hardware register BG1HOFS ($210D), high byte. Horz_Scroll_Hi should also be set in conjunction with this."
 ,$00FE,1,,0,,0,Empty,Unused.
 PPU_CTL1_Copy,$00FF,1,,0,,0,Hardware Mirror,Holds PPU_CTL1 register data
 Update_Select,$0100,1,,0,,0,Video,"Changes which path of ""update routines"" are selected
@@ -657,7 +671,9 @@ Used with Update_Request = UPDATERASTER_32PIXPART if there's a floor (i.e. NOT u
 Player_InPipe,$058C,1,,0,,0,Flag,Player is going through pipe
 Player_MushFall,$058D,1,,0,,0,Flag,"Set to 0 when mushroom is to fall to the left, 1 to the right"
 Player_SprOff,$058E,1,,0,,0,Player,"Player sprite offset (NOTE: Should be multiples of 4, otherwise bad unaligned stuff happens!)"
-Object_SprRAM,$058F,8,,0,,0,Sprites,Sprite_RAM offset by object
+Object_SprRAM,$058F,8,$7E00C6,16,,0,Sprites,"Sprite_RAM offset by object
+
+SNES: Low/high byte object table of offset into Sprite_RAM for empty object slots, set by Object_GetRandNearUnusedSpr"
 Map_MarchInit,$0596,1,,0,,0,Overworld,Set when marching data has been initialized (done once per marching cycle on the map)
 Map_InCanoe_Flag,$0597,0,,0,,0,Misc.,"Set when Player is in Canoe (modifies movement, allows movement in water, etc.)"
 SpecialObj_Var2,$0597,8,,0,,0,Sprites,General purpose variable 2

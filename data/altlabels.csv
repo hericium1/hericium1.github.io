@@ -30,10 +30,10 @@ Objects_Var10,!RAM_SMB3_Level_NorSpr_Table7E1CC8
 Objects_Var11,!RAM_SMB3_Level_NorSpr_Table7E1CCD
 Objects_Var13,!RAM_SMB3_Level_NorSpr_Table7E1CD7
 Objects_Var14,!RAM_SMB3_Level_NorSpr_Table7E1CDC
-,
-,
-,
-,
+Controller1,!RAM_SMB3_Global_ControllerHold1P1
+Controller1Press,!RAM_SMB3_Global_ControllerPress1P1
+Controller2,!RAM_SMB3_Global_ControllerHold1P2
+Controller2Press,!RAM_SMB3_Global_ControllerPress1P2
 ,
 ,
 ,

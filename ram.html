@@ -57,14 +57,12 @@
                       <tbody id="table_main">
                         <tr><td class="space"></td></tr>
                         <tr>
+                          <td class="header">Universal Label</td>
                           <td class="header">NES Address</td>
-                          <td class="header">NES Label</td>
                           <td class="header">NES Length</td>
                           <td class="header">SNES Address</td>
-                          <td class="header">SNES Label</td>
                           <td class="header">SNES Length</td>
                           <td class="header">GBA Address</td>
-                          <td class="header">GBA Label</td>
                           <td class="header">GBA Length</td>
                           <td class="header">Type</td>
                           <td class="header">Description</td>
@@ -110,18 +108,18 @@
 			      base_elm = document.createElement("tr")
 
 			      col_elm = document.createElement("td")
+			      col_elm.className = "cell1 nowrap"
+			      col_elm.innerText = row.data.universal_label
+			      base_elm.appendChild(col_elm)
+
+			      col_elm = document.createElement("td")
 			      col_elm.className = "cell1 mono"
 			      col_link = document.createElement("a")
 			      col_link.href = "#NES_"+slice_hex_prefix(row.data.nes_address)
 			      col_link.innerText = row.data.nes_address;
 			      col_elm.appendChild(col_link)
 			      col_elm.id = "#NES_"+slice_hex_prefix(row.data.nes_address)
-			      base_elm.appendChild(col_elm)
-
-			      col_elm = document.createElement("td")
-			      col_elm.className = "cell1 nowrap"
-			      col_elm.innerText = row.data.nes_label
-			      base_elm.appendChild(col_elm)
+			      base_elm.appendChild(col_elm)			      
 
 			      col_elm = document.createElement("td")
 			      col_elm.className = "cell1 nowrap"
@@ -135,11 +133,6 @@
 			      col_link.innerText = row.data.snes_address
 			      col_elm.appendChild(col_link)
 			      col_elm.id = "#SNES_"+slice_hex_prefix(row.data.snes_address)
-			      base_elm.appendChild(col_elm)
-
-			      col_elm = document.createElement("td")
-			      col_elm.className = "cell1 nowrap"
-			      col_elm.innerText = row.data.snes_label
 			      base_elm.appendChild(col_elm)
 
 			      col_elm = document.createElement("td")
@@ -158,17 +151,12 @@
 
 			      col_elm = document.createElement("td")
 			      col_elm.className = "cell1 nowrap"
-			      col_elm.innerText = row.data.gba_label
-			      base_elm.appendChild(col_elm)
-
-			      col_elm = document.createElement("td")
-			      col_elm.className = "cell1 nowrap"
 			      col_elm.innerText = format_bytes(row.data.gba_size)
 			      base_elm.appendChild(col_elm)
 
 			      col_elm = document.createElement("td")
 			      col_elm.className = "cell1"
-			      col_elm.innerText = row.data.type
+			      col_elm.innerText = row.data.category
 			      base_elm.appendChild(col_elm)
 
 			      col_elm = document.createElement("td")

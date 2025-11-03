@@ -67,6 +67,9 @@
                           <td class="header">Type</td>
                           <td class="header">Description</td>
                         </tr>
+                        <tr>
+				<td hidden class="cell1 nowrap space center" id="table_status" colspan=9>s</td>
+			</tr>
 		      </thead>
                       <tbody id="table_main">
                       </tbody>
@@ -88,171 +91,246 @@
     <script src="./lib/papaparse.min.js"></script>
     <script>
 
-      const SORT_BY = Object.freeze({
-	NES_ADDRESS:0,
-	SNES_ADDRESS:1,
-	GBA_ADDRESS:2
-      });
+	    const SORT_BY = Object.freeze({
+		    NES_ADDRESS:0,
+		    SNES_ADDRESS:1,
+		    GBA_ADDRESS:2
+	    });
 
-      const TABLE_STATUS = Object.freeze({
-	INIT:0,
-	START_DOWNLOAD:1,
-	FIN_DOWNLOAD:2,
-	START_DRAWTABLE:3,
-	FIN_DRAWTABLE:4,
-	START_SORTTABLE:5,
-	FIN_SORTTABLE:6
-      });
+	    const TABLE_STATUS = Object.freeze({
+		    INIT:0,
+		    START_DOWNLOAD:1,
+		    FIN_DOWNLOAD:2,
+		    START_DRAWTABLE:3,
+		    FIN_DRAWTABLE:4,
+		    START_SORTTABLE:5,
+		    FIN_SORTTABLE:6
+	    });
 
-      const RAM_FILE = "./data/ram.csv";
-      var ram_table = [];
-      var TABLE_MAIN = document.getElementById("table_main");
+	    const TABLE_ERRORS = Object.freeze({
+		    NONE:0,
+		    FAILED_DOWNLOAD:1
+	    });
 
-      var table_currentstat = TABLE_STATUS.INIT;
+	    const RAM_FILE = "./data/ram.csv";
+	    var ram_table = [];
+	    var TABLE_MAIN = document.getElementById("table_main");
 
-      function set_table_status(newstat){
-			
-      }
+	    var table_currentstat = TABLE_STATUS.INIT;
 
-      function table_download(){
+	    function set_table_status(newstat, error = TABLE_ERRORS.NONE){
+		    table_currentstat = newstat;	
+		    var tstat_elm = document.getElementById("table_status");
 
-	      set_table_status(TABLE_STATUS.START_DOWNLOAD);
+		    switch (table_currentstat){
+			    case TABLE_STATUS.FIN_SORTTABLE:
+			    case TABLE_STATUS.FIN_DRAWTABLE:
+			    case TABLE_STATUS.FIN_DOWNLOAD:
+				    if (error!=TABLE_ERRORS.NONE){
+				    	tstat_elm.hidden = false;
+					switch (error){
+						case TABLE_ERRORS.FAILED_DOWNLOAD:
+				    			tstat_elm.innerText = "Failed to retrieve table.";
+							break;
+						default:
+				    			tstat_elm.innerText = "Unknown error."
+							break;
+					}
+				    }
+				    else{
+				    	tstat_elm.hidden = true;
+				    }
+				    break;
+			    case TABLE_STATUS.START_SORTTABLE:
+				    tstat_elm.hidden = false;
+				    tstat_elm.innerText = "Sorting table..."
+				    break;
+			    case TABLE_STATUS.START_DRAWTABLE:
+				    tstat_elm.hidden = false;
+				    tstat_elm.innerText = "Drawing table..."
+				    break;
+			    case TABLE_STATUS.START_DOWNLOAD:
+				    tstat_elm.hidden = false;
+				    tstat_elm.innerText = "Retrieving RAM Map..."
+				    break;
+			    default:
+				    break;
+		    }
+	    }
 
-	      ram_table = [];
+	    function table_download(){
 
-	      var addr_count = document.getElementById("addr_count");
-	      addr_count.innerText = "...";
+		    // restricting operation based on status
+		    switch (table_currentstat){
+			    case TABLE_STATUS.INIT:
+			    case TABLE_STATUS.FIN_DOWNLOAD:
+				    break;
+			    default:
+				    return;
+		    }
+		    // 
 
-	      Papa.parse(RAM_FILE,{
-		      header:true,
-		      download:true,
-		      skipEmptyLines:true,
-		      step:function(row){
-			ram_table.push(row.data);
-		      },
-		      complete:function(){
-			addr_count.innerText = ram_table.length;;
-	      		set_table_status(TABLE_STATUS.FIN_DOWNLOAD);
-			table_write();
-		      }
-	     });
-      }
+		    set_table_status(TABLE_STATUS.START_DOWNLOAD);
 
-      function table_write(){
+		    ram_table = [];
 
-	      set_table_status(TABLE_STATUS.START_DRAWTABLE);
+		    var addr_count = document.getElementById("addr_count");
+		    addr_count.innerText = "...";
 
-	      var i;
+		    Papa.parse(RAM_FILE,{
+			    header:true,
+			    download:true,
+			    skipEmptyLines:true,
+			    step:function(row){
+				    ram_table.push(row.data);
+			    },
+			    complete:function(){
+				    addr_count.innerText = ram_table.length;
+				    set_table_status(TABLE_STATUS.FIN_DOWNLOAD);
+				    table_write();
+			    },
+			    error:function(err,file,inputElem,reason){
+				    set_table_status(TABLE_STATUS.FIN_DOWNLOAD, TABLE_ERRORS.FAILED_DOWNLOAD);
+			    }
+		    });
+	    }
 
-	      var base_elm;
-	      var col_elm;
-	      var col_link;
+	    function table_write(){
 
-	      TABLE_MAIN.textContent="";
-	      for (i=0;i<ram_table.length;++i){
+		    // restricting operation based on status
+		    switch (table_currentstat){
+			    case TABLE_STATUS.FIN_DOWNLOAD:
+			    case TABLE_STATUS.FIN_SORTTABLE:
+			    case TABLE_STATUS.FIN_DRAWTABLE:
+				    break;
+			    default:
+				    return;
+		    }
+		    // 
 
-		      base_elm = document.createElement("tr")
+		    set_table_status(TABLE_STATUS.START_DRAWTABLE);
 
-		      col_elm = document.createElement("td")
-		      col_elm.className = "cell1 nowrap"
-		      col_elm.innerText = ram_table[i].universal_label;
-		      base_elm.appendChild(col_elm)
+		    var i;
 
-		      col_elm = document.createElement("td")
-		      col_elm.className = "cell1 mono"
-		      col_link = document.createElement("a")
-		      col_link.href = "#NES_"+slice_hex_prefix(ram_table[i].nes_address)
-		      col_link.innerText = ram_table[i].nes_address;
-		      col_elm.appendChild(col_link)
-		      col_elm.id = "#NES_"+slice_hex_prefix(ram_table[i].nes_address)
-		      base_elm.appendChild(col_elm)			      
+		    var base_elm;
+		    var col_elm;
+		    var col_link;
 
-		      col_elm = document.createElement("td")
-		      col_elm.className = "cell1 nowrap"
-		      col_elm.innerText = format_bytes(ram_table[i].nes_size)
-		      base_elm.appendChild(col_elm)
+		    TABLE_MAIN.textContent="";
+		    for (i=0;i<ram_table.length;++i){
 
-		      col_elm = document.createElement("td")
-		      col_elm.className = "cell1 mono"
-		      col_link = document.createElement("a")
-		      col_link.href = "#SNES_"+slice_hex_prefix(ram_table[i].snes_address)
-		      col_link.innerText = ram_table[i].snes_address
-		      col_elm.appendChild(col_link)
-		      col_elm.id = "#SNES_"+slice_hex_prefix(ram_table[i].snes_address)
-		      base_elm.appendChild(col_elm)
+			    base_elm = document.createElement("tr")
 
-		      col_elm = document.createElement("td")
-		      col_elm.className = "cell1 nowrap"
-		      col_elm.innerText = format_bytes(ram_table[i].snes_size)
-		      base_elm.appendChild(col_elm)
+			    col_elm = document.createElement("td")
+			    col_elm.className = "cell1 nowrap"
+			    col_elm.innerText = ram_table[i].universal_label;
+			    base_elm.appendChild(col_elm)
 
-		      col_elm = document.createElement("td")
-		      col_elm.className = "cell1 mono"
-		      col_link = document.createElement("a")
-		      col_link.href = "#GBA_"+slice_hex_prefix(ram_table[i].gba_address)
-		      col_link.innerText = ram_table[i].gba_address
-		      col_elm.appendChild(col_link)
-		      col_elm.id = "#GBA_"+slice_hex_prefix(ram_table[i].gba_address)
-		      base_elm.appendChild(col_elm)
+			    col_elm = document.createElement("td")
+			    col_elm.className = "cell1 mono"
+			    col_link = document.createElement("a")
+			    col_link.href = "#NES_"+slice_hex_prefix(ram_table[i].nes_address)
+			    col_link.innerText = ram_table[i].nes_address;
+			    col_elm.appendChild(col_link)
+			    col_elm.id = "#NES_"+slice_hex_prefix(ram_table[i].nes_address)
+			    base_elm.appendChild(col_elm)			      
 
-		      col_elm = document.createElement("td")
-		      col_elm.className = "cell1 nowrap"
-		      col_elm.innerText = format_bytes(ram_table[i].gba_size)
-		      base_elm.appendChild(col_elm)
+			    col_elm = document.createElement("td")
+			    col_elm.className = "cell1 nowrap"
+			    col_elm.innerText = format_bytes(ram_table[i].nes_size)
+			    base_elm.appendChild(col_elm)
 
-		      col_elm = document.createElement("td")
-		      col_elm.className = "cell1"
-		      col_elm.innerText = ram_table[i].category
-		      base_elm.appendChild(col_elm)
+			    col_elm = document.createElement("td")
+			    col_elm.className = "cell1 mono"
+			    col_link = document.createElement("a")
+			    col_link.href = "#SNES_"+slice_hex_prefix(ram_table[i].snes_address)
+			    col_link.innerText = ram_table[i].snes_address
+			    col_elm.appendChild(col_link)
+			    col_elm.id = "#SNES_"+slice_hex_prefix(ram_table[i].snes_address)
+			    base_elm.appendChild(col_elm)
 
-		      col_elm = document.createElement("td")
-		      col_elm.className = "cell1"
-		      col_elm.innerText = ram_table[i].description
-		      base_elm.appendChild(col_elm)
+			    col_elm = document.createElement("td")
+			    col_elm.className = "cell1 nowrap"
+			    col_elm.innerText = format_bytes(ram_table[i].snes_size)
+			    base_elm.appendChild(col_elm)
 
-		      TABLE_MAIN.appendChild(base_elm)
-	      }
+			    col_elm = document.createElement("td")
+			    col_elm.className = "cell1 mono"
+			    col_link = document.createElement("a")
+			    col_link.href = "#GBA_"+slice_hex_prefix(ram_table[i].gba_address)
+			    col_link.innerText = ram_table[i].gba_address
+			    col_elm.appendChild(col_link)
+			    col_elm.id = "#GBA_"+slice_hex_prefix(ram_table[i].gba_address)
+			    base_elm.appendChild(col_elm)
 
-	      set_table_status(TABLE_STATUS.FIN_DRAWTABLE);
-      }
+			    col_elm = document.createElement("td")
+			    col_elm.className = "cell1 nowrap"
+			    col_elm.innerText = format_bytes(ram_table[i].gba_size)
+			    base_elm.appendChild(col_elm)
 
-      function table_sort(sort_type){
+			    col_elm = document.createElement("td")
+			    col_elm.className = "cell1"
+			    col_elm.innerText = ram_table[i].category
+			    base_elm.appendChild(col_elm)
 
-	      set_table_status(TABLE_STATUS.START_SORTTABLE);
+			    col_elm = document.createElement("td")
+			    col_elm.className = "cell1"
+			    col_elm.innerText = ram_table[i].description
+			    base_elm.appendChild(col_elm)
 
-	      ram_table.sort(addr_sort(sort_type));
+			    TABLE_MAIN.appendChild(base_elm)
+		    }
 
-	      set_table_status(TABLE_STATUS.FIN_SORTTABLE);
+		    set_table_status(TABLE_STATUS.FIN_DRAWTABLE);
+	    }
 
-	      table_write();
-      }
-      
-      function addr_sort(sort_type){
-	      var key = Object.keys(SORT_BY)[sort_type].toLowerCase();
+	    function table_sort(sort_type){
 
-	      return function(a,b){
-		      var c,d;
+		    // restricting operation based on status
+		    switch (table_currentstat){
+			    case TABLE_STATUS.FIN_SORTTABLE:
+			    case TABLE_STATUS.FIN_DRAWTABLE:
+				    break;
+			    default:
+				    return;
+		    }
+		    // 
 
-		      c = parseInt(slice_hex_prefix(a[key]),16);
-		      d = parseInt(slice_hex_prefix(b[key]),16);
-		      if (isNaN(c) && isNaN(d))
-			      return 0;
-		      if (isNaN(c))
-			      return 1;
-		      if (isNaN(d))
-			      return -1;
-		      return c - d;
-	      }
-      }
+		    set_table_status(TABLE_STATUS.START_SORTTABLE);
 
-      function format_bytes(num){
-	      return num + " byte"+(num!=1 ? "s" : "")
-      }
-      function slice_hex_prefix(num){
-	      return num.slice(1);
-      }
+		    ram_table.sort(addr_sort(sort_type));
 
-      table_download();
+		    set_table_status(TABLE_STATUS.FIN_SORTTABLE);
+
+		    table_write();
+	    }
+
+	    function addr_sort(sort_type){
+		    var key = Object.keys(SORT_BY)[sort_type].toLowerCase();
+
+		    return function(a,b){
+			    var c,d;
+
+			    c = parseInt(slice_hex_prefix(a[key]),16);
+			    d = parseInt(slice_hex_prefix(b[key]),16);
+			    if (isNaN(c) && isNaN(d))
+				    return 0;
+			    if (isNaN(c))
+				    return 1;
+			    if (isNaN(d))
+				    return -1;
+			    return c - d;
+		    }
+	    }
+
+	    function format_bytes(num){
+		    return num + " byte"+(num!=1 ? "s" : "")
+	    }
+	    function slice_hex_prefix(num){
+		    return num.slice(1);
+	    }
+
+	    table_download();
 
     </script>
   </body>

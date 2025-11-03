@@ -54,19 +54,21 @@
                     </table>
                     <a href="./data/ram.csv" download="ram.csv">Download RAM Map as CSV</a>
                     <table cellpadding="0" class="generic">
-                      <tbody id="table_main">
+		      <thead>
                         <tr><td class="space"></td></tr>
                         <tr>
                           <td class="header">Universal Label</td>
-                          <td class="header">NES Address</td>
+			  <td class="header"><a href="#" onclick="table_sort(SORT_BY.NES_ADDRESS)">NES Address</a></td>
                           <td class="header">NES Length</td>
-                          <td class="header">SNES Address</td>
+			  <td class="header"><a href="#" onclick="table_sort(SORT_BY.SNES_ADDRESS)">SNES Address</a></td>
                           <td class="header">SNES Length</td>
-                          <td class="header">GBA Address</td>
+			  <td class="header"><a href="#" onclick="table_sort(SORT_BY.GBA_ADDRESS)">GBA Address</a></td>
                           <td class="header">GBA Length</td>
                           <td class="header">Type</td>
                           <td class="header">Description</td>
                         </tr>
+		      </thead>
+                      <tbody id="table_main">
                       </tbody>
                     </table>
                   </td>
@@ -86,92 +88,161 @@
     <script src="./lib/papaparse.min.js"></script>
     <script>
 
-      const ram_file = "./data/ram.csv";
+      const SORT_BY = Object.freeze({
+	NES_ADDRESS:0,
+	SNES_ADDRESS:1,
+	GBA_ADDRESS:2
+      });
+
+      const TABLE_STATUS = Object.freeze({
+	INIT:0,
+	START_DOWNLOAD:1,
+	FIN_DOWNLOAD:2,
+	START_DRAWTABLE:3,
+	FIN_DRAWTABLE:4,
+	START_SORTTABLE:5,
+	FIN_SORTTABLE:6
+      });
+
+      const RAM_FILE = "./data/ram.csv";
+      var ram_table = [];
+      var TABLE_MAIN = document.getElementById("table_main");
+
+      var table_currentstat = TABLE_STATUS.INIT;
+
+      function set_table_status(newstat){
+			
+      }
+
+      function table_download(){
+
+	      set_table_status(TABLE_STATUS.START_DOWNLOAD);
+
+	      ram_table = [];
+
+	      var addr_count = document.getElementById("addr_count");
+	      addr_count.innerText = "...";
+
+	      Papa.parse(RAM_FILE,{
+		      header:true,
+		      download:true,
+		      skipEmptyLines:true,
+		      step:function(row){
+			ram_table.push(row.data);
+		      },
+		      complete:function(){
+			addr_count.innerText = ram_table.length;;
+	      		set_table_status(TABLE_STATUS.FIN_DOWNLOAD);
+			table_write();
+		      }
+	     });
+      }
 
       function table_write(){
-	      var rows_found;
-	      var table_main = document.getElementById("table_main");
-	      var addr_count = document.getElementById("addr_count");
+
+	      set_table_status(TABLE_STATUS.START_DRAWTABLE);
+
+	      var i;
+
 	      var base_elm;
 	      var col_elm;
 	      var col_link;
 
-	      rows_found = 0;
+	      TABLE_MAIN.textContent="";
+	      for (i=0;i<ram_table.length;++i){
 
-	      Papa.parse(ram_file,{
-		      header:true,
-		      download:true,
-		      skipEmptyLines:true,
-		      //worker:true,
-		      step:function(row){
+		      base_elm = document.createElement("tr")
 
-			      base_elm = document.createElement("tr")
+		      col_elm = document.createElement("td")
+		      col_elm.className = "cell1 nowrap"
+		      col_elm.innerText = ram_table[i].universal_label;
+		      base_elm.appendChild(col_elm)
 
-			      col_elm = document.createElement("td")
-			      col_elm.className = "cell1 nowrap"
-			      col_elm.innerText = row.data.universal_label
-			      base_elm.appendChild(col_elm)
+		      col_elm = document.createElement("td")
+		      col_elm.className = "cell1 mono"
+		      col_link = document.createElement("a")
+		      col_link.href = "#NES_"+slice_hex_prefix(ram_table[i].nes_address)
+		      col_link.innerText = ram_table[i].nes_address;
+		      col_elm.appendChild(col_link)
+		      col_elm.id = "#NES_"+slice_hex_prefix(ram_table[i].nes_address)
+		      base_elm.appendChild(col_elm)			      
 
-			      col_elm = document.createElement("td")
-			      col_elm.className = "cell1 mono"
-			      col_link = document.createElement("a")
-			      col_link.href = "#NES_"+slice_hex_prefix(row.data.nes_address)
-			      col_link.innerText = row.data.nes_address;
-			      col_elm.appendChild(col_link)
-			      col_elm.id = "#NES_"+slice_hex_prefix(row.data.nes_address)
-			      base_elm.appendChild(col_elm)			      
+		      col_elm = document.createElement("td")
+		      col_elm.className = "cell1 nowrap"
+		      col_elm.innerText = format_bytes(ram_table[i].nes_size)
+		      base_elm.appendChild(col_elm)
 
-			      col_elm = document.createElement("td")
-			      col_elm.className = "cell1 nowrap"
-			      col_elm.innerText = format_bytes(row.data.nes_size)
-			      base_elm.appendChild(col_elm)
+		      col_elm = document.createElement("td")
+		      col_elm.className = "cell1 mono"
+		      col_link = document.createElement("a")
+		      col_link.href = "#SNES_"+slice_hex_prefix(ram_table[i].snes_address)
+		      col_link.innerText = ram_table[i].snes_address
+		      col_elm.appendChild(col_link)
+		      col_elm.id = "#SNES_"+slice_hex_prefix(ram_table[i].snes_address)
+		      base_elm.appendChild(col_elm)
 
-			      col_elm = document.createElement("td")
-			      col_elm.className = "cell1 mono"
-			      col_link = document.createElement("a")
-			      col_link.href = "#SNES_"+slice_hex_prefix(row.data.snes_address)
-			      col_link.innerText = row.data.snes_address
-			      col_elm.appendChild(col_link)
-			      col_elm.id = "#SNES_"+slice_hex_prefix(row.data.snes_address)
-			      base_elm.appendChild(col_elm)
+		      col_elm = document.createElement("td")
+		      col_elm.className = "cell1 nowrap"
+		      col_elm.innerText = format_bytes(ram_table[i].snes_size)
+		      base_elm.appendChild(col_elm)
 
-			      col_elm = document.createElement("td")
-			      col_elm.className = "cell1 nowrap"
-			      col_elm.innerText = format_bytes(row.data.snes_size)
-			      base_elm.appendChild(col_elm)
+		      col_elm = document.createElement("td")
+		      col_elm.className = "cell1 mono"
+		      col_link = document.createElement("a")
+		      col_link.href = "#GBA_"+slice_hex_prefix(ram_table[i].gba_address)
+		      col_link.innerText = ram_table[i].gba_address
+		      col_elm.appendChild(col_link)
+		      col_elm.id = "#GBA_"+slice_hex_prefix(ram_table[i].gba_address)
+		      base_elm.appendChild(col_elm)
 
-			      col_elm = document.createElement("td")
-			      col_elm.className = "cell1 mono"
-			      col_link = document.createElement("a")
-			      col_link.href = "#GBA_"+slice_hex_prefix(row.data.gba_address)
-			      col_link.innerText = row.data.gba_address
-			      col_elm.appendChild(col_link)
-			      col_elm.id = "#GBA_"+slice_hex_prefix(row.data.gba_address)
-			      base_elm.appendChild(col_elm)
+		      col_elm = document.createElement("td")
+		      col_elm.className = "cell1 nowrap"
+		      col_elm.innerText = format_bytes(ram_table[i].gba_size)
+		      base_elm.appendChild(col_elm)
 
-			      col_elm = document.createElement("td")
-			      col_elm.className = "cell1 nowrap"
-			      col_elm.innerText = format_bytes(row.data.gba_size)
-			      base_elm.appendChild(col_elm)
+		      col_elm = document.createElement("td")
+		      col_elm.className = "cell1"
+		      col_elm.innerText = ram_table[i].category
+		      base_elm.appendChild(col_elm)
 
-			      col_elm = document.createElement("td")
-			      col_elm.className = "cell1"
-			      col_elm.innerText = row.data.category
-			      base_elm.appendChild(col_elm)
+		      col_elm = document.createElement("td")
+		      col_elm.className = "cell1"
+		      col_elm.innerText = ram_table[i].description
+		      base_elm.appendChild(col_elm)
 
-			      col_elm = document.createElement("td")
-			      col_elm.className = "cell1"
-			      col_elm.innerText = row.data.description
-			      base_elm.appendChild(col_elm)
+		      TABLE_MAIN.appendChild(base_elm)
+	      }
 
-			      table_main.appendChild(base_elm)
+	      set_table_status(TABLE_STATUS.FIN_DRAWTABLE);
+      }
 
-			      ++rows_found;
-		      },
-		      complete:function(){
-			      addr_count.innerText = rows_found;
-		      }
-	      });
+      function table_sort(sort_type){
+
+	      set_table_status(TABLE_STATUS.START_SORTTABLE);
+
+	      ram_table.sort(addr_sort(sort_type));
+
+	      set_table_status(TABLE_STATUS.FIN_SORTTABLE);
+
+	      table_write();
+      }
+      
+      function addr_sort(sort_type){
+	      var key = Object.keys(SORT_BY)[sort_type].toLowerCase();
+
+	      return function(a,b){
+		      var c,d;
+
+		      c = parseInt(slice_hex_prefix(a[key]),16);
+		      d = parseInt(slice_hex_prefix(b[key]),16);
+		      if (isNaN(c) && isNaN(d))
+			      return 0;
+		      if (isNaN(c))
+			      return 1;
+		      if (isNaN(d))
+			      return -1;
+		      return c - d;
+	      }
       }
 
       function format_bytes(num){
@@ -181,7 +252,7 @@
 	      return num.slice(1);
       }
 
-      table_write();
+      table_download();
 
     </script>
   </body>

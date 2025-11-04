@@ -23,7 +23,7 @@ SNES: SNES_Horz_Scroll_Hi_Copy should also be set in conjunction with this."
 Vert_Scroll_Hi,$0013,1,$7E0013,1,,0,Camera,"Provides a ""High"" byte for vertically scrolling (only used during vertical levels!)
 
 SNES note: SNES_Vert_Scroll_Hi_Copy should also be set in conjunction with this."
-PPU_CTL1_Mod,$0013,0,,0,,0,Hardware Mirror,"NOT DURING GAMEPLAY, this is used as an additional modifier to PPU_CTL1"
+PPU_CTL1_Mod,$0013,1,,0,,0,Hardware Mirror,"NOT DURING GAMEPLAY, this is used as an additional modifier to PPU_CTL1"
 Level_ExitToMap,$0014,1,$7E0014,1,,0,Level,"When non-zero, kicks back to map (OR to event when Player_FallToKing or Player_RescuePrincess is nonzero!)"
 Counter_1,$0015,1,$7E0015,1,,0,Counter,"This value simply increments every frame, used for timing various things"
 PPU_CTL2_Copy,$0016,1,$7E0016,1,,0,Hardware Mirror,"Essentially a copy of PPU_CTL2, which updates it as well, though the sprite/BG visibility setting is usually (always?) forced on
@@ -106,7 +106,7 @@ Map_UnusedPlayerVal,$007F,2,,0,,0,Overworld,"(Mario/Luigi) Set for each Player t
 Map_UnusedPlayerVal2,$0084,2,,0,,0,Overworld,"(Mario/Luigi) Apparently unused at all, but backed up and persisted on the world map"
 Level_GndLUT_Addr,$0084,2,,0,,0,Level,(TOFIX)
 Pipe_PlayerX,$0084,1,,0,,0,Player,Stores Player's X when they went into pipe (non-transit)
-Title_ObjX,$0085,0,,0,,0,Misc.,Title screen object X positions
+Title_ObjX,$0085,1,,0,,0,Misc.,Title screen object X positions
 Pipe_PlayerY,$0085,1,,0,,0,Player,"Stores Player's Y when they went into pipe (non-transit, aligned to nearest 16, minus 1)"
 Map_WWOrHT_Y,$0086,1,,0,,0,Overworld,Warp Whistle wind or Hand Trap Y position
 Player_YHi,$0087,1,$7E0055,1,,0,Player,Player Y Hi
@@ -118,7 +118,7 @@ Map_WWOrHT_Dir,$008A,1,,0,,0,Overworld,"Direction the Warp Whistle wind travels 
 Map_StarFX_State,$008B,1,,0,,0,Overworld,0 - 2 NOTE: Shared with Map_WarpWind_FX
 BonusCoins_State,$008B,1,,0,,0,Bonus Game,(TOFIX)
 Map_WarpWind_FX,$008B,1,,0,,0,Overworld,1 - 4 is the warp whistle effect
-World_Map_Twirl,$008C,0,,0,,0,Misc.,"If set, Mario is ""twirling"""
+World_Map_Twirl,$008C,1,,0,,0,Misc.,"If set, Mario is ""twirling"""
 Title_ObjY,$008D,8,,0,,0,Title Screen/Ending,Title screen object Y positions
 Map_Skid_DeltaY,$008E,1,,0,,0,Overworld,Delta applied directly to Y
 Map_Skid_DeltaFracY,$008F,1,,0,,0,Overworld,Fractional delta Y
@@ -675,7 +675,7 @@ Object_SprRAM,$058F,8,$7E00C6,16,,0,Sprites,"Sprite_RAM offset by object
 
 SNES: Low/high byte object table of offset into Sprite_RAM for empty object slots, set by Object_GetRandNearUnusedSpr"
 Map_MarchInit,$0596,1,,0,,0,Overworld,Set when marching data has been initialized (done once per marching cycle on the map)
-Map_InCanoe_Flag,$0597,0,,0,,0,Misc.,"Set when Player is in Canoe (modifies movement, allows movement in water, etc.)"
+Map_InCanoe_Flag,$0597,1,,0,,0,Misc.,"Set when Player is in Canoe (modifies movement, allows movement in water, etc.)"
 SpecialObj_Var2,$0597,8,,0,,0,Sprites,General purpose variable 2
 World_8_Dark,$0598,1,,0,,0,Overworld,"Darkness on World 8 Map, level 2 -- counts 0-7 while setting up the effect"
 World_Map_AnimF,$0599,1,,0,,0,Overworld,"World map animation frame (for bushes, etc.)"

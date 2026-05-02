@@ -49,9 +49,9 @@ Scroll_ColumnR,$0023,1,$7E0023,1,,0,Camera,Current tile column (every 16px) of r
 Scroll_VOffsetB,$0024,1,,0,,0,Camera,Current tile offset (every 16px) of bottom of screen (vertical level style ONLY)
 Scroll_ColumnL,$0024,1,$7E0024,1,,0,Camera,Current tile column (every 16px) of left side of screen (non-vertical level style ONLY)
 Scroll_ColorStrip,$0025,54,,0,,0,Graphics,"This stores a strip of just the upper 2 bits of a tile ($00, $40, $80, $C0) to produce attribute info"
-Scroll_LastDir,$005B,1,,0,,0,Camera,"0=screen last moved right (or up, if vertical), 1=screen last moved left (or down, if vertical)"
-Scroll_RightUpd,$005C,1,,0,,0,Camera,"Indicates every 8 pixels update going to the right, or $FF if screen moves left"
-Scroll_VertUpd,$005C,1,,0,,0,Camera,"Indicates every 8 pixels update up or down, in vertical levels"
+Scroll_LastDir,$005B,1,$7E0025,1,,0,Camera,"0=screen last moved right (or up, if vertical), 1=screen last moved left (or down, if vertical)"
+Scroll_RightUpd,$005C,1,$7E0026,1,,0,Camera,"Indicates every 8 pixels update going to the right, or $FF if screen moves left"
+Scroll_VertUpd,$005C,1,$7E0027,1,,0,Camera,"Indicates every 8 pixels update up or down, in vertical levels"
 Scroll_LeftUpd,$005D,1,,0,,0,Camera,"Indicates every 8 pixels update going to the left, or $FF if screen moves right"
 Graphics_Queue,$005E,1,,0,,0,Misc.,"Prepares to perform a Video_Update when possible, indexes the ""Video_Upd_Table"" in PRG030 OR Video_Upd_Table2 in PRG025 (whichever is currently in context)
 Also resets the graphics buffer afterward, since the RAM buffer is constantly being called to possibly perform its own updates after this value resets to zero."
@@ -62,6 +62,7 @@ SNES_Level_LayPtr_AddrB,,0,$7E002D,1,,0,Level,SNES: High byte of address to tile
 Map_Tile_AddrL,$0063,1,$7E002E,1,,0,Level,Low byte of tile address
 BonusText_BaseL,$0063,1,,0,,0,Bonus Game,Instruction text base address low
 Map_Tile_AddrH,$0064,1,$7E002F,1,,0,Level,High byte of tile address
+SNES_Map_Tile_AddrB,,0,$7E0030,1,,0,Level,Bank byte of tile address
 BonusText_BaseH,$0064,1,,0,,0,Bonus Game,Instruction text base address high
 Level_ObjPtr_AddrL,$0065,1,,0,,0,Level,Low byte of address to object set (ORIGINAL stored in Level_ObjPtrOrig_AddrL)
 Level_ObjPtr_AddrH,$0066,1,,0,,0,Level,High byte of address to object set (ORIGINAL stored in Level_ObjPtrOrig_AddrH)
@@ -237,12 +238,12 @@ Level_TileOff,$00E4,1,,0,,0,Level,Tile mem offset
 Level_Tile,$00E5,1,,0,,0,Level,Temporary holding point for a detected tile index
 Title_LActScriptPos,$00E5,1,,0,,0,Title Screen/Ending,Offset within Luigi's action script
 World_Map_Tile,$00E5,1,,0,,0,Overworld,Current tile index Mario is standing on
-Player_Slopes,$00E6,3,,0,,0,Level,"for sloped levels only (3 bytes allocated, but only one actually used)
+Player_Slopes,$00E6,3,$7E00B4,3,,0,Level,"for sloped levels only (3 bytes allocated, but only one actually used)
 NOTE: Code at PRG030_9EDB clears Player_Slopes+1 and Player_Slopes+2, but these are never used!"
 Title_MActScriptDelay,$00E6,1,,0,,0,Title Screen/Ending,Mario's action script delay until next event
 Title_LActScriptDelay,$00E7,1,,0,,0,Title Screen/Ending,Luigi's action script delay until next event
 Title_MActScriptDirSet,$00E8,1,,0,,0,Title Screen/Ending,"Mario's action script Buffer for last queue command (sets respective ""Title_ObjMLDir"" variable)"
-Scroll_Temp,$00E9,1,,0,,0,Overworld,Scroll hold value
+Scroll_Temp,$00E9,1,$7E00B7,1,,0,Overworld,Scroll hold value
 Title_LActScriptDirSet,$00E9,1,,0,,0,Title Screen/Ending,"Luigi's action script Buffer for last queue command (sets respective ""Title_ObjMLDir"" variable)"
 Title_ObjMLDir,$00EA,2,,0,,0,Title Screen/Ending,"Mario / Luigi vector direction bitfield (1 = Left, 2 = Right, 4 = Down, 8 = Up, $10 = Sprite behind BG, $80 = Tail wagging)"
 Player_XStart,$00EB,1,$7E00B9,1,,0,Player,Set to Player's original starting X position (also used to check if level has initialized)
@@ -486,7 +487,7 @@ Map_EntTran_VRAMGap,$0456,1,,0,,0,Level,"Sets gap (i.e. 1 for vertical, 32 for h
 ,$0457,1,,0,,0,Empty,Unused.
 Map_W8D_YOff,$0458,1,,0,,0,Overworld,Y Offset from Player when doing darkness
 Map_W8D_XOff,$0459,1,,0,,0,Overworld,X Offset from Player when doing darkness
-Map_W8D_RC,$045A,1,,0,,0,Overworld,"Row in the upper bits, column in the lower bits"
+Map_W8D_RC,$045A,1,$7E105A,1,,0,Overworld,"Row in the upper bits, column in the lower bits"
 Map_W8D_Dir,$045B,1,,0,,0,Overworld,"Direction of travel in darkness (1 = Right, 2 = Left, 4 = Down, 8 = Up)"
 Map_W8D_X,$045C,1,,0,,0,Overworld,World 8 Darkness - (TOFIX)
 Map_W8D_Y,$045D,1,,0,,0,Overworld,World 8 Darkness - (TOFIX)
@@ -727,7 +728,7 @@ Level_Tile_Slope,$060D,4,,0,,0,Player,"Slope of tile for each of the positions a
 1: Slope shape at head
 2: ""in front"" of Player (""lower"", at feet)
 3: ""in front"" of Player (""upper"", at face)"
-Scroll_Cols2Upd,$0612,1,,0,,0,Graphics,Number of 8x8 columns to update (typically set to 32 for a full dirty update)
+Scroll_Cols2Upd,$0612,1,$7E0612,1,,0,Graphics,Number of 8x8 columns to update (typically set to 32 for a full dirty update)
 Bonus_CoinsYVel,$0619,6,,0,,0,Bonus Game,UNUSED Bonus game coins Y velocity
 Bonus_CoinsY,$061F,6,,0,,0,Bonus Game,UNUSED Bonus game coins Y
 Bonus_CoinsXVel,$0625,6,,0,,0,Bonus Game,UNUSED Bonus game coins X velocity
@@ -791,7 +792,7 @@ LevLoad_Unused3,$0703,1,,0,,0,Empty,Unused. Initialized at level load.
 LevLoad_Unused4,$0704,1,,0,,0,Empty,Unused. Initialized at level load.
 ,$0705,1,,0,,0,Empty,Unused.
 LL_ShapeDef,$0706,1,,0,,0,Level,"During level loading, defines a shape of something (context-specific)"
-Scroll_UpdAttrFlag,$0707,1,,0,,0,Bonus Game,Set when it is time to update attributes
+Scroll_UpdAttrFlag,$0707,1,$7E0707,1,,0,Bonus Game,Set when it is time to update attributes
 ,$0708,2,,0,,0,Empty,Unused.
 Level_Tileset,$070A,1,,0,,0,Level,Different tilesets which changes the detection and meaning in levels (TOFIX)
 Bonus_UnusedVH,$070B,1,,0,,0,Bonus Game,VRAM High address ?? Seems to only be part of an unused routine

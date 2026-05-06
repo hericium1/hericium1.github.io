@@ -45,6 +45,9 @@
                                     -->
                                   </td>
                                 </tr>
+								<tr>
+								  <td colspan=3><br>NOTES:<br>The Ending system uses some Title Screen variables, so gaps in the Ending context will not be marked as unused.<br></td>								  
+								</tr>
                               </tbody>
                             </table>
                           </td>
@@ -65,6 +68,7 @@
 			  <td class="header"><a href="#" onclick="table_sort(SORT_BY.GBA_ADDRESS)">GBA Address</a></td>
                           <td class="header">GBA Length</td>
                           <td class="header">Type</td>
+						  <td class="header">Context</td>
                           <td class="header">Description</td>
                         </tr>
                         <tr>
@@ -271,6 +275,11 @@
 			    col_elm = document.createElement("td")
 			    col_elm.className = "cell1"
 			    col_elm.innerText = ram_table[i].category
+			    base_elm.appendChild(col_elm)
+				
+				col_elm = document.createElement("td")
+			    col_elm.className = "cell1"
+			    col_elm.innerText = ram_table[i].context
 			    base_elm.appendChild(col_elm)
 
 			    col_elm = document.createElement("td")

@@ -15,7 +15,7 @@ Temp_Var13,$000C,1,$7E000C,1,,0,Misc.,General,Temporary storage variable
 Temp_Var14,$000D,1,$7E000D,1,,0,Misc.,General,Temporary storage variable
 Temp_Var15,$000E,1,$7E000E,1,,0,Misc.,General,Temporary storage variable
 Temp_Var16,$000F,1,$7E000F,1,,0,Misc.,General,Temporary storage variable
-VBlank_Tick,$0010,1,,0,,0,Flag,General,"Can be used for timing, or knowing when an NMI just fired off"
+VBlank_Tick,$0010,1,$7E0154,1,,0,Flag,General,"Can be used for timing, or knowing when an NMI just fired off"
 ,$0011,1,$7E0010,2,,0,Empty,General,Unused.
 Horz_Scroll_Hi,$0012,1,$7E0012,1,,0,Camera,General,"Provides a ""High"" byte for horizontally scrolling, or could be phrased as ""current screen""
 
@@ -347,14 +347,14 @@ SNES_BGPal,,0,$7E02B9,2,,0,Level,General,(TOFIX)
 SNES_LevelHeaderL3Pal,,0,$7E02BE,1,,0,Level,General,(TOFIX)
 Graphics_BufCnt,$0300,1,,0,,0,Graphics,General,first byte holds current position within buffer (Graphics_Buffer+) to store info
 Graphics_Buffer,$0301,107,,0,,0,Graphics,General,"Simple (and small!) delayed write buffer; uses same format as Video_Upd_Table in PRG030, get format info there"
-TileChng_VRAM_H,$036C,1,,0,,0,Graphics,General,High part of VRAM address to change
-TileChng_VRAM_L,$036D,1,,0,,0,Graphics,General,Low part of VRAM address to change
-TileChng_Pats,$036E,4,,0,,0,Graphics,General,The four patterns required to change a tile (for Level_ChgTileEvent)
+TileChng_VRAM_H,$036C,1,$7E036C,1,,0,Graphics,General,High part of VRAM address to change
+TileChng_VRAM_L,$036D,1,$7E036D,1,,0,Graphics,General,Low part of VRAM address to change
+TileChng_Pats,$036E,4,$7E036E,8,,0,Graphics,General,The four patterns required to change a tile (for Level_ChgTileEvent)
 Level_SizeOrig,$0372,1,$7E0376,1,,0,Level,General,Holds original size (width or height) of level (in screens)
 Level_PipeExitDir,$0373,1,,0,,0,Player,General,"Direction Player is going to exit from a pipe (1 = Up, 2 = Down, 3 = Right, 4 = Left, 5 = In-level Transit)"
 Level_7VertCopy,$0374,1,,0,,0,Level,General,"Just seems to be an unmaintained copy of Level_7Vertical from level load, but that's it"
-Level_PipeNotExit,$0375,1,,0,,0,Level,General,"If set, pipes do NOT exit to map (i.e. as in pipe junctions)"
-Level_PauseFlag,$0376,1,,0,,0,Level,General,"Set to 0 when not paused, or 1 when paused"
+Level_PipeNotExit,$0375,1,$7E0379,1,,0,Level,General,"If set, pipes do NOT exit to map (i.e. as in pipe junctions)"
+Level_PauseFlag,$0376,1,$7E037A,1,,0,Level,General,"Set to 0 when not paused, or 1 when paused"
 Level_SkipStatusBarUpd,$0377,1,,0,,0,Graphics,General,"When set, skips updating the status bar for one frame (priority graphics buffer changes I think)"
 Raster_State,$0378,1,,0,,0,Graphics,General,"This variable's meaning depends on the Raster_Effect in use; typically 0 is first pass, then more for further scanlines"
 ,$0379,7,,0,,0,Empty,General,Unused.
@@ -382,10 +382,10 @@ Normal values for the junction:
  3 - General purpose junction (as specified by Level_AltLayout and Level_AltObjects)
  4 - Generic level exit (where you come up from a pipe in the generic exit area)
  5 - Special Toad House (used for the 1-3 warp whistle)"
-Level_JctFlag,$03DF,1,,0,,0,Flag,General,Toggles when you junction
+Level_JctFlag,$03DF,1,$7E0415,1,,0,Flag,General,Toggles when you junction
 ,$03E0,1,,0,,0,Empty,General,Unused.
 Map_DrawPanState,$03E1,1,,0,,0,Overworld,General,Map draw/pan state
-ObjGroupRel_Idx,$03E2,1,,0,,0,Sprites,General,Holds relative index of object within its group (see PRG000_CA51)
+ObjGroupRel_Idx,$03E2,1,$7E0418,1,,0,Sprites,General,Holds relative index of object within its group (see PRG000_CA51)
 InvFlip_VAddrHi,$03E3,1,,0,,0,Level,General,Hi byte of VRAM address during inventory flip modifications
 ,$03E4,1,,0,,0,Empty,General,Unused.
 InvFlip_Frame,$03E5,1,,0,,0,Misc.,General,"Sort of a ""frame"" of animation during flipping of the inventory box; 0-7 during closing, 8-15 during opening"
@@ -405,11 +405,11 @@ THouse_Treasure,$03EB,1,,0,,0,Level,General,"Treasure type you'll get at this To
 7 = Random Basic Item"
 Coins_Earned,$03EC,1,,0,,0,Level,General,"A ""buffer"" of coins earned to be added to your total, actual coinage stored in Inventory_Coins[2]"
 Map_Powerup_Poof,$03ED,1,,0,,0,Counter,General,"Counter that handles the ""poof"" effect when a powerup is used on the map (requires Inventory to be open, and forces it to close afterward)"
-Level_FreeVertScroll,$03EE,1,,0,,0,Level,General,"0 = Screen locked at $EF (lowest point) unless flying or climbing a vine
+Level_FreeVertScroll,$03EE,1,$7E0424,1,,0,Level,General,"0 = Screen locked at $EF (lowest point) unless flying or climbing a vine
 1 = Free vertical scroll
 2 = Locked at arbitrary point (i.e. whatever Vert_Scroll is, it stays there)"
 Level_7Vertical,$03EF,1,$7E0425,1,,0,Level,General,Set in World 7 vertical type levels
-Level_SelXStart,$03F0,1,,0,,0,Level,General,Selects X starting position when level begins (valid values 0-3)
+Level_SelXStart,$03F0,1,$7E0426,1,,0,Level,General,Selects X starting position when level begins (valid values 0-3)
 Update_Request,$03F1,1,,0,,0,Video,General,"This changes the current Raster_Effect and Update_Select and doesn't persist
 1 = 32 pixel partition; common use is for levels with water along the bottom
 2 = Spade game sliders
@@ -604,7 +604,7 @@ Player_PMeterCnt,$0515,1,,0,,0,Counter,Level,Tick counter used to count when to 
 B10Coin_Timer,$0516,1,,0,,0,Counter,Level,"Decrements until zero, which is how much time you have to get the max coins from a 10 coin block"
 Player_TailAttack,$0517,1,,0,,0,Counter,Level,"Initiailized to $12; counts down to zero, performs tail attack!"
 CineKing_Timer,$0518,1,,0,,0,Counter,Level,Timer; decrements to zero (shares Objects_Timer first byte)
-Objects_Timer,$0518,8,,0,,0,Sprites,Level,"""Timer"" values; automatically decrements to zero"
+Objects_Timer,$0518,8,$7E0518,8,,0,Sprites,Level,"""Timer"" values; automatically decrements to zero"
 Title_ObjVar2,$0519,6,,0,,0,Title Screen/Ending,Title Screen,Minor objects user-defined variable 2
 Map_Object_ActXH,$051E,15,,0,,0,Overworld,Overworld,"For map objects, their actual display X Hi byte (as it may modify, esp. with marchers)"
 Title_ObjFrame,$051F,1,,0,,0,Title Screen/Ending,Title Screen,"Minor object ""frame""; adds 2x the value here to the pattern selection for the object's sprites"
@@ -624,7 +624,7 @@ Level_BlkBump_YLo,$053A,3,,0,,0,Sprites,Level,Block bump slot Y Lo
 Map_March_Count,$053C,15,,0,,0,Overworld,Overworld,"Simply counts and overflows, but used to determine position of marching map objects (PER ID, not object index ... Actually is seems they go back and forth on that??)"
 ,$053D,8,,0,,0,Empty,Level,Unused.
 Level_VertScrollH,$0542,1,,0,,0,Camera,Level,"Alternate VertScroll_Hi used by engine, adjusted before being sent to Vert_Scroll_Hi"
-Level_VertScroll,$0543,1,,0,,0,Camera,Level,"Alternate VertScroll used by engine, adjusted before being sent to Vert_Scroll"
+Level_VertScroll,$0543,1,$7E0543,1,,0,Camera,Level,"Alternate VertScroll used by engine, adjusted before being sent to Vert_Scroll"
 Player_AboveTop,$0544,1,,0,,0,Flag,Level,"If Player is above top of level, this is $FF (-1), otherwise it is zero"
 Level_InitAction,$0545,1,,0,,0,Level,Level,AT LEVEL INITIALIZATION ONLY: Performs a specific initialization routine (NOTE: Shared with Player_Slide)
 Player_Slide,$0545,1,,0,,0,Player,Level,"Positive values sliding forward, negative values sliding backward; directly sets Player_XVel"
@@ -645,12 +645,12 @@ Player_EndLevel,$0559,1,,0,,0,Counter,Level,Player's end of level run-off until 
 Level_AirshipCtl,$055A,1,,0,,0,Level,Level,"Airship control -- 1 = run and jump to catch air ship, 2 = climb to enter, 3 = enter"
 ,$055B,1,,0,,0,Empty,Level,Unused.
 Counter_Wiggly,$055C,1,,0,,0,Counter,Level,"""Wiggly"" counter, provides rippled movement (like the airship rising during its intro)"
-Counter_7to0,$055D,1,,0,,0,Counter,Level,Counter that runs from 7 to 0 continuously while level is in progress
+Counter_7to0,$055D,1,$7E055D,1,,0,Counter,Level,Counter that runs from 7 to 0 continuously while level is in progress
 ,$055E,1,,0,,0,Empty,Level,Unused.
 LevelPartialInit,$055F,1,,0,,0,Level,Level,"When set, performs a partial reinitialization of level data (notably does not perform the Level InitAction unless it is airship related)"
 Level_TilesetIdx,$0560,1,$7E0560,1,,0,Level,Level,"Holds Level_Tileset as an ""index"" value instead, relative to levels (i.e. Level_Tileset - 1)"
 Level_ChangeReset,$0561,1,,0,,0,Level,Level,"When set to zero, a mass reset is performed (used when changing ""scenes"" in a single level)"
-Level_UnusedFlag,$0562,1,,0,,0,Level,Level,"Unused; only set in a couple places, but never read back!"
+Level_UnusedFlag,$0562,1,$7E0562,1,,0,Level,Level,"Unused; only set in a couple places, but never read back!"
 Level_SlopeEn,$0563,1,,0,,0,Flag,Level,"If set, enables slope tiles (otherwise they're considered flat top-only solids)"
 Level_ChgTileEvent,$0564,1,,0,,0,Level,Level,"When non-zero, queues a ""change tile"" event (TOFIX)"
 Level_NoStopCnt,$0565,1,,0,,0,Counter,Level,"A counter which continuously increments unless something is ""stopping"" the action"
@@ -663,9 +663,9 @@ Player_IsClimbing,$056B,1,,0,,0,Flag,Level,Set when Player is climing vine
 Player_FlipBits_OLD,$056C,1,,0,,0,Player,Level,Holds backup of Player_FlipBits
 Player_HitCeiling,$056D,1,,0,,0,Flag,Level,Flag set when Player has just hit head off ceiling
 Player_FlyTime,$056E,1,,0,,0,Counter,Level,"When > 0, Player can fly (for power ups that do so); decrements (unless $FF) to 0"
-Player_IsDucking,$056F,1,,0,,0,Flag,Level,Set when Player is ducking down
+Player_IsDucking,$056F,1,$7E056F,1,,0,Flag,Level,Set when Player is ducking down
 Player_WhiteBlkCnt,$0570,1,,0,,0,Counter,Level,White block counter; counts up while Player is standing on white block and holding down
-Level_PipeMove,$0571,1,,0,,0,Level,Level,"Level_PipeMove is set to various values that dictate how Player is moving within a pipe
+Level_PipeMove,$0571,1,$7E0571,1,,0,Level,Level,"Level_PipeMove is set to various values that dictate how Player is moving within a pipe
 
 The lower 2 bits form a direction as follows:
  00 - right
@@ -696,7 +696,7 @@ Player_Bounce,$057C,1,,0,,0,Sprites,Level,Set to cause block bounce (upper 4 bit
 Player_BounceDir,$057D,1,,0,,0,Player,Level,"Direction of Player bounce -- 0 = Down, 1 = Up, 2 = Left, 3 = Right"
 Player_BounceObj,$057E,1,,0,,0,Sprites,Level,Set if it was a kicked shelled object that hit the bounce block (i.e. don't bounce the Player if the object is the one that hit) 
 Counter_ByPlayerSpd,$057F,1,,0,,0,Counter,Level,A counter which increments faster as the Player goes faster
-Level_HAutoScroll,$0580,1,,0,,0,Flag,Level,"When set to 1, ""auto horizontal scroll"" is active (this can be toggled mid-level)"
+Level_HAutoScroll,$0580,1,$7E0580,1,,0,Flag,Level,"When set to 1, ""auto horizontal scroll"" is active (this can be toggled mid-level)"
 B10Coin_Count,$0581,1,,0,,0,Counter,Level,"Decrements until -1, you continue to get a coin until it does so"
 B10Coin_ID,$0582,1,,0,,0,Level,Level,Forms a sort of unique ID so game knows if you've switched blocks
 Player_OffScreen,$0583,1,,0,,0,Flag,Level,Set when Player is completely off screen
@@ -954,10 +954,10 @@ Video_DoPalUpd,$07BE,1,,0,,0,Palettes,General,Name consistent with Video_Upd_Tab
 Palette_AddrHi,$07BE,1,,0,,0,Palettes,General,Stores high part of palette address when committing palettes
 Palette_AddrLo,$07BF,1,,0,,0,Palettes,General,Stores low part of palette address when committing palettes
 Palette_BufCnt,$07C0,1,,0,,0,Palettes,General,32 for updating entire palette
-Palette_Buffer,$07C1,32,$07C9,26,,0,Palettes,General,"Buffer of palette bytes to commit, used for fade in/out
+Palette_Buffer,$07C1,32,$7E07C9,26,,0,Palettes,General,"Buffer of palette bytes to commit, used for fade in/out
 SNES: only written to during airship coin glow effect, which remains unutilized"
 Palette_Term,$07E1,1,,0,,0,Palettes,General,"Set to zero as terminator, per requirement of the Video_Upd_Table format"
-BigQBlock_GotIt,$07E2,1,$07E3,1,,0,Level,General,"Big ? Blocks can only be retrieved once; this is a bitfield that marks which ones you've gotten by setting a bit per screen space in the Big ? Block area.
+BigQBlock_GotIt,$07E2,1,$7E07E3,1,,0,Level,General,"Big ? Blocks can only be retrieved once; this is a bitfield that marks which ones you've gotten by setting a bit per screen space in the Big ? Block area.
 Basically, if you reenter a Big ? Block area after opening it, it won't reappear! See ObjInit_BigQBlock and ObjNorm_BigQBlock for usage...
 NOTE: This is cleared completely upon Player death which works since levels are not re-enterable, but still seems a bit extreme..."
 ,$07E3,13,,0,,0,Empty,General,Unused.
@@ -1127,7 +1127,7 @@ Map_Unused7992,$7992,1,,0,,0,Overworld,General,Value used in some dead code in P
 Bonus_DiePos,$7992,1,,0,,0,Bonus Game,General,"UNUSED Die in the lost bonus games, counts 0-5"
 Map_Previous_Dir,$7993,2,,0,,0,Overworld,General,"(Mario/Luigi) Backup movement dir (remember which way Player moved last) (8=Up, 4=Down, 2=Left, 1=Right)"
 Map_Unused7995,$7995,1,,0,,0,Empty,General,Unused; cleared but never used otherwise
-Player_NoSlopeStick,$7996,1,,0,,0,Flag,General,"If set, Player does not stick to slopes (noticeable running downhill)"
+Player_NoSlopeStick,$7996,1,$7E027F,1,,0,Flag,General,"If set, Player does not stick to slopes (noticeable running downhill)"
 ,$7997,105,,0,,0,Empty,General,Unused.
 AScroll_Anchor,$7A00,1,,0,,0,Misc.,General,"Used as starting point for $7A00-$7A14 clear, but never actually used in Auto-Scroll"
 Level_AScrlSelect,$7A01,1,,0,,0,Level,General,Selects auto scroll routine to use (see PRG009_B922) (TOFIX)
@@ -1175,6 +1175,7 @@ Splash_DisTimer,$7A45,1,,0,,0,Player,General,Player water splashes are disabled 
 ShellKillFlash_Cnt,$7A46,1,,0,,0,Sprites,General,"""Shell Kill Flash"" counter"
 ShellKillFlash_Y,$7A47,1,,0,,0,Sprites,General,"""Shell Kill Flash"" Y"
 ShellKillFlash_X,$7A48,1,,0,,0,Sprites,General,"""Shell Kill Flash"" X"
+SNES_ShellKillFlash_XHi,,0,$7E027E,1,,0,Sprites,General,"SNES: ""Shell Kill Flash"" XHi"
 Objects_DisPatChng,$7A49,6,,0,,0,Sprites,General,"If set, this object no longer enforces a pattern bank change"
 ObjSplash_DisTimer,$7A4F,6,,0,,0,Sprites,General,Object water/lava splashes are disabled until decrements to zero
 PlayerProj_XVelFrac,$7A55,2,,0,,0,Sprites,General,Player Projectile X velocity fractional accumulator
@@ -1277,8 +1278,10 @@ Level_JctBackupTileset,$7EB7,1,,0,,0,Level,General,Level Junction tileset backup
 Level_AltTileset,$7EB8,1,,0,,0,Level,General,"Level's ""alternate"" tileset (when you go into bonus pipe, etc.)"
 Level_LayPtrOrig_AddrL,$7EB9,1,,0,,0,Level,General,ORIGINAL Low byte of address to tile layout
 Level_LayPtrOrig_AddrH,$7EBA,1,,0,,0,Level,General,ORIGINAL High byte of address to tile layout
-Level_ObjPtrOrig_AddrL,$7EBB,1,,0,,0,Level,General,ORIGINAL Low byte of address to object set
-Level_ObjPtrOrig_AddrH,$7EBC,1,,0,,0,Level,General,ORIGINAL High byte of address to object set
+Level_ObjPtrOrig_AddrL,$7EBB,1,$7E023A,1,,0,Level,General,ORIGINAL Low byte of address to object set
+Level_ObjPtrOrig_AddrH,$7EBC,1,$7E023B,1,,0,Level,General,ORIGINAL High byte of address to object set
+SNES_Level_ObjPtrOrig_AddrB,,0,$7E023C,1,,0,Level,General,"ORIGINAL Bank byte of address to object set
+SNES: Written to on toad house warp - never read"
 Level_BG_Page1_2,$7EBD,1,,0,,0,Graphics,General,Sets which bank the first and second page (2K / 64 8x8 tiles) of BG is using (see Level_BG_Pages1/2)
 Map_BorderAttrFromTiles,$7EBE,44,,0,,0,Overworld,General,Attributes collected from map tiles that get overwritten by border FIXME SIZE UNCERTAIN (TOFIX)
 Map_Unused7EEA,$7EEA,1,,0,,0,Overworld,General,"Value retrieved from LUT at initialization of world, but never used otherwise"
@@ -1328,6 +1331,7 @@ BrickBust_YVel,$7FA3,3,,0,,0,Sprites,General,Brick bust Y velocity
 BrickBust_XDist,$7FA6,3,,0,,0,Sprites,General,Brick bust X split
 BrickBust_YLwr,$7FA9,3,,0,,0,Sprites,General,Brick bust lower chunks Y
 BrickBust_HEn,$7FAC,3,,0,,0,Sprites,General,"Bits to hide chunks (Bit 0 = Right, 1 = Left, 2 = Lower, 3 = Upper) OR poof counter"
+SNES_BrickBust_XHi,,0,$7E02AE,1,,0,Sprites,General,SNES: Brick bust XHi split
 ,$7FAF,3,,0,,0,Empty,General,Unused.
 CoinPUp_State,$7FB2,4,,0,,0,Sprites,General,"State of up to 4 ""Power Up"" coins (i.e. coins that come out of ? blocks and bricks)"
 CoinPUp_Y,$7FB6,4,,0,,0,Sprites,General,"Y of ""Power Up"" coins"

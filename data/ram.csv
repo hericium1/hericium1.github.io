@@ -31,9 +31,11 @@ SNES: hardware mirror for INIDISP ($2100)"
 Pad_Holding,$0017,1,$7E0017,1,,0,I/O,General,"Active player's inputs (i.e. 1P or 2P, whoever's playing) buttons being held in (continuous)"
 Pad_Input,$0018,1,$7E0018,1,,0,I/O,General,"Active player's inputs (i.e. 1P or 2P, whoever's playing) buttons newly pressed only (one shot)"
 Roulette_RowIdx,$0019,1,$7E0019,1,,0,Bonus Game,General,Roulette Bonus Game only obviously
-Pal_Force_Set12,$001A,1,,0,,0,Palettes,General,"This overrides the normal palette routine of selecting by Level_Tileset and loading the color sets PalSel_Tile_Colors/PalSel_Obj_Colors.
-Setting Pal_Force_Set12 to a non-zero value will select as the index instead of Level_Tileset, and then it will copy the first two sets of 16 colors from the palette data as bg / sprite colors."
-PlantInfest_ACnt,$001B,1,,0,,0,Counter,General,Plant infestation level animation counter
+Pal_Force_Set12,$001A,1,$7E001A,1,,0,Palettes,General,"This overrides the normal palette routine of selecting by Level_Tileset and loading the color sets PalSel_Tile_Colors/PalSel_Obj_Colors.
+Setting Pal_Force_Set12 to a non-zero value will select as the index instead of Level_Tileset, and then it will copy the first two sets of 16 colors from the palette data as bg / sprite colors.
+SNES: Unused.
+Used by SMB3Editor."
+PlantInfest_ACnt,$001B,1,$7E001B,1,,0,Counter,General,Plant infestation level animation counter
 VBlank_TickEn,$001C,1,$7E001C,1,,0,Flag,General,Enables the VBlank_Tick decrement and typically other things like joypad reading
 Map_Enter2PFlag,$001D,1,,0,,0,Flag,General,"If $00, entering level, otherwise set if entering 2P VS mode"
 Map_EnterViaID,$001E,1,,0,,0,Overworld,General,Overrides whatever spot on the map you entered with something special (see Map_DoEnterViaID)
@@ -44,9 +46,9 @@ Map_EnterLevelFX,$0020,1,$7E0020,1,,0,Video,General,"When entering a level on th
 Map_ScrollOddEven,$0020,1,,0,,0,Camera,General,Toggles odd/even column as it scrolls
 ,$0021,1,,0,,0,Empty,General,Unused.
 Level_Width,$0022,1,$7E0022,1,,0,Level,General,"Width of current level, in screens (0 = don't move at all, max is 15H/16V)"
-Scroll_VOffsetT,$0023,1,,0,,0,Camera,General,Current tile offset (every 16px) of top of screen (vertical level style ONLY)
+Scroll_VOffsetT,$0023,1,$7E0023,1,,0,Camera,General,Current tile offset (every 16px) of top of screen (vertical level style ONLY)
 Scroll_ColumnR,$0023,1,$7E0023,1,,0,Camera,General,Current tile column (every 16px) of right side of screen (non-vertical level style ONLY)
-Scroll_VOffsetB,$0024,1,,0,,0,Camera,General,Current tile offset (every 16px) of bottom of screen (vertical level style ONLY)
+Scroll_VOffsetB,$0024,1,$7E0024,1,,0,Camera,General,Current tile offset (every 16px) of bottom of screen (vertical level style ONLY)
 Scroll_ColumnL,$0024,1,$7E0024,1,,0,Camera,General,Current tile column (every 16px) of left side of screen (non-vertical level style ONLY)
 Scroll_ColorStrip,$0025,54,,0,,0,Graphics,General,"This stores a strip of just the upper 2 bits of a tile ($00, $40, $80, $C0) to produce attribute info"
 Scroll_LastDir,$005B,1,$7E0025,1,,0,Camera,General,"0=screen last moved right (or up, if vertical), 1=screen last moved left (or down, if vertical)"
@@ -305,11 +307,15 @@ SNES_SpriteBank,,0,$7E00DE,1,,0,Sprites,General,"SNES: Current ""Bank"" of sprit
 SNES_SpecialObj_XHi,,0,$7E00E2,0,,0,Sprites,General,SNES:  X high coordinate of special object
 Controller1Press,$00F5,1,$7E00F6,0,,0,I/O,General,"Player 1's controller ""pressed this frame only"" (see Controller1 for values)"
 Controller2Press,$00F6,1,$7E00F7,0,,0,I/O,General,"Player 2's controller ""pressed this frame only"" (see Controller2 for values)"
+SNES_ControllerB1Press,,0,$7E00F8,1,,0,I/O,General,"Player 1's controller ""pressed this frame only"" (see ControllerB1 for values)"
+SNES_ControllerB2Press,,0,$7E00F9,1,,0,I/O,General,"Player 2's controller ""pressed this frame only"" (see ControllerB2 for values)"
 Controller1,$00F7,1,$7E00F2,0,,0,I/O,General,"Player 1's controller inputs
 NES -- R01 L02 D04 U08 S10 E20 B40 A80"
 Controller2,$00F8,1,$7E00F3,0,,0,I/O,General,"Player 2's controller inputs
 NES -- R01 L02 D04 U08 S10 E20 B40 A80"
-,$00F9,3,,0,,0,Empty,General,Unused.
+SNES_ControllerB1,,0,$7E00F4,1,,0,I/O,General,"Player 1's controller inputs, second group of buttons"
+SNES_ControllerB2,,0,$7E00F5,1,,0,I/O,General,"Player 2's controller inputs, second group of buttons"
+,$00F9,3,,0,,0,Empty,General,NES -- R01 L02 D04 U08 S10 E20 B40 A80
 Vert_Scroll,$00FC,1,$7E0216,1,,0,Camera,General,"Vertical scroll of name table; typically at $EF (239, basically showing the bottom half)
 
 SNES: Mirror of hardware register BG1VOFS ($210E), low byte"
@@ -337,12 +343,14 @@ Byte 2 - Stores the attributes of the sprite.
 * Bit 6 - Indicates whether to flip the sprite horizontally.
 * Bit 7 - Indicates whether to flip the sprite vertically.
 Byte 3 - X coordinate"
+SNES_BGPal,,0,$7E02B9,2,,0,Level,General,(TOFIX)
+SNES_LevelHeaderL3Pal,,0,$7E02BE,1,,0,Level,General,(TOFIX)
 Graphics_BufCnt,$0300,1,,0,,0,Graphics,General,first byte holds current position within buffer (Graphics_Buffer+) to store info
 Graphics_Buffer,$0301,107,,0,,0,Graphics,General,"Simple (and small!) delayed write buffer; uses same format as Video_Upd_Table in PRG030, get format info there"
 TileChng_VRAM_H,$036C,1,,0,,0,Graphics,General,High part of VRAM address to change
 TileChng_VRAM_L,$036D,1,,0,,0,Graphics,General,Low part of VRAM address to change
 TileChng_Pats,$036E,4,,0,,0,Graphics,General,The four patterns required to change a tile (for Level_ChgTileEvent)
-Level_SizeOrig,$0372,1,,0,,0,Level,General,Holds original size (width or height) of level (in screens)
+Level_SizeOrig,$0372,1,$7E0376,1,,0,Level,General,Holds original size (width or height) of level (in screens)
 Level_PipeExitDir,$0373,1,,0,,0,Player,General,"Direction Player is going to exit from a pipe (1 = Up, 2 = Down, 3 = Right, 4 = Left, 5 = In-level Transit)"
 Level_7VertCopy,$0374,1,,0,,0,Level,General,"Just seems to be an unmaintained copy of Level_7Vertical from level load, but that's it"
 Level_PipeNotExit,$0375,1,,0,,0,Level,General,"If set, pipes do NOT exit to map (i.e. as in pipe junctions)"
@@ -352,8 +360,8 @@ Raster_State,$0378,1,,0,,0,Graphics,General,"This variable's meaning depends on 
 ,$0379,7,,0,,0,Empty,General,Unused.
 Scroll_ToVRAMHi,$0380,1,$7E0380,1,,0,Camera,General,"High byte for when pushing a column of tile data to VRAM (Set to $20, Name Table 0, after scroll update)"
 Scroll_LastCol8,$0381,1,$7E0381,1,,0,Camera,General,Last 8x8 block column that was updated (non-vertical level ONLY)
-Scroll_LastOff8,$0381,1,$7E0381,1,,0,Camera,General,Last 8x8 block offset that was updated (vertical level style ONLY)
-Scroll_PatStrip,$0382,54,$7E0382,54,,0,Camera,General,"(may be less?) This stores a strip of 8x8 blocks, (non-vertical level: top to bottom with 2 columns), to render the next 16 pixel ""sliver"" of screen space"
+Scroll_LastOff8,$0381,1,,1,,0,Camera,General,Last 8x8 block offset that was updated (vertical level style ONLY)
+Scroll_PatStrip,$0382,54,$7E0382,64,,0,Camera,General,"(may be less?) This stores a strip of 8x8 blocks, (non-vertical level: top to bottom with 2 columns), to render the next 16 pixel ""sliver"" of screen space"
 Scroll_ToVRAMHA,$03B8,1,,0,,0,Graphics,General,"High byte for when pushing attribute data to VRAM (Set to $23, attribute table 0)"
 Scroll_LastAttr,$03B9,1,,0,,0,Misc.,General,(TOFIX)
 Scroll_AttrStrip,$03BA,14,,0,,0,Graphics,General,(may be less?) This stores a 2x2 block of attribute coloring data
@@ -364,7 +372,7 @@ Map_StarsDeltaY,$03CA,1,,0,,0,Overworld,General,"Delta the stars move in Y to re
 Map_Stars_PRelX,$03DB,1,,0,,0,Overworld,General,"During world intro, screen relative position of Player X"
 Map_Stars_PRelY,$03DC,1,,0,,0,Overworld,General,"During world intro, screen relative position of Player Y"
 Player_Power,$03DD,1,,0,,0,Player,General,>>>>>>[P] charge level ($7F max)
-Level_JctCtl,$03DE,1,,0,,0,Level,General,"Level_JctCtl is configured when you enter a door or a pipn* When $80, use current values for Level_AltLayout and Level_AltObjects
+Level_JctCtl,$03DE,1,$7E0414,1,,0,Level,General,"Level_JctCtl is configured when you enter a door or a pipn* When $80, use current values for Level_AltLayout and Level_AltObjects
 * When otherwise non-zero (inc $80), skips setting vertical start position
 
 Normal values for the junction:
@@ -400,7 +408,7 @@ Map_Powerup_Poof,$03ED,1,,0,,0,Counter,General,"Counter that handles the ""poof"
 Level_FreeVertScroll,$03EE,1,,0,,0,Level,General,"0 = Screen locked at $EF (lowest point) unless flying or climbing a vine
 1 = Free vertical scroll
 2 = Locked at arbitrary point (i.e. whatever Vert_Scroll is, it stays there)"
-Level_7Vertical,$03EF,1,,0,,0,Level,General,Set in World 7 vertical type levels
+Level_7Vertical,$03EF,1,$7E0425,1,,0,Level,General,Set in World 7 vertical type levels
 Level_SelXStart,$03F0,1,,0,,0,Level,General,Selects X starting position when level begins (valid values 0-3)
 Update_Request,$03F1,1,,0,,0,Video,General,"This changes the current Raster_Effect and Update_Select and doesn't persist
 1 = 32 pixel partition; common use is for levels with water along the bottom
@@ -427,10 +435,10 @@ Roulette_PosFrac,$0415,3,,0,,0,Bonus Game,Bonus Game,Fractional accumulator for 
 ,$0418,1,,0,,0,Empty,Bonus Game,Unused.
 Roulette_Turns,$0419,1,,0,,0,Bonus Game,Bonus Game,"UNUSED ""Turns Remaining"" (if > 0, and you lose Roulette, hit a button and spin again!)"
 ,$041A,12,,0,,0,Empty,Bonus Game,Unused.
-Fade_State,$041B,1,,0,,0,Level,Level,"0 = Nothing, 1 = Fade in, 3 = Fade out"
-Fade_Tick,$041C,1,,0,,0,Counter,Level,Ticks down and then decrements Fade_Level
-Fade_Level,$041D,1,,0,,0,Level,Level,"4 to 0, fade in level"
-FadeOut_Cancel,$041E,1,,0,,0,Level,Level,"If set, the next attempted fade out will be cancelled, which then resets this to zero"
+Fade_State,$041B,1,$7E101B,0,,0,Level,Level,"0 = Nothing, 1 = Fade in, 3 = Fade out"
+Fade_Tick,$041C,1,$7E101C,0,,0,Counter,Level,Ticks down and then decrements Fade_Level
+Fade_Level,$041D,1,$7E101D,1,,0,Level,Level,"4 to 0, fade in level"
+FadeOut_Cancel,$041E,1,$7E101E,1,,0,Level,Level,"If set, the next attempted fade out will be cancelled, which then resets this to zero"
 Player_AllowAirJump,$041F,1,,0,,0,Counter,Level,"Counts down to zero, but while set, you can jump in the air"
 Player_XVelAdj,$0420,1,,0,,0,Player,Level,Applies additional value to the X Velocity
 CineKing_Frame,$0421,1,,0,,0,Level,Level,King's animation frame (NOTE: Shared with Objects_Var7 first byte)
@@ -526,7 +534,7 @@ Map_W8D_Idx,$045E,1,,0,,0,Overworld,Overworld,World 8 Darkness - (TOFIX)
 Map_EntTran_Temp,$045F,1,,0,,0,Overworld,Overworld,Seems to me a multi-purpose value in entrance transition
 Map_EntTran_InitValIdx,$0460,1,,0,,0,Overworld,Overworld,Selects an index of values to initialize by (TOFIX)
 Level_MusicQueue,$0461,1,,0,,0,Audio,General,Requests a song from Set 2A/B (used to allow delayed start)
-Level_MusicQueueRestore,$0462,1,,0,,0,Audio,General,"What to ""restore"" the BGM to when it changes (e.g. Starman, P-Switch, etc.)"
+Level_MusicQueueRestore,$0462,1,$7E1062,1,,0,Audio,General,"What to ""restore"" the BGM to when it changes (e.g. Starman, P-Switch, etc.)"
 ,$0463,109,,0,,0,Empty,General,Unused.
 Music_TriTrkPos,$04D0,1,,0,,0,Audio,General,Offset of triangle track in currently playing index
 Music_NseTrkPos,$04D1,1,,0,,0,Audio,General,Offset of noise track in currently playing index
@@ -640,7 +648,7 @@ Counter_Wiggly,$055C,1,,0,,0,Counter,Level,"""Wiggly"" counter, provides rippled
 Counter_7to0,$055D,1,,0,,0,Counter,Level,Counter that runs from 7 to 0 continuously while level is in progress
 ,$055E,1,,0,,0,Empty,Level,Unused.
 LevelPartialInit,$055F,1,,0,,0,Level,Level,"When set, performs a partial reinitialization of level data (notably does not perform the Level InitAction unless it is airship related)"
-Level_TilesetIdx,$0560,1,,0,,0,Level,Level,"Holds Level_Tileset as an ""index"" value instead, relative to levels (i.e. Level_Tileset - 1)"
+Level_TilesetIdx,$0560,1,$7E0560,1,,0,Level,Level,"Holds Level_Tileset as an ""index"" value instead, relative to levels (i.e. Level_Tileset - 1)"
 Level_ChangeReset,$0561,1,,0,,0,Level,Level,"When set to zero, a mass reset is performed (used when changing ""scenes"" in a single level)"
 Level_UnusedFlag,$0562,1,,0,,0,Level,Level,"Unused; only set in a couple places, but never read back!"
 Level_SlopeEn,$0563,1,,0,,0,Flag,Level,"If set, enables slope tiles (otherwise they're considered flat top-only solids)"
@@ -868,7 +876,7 @@ PAGE_A000,$0720,1,,0,,0,Hardware Mirror,General,Page to set PRG ROM A000 (PRGROM
 PAGE_CMD,$0721,1,,0,,0,Hardware Mirror,General,"When using PRGROM_Change_Both2 or PRGROM_Change_A000, this value stores the MMC3 command"
 Map_Prev_XOff,$0722,2,,0,,0,Overworld,General,(Mario/Luigi) Stores previous scroll X offset on map
 Map_Prev_XHi,$0724,2,,0,,0,Overworld,General,"(Mario/Luigi) Stores previous ""hi byte"" of map X"
-Player_Current,$0726,1,,0,,0,Player,General,"Which Player is currently up (0 = Mario, 1 = Luigi)"
+Player_Current,$0726,1,$7E0726,1,,0,Player,General,"Which Player is currently up (0 = Mario, 1 = Luigi)"
 World_Num,$0727,1,,0,,0,Overworld,General,"Current world index (0-8, where 0 = World 1, 7 = World 8, 8 = World 9 / Warp Zone)"
 World_EnterState,$0728,1,,0,,0,Overworld,General,"State variable during ""world X"" intro entrance, set to 3 when entering a level; overlaps GameOver_State"
 GameOver_State,$0728,1,,0,,0,Overworld,General,"State variable used during ""Gameover!"" sequence only; overlaps World_EnterState"
@@ -946,9 +954,10 @@ Video_DoPalUpd,$07BE,1,,0,,0,Palettes,General,Name consistent with Video_Upd_Tab
 Palette_AddrHi,$07BE,1,,0,,0,Palettes,General,Stores high part of palette address when committing palettes
 Palette_AddrLo,$07BF,1,,0,,0,Palettes,General,Stores low part of palette address when committing palettes
 Palette_BufCnt,$07C0,1,,0,,0,Palettes,General,32 for updating entire palette
-Palette_Buffer,$07C1,32,,0,,0,Palettes,General,"Buffer of palette bytes to commit, used for fade in/out"
+Palette_Buffer,$07C1,32,$07C9,26,,0,Palettes,General,"Buffer of palette bytes to commit, used for fade in/out
+SNES: only written to during airship coin glow effect, which remains unutilized"
 Palette_Term,$07E1,1,,0,,0,Palettes,General,"Set to zero as terminator, per requirement of the Video_Upd_Table format"
-BigQBlock_GotIt,$07E2,1,,0,,0,Level,General,"Big ? Blocks can only be retrieved once; this is a bitfield that marks which ones you've gotten by setting a bit per screen space in the Big ? Block area.
+BigQBlock_GotIt,$07E2,1,$07E3,1,,0,Level,General,"Big ? Blocks can only be retrieved once; this is a bitfield that marks which ones you've gotten by setting a bit per screen space in the Big ? Block area.
 Basically, if you reenter a Big ? Block area after opening it, it won't reappear! See ObjInit_BigQBlock and ObjNorm_BigQBlock for usage...
 NOTE: This is cleared completely upon Player death which works since levels are not re-enterable, but still seems a bit extreme..."
 ,$07E3,13,,0,,0,Empty,General,Unused.
@@ -1079,7 +1088,7 @@ Map_MoveRepeat,$7950,2,,0,,0,Overworld,General,(Mario/Luigi) counts up to $18 an
 AScrlURDiag_OffsetX,$7952,1,,0,,0,Camera,General,"When diagonal autoscroller is wrapping, this holds an X offset for Player/Objects to temporarily correct"
 AScrlURDiag_OffsetY,$7953,1,,0,,0,Camera,General,"When diagonal autoscroller is wrapping, this holds an Y offset for Player/Objects to temporarily correct"
 StatusBar_UpdFl,$7954,1,,0,,0,Misc.,General,Status bar Update Flag; toggles so to update status bar only every other frame
-UpdSel_Disable,$7955,1,,0,,0,Misc.,General,"When set, disables the Update_Select routine during the NMI, which halts most activity due to no reported V-Blanking"
+UpdSel_Disable,$7955,1,$7E3955,1,,0,Misc.,General,"When set, disables the Update_Select routine during the NMI, which halts most activity due to no reported V-Blanking"
 Map_Objects_Itm,$7956,13,,0,,0,Overworld,General,"""Item given by"" map objects"
 Level_TreasureItem,$7963,1,,0,,0,Level,General,Item that will be given by treasure box; set by the object OBJ_TREASURESET by its row (TOFIX)
 Reset_Latch,$7964,1,,0,,0,Misc.,General,"If this value is anything besides $5A, the reset is run (I assume this is considered a safe value in case of data corruption, e.g. from runaway generator)"
@@ -1111,7 +1120,7 @@ Map_Prev_XHi2,$7988,2,,0,,0,Overworld,General,"(Mario/Luigi) Holds a copy of Map
 Map_Unused798A,$798A,2,,0,,0,Hardware Mirror,General,(Mario/Luigi) Unused; cleared and never touched again
 Level_Jct_HSHi,$798C,1,,0,,0,Camera,General,Level junction horizontal scroll high value
 Level_Jct_HS,$798D,1,,0,,0,Camera,General,Level junction horizontal scroll value
-Level_Jct_VSHi,$798E,1,,0,,0,Camera,General,Level junction vertical scroll high value
+Level_Jct_VSHi,$798E,1,$7E398D,1,,0,Camera,General,Level junction vertical scroll high value
 Level_Jct_VS,$798F,1,,0,,0,Camera,General,Level junction vertical scroll value
 ,$7990,2,,0,,0,Empty,General,Unused.
 Map_Unused7992,$7992,1,,0,,0,Overworld,General,Value used in some dead code in PRG011; cleared elsewhere (NOT SURE if maybe it sometimes meant Bonus_DiePos?)
@@ -1252,7 +1261,7 @@ Map_GameOver_CursorY,$7DCB,1,,0,,0,Overworld,General,Game Over popup cursor Y ($
 ,$7DCC,9,,0,,0,Empty,General,Unused.
 Map_PrevMoveDir,$7DD5,1,,0,,0,Overworld,General,Last SUCCESSFUL (allowed) movement direction on map R01 L02 D04 U08
 ,$7DD6,8,,0,,0,Empty,General,Unused.
-Pal_Data,$7DDE,32,,0,,0,Palettes,General,"Holds an entire bg/sprite palette (this is the MASTER palette, what fades target, and others may source for ""original"" colors!)"
+Pal_Data,$7DDE,32,$7E1300,200,,0,Palettes,General,"Holds an entire bg/sprite palette (this is the MASTER palette, what fades target, and others may source for ""original"" colors!)"
 Level_AltLayout,$7DFE,2,,0,,0,Level,General,"Pointer to level's ""alternate"" layout (when you go into bonus pipe, etc.)"
 Level_AltObjects,$7E00,2,,0,,0,Level,General,"Pointer to level's ""alternate"" object set (when you go into bonus pipe, etc.)"
 Level_BlockGrabHitMem,$7E02,128,,0,,0,Level,General,"Records coins and 1-ups grabbed, so they don't come back if you switch areas"

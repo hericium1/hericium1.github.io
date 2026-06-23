@@ -53,7 +53,7 @@ Scroll_ColumnL,$0024,1,$7E0024,1,,0,Camera,General,Current tile column (every 16
 Scroll_ColorStrip,$0025,54,,0,,0,Graphics,General,"This stores a strip of just the upper 2 bits of a tile ($00, $40, $80, $C0) to produce attribute info"
 Scroll_LastDir,$005B,1,$7E0025,1,,0,Camera,General,"0=screen last moved right (or up, if vertical), 1=screen last moved left (or down, if vertical)"
 Scroll_RightUpd,$005C,1,$7E0026,1,,0,Camera,General,"Indicates every 8 pixels update going to the right, or $FF if screen moves left"
-Scroll_VertUpd,$005C,1,$7E0027,1,,0,Camera,General,"Indicates every 8 pixels update up or down, in vertical levels"
+Scroll_VertUpd,$005C,1,$7E0026,1,,0,Camera,General,"Indicates every 8 pixels update up or down, in vertical levels"
 Scroll_LeftUpd,$005D,1,,0,,0,Camera,General,"Indicates every 8 pixels update going to the left, or $FF if screen moves right"
 Graphics_Queue,$005E,1,,0,,0,Misc.,General,"Prepares to perform a Video_Update when possible, indexes the ""Video_Upd_Table"" in PRG030 OR Video_Upd_Table2 in PRG025 (whichever is currently in context)
 Also resets the graphics buffer afterward, since the RAM buffer is constantly being called to possibly perform its own updates after this value resets to zero."
@@ -320,6 +320,8 @@ Vert_Scroll,$00FC,1,$7E0216,1,,0,Camera,General,"Vertical scroll of name table; 
 
 SNES: Mirror of hardware register BG1VOFS ($210E), low byte"
 SNES_Vert_Scroll_Hi_Copy,,0,$7E0217,1,,0,Camera,General,"SNES: Mirror of hardware register BG1VOFS ($210E), high byte. Vert_Scroll_Hi should also be set in conjunction with this."
+SNES_Vert_Scroll_L2,,0,$7E0218,1,,0,Camera,General,(TOFIX)
+SNES_Vert_Scroll_Hi_L2,,0,$7E0219,1,,0,Camera,General,(TOFIX)
 Horz_Scroll,$00FD,1,$7E0210,1,,0,Camera,General,"Horizontal scroll of name table
 
 SNES: Mirror of hardware register BG1HOFS ($210D), low byte."
@@ -360,7 +362,7 @@ Raster_State,$0378,1,,0,,0,Graphics,General,"This variable's meaning depends on 
 ,$0379,7,,0,,0,Empty,General,Unused.
 Scroll_ToVRAMHi,$0380,1,$7E0380,1,,0,Camera,General,"High byte for when pushing a column of tile data to VRAM (Set to $20, Name Table 0, after scroll update)"
 Scroll_LastCol8,$0381,1,$7E0381,1,,0,Camera,General,Last 8x8 block column that was updated (non-vertical level ONLY)
-Scroll_LastOff8,$0381,1,,1,,0,Camera,General,Last 8x8 block offset that was updated (vertical level style ONLY)
+Scroll_LastOff8,$0381,1,$7E0381,1,,0,Camera,General,Last 8x8 block offset that was updated (vertical level style ONLY)
 Scroll_PatStrip,$0382,54,$7E0382,64,,0,Camera,General,"(may be less?) This stores a strip of 8x8 blocks, (non-vertical level: top to bottom with 2 columns), to render the next 16 pixel ""sliver"" of screen space"
 Scroll_ToVRAMHA,$03B8,1,,0,,0,Graphics,General,"High byte for when pushing attribute data to VRAM (Set to $23, attribute table 0)"
 Scroll_LastAttr,$03B9,1,,0,,0,Misc.,General,(TOFIX)
@@ -1121,7 +1123,7 @@ Map_Unused798A,$798A,2,,0,,0,Hardware Mirror,General,(Mario/Luigi) Unused; clear
 Level_Jct_HSHi,$798C,1,,0,,0,Camera,General,Level junction horizontal scroll high value
 Level_Jct_HS,$798D,1,,0,,0,Camera,General,Level junction horizontal scroll value
 Level_Jct_VSHi,$798E,1,$7E398D,1,,0,Camera,General,Level junction vertical scroll high value
-Level_Jct_VS,$798F,1,,0,,0,Camera,General,Level junction vertical scroll value
+Level_Jct_VS,$798F,1,$7E398E,1,,0,Camera,General,Level junction vertical scroll value
 ,$7990,2,,0,,0,Empty,General,Unused.
 Map_Unused7992,$7992,1,,0,,0,Overworld,General,Value used in some dead code in PRG011; cleared elsewhere (NOT SURE if maybe it sometimes meant Bonus_DiePos?)
 Bonus_DiePos,$7992,1,,0,,0,Bonus Game,General,"UNUSED Die in the lost bonus games, counts 0-5"

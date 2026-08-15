@@ -26,8 +26,9 @@ SNES note: SNES_Vert_Scroll_Hi_Copy should also be set in conjunction with this.
 PPU_CTL1_Mod,$0013,1,,0,,0,Hardware Mirror,General,"NOT DURING GAMEPLAY, this is used as an additional modifier to PPU_CTL1"
 Level_ExitToMap,$0014,1,$7E0014,1,,0,Level,General,"When non-zero, kicks back to map (OR to event when Player_FallToKing or Player_RescuePrincess is nonzero!)"
 Counter_1,$0015,1,$7E0015,1,,0,Counter,General,"This value simply increments every frame, used for timing various things"
-PPU_CTL2_Copy,$0016,1,$7E0016,1,,0,Hardware Mirror,General,"Essentially a copy of PPU_CTL2, which updates it as well, though the sprite/BG visibility setting is usually (always?) forced on
+PPU_CTL2_Copy,$0016,1,,0,,0,Hardware Mirror,General,"Essentially a copy of PPU_CTL2, which updates it as well, though the sprite/BG visibility setting is usually (always?) forced on
 SNES: hardware mirror for INIDISP ($2100)"
+SNES_ScreenDisp,,0,$7E0016,1,,0,Hardware Mirror,General,SNES: Mirror of INIDISP.
 Pad_Holding,$0017,1,$7E0017,1,,0,I/O,General,"Active player's inputs (i.e. 1P or 2P, whoever's playing) buttons being held in (continuous)"
 Pad_Input,$0018,1,$7E0018,1,,0,I/O,General,"Active player's inputs (i.e. 1P or 2P, whoever's playing) buttons newly pressed only (one shot)"
 Roulette_RowIdx,$0019,1,$7E0019,1,,0,Bonus Game,General,Roulette Bonus Game only obviously
@@ -350,6 +351,14 @@ TOFIX: SNES"
 SNES_SpriteHiFull_RAM,,0,$7E0A00,32,,0,Sprites,General,(TOFIX) SNES: Should not be modified. Write to SNES_SpriteHi_RAM instead.
 SNES_SpriteHi_RAM,,0,$7E0A20,128,,0,Sprites,General,(TOFIX)
 ,,0,$7E0AA0,1376,,0,Empty,General,Unused.
+SNES_ASPauseStat,,,$7E028C,1,,,Misc.,General,SNES: All-Stars Pause menu status.
+SNES_WindowType,,,$7E0291,1,,,Graphics,General,"(TOFIX) SNES: Window type.
+0 - none
+1 - ?
+2 - Enter Level Iris
+3 - Overworld Darkness Spotlight
+4 - Enter Level Iris (Overworld Darkness)
+5 - ?"
 SNES_BGPal,,0,$7E02B9,2,,0,Level,General,(TOFIX)
 SNES_LevelHeaderL3Pal,,0,$7E02BE,1,,0,Level,General,(TOFIX)
 Graphics_BufCnt,$0300,1,,0,,0,Graphics,General,first byte holds current position within buffer (Graphics_Buffer+) to store info
@@ -433,7 +442,7 @@ Roulette_PosHi,$0403,3,,0,,0,Bonus Game,Bonus Game,Hi part of Roulette_Pos
 Roulette_ShapeLock,$0406,3,,0,,0,Bonus Game,Bonus Game,"Locked position of each row (0 = Mushroom, 1 = Flower, 2 = Mushroom, 3 = Star)"
 Roulette_ConfigRun,$0409,1,,0,,0,Bonus Game,Bonus Game,"0 = Configuring, 1 = Running"
 Roulette_ConfigState,$040A,1,,0,,0,Bonus Game,Bonus Game,Early configuration state
-Roulette_RunState,$040B,1,,0,,0,Bonus Game,Bonus Game,Running state of game
+Roulette_RunState,$040B,1,$100B,0,,0,Bonus Game,Bonus Game,Running state of game
 Roulette_xUpY,$040C,1,,0,,0,Bonus Game,Bonus Game,"""x Up"" display Y position (overlaps first byte of Roulette_StopState)"
 Roulette_StopState,$040C,3,,0,,0,Bonus Game,Bonus Game,"Current ""state"" of each row while it is coming to a stop (1+)"
 Roulette_LivesToGive,$040D,1,,0,,0,Bonus Game,Bonus Game,Lives left to give in reward (overlaps second byte of Roulette_StopState)
@@ -562,7 +571,8 @@ Music_PCMStart,$04DE,1,,0,,0,Audio,General,Holds the starting offset of the DMC 
 Music_NextIndex,$04DF,1,,0,,0,Audio,General,"Next ""index"" to be played"
 SFX_Counter1,$04E0,1,,0,,0,Counter,General,Generic purpose SFX counter
 SndCur_Player,$04E1,1,,0,,0,Audio,General,Currently playing Player sound (blocks music on Square 1)
-SndCur_Level1,$04E2,1,,0,,0,Audio,General,"Currently playing ""level 1"" sound (blocks music on Square 2)"
+SndCur_Level1,$04E2,1,$7E04E2,0,,0,Audio,General,"Currently playing ""level 1"" sound (blocks music on Square 2)
+SNES: read, but never written to. Also read on the title screen?"
 SndCur_Level2,$04E3,1,,0,,0,Audio,General,"Currently playing ""level 2"" sound"
 SndCur_Music1,$04E4,1,,0,,0,Audio,General,Currently playing BGM from Music 1 set
 SndCur_Music2,$04E5,1,,0,,0,Audio,General,Currently playing BGM from Music 2 set
@@ -594,7 +604,7 @@ Music_Sq1TrkOff,$04FF,1,,0,,0,Audio,General,Offset of square wave 1 track in cur
 ,$0500,16,,0,,0,Empty,Level,Unused.
 ,$0500,231,,0,,0,Empty,Bonus Game,Unused.
 ,$0500,16,,0,,0,Empty,Title Screen,Unused.
-Map_Object_ActY,$0500,15,,0,,0,Overworld,Overworld,"For map objects, their actual display Y coordinate (as it may modify, esp. with marchers)"
+Map_Object_ActY,$0500,15,$7E0500,0,,0,Overworld,Overworld,"For map objects, their actual display Y coordinate (as it may modify, esp. with marchers)"
 Map_Object_ActX,$050F,15,,0,,0,Overworld,Overworld,"For map objects, their actual display X coordinate (as it may modify, esp. with marchers)"
 Event_Countdown,$0510,1,,0,,0,Counter,Level,"Event_Countdown is context dependent; without context, does nothing
 * When you come out of a pipe, this counter decrements until the pipe should be finished
@@ -732,7 +742,7 @@ SNES: Low/high byte object table of offset into Sprite_RAM for empty object slot
 Map_MarchInit,$0596,1,,0,,0,Overworld,Overworld,Set when marching data has been initialized (done once per marching cycle on the map)
 Map_InCanoe_Flag,$0597,1,,0,,0,Misc.,Overworld,"Set when Player is in Canoe (modifies movement, allows movement in water, etc.)"
 SpecialObj_Var2,$0597,8,$7E0597,8,,0,Sprites,Level,General purpose variable 2
-World_8_Dark,$0598,1,,0,,0,Overworld,Overworld,"Darkness on World 8 Map, level 2 -- counts 0-7 while setting up the effect"
+World_8_Dark,$0598,1,$7E0598,1,,0,Overworld,Overworld,"Darkness on World 8 Map, level 2 -- counts 0-7 while setting up the effect"
 World_Map_AnimF,$0599,1,,0,,0,Overworld,Overworld,"World map animation frame (for bushes, etc.)"
 World_Map_AnimT,$059A,1,,0,,0,Overworld,Overworld,World map animation tick
 ,$059B,101,,0,,0,Empty,Overworld,Unused.
@@ -890,7 +900,7 @@ World_Num,$0727,1,,0,,0,Overworld,General,"Current world index (0-8, where 0 = W
 World_EnterState,$0728,1,,0,,0,Overworld,General,"State variable during ""world X"" intro entrance, set to 3 when entering a level; overlaps GameOver_State"
 GameOver_State,$0728,1,,0,,0,Overworld,General,"State variable used during ""Gameover!"" sequence only; overlaps World_EnterState"
 CineKing_State,$0728,1,,0,,0,Level,General,State of King-got-his-wand-back sequence
-Map_Operation,$0729,1,,0,,0,Overworld,General,"Current ""operation"" happening on map (See Map_DoOperation in PRG010)"
+Map_Operation,$0729,1,$7E0729,1,,0,Overworld,General,"Current ""operation"" happening on map (See Map_DoOperation in PRG010)"
 ,$072A,1,,0,,0,Empty,General,Unused.
 Total_Players,$072B,1,,0,,0,Misc.,General,"Total players (0 = 1P, 1 = 2P)"
 Map_Unused72C,$072C,1,,0,,0,Empty,General,"No apparent use; only assigned to, but never read back"
@@ -941,7 +951,7 @@ Level_ScrollDiffH,$0780,1,,0,,0,Camera,General,Difference between desired horizo
 Random_Pool,$0781,10,,0,,0,Misc.,General,Data pool for pseudo-random number generator algorithm
 Map_PlayerLost2PVs,$078B,1,,0,,0,Battle Mode,General,"When > 0, (1=Mario, 2=Luigi) doesn't lose a life for ""death"" exiting to map, but does lose their turn"
 ,$078C,1,,0,,0,Empty,General,Unused.
-Player_RescuePrincess,$078D,1,,0,,0,Level,General,Player will jump to the princess rescue when Level_ExitToMap is nonzero (instead of map)
+Player_RescuePrincess,$078D,1,$078E,1,,0,Level,General,Player will jump to the princess rescue when Level_ExitToMap is nonzero (instead of map)
 ,$078E,8,,0,,0,Empty,General,Unused.
 Objects_PlayerHitStat,$0796,8,,0,,0,Player,General,"Player hit status
 Bit 0 - Set if Player's bbox bottom is HIGHER than object's bbox bottom

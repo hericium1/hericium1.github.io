@@ -38,7 +38,7 @@ Used by SMB3Editor."
 PlantInfest_ACnt,$001B,1,$7E001B,1,,0,Counter,General,Plant infestation level animation counter
 VBlank_TickEn,$001C,1,$7E001C,1,,0,Flag,General,Enables the VBlank_Tick decrement and typically other things like joypad reading
 Map_Enter2PFlag,$001D,1,,0,,0,Flag,General,"If $00, entering level, otherwise set if entering 2P VS mode"
-Map_EnterViaID,$001E,1,,0,,0,Overworld,General,Overrides whatever spot on the map you entered with something special (see Map_DoEnterViaID)
+Map_EnterViaID,$001E,1,$7E001E,1,,0,Overworld,General,Overrides whatever spot on the map you entered with something special (see Map_DoEnterViaID)
 ,$001F,1,,0,,0,Empty,General,Unused.
 Map_IntBoxErase,$0020,1,,0,,0,Overworld,General,"Used for determining where in erasing the ""World X"" intro box we are"
 Map_ClearLevelFXCnt,$0020,1,,0,,0,Counter,General,"Counter for ""clear level"" FX occurring (1-6: Poof, 7-9: Flip) (""poof""/""panel flip"")"
@@ -334,7 +334,7 @@ Raster_Effect,$0101,1,,0,,0,Video,General,"$00 is standard status bar, $20 is ti
 ,$0102,254,,0,,0,Misc.,General,Stack.
 Debug_Flag,$0160,1,,0,,0,Misc.,General,"Set to $80 by the debug menu, enables debug functionality like power level cycling and not dying from time over.
 NES - Merges with previous stack area."
-Sprite_RAM,$0200,256,,0,,0,Sprites,General,"This is where sprite memory is stored locally prior to being DMA'ed.
+Sprite_RAM,$0200,256,$7E0800,512,,0,Sprites,General,"This is where sprite memory is stored locally prior to being DMA'ed.
 
 Sprite memory is laid out in four bytes:
 Byte 0 - Stores the y-coordinate of the top left of the sprite minus 1.
@@ -344,7 +344,12 @@ Byte 2 - Stores the attributes of the sprite.
 * Bit 5 - Indicates whether this sprite has priority over the background.
 * Bit 6 - Indicates whether to flip the sprite horizontally.
 * Bit 7 - Indicates whether to flip the sprite vertically.
-Byte 3 - X coordinate"
+Byte 3 - X coordinate
+
+TOFIX: SNES"
+SNES_SpriteHiFull_RAM,,0,$7E0A00,32,,0,Sprites,General,(TOFIX) SNES: Should not be modified. Write to SNES_SpriteHi_RAM instead.
+SNES_SpriteHi_RAM,,0,$7E0A20,128,,0,Sprites,General,(TOFIX)
+,,0,$7E0AA0,1376,,0,Empty,General,Unused.
 SNES_BGPal,,0,$7E02B9,2,,0,Level,General,(TOFIX)
 SNES_LevelHeaderL3Pal,,0,$7E02BE,1,,0,Level,General,(TOFIX)
 Graphics_BufCnt,$0300,1,,0,,0,Graphics,General,first byte holds current position within buffer (Graphics_Buffer+) to store info
@@ -597,7 +602,8 @@ Title_MLAccelCnt,$0510,1,,0,,0,Counter,Title Screen,"Constant moving counter whi
 Player_TailCount,$0511,1,,0,,0,Player,Level,Determines display frame of tail wag
 Title_MarioPoof,$0511,1,,0,,0,Counter,Title Screen,"Countdown of Mario's ""poof"" when he collects the power up"
 Title_MLHoldTick,$0512,1,,0,,0,Title Screen/Ending,Title Screen,"Set to $40 when Mario/Luigi are ""held"" (count down to zero)"
-Player_InAir_OLD,$0512,1,,0,,0,Player,Level,Stores backup of Player_InAir
+Player_InAir_OLD,$0512,1,$7E0512,1,,0,Player,Level,"Stores backup of Player_InAir
+SNES: not utilized."
 Player_FireCount,$0513,1,,0,,0,Player,Level,"Player shoots fireball/hammer, sets sprite frame (shared with Player_FrogHopCnt)"
 Title_ObjVar,$0513,6,,0,,0,Title Screen/Ending,Title Screen,Minor objects user-defined variable 1 (automatically decrements if not zero!)
 Player_FrogHopCnt,$0513,1,,0,,0,Counter,Level,Counter used for frog hopping along the ground (shared with Player_FireCount)
@@ -656,7 +662,7 @@ Level_UnusedFlag,$0562,1,$7E0562,1,,0,Level,Level,"Unused; only set in a couple 
 Level_SlopeEn,$0563,1,,0,,0,Flag,Level,"If set, enables slope tiles (otherwise they're considered flat top-only solids)"
 Level_ChgTileEvent,$0564,1,,0,,0,Level,Level,"When non-zero, queues a ""change tile"" event (TOFIX)"
 Level_NoStopCnt,$0565,1,,0,,0,Counter,Level,"A counter which continuously increments unless something is ""stopping"" the action"
-Level_Event,$0566,1,,0,,0,Level,Level,"Check ""LevelEvent_Do"" for values; 0 means nothing (TOFIX)"
+Level_Event,$0566,1,$7E0566,1,,0,Level,Level,"Check ""LevelEvent_Do"" for values; 0 means nothing (TOFIX)"
 Level_PSwitchCnt,$0567,1,,0,,0,Counter,Level,"When non-zero, P-Switch is active (init @ $80); counts down to zero and restarts music"
 ,$0568,1,,0,,0,Empty,Level,Unused.
 Player_SlideRate,$0569,1,,0,,0,Player,Level,"While Player is sliding, this is added to X Velocity (does not persist, however)"
@@ -724,7 +730,7 @@ Object_SprRAM,$058F,8,$7E00C6,16,,0,Sprites,Level,"Sprite_RAM offset by object
 SNES: Low/high byte object table of offset into Sprite_RAM for empty object slots, set by Object_GetRandNearUnusedSpr"
 Map_MarchInit,$0596,1,,0,,0,Overworld,Overworld,Set when marching data has been initialized (done once per marching cycle on the map)
 Map_InCanoe_Flag,$0597,1,,0,,0,Misc.,Overworld,"Set when Player is in Canoe (modifies movement, allows movement in water, etc.)"
-SpecialObj_Var2,$0597,8,,0,,0,Sprites,Level,General purpose variable 2
+SpecialObj_Var2,$0597,8,$7E0597,8,,0,Sprites,Level,General purpose variable 2
 World_8_Dark,$0598,1,,0,,0,Overworld,Overworld,"Darkness on World 8 Map, level 2 -- counts 0-7 while setting up the effect"
 World_Map_AnimF,$0599,1,,0,,0,Overworld,Overworld,"World map animation frame (for bushes, etc.)"
 World_Map_AnimT,$059A,1,,0,,0,Overworld,Overworld,World map animation tick
@@ -734,7 +740,7 @@ SpecialObj_YVelFrac,$05A1,8,,0,,0,Sprites,Level,Y velocity fractional accumulato
 ,$05A9,2,,0,,0,Empty,Level,Unused.
 SpecialObj_XVelFrac,$05AB,8,,0,,0,Sprites,Level,X velocity fractional accumulator
 ,$05B3,2,,0,,0,Empty,Level,Unused.
-SpecialObj_Var3,$05B5,8,,0,,0,Sprites,Level,General purpose variable 3
+SpecialObj_Var3,$05B5,8,$7E05B5,8,,0,Sprites,Level,General purpose variable 3
 ,$05BD,2,,0,,0,Empty,Level,Unused.
 SpecialObj_YLo,$05BF,8,,0,,0,Sprites,Level,Y low coordinate of special object
 ,$05C7,2,,0,,0,Empty,Level,Unused.
@@ -897,7 +903,7 @@ Map_WW_Backup_UPV2,$0733,1,,0,,0,Overworld,General,Warp Whistle wind backs up Ma
 ,$0734,2,,0,,0,Empty,General,Unused.
 Player_Lives,$0736,2,,0,,0,Player,General,(Mario/Luigi) Player's lives
 Map_Unused738,$0738,1,,0,,0,Empty,General,Index used in some dead code in PRG011; sometimes index of unused array Map_Unused7DC6
-ClearPattern,$0739,1,,0,,0,Graphics,General,Set by ClearPattern_ByTileset for use in Clear_Nametable_Short
+ClearPattern,$0739,1,$7E0739,1,,0,Graphics,General,Set by ClearPattern_ByTileset for use in Clear_Nametable_Short
 PalSel_Tile_Colors,$073A,1,,0,,0,Palettes,General,Stores value to index which tile color set to use when palette loading routine is called
 PalSel_Obj_Colors,$073B,1,,0,,0,Palettes,General,Stores value to index which object color set to use when palette loading routine is called
 Player_FallToKing,$073C,2,,0,,0,Player,General,(Mario/Luigi) Player will fall to king when Level_ExitToMap is nonzero (instead of map)
@@ -1102,8 +1108,8 @@ Map_BonusAppY,$796B,1,,0,,0,Overworld,General,"Map ""white"" bonus appearance Y 
 Map_BonusAppXHi,$796C,1,,0,,0,Overworld,General,"Map ""white"" bonus appearance XHi (set to Player's last ""succeeded"" map position)"
 Map_BonusAppX,$796D,1,,0,,0,Overworld,General,"Map ""white"" bonus appearance X (set to Player's last ""succeeded"" map position)"
 Map_NoLoseTurn,$796E,1,,0,,0,Flag,General,"If set, Player does not lose turn after having completed a level (used for Toad House, pipeways, etc.)"
-Map_Got13Warp,$796F,1,,0,,0,Flag,General,Set non-zero if Player already got the 1-3 Warp Whistle
-Map_Anchored,$7970,1,,0,,0,Flag,General,Set if anchor is set on this map
+Map_Got13Warp,$796F,1,$7E396E,0,,0,Flag,General,Set non-zero if Player already got the 1-3 Warp Whistle
+Map_Anchored,$7970,1,$7E396F,0,,0,Flag,General,Set if anchor is set on this map
 Map_WhiteHouse,$7971,1,,0,,0,Flag,General,Set if you have already earned the White Toad House for this world
 Map_CoinShip,$7972,1,,0,,0,Flag,General,Set if you have already earned the Coin Ship for this world
 Map_WasInPipeway,$7973,1,,0,,0,Flag,General,Set if you just came out of a pipeway
@@ -1208,9 +1214,9 @@ Music_RestH_Off,$7AF7,1,,0,,0,Audio,General,Offset added to Music_RestH_Base; ty
 PAPU_MODCTL_Copy,$7AFF,1,,0,,0,Hardware Mirror,General,Current PAPU_MODCTL register
 Level_ObjIdxStartByScreen,$7B00,16,,0,,0,Level,General,"Defines the starting index into Level_Objects for each ""screen"""
 Level_ObjectsSpawned,$7B10,48,,0,,0,Level,General,"When $80 set, object is already spawned, $00 means not"
-Level_Objects,$7B40,144,,0,,0,Level,General,"Object array for current level - 3 bytes per object: ID, Column, Row (C/R of tile grid, multiply by 16 for pixel location)"
-,$7BD0,80,,0,,0,Empty,General,Unused.
-Object_BufferX,$7C20,64,,0,,0,Sprites,General,"For certain objects that require a buffer of X values
+Level_Objects,$7B40,144,$7E1B40,144,,0,Level,General,"Object array for current level - 3 bytes per object: ID, Column, Row (C/R of tile grid, multiply by 16 for pixel location)"
+,$7BD0,80,$7E1BD0,80,,0,Empty,General,Unused.
+Object_BufferX,$7C20,64,$7E1C20,64,,0,Sprites,General,"For certain objects that require a buffer of X values
 Buffer_Occupied determines which of the two buffers is free, if any at all. The object will hold onto it then."
 Object_BufferY,$7C60,64,,0,,0,Sprites,General,"For certain objects that require a buffer of Y values
 Buffer_Occupied determines which of the two buffers is free, if any at all. The object will hold onto it then."

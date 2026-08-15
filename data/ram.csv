@@ -327,8 +327,8 @@ Horz_Scroll,$00FD,1,$7E0210,1,,0,Camera,General,"Horizontal scroll of name table
 SNES: Mirror of hardware register BG1HOFS ($210D), low byte."
 SNES_Horz_Scroll_Hi_Copy,,0,$7E0211,1,,0,Camera,General,"SNES: Mirror of hardware register BG1HOFS ($210D), high byte. Horz_Scroll_Hi should also be set in conjunction with this."
 ,$00FE,1,,0,,0,Empty,General,Unused.
-PPU_CTL1_Copy,$00FF,1,,0,,0,Hardware Mirror,General,Holds PPU_CTL1 register data
-Update_Select,$0100,1,,0,,0,Video,General,"Changes which path of ""update routines"" are selected
+PPU_CTL1_Copy,$00FF,1,$7E00FF,1,,0,Hardware Mirror,General,Holds PPU_CTL1 register data
+Update_Select,$0100,1,$7E0100,1,,0,Video,General,"Changes which path of ""update routines"" are selected
 $00 = ??, $20 = Title Screen, $40 = Spade Game, $80 = Vertical level, $A0 = 32 pixel partition, $C0 = Normal"
 Raster_Effect,$0101,1,,0,,0,Video,General,"$00 is standard status bar, $20 is title/ending, $40 = 32 pixel partition, $60 = Spade Bonus Game (3 sliding rows), $80 is nothing (e.g. as in 2P versus), $A0 = ???"
 ,$0102,254,,0,,0,Misc.,General,Stack.
@@ -354,6 +354,7 @@ SNES_BGPal,,0,$7E02B9,2,,0,Level,General,(TOFIX)
 SNES_LevelHeaderL3Pal,,0,$7E02BE,1,,0,Level,General,(TOFIX)
 Graphics_BufCnt,$0300,1,,0,,0,Graphics,General,first byte holds current position within buffer (Graphics_Buffer+) to store info
 Graphics_Buffer,$0301,107,,0,,0,Graphics,General,"Simple (and small!) delayed write buffer; uses same format as Video_Upd_Table in PRG030, get format info there"
+SNES_DoorAnimationVar,,0,$7E034E,1,,,Level,General,"SNES: If non-zero, the door-entering animation will play on the next junction transition. Also used as a timer for the animation."
 TileChng_VRAM_H,$036C,1,$7E036C,1,,0,Graphics,General,High part of VRAM address to change
 TileChng_VRAM_L,$036D,1,$7E036D,1,,0,Graphics,General,Low part of VRAM address to change
 TileChng_Pats,$036E,4,$7E036E,8,,0,Graphics,General,The four patterns required to change a tile (for Level_ChgTileEvent)

@@ -85,7 +85,7 @@ Sound_Map_Off,$0073,1,,0,,0,Audio,General,"Current ""offset"" within a map sound
 ,$0075,22,,0,,0,Empty,Bonus Game,Unused.
 Ending2_PicState,$0075,1,,0,,0,Title Screen/Ending,Ending,Ending part 2 picture loader state
 Title_XPosHi,$0075,8,,0,,0,Title Screen/Ending,Title Screen,"""High"" part of the extended precision X position for all objects"
-World_Map_Y,$0075,2,,0,,0,Overworld,Overworld,(Mario/Luigi) Y pixel coordinate position of Mario on world map
+World_Map_Y,$0075,2,$7E0043,2,,0,Overworld,Overworld,(Mario/Luigi) Y pixel coordinate position of Mario on world map
 Vs_State,$0075,1,,0,,0,Battle Mode,Battle Mode,2P Vs Mode state
 Player_XHi,$0075,1,$7E0043,1,,0,Player,Level,Player X Hi
 Ending2_ClearLen,$0076,1,,0,,0,Title Screen/Ending,Ending,Length of clear run
@@ -93,10 +93,10 @@ Vs_IsPaused,$0076,1,,0,,0,Battle Mode,Battle Mode,"If set, 2P Vs is paused"
 Objects_XHi,$0076,8,$7E0044,8,,0,Sprites,Level,Other object's X Hi positions
 ,$0077,125,,0,,0,Empty,Battle Mode,Unused.
 Ending2_ClearPat,$0077,1,,0,,0,Title Screen/Ending,Ending,Pattern to clear the screen with
-World_Map_XHi,$0077,2,,0,,0,Overworld,Overworld,(Mario/Luigi) X pixel (hi byte) coordinate position of Mario on world map
+World_Map_XHi,$0077,2,$7E0045,2,,0,Overworld,Overworld,(Mario/Luigi) X pixel (hi byte) coordinate position of Mario on world map
 Ending2_PicVRAMH,$0078,1,,0,,0,Title Screen/Ending,Ending,Ending part 2 picture VRAM Hi
 Ending2_PicVRAML,$0079,1,,0,,0,Title Screen/Ending,Ending,Ending part 2 picture VRAM Lo
-World_Map_X,$0079,2,,0,,0,Overworld,Overworld,(Mario/Luigi) X pixel (lo byte) coordinate position of Mario on world map
+World_Map_X,$0079,2,$7E0047,2,,0,Overworld,Overworld,(Mario/Luigi) X pixel (lo byte) coordinate position of Mario on world map
 Ending2_QCmdEnd,$007A,1,,0,,0,Title Screen/Ending,Ending,Ending2_QueueCmd is incremented to this point
 Ending2_FadeTimer,$007B,1,,0,,0,Title Screen/Ending,Ending,Timer which controls the speed of the fade between worlds
 World_Map_Move,$007B,2,,0,,0,Overworld,Overworld,(Mario/Luigi) Movement left in specified direction (even numbers only!)
@@ -295,7 +295,7 @@ Player_IsDying,$00F1,1,,0,,0,Player,Level,"0 = Not dying, 1 = Dying, 2 = Dropped
 Title_3GlowFlag,$00F2,1,,0,,0,Title Screen/Ending,Title Screen,"When non-zero, begins the ""glowing"" effect for the big '3'"
 Title_3GlowIndex,$00F3,1,,0,,0,Title Screen/Ending,Title Screen,Index into an array of colors to cause the big '3' on the title screen to glow
 Obj01_Flag,$00F3,1,,0,,0,Sprites,Level,Not sure what Obj01 is!! This blocks its left/right handler logic.
-Scroll_OddEven,$00F4,1,$7E00C2,0,,0,Camera,General,"0 or 1, depending on what part of 8 pixels has crossed (need better description) (TOFIX)"
+Scroll_OddEven,$00F4,1,$7E00C2,1,,0,Camera,General,"0 or 1, depending on what part of 8 pixels has crossed (need better description) (TOFIX)"
 Ending2_IntCmd,$00F4,1,,0,,0,Title Screen/Ending,Ending,"Used during ending to buffer out the ending picture data on the interrupt.
 Triggers ""Do_Ending2_IntCmd"" in PRG024 in interrupt context."
 SNES_TempPointerL,,0,$7E00D8,1,,0,Misc.,General,SNES: Temporary pointer used for various purposes. 
@@ -305,14 +305,14 @@ SNES_TempPointer2L,,0,$7E00DB,1,,0,Misc.,General,SNES: Temporary pointer used fo
 SNES_TempPointer2H,,0,$7E00DC,1,,0,Misc.,General,SNES: Temporary pointer used for various purposes. 
 SNES_TempPointer2B,,0,$7E00DD,1,,0,Misc.,General,SNES: Temporary pointer used for various purposes. 
 SNES_SpriteBank,,0,$7E00DE,1,,0,Sprites,General,"SNES: Current ""Bank"" of sprite (in #$24 increments)"
-SNES_SpecialObj_XHi,,0,$7E00E2,0,,0,Sprites,General,SNES:  X high coordinate of special object
-Controller1Press,$00F5,1,$7E00F6,0,,0,I/O,General,"Player 1's controller ""pressed this frame only"" (see Controller1 for values)"
-Controller2Press,$00F6,1,$7E00F7,0,,0,I/O,General,"Player 2's controller ""pressed this frame only"" (see Controller2 for values)"
+SNES_SpecialObj_XHi,,0,$7E00E2,8,,0,Sprites,General,SNES:  X high coordinate of special object
+Controller1Press,$00F5,1,$7E00F6,1,,0,I/O,General,"Player 1's controller ""pressed this frame only"" (see Controller1 for values)"
+Controller2Press,$00F6,1,$7E00F7,1,,0,I/O,General,"Player 2's controller ""pressed this frame only"" (see Controller2 for values)"
 SNES_ControllerB1Press,,0,$7E00F8,1,,0,I/O,General,"Player 1's controller ""pressed this frame only"" (see ControllerB1 for values)"
 SNES_ControllerB2Press,,0,$7E00F9,1,,0,I/O,General,"Player 2's controller ""pressed this frame only"" (see ControllerB2 for values)"
-Controller1,$00F7,1,$7E00F2,0,,0,I/O,General,"Player 1's controller inputs
+Controller1,$00F7,1,$7E00F2,1,,0,I/O,General,"Player 1's controller inputs
 NES -- R01 L02 D04 U08 S10 E20 B40 A80"
-Controller2,$00F8,1,$7E00F3,0,,0,I/O,General,"Player 2's controller inputs
+Controller2,$00F8,1,$7E00F3,1,,0,I/O,General,"Player 2's controller inputs
 NES -- R01 L02 D04 U08 S10 E20 B40 A80"
 SNES_ControllerB1,,0,$7E00F4,1,,0,I/O,General,"Player 1's controller inputs, second group of buttons"
 SNES_ControllerB2,,0,$7E00F5,1,,0,I/O,General,"Player 2's controller inputs, second group of buttons"
@@ -442,7 +442,7 @@ Roulette_PosHi,$0403,3,,0,,0,Bonus Game,Bonus Game,Hi part of Roulette_Pos
 Roulette_ShapeLock,$0406,3,,0,,0,Bonus Game,Bonus Game,"Locked position of each row (0 = Mushroom, 1 = Flower, 2 = Mushroom, 3 = Star)"
 Roulette_ConfigRun,$0409,1,,0,,0,Bonus Game,Bonus Game,"0 = Configuring, 1 = Running"
 Roulette_ConfigState,$040A,1,,0,,0,Bonus Game,Bonus Game,Early configuration state
-Roulette_RunState,$040B,1,$100B,0,,0,Bonus Game,Bonus Game,Running state of game
+Roulette_RunState,$040B,1,$100B,1,,0,Bonus Game,Bonus Game,Running state of game
 Roulette_xUpY,$040C,1,,0,,0,Bonus Game,Bonus Game,"""x Up"" display Y position (overlaps first byte of Roulette_StopState)"
 Roulette_StopState,$040C,3,,0,,0,Bonus Game,Bonus Game,"Current ""state"" of each row while it is coming to a stop (1+)"
 Roulette_LivesToGive,$040D,1,,0,,0,Bonus Game,Bonus Game,Lives left to give in reward (overlaps second byte of Roulette_StopState)
@@ -452,8 +452,8 @@ Roulette_PosFrac,$0415,3,,0,,0,Bonus Game,Bonus Game,Fractional accumulator for 
 ,$0418,1,,0,,0,Empty,Bonus Game,Unused.
 Roulette_Turns,$0419,1,,0,,0,Bonus Game,Bonus Game,"UNUSED ""Turns Remaining"" (if > 0, and you lose Roulette, hit a button and spin again!)"
 ,$041A,12,,0,,0,Empty,Bonus Game,Unused.
-Fade_State,$041B,1,$7E101B,0,,0,Level,Level,"0 = Nothing, 1 = Fade in, 3 = Fade out"
-Fade_Tick,$041C,1,$7E101C,0,,0,Counter,Level,Ticks down and then decrements Fade_Level
+Fade_State,$041B,1,$7E101B,1,,0,Level,Level,"0 = Nothing, 1 = Fade in, 3 = Fade out"
+Fade_Tick,$041C,1,$7E101C,1,,0,Counter,Level,Ticks down and then decrements Fade_Level
 Fade_Level,$041D,1,$7E101D,1,,0,Level,Level,"4 to 0, fade in level"
 FadeOut_Cancel,$041E,1,$7E101E,1,,0,Level,Level,"If set, the next attempted fade out will be cancelled, which then resets this to zero"
 Player_AllowAirJump,$041F,1,,0,,0,Counter,Level,"Counts down to zero, but while set, you can jump in the air"
@@ -571,7 +571,7 @@ Music_PCMStart,$04DE,1,,0,,0,Audio,General,Holds the starting offset of the DMC 
 Music_NextIndex,$04DF,1,,0,,0,Audio,General,"Next ""index"" to be played"
 SFX_Counter1,$04E0,1,,0,,0,Counter,General,Generic purpose SFX counter
 SndCur_Player,$04E1,1,,0,,0,Audio,General,Currently playing Player sound (blocks music on Square 1)
-SndCur_Level1,$04E2,1,$7E04E2,0,,0,Audio,General,"Currently playing ""level 1"" sound (blocks music on Square 2)
+SndCur_Level1,$04E2,1,$7E04E2,1,,0,Audio,General,"Currently playing ""level 1"" sound (blocks music on Square 2)
 SNES: read, but never written to. Also read on the title screen?"
 SndCur_Level2,$04E3,1,,0,,0,Audio,General,"Currently playing ""level 2"" sound"
 SndCur_Music1,$04E4,1,,0,,0,Audio,General,Currently playing BGM from Music 1 set
@@ -604,7 +604,7 @@ Music_Sq1TrkOff,$04FF,1,,0,,0,Audio,General,Offset of square wave 1 track in cur
 ,$0500,16,,0,,0,Empty,Level,Unused.
 ,$0500,231,,0,,0,Empty,Bonus Game,Unused.
 ,$0500,16,,0,,0,Empty,Title Screen,Unused.
-Map_Object_ActY,$0500,15,$7E0500,0,,0,Overworld,Overworld,"For map objects, their actual display Y coordinate (as it may modify, esp. with marchers)"
+Map_Object_ActY,$0500,15,$7E0500,15,,0,Overworld,Overworld,"For map objects, their actual display Y coordinate (as it may modify, esp. with marchers)"
 Map_Object_ActX,$050F,15,,0,,0,Overworld,Overworld,"For map objects, their actual display X coordinate (as it may modify, esp. with marchers)"
 Event_Countdown,$0510,1,,0,,0,Counter,Level,"Event_Countdown is context dependent; without context, does nothing
 * When you come out of a pipe, this counter decrements until the pipe should be finished
@@ -937,7 +937,7 @@ THouse_UnusedFlag,$0757,1,,0,,0,Flag,General,"Cleared when Toad House gives you 
 Player_YVelFrac,$075F,1,,0,,0,Player,General,Y velocity fractional accumulator
 Objects_YVelFrac,$0760,8,,0,,0,Sprites,General,Other object's Y velocity fractional accumulator
 Objects_ColorCycle,$0768,8,,0,,0,Sprites,General,"Cycles colors of object and decrements to zero (e.g. ""Melting"" ice block, starman, etc.)"
-Objects_Var6,$0770,5,,0,,0,Sprites,General,"General purpose variable 6
+Objects_Var6,$0770,5,$7E0771,5,,0,Sprites,General,"General purpose variable 6
 
 Special hardcoded behavior for the following objects ONLY:
 OBJ_FIRECHOMP, OBJ_CHAINCHOMPFREE, OBJ_BLOOPERCHILDSHOOT, OBJ_BLOOPERWITHKIDS, or OBJ_FIRESNAKE
@@ -996,7 +996,7 @@ Sound_Map_LHold,$07FC,1,,0,,0,Audio,General,"Current length setting, used as del
 Sound_Map_Len,$07FD,1,,0,,0,Audio,General,Countdown tick for current note/rest that map sound effect is on
 Sound_Map_Off2,$07FE,1,,0,,0,Audio,General,"Same as Sound_Map_Off, used for the secondary track"
 Sound_Unused7FF,$07FF,1,,0,,0,Empty,General,"Cleared once, never used otherwise"
-Tile_Mem,$6000,6480,,0,,0,Misc.,General,"Space used to store the 16x16 ""tiles"" that make up the World Map or Level
+Tile_Mem,$6000,6480,$7E2000,6480,,0,Misc.,General,"Space used to store the 16x16 ""tiles"" that make up the World Map or Level
 
 Vertical level max size is 15 rows * 16 columns * 16 screens = 3840 ($0F00) bytes
 Non-vertical level max size is 27 rows * 16 columns * 15 screens = 6480 ($1950) bytes"
@@ -1103,7 +1103,7 @@ Vs_xUpX,$69A7,2,,0,,0,Battle Mode,Battle Mode,"Mario/Luigi ""x Up"" X pos"
 Vs_xUpLives,$69A9,2,,0,,0,Battle Mode,Battle Mode,"Mario/Luigi ""x Up"" Lives amount (1, 2, 3, 5)"
 Vs_SpawnCnt,$69AB,1,,0,,0,Battle Mode,Battle Mode,Spawn counter; increments and triggers spawning
 ,$69AC,4004,,0,,0,Empty,Battle Mode,Unused.
-Map_MoveRepeat,$7950,2,,0,,0,Overworld,General,(Mario/Luigi) counts up to $18 and then you keep moving without pause
+Map_MoveRepeat,$7950,2,$7E3950,2,,0,Overworld,General,(Mario/Luigi) counts up to $18 and then you keep moving without pause
 AScrlURDiag_OffsetX,$7952,1,,0,,0,Camera,General,"When diagonal autoscroller is wrapping, this holds an X offset for Player/Objects to temporarily correct"
 AScrlURDiag_OffsetY,$7953,1,,0,,0,Camera,General,"When diagonal autoscroller is wrapping, this holds an Y offset for Player/Objects to temporarily correct"
 StatusBar_UpdFl,$7954,1,,0,,0,Misc.,General,Status bar Update Flag; toggles so to update status bar only every other frame
@@ -1119,15 +1119,15 @@ Map_BonusAppY,$796B,1,,0,,0,Overworld,General,"Map ""white"" bonus appearance Y 
 Map_BonusAppXHi,$796C,1,,0,,0,Overworld,General,"Map ""white"" bonus appearance XHi (set to Player's last ""succeeded"" map position)"
 Map_BonusAppX,$796D,1,,0,,0,Overworld,General,"Map ""white"" bonus appearance X (set to Player's last ""succeeded"" map position)"
 Map_NoLoseTurn,$796E,1,,0,,0,Flag,General,"If set, Player does not lose turn after having completed a level (used for Toad House, pipeways, etc.)"
-Map_Got13Warp,$796F,1,$7E396E,0,,0,Flag,General,Set non-zero if Player already got the 1-3 Warp Whistle
-Map_Anchored,$7970,1,$7E396F,0,,0,Flag,General,Set if anchor is set on this map
+Map_Got13Warp,$796F,1,$7E396E,1,,0,Flag,General,Set non-zero if Player already got the 1-3 Warp Whistle
+Map_Anchored,$7970,1,$7E396F,1,,0,Flag,General,Set if anchor is set on this map
 Map_WhiteHouse,$7971,1,,0,,0,Flag,General,Set if you have already earned the White Toad House for this world
 Map_CoinShip,$7972,1,,0,,0,Flag,General,Set if you have already earned the Coin Ship for this world
 Map_WasInPipeway,$7973,1,,0,,0,Flag,General,Set if you just came out of a pipeway
 EndCard_Flag,$7974,1,,0,,0,Flag,General,Set when End Level card is hit (can determine when level has ended)
 Map_PlyrSprOvrY,$7975,1,,0,,0,Overworld,General,"""Player Sprite Override Y""; If set to $F8 during warp, erases Player's map sprite; otherwise provides a Y to put it at"
 Map_Entered_Y,$7976,2,,0,,0,Overworld,General,(Mario/Luigi) Stores the Y value when you enter a level; this is the Y used if you complete the level
-Map_Entered_XHi,$7978,2,,0,,0,Overworld,General,(Mario/Luigi) Hi byte for Map_Entered_X
+Map_Entered_XHi,$7978,2,$7E3977,2,,0,Overworld,General,(Mario/Luigi) Hi byte for Map_Entered_X
 Map_Entered_X,$797A,2,,0,,0,Overworld,General,"(Mario/Luigi) Same as Map_Entered_Y, only for X"
 Map_Previous_UnusedPVal2,$797C,2,,0,,0,Overworld,General,(Mario/Luigi) Backup of Map_UnusedPlayerVal2
 Map_Previous_Y,$797E,2,,0,,0,Overworld,General,"(Mario/Luigi) Stores the previous Y you were ""safe"" at; this is the Y you go back to if you die"
@@ -1268,7 +1268,7 @@ Map_Completions,$7D00,128,,0,,0,Overworld,General,"Stores ""rows"" of completed 
 
 Allows a MAX of 4 map screens (64 columns total each player, 16 columns per map screen)
 $7D00-$7D3F (Mario), $7D40-$7D7F (Luigi)"
-Inventory_Items,$7D80,28,,0,,0,Misc.,General,"Mario, 4 rows of 7 items"
+Inventory_Items,$7D80,28,$7E1D80,28,,0,Misc.,General,"Mario, 4 rows of 7 items"
 Inventory_Cards,$7D9C,3,,0,,0,Misc.,General,"Mario, 3 cards"
 Inventory_Score,$7D9F,3,,0,,0,Misc.,General,"Mario, 3 byte score"
 Inventory_Coins,$7DA2,1,,0,,0,Misc.,General,Mario's coins
@@ -1290,9 +1290,9 @@ Tile_AttrTable,$7E94,8,,0,,0,Misc.,General,"In levels, both ""halves"" define th
 
 On the world map, the check follows with a ""less than"", as a quick failure check (if you're in this ""range"" of tiles, but less than that value, you can't possibly be on an enterable tile). The second half is not used on the world map. (TOFIX)"
 Level_UnusedSlopesTS5,$7E9C,1,,0,,0,Level,General,"UNUSED; If set to 2, forces slopes to be enabled for Level_Tileset = 5 (plant infestation)"
-PlantInfest_ACnt_Max,$7E9D,1,,0,,0,Level,General,"Always set to $1A in plant infestation levels, sets max value for animation counter"
-,$7E9E,24,,0,,0,Empty,General,Unused.
-LevelJctBQ_Flag,$7EB6,1,,0,,0,Flag,General,"Set to '1' while in a Big Question block area, locks horizontal scrolling"
+PlantInfest_ACnt_Max,$7E9D,1,$7E1E9F,1,,0,Level,General,"Always set to $1A in plant infestation levels, sets max value for animation counter"
+,$7E9E,24,$7E1EA0,24,,0,Empty,General,Unused.
+LevelJctBQ_Flag,$7EB6,1,$7E1EB8,1,,0,Flag,General,"Set to '1' while in a Big Question block area, locks horizontal scrolling"
 Level_JctBackupTileset,$7EB7,1,,0,,0,Level,General,Level Junction tileset backup
 Level_AltTileset,$7EB8,1,,0,,0,Level,General,"Level's ""alternate"" tileset (when you go into bonus pipe, etc.)"
 Level_LayPtrOrig_AddrL,$7EB9,1,,0,,0,Level,General,ORIGINAL Low byte of address to tile layout
@@ -1356,15 +1356,16 @@ CoinPUp_State,$7FB2,4,,0,,0,Sprites,General,"State of up to 4 ""Power Up"" coins
 CoinPUp_Y,$7FB6,4,,0,,0,Sprites,General,"Y of ""Power Up"" coins"
 CoinPUp_X,$7FBA,4,,0,,0,Sprites,General,"X of ""Power Up"" coins"
 CoinPUp_YVel,$7FBE,4,,0,,0,Sprites,General,"Y velocity of ""Power Up"" coins"
-CoinPUp_Counter,$7FC2,4,,0,,0,Sprites,General,"Counter used by ""Power Up"" coins"
-SpecialObj_ID,$7FC6,8,,0,,0,Sprites,General,Special object spawn event IDs (TOFIX)
-,$7FCE,2,,0,,0,Empty,General,Unused.
-Objects_Var3,$7FD0,5,,0,,0,Sprites,General,Generic variable 3 for objects SLOT 0 - 4 ONLY
-SpecialObj_YHi,$7FD5,8,,0,,0,Sprites,General,Special object Y high coordinate
-,$7FDD,2,,0,,0,Empty,General,Unused.
-Objects_LastTile,$7FDF,8,,0,,0,Sprites,General,Last tile this object detected
-Objects_SprAttr,$7FE7,8,,0,,0,Sprites,General,Object sprite attributes (only uses bit 6 for H-Flip and bits 0-1 for palette)
-Objects_UseShortHTest,$7FEF,8,,0,,0,Sprites,General,"If set, object will use a short horizontal test to determine if it is off-screen"
-Roulette_Lives,$7FF7,1,,0,,0,Bonus Game,General,Number of lives you are rewarded from winning the Roulette (NOTE: Shared with first byte of Objects_IsGiant)
-Objects_IsGiant,$7FF7,8,,0,,0,Sprites,General,"Set mainly for World 4 ""Giant"" enemies (but some others, like Bowser, also use it)"
+CoinPUp_Counter,$7FC2,4,$7E1FC4,4,,0,Sprites,General,"Counter used by ""Power Up"" coins"
+SpecialObj_ID,$7FC6,8,$7E1FC8,8,,0,Sprites,General,Special object spawn event IDs (TOFIX)
+,$7FCE,2,$7E1FD0,2,,0,Empty,General,Unused.
+Objects_Var3,$7FD0,5,$7E1FD2,5,,0,Sprites,General,Generic variable 3 for objects SLOT 0 - 4 ONLY
+SpecialObj_YHi,$7FD5,8,$7E1FD7,8,,0,Sprites,General,Special object Y high coordinate
+,$7FDD,2,$7E1FDF,2,,0,Empty,General,Unused.
+Objects_LastTile,$7FDF,8,$7E1FE1,8,,0,Sprites,General,Last tile this object detected
+Objects_SprAttr,$7FE7,8,$7E1FE9,8,,0,Sprites,General,Object sprite attributes (only uses bit 6 for H-Flip and bits 0-1 for palette)
+Objects_UseShortHTest,$7FEF,8,$7E1FF1,8,,0,Sprites,General,"If set, object will use a short horizontal test to determine if it is off-screen"
+Roulette_Lives,$7FF7,1,$7E1FF9,1,,0,Bonus Game,General,Number of lives you are rewarded from winning the Roulette (NOTE: Shared with first byte of Objects_IsGiant)
+Objects_IsGiant,$7FF7,8,$7E1FF9,8,,0,Sprites,General,"Set mainly for World 4 ""Giant"" enemies (but some others, like Bowser, also use it)
+SNES: The table will bleed into the first two hardware registers if slots 6-7 are used."
 ,$7FFF,1,,0,,0,Empty,General,Unused.

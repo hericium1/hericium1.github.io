@@ -339,8 +339,6 @@ Vert_Scroll,$00FC,1,$7E0216,1,,0,Camera,General,"Vertical scroll of name table; 
 
 SNES: Mirror of hardware register BG1VOFS ($210E), low byte"
 SNES_Vert_Scroll_Hi_Copy,,0,$7E0217,1,,0,Camera,General,"SNES: Mirror of hardware register BG1VOFS ($210E), high byte. Vert_Scroll_Hi should also be set in conjunction with this."
-SNES_Vert_Scroll_L2,,0,$7E0218,1,,0,Camera,General,(TOFIX)
-SNES_Vert_Scroll_Hi_L2,,0,$7E0219,1,,0,Camera,General,(TOFIX)
 Horz_Scroll,$00FD,1,$7E0210,1,,0,Camera,General,"Horizontal scroll of name table
 
 SNES: Mirror of hardware register BG1HOFS ($210D), low byte."
@@ -349,9 +347,9 @@ SNES_Horz_Scroll_Hi_Copy,,0,$7E0211,1,,0,Camera,General,"SNES: Mirror of hardwar
 PPU_CTL1_Copy,$00FF,1,$7E00FF,1,,0,Hardware Mirror,General,Holds PPU_CTL1 register data
 Update_Select,$0100,1,$7E0100,1,,0,Video,General,"Changes which path of ""update routines"" are selected
 $00 = ??, $20 = Title Screen, $40 = Spade Game, $80 = Vertical level, $A0 = 32 pixel partition, $C0 = Normal"
-Raster_Effect,$0101,1,,0,,0,Video,General,"$00 is standard status bar, $20 is title/ending, $40 = 32 pixel partition, $60 = Spade Bonus Game (3 sliding rows), $80 is nothing (e.g. as in 2P versus), $A0 = ???"
-,$0102,254,,0,,0,Misc.,General,Stack.
-Debug_Flag,$0160,1,,0,,0,Misc.,General,"Set to $80 by the debug menu, enables debug functionality like power level cycling and not dying from time over.
+Raster_Effect,$0101,1,$7E0101,1,,0,Video,General,"$00 is standard status bar, $20 is title/ending, $40 = 32 pixel partition, $60 = Spade Bonus Game (3 sliding rows), $80 is nothing (e.g. as in 2P versus), $A0 = ???"
+,$0102,254,$7E0102,254,,0,Misc.,General,Stack.
+Debug_Flag,$0160,1,$7E0160,1,,0,Misc.,General,"Set to $80 by the debug menu, enables debug functionality like power level cycling and not dying from time over.
 NES - Merges with previous stack area."
 Sprite_RAM,$0200,256,$7E0800,512,,0,Sprites,General,"This is where sprite memory is stored locally prior to being DMA'ed.
 
@@ -366,6 +364,59 @@ Byte 2 - Stores the attributes of the sprite.
 Byte 3 - X coordinate
 
 TOFIX: SNES"
+SNES_HWM_W12SEL,,0,$7E0200,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register W12SEL ($2123).
+SNES_HWM_W34SEL,,0,$7E0201,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register W34SEL ($2124).
+SNES_HWM_WOBJSEL,,0,$7E0202,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register WOBJSEL ($2125).
+SNES_HWM_CGWSEL,,0,$7E0203,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register CGWSEL ($2130).
+SNES_HWM_CGADSUB,,0,$7E0204,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register CGADSUB ($2131).
+SNES_HWM_COLDATA_R,,0,$7E0205,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register COLDATA ($2132). This sets the red colour.
+SNES_HWM_COLDATA_G,,0,$7E0206,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register COLDATA ($2132). This sets the green colour.
+SNES_HWM_COLDATA_B,,0,$7E0207,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register COLDATA ($2132). This sets the blue colour.
+SNES_HWM_TM,,0,$7E0208,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register TM ($212C).
+SNES_HWM_TS,,0,$7E0209,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register TS ($212D).
+SNES_HWM_TMW,,0,$7E020A,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register TMW ($212E).
+SNES_HWM_TSW,,0,$7E020B,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register TSW ($212F).
+SNES_HWM_BGMODE,,0,$7E020C,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register BGMODE ($2105).
+SNES_HWM_MOSAIC,,0,$7E020D,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register MOSAIC ($2106).
+SNES_HWM_BGMODE_IRQ,,0,$7E020E,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register BGMODE ($2105). This value is used during the status bar IRQ.
+SNES_HWM_TM_IRQ,,0,$7E020F,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register TM ($212C). This value is used during the status bar IRQ.
+SNES_Horz_Scroll_L2,,0,$7E0212,1,,0,Camera,General,SNES: Mirror of hardware register BG2HOFS ($210F). This writes the low byte.
+SNES_Horz_Scroll_Hi_L2,,0,$7E0213,1,,0,Camera,General,SNES: Mirror of hardware register BG2HOFS ($210F). This writes the high byte.
+SNES_Horz_Scroll_L3,,0,$7E0214,1,,0,Camera,General,SNES: Mirror of hardware register BG3HOFS ($2111). This writes the low byte.
+SNES_Horz_Scroll_Hi_L3,,0,$7E0215,1,,0,Camera,General,SNES: Mirror of hardware register BG3HOFS ($2111). This writes the high byte.
+SNES_Vert_Scroll_L2,,0,$7E0218,1,,0,Camera,General,SNES: Mirror of hardware register BG2VOFS ($2110). This writes the low byte.
+SNES_Vert_Scroll_Hi_L2,,0,$7E0219,1,,0,Camera,General,SNES: Mirror of hardware register BG2VOFS ($2110). This writes the high byte.
+SNES_Vert_Scroll_L3,,0,$7E021A,1,,0,Camera,General,SNES: Mirror of hardware register BG3VOFS ($2110). This writes the low byte.
+SNES_Vert_Scroll_Hi_L3,,0,$7E021B,1,,0,Camera,General,SNES: Mirror of hardware register BG3VOFS ($2110). This writes the high byte.
+SNES_Counter_2,,0,$7E021C,1,,0,Counter,General,A counter that increments during IRQ.
+,,0,$7E021D,1,,0,Empty,General,Unused.
+SNES_HWM_OBSEL,,0,$7E021E,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register OBSEL ($2101).
+,,0,$7E021F,1,,0,Empty,General,Unused.
+SNES_MarioDMA_6000,,0,$7E0220,2,,0,Graphics,General,Mario DMA Settings - Source Lo/Hi (offset 6000)
+SNES_MarioDMA_6020,,0,$7E0222,2,,0,Graphics,General,Mario DMA Settings - Source Lo/Hi (offset 6020)
+SNES_MarioDMA_6040,,0,$7E0224,2,,0,Graphics,General,Mario DMA Settings - Source Lo/Hi (offset 6040)
+SNES_MarioDMA_6060,,0,$7E0226,2,,0,Graphics,General,Mario DMA Settings - Source Lo/Hi (offset 6060)
+SNES_MarioDMA_6080,,0,$7E0228,2,,0,Graphics,General,Mario DMA Settings - Source Lo/Hi (offset 6080)
+SNES_MarioDMA_60A0,,0,$7E022A,2,,0,Graphics,General,Mario DMA Settings - Source Lo/Hi (offset 60A0)
+SNES_MarioDMA_6100,,0,$7E022C,2,,0,Graphics,General,Mario DMA Settings - Source Lo/Hi (offset 6100)
+SNES_MarioDMA_6120,,0,$7E022E,2,,0,Graphics,General,Mario DMA Settings - Source Lo/Hi (offset 6120)
+SNES_MarioDMA_6140,,0,$7E0230,2,,0,Graphics,General,Mario DMA Settings - Source Lo/Hi (offset 6140)
+SNES_MarioDMA_6160,,0,$7E0232,2,,0,Graphics,General,Mario DMA Settings - Source Lo/Hi (offset 6160)
+SNES_MarioDMA_6180,,0,$7E0234,2,,0,Graphics,General,Mario DMA Settings - Source Lo/Hi (offset 6180)
+SNES_MarioDMA_61A0,,0,$7E0236,2,,0,Graphics,General,Mario DMA Settings - Source Lo/Hi (offset 61A0)
+SNES_MarioDMA_6000_Bk_En,,0,$7E0238,1,,0,Graphics,General,Mario DMA Settings - Source Bank (offset 6000). This also enables the DMA transfer if non-zero.
+SNES_MarioDMA_6100_Bk,,0,$7E0239,1,,0,Graphics,General,Mario DMA Settings - Source Bank (offset 6100)
+SNES_Debug_PlayerFreeMove,,0,$7E023D,1,,0,Player,General,Flag that lets the player be freely controlled with the DPAD within SMAS Debug Mode.
+SNES_DMAQueue_Dest_En,,0,$7E023E,2,,0,Graphics,General,"Final VRAM address for DMA queue. If non-zero, this will perform the transfer with all current DMA queue parameters during NMI."
+SNES_DMAQueue_SrcLo,,0,$7E0240,1,,0,Graphics,General,Low byte of source address in DMA queue.
+SNES_DMAQueue_SrcHi,,0,$7E0241,1,,0,Graphics,General,High byte of source address in DMA queue.
+SNES_DMAQueue_SrcBk,,0,$7E0242,1,,0,Graphics,General,Bank byte of source address in DMA queue.
+SNES_Anim_Slice,,0,$7E0243,1,,0,Graphics,General,SNES: Animation slice of current frame to upload. An entire frame is usually uploaded with a few portions at a time during NMI. This counter keeps track of this.
+SNES_AnimIndex_Overworld,,0,$7E0244,1,,0,Graphics,General,SNES: Current animation Frame of Overworld.
+SNES_AnimIndex_Level,,0,$7E0245,1,,0,Graphics,General,"SNES: Current animation Frame of Level.
+If negative, pile driver's block will not be animated."
+SNES_AnimIndex_Tank,,0,$7E0246,1,,0,Graphics,General,SNES: Current animation Frame of a Tank Level.
+,,0,$7E0247,2,,0,Empty,General,Unused.
 SNES_SpriteHiFull_RAM,,0,$7E0A00,32,,0,Sprites,General,(TOFIX) SNES: Should not be modified. Write to SNES_SpriteHi_RAM instead.
 SNES_SpriteHi_RAM,,0,$7E0A20,128,,0,Sprites,General,(TOFIX)
 ,,0,$7E0AA0,1376,,0,Empty,General,Unused.
@@ -379,9 +430,15 @@ SNES_WindowType,,,$7E0291,1,,,Graphics,General,"(TOFIX) SNES: Window type.
 5 - ?"
 SNES_BGPal,,0,$7E02B9,2,,0,Level,General,(TOFIX)
 SNES_LevelHeaderL3Pal,,0,$7E02BE,1,,0,Level,General,(TOFIX)
-Graphics_BufCnt,$0300,1,,0,,0,Graphics,General,first byte holds current position within buffer (Graphics_Buffer+) to store info
-Graphics_Buffer,$0301,107,,0,,0,Graphics,General,"Simple (and small!) delayed write buffer; uses same format as Video_Upd_Table in PRG030, get format info there"
-SNES_DoorAnimationVar,,0,$7E034E,1,,,Level,General,"SNES: If non-zero, the door-entering animation will play on the next junction transition. Also used as a timer for the animation."
+Graphics_BufCnt,$0300,1,$7E1600,1,,0,Graphics,General,first byte holds current position within buffer (Graphics_Buffer+) to store info
+SNES_Graphics_BufCntHi,,0,$7E1601,1,,0,Graphics,General,High byte of previous.
+Graphics_Buffer,$0301,107,$7E1602,510,,0,Graphics,General,"Simple (and small!) delayed write buffer; uses same format as Video_Upd_Table in PRG030, get format info there"
+,,0,$7E0300,73,,0,Empty,General,Unused. Cleared on Overworld load.
+SNES_Timer_PauseCooldown,,,$7E0349,1,,,Misc.,General,"Generic timer, counts to zero during levels/overworld. Prevents pause from being pressed. Set to #$10 at level/world initialize, but never written to otherwise."
+SNES_DoorAnimationVar,,0,$7E034E,1,,0,Level,General,"SNES: If non-zero, the door-entering animation will play on the next junction transition. Also used as a timer for the animation."
+(TOFIX),,,$7E034F,1,,0,Level,General,(TOFIX)
+SNES_LevelHeaderL2BG,,0,$7E0350,1,,0,Level,General,(TOFIX)
+SNES_PalAnimCounter,,0,$7E0356,1,,0,Graphics,General,SNES: used as a counter and index for palette animations in various levels.
 TileChng_VRAM_H,$036C,1,$7E036C,1,,0,Graphics,General,High part of VRAM address to change
 TileChng_VRAM_L,$036D,1,$7E036D,1,,0,Graphics,General,Low part of VRAM address to change
 TileChng_Pats,$036E,4,$7E036E,8,,0,Graphics,General,The four patterns required to change a tile (for Level_ChgTileEvent)
@@ -407,7 +464,8 @@ Map_StarsDeltaY,$03CA,1,,0,,0,Overworld,General,"Delta the stars move in Y to re
 Map_Stars_PRelX,$03DB,1,,0,,0,Overworld,General,"During world intro, screen relative position of Player X"
 Map_Stars_PRelY,$03DC,1,,0,,0,Overworld,General,"During world intro, screen relative position of Player Y"
 Player_Power,$03DD,1,,0,,0,Player,General,>>>>>>[P] charge level ($7F max)
-Level_JctCtl,$03DE,1,$7E0414,1,,0,Level,General,"Level_JctCtl is configured when you enter a door or a pipn* When $80, use current values for Level_AltLayout and Level_AltObjects
+Level_JctCtl,$03DE,1,$7E0414,1,,0,Level,General,"Level_JctCtl is configured when you enter a door or a pipe
+* When $80, use current values for Level_AltLayout and Level_AltObjects
 * When otherwise non-zero (inc $80), skips setting vertical start position
 
 Normal values for the junction:
@@ -568,7 +626,7 @@ Map_W8D_Y,$045D,1,,0,,0,Overworld,Overworld,World 8 Darkness - (TOFIX)
 Map_W8D_Idx,$045E,1,,0,,0,Overworld,Overworld,World 8 Darkness - (TOFIX)
 Map_EntTran_Temp,$045F,1,,0,,0,Overworld,Overworld,Seems to me a multi-purpose value in entrance transition
 Map_EntTran_InitValIdx,$0460,1,,0,,0,Overworld,Overworld,Selects an index of values to initialize by (TOFIX)
-Level_MusicQueue,$0461,1,,0,,0,Audio,General,Requests a song from Set 2A/B (used to allow delayed start)
+Level_MusicQueue,$0461,1,$7E1061,1,,0,Audio,General,Requests a song from Set 2A/B (used to allow delayed start)
 Level_MusicQueueRestore,$0462,1,$7E1062,1,,0,Audio,General,"What to ""restore"" the BGM to when it changes (e.g. Starman, P-Switch, etc.)"
 ,$0463,109,,0,,0,Empty,General,Unused.
 Music_TriTrkPos,$04D0,1,,0,,0,Audio,General,Offset of triangle track in currently playing index
@@ -905,7 +963,7 @@ CineKing_Timer2,$0711,1,,0,,0,Counter,General,Timer; decrements to zero
 ,$0712,1,,0,,0,Empty,General,Unused.
 Map_ReturnStatus,$0713,1,,0,,0,Overworld,General,"When 0, level panel is cleared; otherwise, Player is considered to have died (decrements life!)"
 MaxPower_Tick,$0714,1,,0,,0,Player,General,"When Player has maximum ""power"" charge, this counts for the flashing [P]"
-Player_Score,$0715,3,,0,,0,Misc.,General,"Treated as 3-byte integer, with least significant zero on display not part of this value"
+Player_Score,$0715,3,$7E0715,3,,0,Misc.,General,"Treated as 3-byte integer, with least significant zero on display not part of this value"
 ,$0718,1,,0,,0,Empty,General,Unused.
 PatTable_BankSel,$0719,6,,0,,0,Graphics,General,Provides an array of 6 pages to set the entire Pattern Table [BG_Full_CHRROM_Switch]
 PAGE_C000,$071F,1,,0,,0,Hardware Mirror,General,Page to set PRG ROM C000 (PRGROM_Change_Both)
@@ -1018,9 +1076,9 @@ Tile_Mem,$6000,6480,$7E2000,6480,,0,Misc.,General,"Space used to store the 16x16
 
 Vertical level max size is 15 rows * 16 columns * 16 screens = 3840 ($0F00) bytes
 Non-vertical level max size is 27 rows * 16 columns * 15 screens = 6480 ($1950) bytes"
-Vs_PlayerFrame,$6800,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Frame
-Vs_MemStart,$6800,1,,0,,0,Battle Mode,Battle Mode,"Should be at ""top""; this point and 512 bytes forward are cleared at start of 2P Vs"
-Vs_PlayerState,$6802,2,,0,,0,Battle Mode,Battle Mode,"Mario/Luigi State (0=Init, 1=Normal, 2=Dying, 3=Ladder climbing)"
+Vs_PlayerFrame,$6800,2,$7E008D,2,,0,Battle Mode,Battle Mode,Mario/Luigi Frame
+Vs_MemStart,$6800,1,$7E1800,0,,0,Battle Mode,Battle Mode,"Should be at ""top""; this point and 512 bytes forward are cleared at start of 2P Vs"
+Vs_PlayerState,$6802,2,$7E1800,2,,0,Battle Mode,Battle Mode,"Mario/Luigi State (0=Init, 1=Normal, 2=Dying, 3=Ladder climbing)"
 Vs_ObjectState,$6804,12,,0,,0,Battle Mode,Battle Mode,"Objects State (0=Dead/empty, 1=Normal, 2=Flipped over, 3=Dying)"
 ,$6810,1,,0,,0,Empty,Battle Mode,Unused.
 Vs_PlayerBlkHitCnt,$6811,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Hit block counter value
@@ -1139,8 +1197,8 @@ Map_BonusAppX,$796D,1,,0,,0,Overworld,General,"Map ""white"" bonus appearance X 
 Map_NoLoseTurn,$796E,1,,0,,0,Flag,General,"If set, Player does not lose turn after having completed a level (used for Toad House, pipeways, etc.)"
 Map_Got13Warp,$796F,1,$7E396E,1,,0,Flag,General,Set non-zero if Player already got the 1-3 Warp Whistle
 Map_Anchored,$7970,1,$7E396F,1,,0,Flag,General,Set if anchor is set on this map
-Map_WhiteHouse,$7971,1,,0,,0,Flag,General,Set if you have already earned the White Toad House for this world
-Map_CoinShip,$7972,1,,0,,0,Flag,General,Set if you have already earned the Coin Ship for this world
+Map_WhiteHouse,$7971,1,$7E3970,0,,0,Flag,General,Set if you have already earned the White Toad House for this world
+Map_CoinShip,$7972,1,$7E3971,0,,0,Flag,General,Set if you have already earned the Coin Ship for this world
 Map_WasInPipeway,$7973,1,,0,,0,Flag,General,Set if you just came out of a pipeway
 EndCard_Flag,$7974,1,,0,,0,Flag,General,Set when End Level card is hit (can determine when level has ended)
 Map_PlyrSprOvrY,$7975,1,,0,,0,Overworld,General,"""Player Sprite Override Y""; If set to $F8 during warp, erases Player's map sprite; otherwise provides a Y to put it at"
@@ -1163,10 +1221,12 @@ Level_Jct_VS,$798F,1,$7E398E,1,,0,Camera,General,Level junction vertical scroll 
 Map_Unused7992,$7992,1,,0,,0,Overworld,General,Value used in some dead code in PRG011; cleared elsewhere (NOT SURE if maybe it sometimes meant Bonus_DiePos?)
 Bonus_DiePos,$7992,1,,0,,0,Bonus Game,General,"UNUSED Die in the lost bonus games, counts 0-5"
 Map_Previous_Dir,$7993,2,,0,,0,Overworld,General,"(Mario/Luigi) Backup movement dir (remember which way Player moved last) (8=Up, 4=Down, 2=Left, 1=Right)"
-Map_Unused7995,$7995,1,,0,,0,Empty,General,Unused; cleared but never used otherwise
+Map_Unused7995,$7995,1,$7E3994,0,,0,Empty,General,Unused; cleared but never used otherwise
+SNES_PreventLevelClear,,0,$7E3995,1,,0,Overworld,General,"If set, the level will not be cleared once completed.
+This is used to fix any N-Spade game/White Mushroom House clearing any uncompleted tile that it sits on."
 Player_NoSlopeStick,$7996,1,$7E027F,1,,0,Flag,General,"If set, Player does not stick to slopes (noticeable running downhill)"
-,$7997,105,,0,,0,Empty,General,Unused.
-AScroll_Anchor,$7A00,1,,0,,0,Misc.,General,"Used as starting point for $7A00-$7A14 clear, but never actually used in Auto-Scroll"
+,$7997,105,$7E3996,1642,,0,Empty,General,Unused.
+AScroll_Anchor,$7A00,1,$7E1A00,1,,0,Misc.,General,"Used as starting point for $7A00-$7A14 clear, but never actually used in Auto-Scroll"
 Level_AScrlSelect,$7A01,1,,0,,0,Level,General,Selects auto scroll routine to use (see PRG009_B922) (TOFIX)
 CineKing_WandState,$7A01,1,,0,,0,Sprites,King Post-Transform,"Wand state; 0 = falling, 1 = spinning, 2 = held"
 CineKing_WandFrame,$7A02,1,,0,,0,Sprites,King Post-Transform,Wand frame; 0 to 7
@@ -1210,7 +1270,7 @@ CannonFire_X,$7A35,8,,0,,0,Sprites,General,Cannon fire X
 CannonFire_Parent,$7A3D,8,,0,,0,Sprites,General,"Tie back to level object index of ""parent"" object"
 Splash_DisTimer,$7A45,1,,0,,0,Player,General,Player water splashes are disabled until decrements to zero; set when Player hits any bounce block
 ShellKillFlash_Cnt,$7A46,1,,0,,0,Sprites,General,"""Shell Kill Flash"" counter"
-ShellKillFlash_Y,$7A47,1,,0,,0,Sprites,General,"""Shell Kill Flash"" Y"
+ShellKillFlash_Y,$7A47,1,$7E1A47,0,,0,Sprites,General,"""Shell Kill Flash"" Y"
 ShellKillFlash_X,$7A48,1,,0,,0,Sprites,General,"""Shell Kill Flash"" X"
 SNES_ShellKillFlash_XHi,,0,$7E027E,1,,0,Sprites,General,"SNES: ""Shell Kill Flash"" XHi"
 Objects_DisPatChng,$7A49,6,,0,,0,Sprites,General,"If set, this object no longer enforces a pattern bank change"
@@ -1388,3 +1448,5 @@ Roulette_Lives,$7FF7,1,$7E1FF9,1,,0,Bonus Game,General,Number of lives you are r
 Objects_IsGiant,$7FF7,8,$7E1FF9,8,,0,Sprites,General,"Set mainly for World 4 ""Giant"" enemies (but some others, like Bowser, also use it)
 SNES: The table will bleed into the first two hardware registers if slots 6-7 are used."
 ,$7FFF,1,,0,,0,Empty,General,Unused.
+SNES_Tile_Mem_Hi,,0,$7E4000,6480,,0,Misc.,General,"Space used to store the 16x16 ""tiles"" that make up the World Map or Level
+Used"

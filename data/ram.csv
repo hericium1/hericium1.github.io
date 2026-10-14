@@ -364,6 +364,9 @@ Byte 2 - Stores the attributes of the sprite.
 Byte 3 - X coordinate
 
 TOFIX: SNES"
+SNES_SpriteHiFull_RAM,,0,$7E0A00,32,,0,Sprites,General,(TOFIX) SNES: Should not be modified. Write to SNES_SpriteHi_RAM instead.
+SNES_SpriteHi_RAM,,0,$7E0A20,128,,0,Sprites,General,(TOFIX)
+,,0,$7E0AA0,1376,,0,Empty,General,Unused.
 SNES_HWM_W12SEL,,0,$7E0200,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register W12SEL ($2123).
 SNES_HWM_W34SEL,,0,$7E0201,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register W34SEL ($2124).
 SNES_HWM_WOBJSEL,,0,$7E0202,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register WOBJSEL ($2125).
@@ -413,57 +416,151 @@ SNES_DMAQueue_SrcHi,,0,$7E0241,1,,0,Graphics,General,High byte of source address
 SNES_DMAQueue_SrcBk,,0,$7E0242,1,,0,Graphics,General,Bank byte of source address in DMA queue.
 SNES_Anim_Slice,,0,$7E0243,1,,0,Graphics,General,SNES: Animation slice of current frame to upload. An entire frame is usually uploaded with a few portions at a time during NMI. This counter keeps track of this.
 SNES_AnimIndex_Overworld,,0,$7E0244,1,,0,Graphics,General,SNES: Current animation Frame of Overworld.
-SNES_AnimIndex_Level,,0,$7E0245,1,,0,Graphics,General,"SNES: Current animation Frame of Level.
-If negative, pile driver's block will not be animated."
+SNES_AnimIndex_Level,,0,$7E0245,1,,0,Graphics,General,"SNES: Current animation Frame of Level. Frame 0 is the P-Switch Frame.
+If negative, or zero, pile driver's block will not be animated.
+"
 SNES_AnimIndex_Tank,,0,$7E0246,1,,0,Graphics,General,SNES: Current animation Frame of a Tank Level.
-,,0,$7E0247,2,,0,Empty,General,Unused.
-SNES_SpriteHiFull_RAM,,0,$7E0A00,32,,0,Sprites,General,(TOFIX) SNES: Should not be modified. Write to SNES_SpriteHi_RAM instead.
-SNES_SpriteHi_RAM,,0,$7E0A20,128,,0,Sprites,General,(TOFIX)
-,,0,$7E0AA0,1376,,0,Empty,General,Unused.
-SNES_ASPauseStat,,,$7E028C,1,,,Misc.,General,SNES: All-Stars Pause menu status.
-SNES_WindowType,,,$7E0291,1,,,Graphics,General,"(TOFIX) SNES: Window type.
+SNES_PlayerProj_XHi,,0,$7E0247,2,,0,Sprites,General,Player projectile X Hi
+SNES_BGAndEndingVar,,0,$7E0249,2,,0,Misc.,General,Used during several background calculations and as a counter during the ending. May be 16-bit.
+SNES_BGAndEndingVar2,,0,$7E024B,1,,0,Misc.,General,Used during several background calculations and as a variable during the ending.
+SNES_CoinPUp_XHi,,0,$7E024C,4,,0,Sprites,General,"XHi of ""Power Up"" coins"
+,,0,$7E0250,1,,0,Empty,General,Unused.
+SNES_Scores_XHi,,0,$7E0251,5,,0,Sprites,General,Score's X Hi
+SNES_ChainChomp_ChainXHi1,,0,$7E0256,5,,0,Sprites,General,Chain Link 1 X Hi
+SNES_ChainChomp_ChainXHi2,,0,$7E025B,5,,0,Sprites,General,Chain Link 2 X Hi
+SNES_ChainChomp_ChainXHi3,,0,$7E0260,5,,0,Sprites,General,Chain Link 3 X Hi
+SNES_ChainChomp_ChainXHi4,,0,$7E0265,5,,0,Sprites,General,Chain Link 4 X Hi
+SNES_ChainChomp_ChainYHi1,,0,$7E026A,5,,0,Sprites,General,Chain Link 1 Y Hi
+SNES_ChainChomp_ChainYHi2,,0,$7E026F,5,,0,Sprites,General,Chain Link 2 Y Hi
+SNES_ChainChomp_ChainYHi3,,0,$7E0274,5,,0,Sprites,General,Chain Link 3 Y Hi
+SNES_ChainChomp_ChainYHi4,,0,$7E0279,5,,0,Sprites,General,Chain Link 4 Y Hi
+SNES_ShellKillFlash_XHi,,0,$7E027E,1,,0,Sprites,General,"""Shell Kill Flash"" X Hi"
+SNES_EndCardPowerFlag,,0,$7E0280,1,,0,Player,General,Set while player is walking off during the end card scene. Value can vary depending on whether player hit the card at max P speed.
+SNES_Window_LeftBound,,0,$7E0281,2,,0,Graphics,General,Factor used for some window effects
+SNES_Window_RightBound,,0,$7E0283,2,,0,Graphics,General,Factor used for some window effects
+SNES_Window_TopBound,,0,$7E0285,2,,0,Graphics,General,Factor used for some window effects
+SNES_PauseBox_RestoreTMW,,0,$7E0287,1,,0,Misc.,General,Backup TMW value. Used during pausing.
+SNES_PauseBox_RestoreTSW,,0,$7E0288,1,,0,Misc.,General,Backup TSW value. Used during pausing.
+SNES_Window_BottomBound,,0,$7E0289,2,,0,Graphics,General,Factor used for some window effects
+SNES_Window_Var1,,0,$7E028B,2,,0,Misc.,General,"General variable used for some window effects
+NOTE: this is 16-bit and shares a memory location with pause variables"
+SNES_PauseBox_Stat,,0,$7E028C,1,,0,Misc.,General,SNES: All-Stars Pause menu status.
+SNES_Window_Var2,,0,$7E028D,2,,0,Misc.,General,"General variable used for some window effects
+NOTE: this is 16-bit and shares a memory location with pause variables"
+SNES_PauseBox_Cursor,,0,$7E028E,1,,0,Misc.,General,All-Stars Pause menu cursor position
+SNES_PauseBox_Counter,,0,$7E028F,1,,0,Misc.,General,All-Stars Pause menu counter
+SNES_PauseBox_IsOpen,,0,$7E0290,1,,0,Misc.,General,Set once Pause Menu is ready for a selection
+SNES_Window_Type,,0,$7E0291,1,,0,Graphics,General,"(TOFIX) SNES: Window type.
 0 - none
 1 - ?
 2 - Enter Level Iris
 3 - Overworld Darkness Spotlight
 4 - Enter Level Iris (Overworld Darkness)
 5 - ?"
+,,0,$7E0292,1,,0,Empty,General,Unused. Cleared on Overworld load.
+SNES_HWM_HDMAEN,,0,$7E0293,1,,0,Hardware Mirror,General,SNES: Mirror of hardware register HDMAEN ($420C).
+SNES_Window_YSrc,,0,$7E0294,1,,0,Misc.,General,Window value used for iris effects
+SNES_Window_XSrc,,0,$7E0295,2,,0,Misc.,General,Window value used for iris effects
+SNES_Window_Var3,,0,$7E0297,2,,0,Misc.,General,Factor used for some window effects
+SNES_Window_Var4,,0,$7E0299,2,,0,Misc.,General,Factor used for some window effects
+SNES_Cutscene_Var1,,0,$7E029A,2,,0,Title Screen/Ending,Ending,(TOFIX)
+SNES_Window_Var5,,0,$7E029B,2,,0,Misc.,General,Factor used for some window effects
+SNES_Window_Var6,,0,$7E029D,2,,0,Misc.,General,Factor used for some window effects
+SNES_Window_Var7,,0,$7E029F,2,,0,Misc.,General,Factor used for some window effects
+SNES_Window_Var8,,0,$7E02A1,2,,0,Misc.,General,Factor used for some window effects
+,,0,$7E02A3,4,,0,Empty,General,Unused. Cleared on Overworld load.
+SNES_SplashVertScrollBk,,0,$7E02A7,2,,0,Sprites,General,"(TOFIX), overlaps with next"
+SNES_Window_Var9,,0,$7E02A7,2,,0,Misc.,General,(TOFIX)
+SNES_Window_Var10,,0,$7E02A9,2,,0,Misc.,General,(TOFIX)
+SNES_Window_Pointer,,0,$7E02AB,3,,0,Misc.,General,Indirect Pointer for Window HDMA Table
+SNES_BrickBust_XHi,,0,$7E02AE,3,,0,Sprites,General,SNES: Brick bust X Hi split
+SNES_AnimIndex_Blocks,,0,$7E02B1,1,,0,Graphics,General,Animation Index for ? Blocks and Coins.
+SNES_AnimIndex_PileDriver,,0,$7E02B2,1,,0,Graphics,General,Animation Index for the Pile Driver Sprite Block.
+SNES_Cutscene_IsFaded,,0,$7E02B3,2,,0,Graphics,General,Used by cutscenes to see if a transition has occured.
+SNES_Ending_FadeCounter,,0,$7E02B5,2,,0,Graphics,General,Fade counter for ending
+SNES_Ending_MaskVal,,0,$7E02B7,2,,0,Graphics,General,Mask value for ending
 SNES_BGPal,,0,$7E02B9,2,,0,Level,General,(TOFIX)
+SNES_EndCardTilemapUpl,,0,$7E02BB,1,,0,Level,General,"If non-zero, upload the buffer for the end card fireworks tilemap"
+,,0,$7E02BC,2,,0,Empty,General,Unused. Cleared on Overworld load.
 SNES_LevelHeaderL3Pal,,0,$7E02BE,1,,0,Level,General,(TOFIX)
+SNES_LevelHeaderL3BG,,0,$7E02BF,1,,0,Level,General,(TOFIX)
+SNES_L3Anim_Frame,,0,$7E02C0,1,,0,Level,General,(TOFIX)
+SNES_LevelHeader_WaterHeight,,0,$7E02C1,1,,0,Level,General,(TOFIX)
+SNES_L3Anim_Slice,,0,$7E02C2,1,,0,Level,General,(TOFIX)
+SNES_BGOffset_X,,0,$7E02C3,2,,0,Graphics,General,(TOFIX)
+SNES_BGHeader_Pal,,0,$7E02C5,1,,0,Level,General,(TOFIX)
+SNES_StarPalCountA,,0,$7E02C6,1,,0,Player,General,Used for the palette rotation while under a star's effects.
+SNES_StarPalCountB,,0,$7E02C7,1,,0,Player,General,Used for the palette rotation while under a star's effects.
+,,0,$7E02C8,2,,0,Empty,General,Unused. Cleared on Overworld load.
+SNES_DMAQueue_Size,,0,$7E02CA,2,,0,Graphics,General,Size of source in DMA queue.
+SNES_ExtraBGScroll_Vert,,0,$7E02CC,2,,0,Camera,General,(TOFIX)
+SNES_ExtraBGScroll_Horz,,0,$7E02CE,2,,0,Camera,General,(TOFIX)
+,,0,$7E02D0,1,,0,Empty,General,Unused. Cleared on Overworld load.
+SNES_CourseClearUpl,,0,$7E02D1,1,,0,Level,General,"When negative, upload the Course Clear Tilemap. Set to $01 on finish."
+SNES_Card_Matches_BordCounter,,0,$7E02D2,1,,0,Bonus Game,General,Updates border Tilemap on card match.
+SNES_Anim_ForceOW,,0,$7E02D3,1,,0,Overworld,General,"If negative, force animation overrides to update, skip overworld DMA GFX updating (e.g. bridges)"
+(TOFIX),,0,$7E02D4,1,,0,,,(TOFIX)
+(TOFIX),,0,$7E02D5,1,,0,,,(TOFIX)
+,,0,$7E02D6,1,,0,Empty,General,Unused. Cleared on Overworld load.
+SNES_Map_UpdDrawbridge,,0,$7E02D7,1,,0,Overworld,General,"If zero, update the drawbridge graphics"
+(TOFIX),,0,$7E02D8,1,,0,Bonus Game,,(TOFIX)
+(TOFIX),,0,$7E02D9,1,,0,,,(TOFIX)
+SNES_Vs_PlayerGameWinCount,,0,$7E02DA,2,,0,Battle Mode,,(TOFIX)
+(TOFIX),,0,$7E02DC,1,,0,,,(TOFIX)
+(TOFIX),,0,$7E02DD,1,,0,,,(TOFIX)
+SNES_Vs_PlayerMatchWinCount,,0,$7E02DE,2,,0,Battle Mode,,(TOFIX)
+(TOFIX),,0,$7E02E0,1,,0,,,(TOFIX)
+(TOFIX),,0,$7E02E1,1,,0,,,(TOFIX)
+(TOFIX),,0,$7E02E2,1,,0,,,(TOFIX)
+(TOFIX),,0,$7E02E3,2,,0,,,(TOFIX)
+,,0,$7E02E5,27,,0,Empty,General,Unused. Cleared on Overworld load.
 Graphics_BufCnt,$0300,1,$7E1600,1,,0,Graphics,General,first byte holds current position within buffer (Graphics_Buffer+) to store info
 SNES_Graphics_BufCntHi,,0,$7E1601,1,,0,Graphics,General,High byte of previous.
 Graphics_Buffer,$0301,107,$7E1602,510,,0,Graphics,General,"Simple (and small!) delayed write buffer; uses same format as Video_Upd_Table in PRG030, get format info there"
 ,,0,$7E0300,73,,0,Empty,General,Unused. Cleared on Overworld load.
-SNES_Timer_PauseCooldown,,,$7E0349,1,,,Misc.,General,"Generic timer, counts to zero during levels/overworld. Prevents pause from being pressed. Set to #$10 at level/world initialize, but never written to otherwise."
+SNES_Timer_PauseCooldown,,0,$7E0349,1,,0,Misc.,General,"Generic timer, counts to zero during levels/overworld. Prevents pause from being pressed. Set to #$10 at level/world initialize, but never written to otherwise."
+(TOFIX),,0,$7E034A,1,,0,,,(TOFIX)
+(TOFIX),,0,$7E034B,1,,0,,,(TOFIX)
+,,,$7E034C,1,,0,Empty,General,Unused. Cleared on Overworld load.
+(TOFIX),,0,$7E034D,1,,0,,,(TOFIX)
 SNES_DoorAnimationVar,,0,$7E034E,1,,0,Level,General,"SNES: If non-zero, the door-entering animation will play on the next junction transition. Also used as a timer for the animation."
-(TOFIX),,,$7E034F,1,,0,Level,General,(TOFIX)
+SNES_BGHeader_Flag,,0,$7E034F,1,,0,Level,General,(TOFIX)
 SNES_LevelHeaderL2BG,,0,$7E0350,1,,0,Level,General,(TOFIX)
+(TOFIX),,0,$7E0351,1,,0,,,(TOFIX)
+(TOFIX),,0,$7E0352,1,,0,,,(TOFIX)
+(TOFIX),,,$7E0353,1,,0,,,(TOFIX)
+(TOFIX),,,$7E0354,1,,0,,,(TOFIX)
+,,,$7E0355,1,,0,Empty,General,Unused. Cleared on Overworld load.
 SNES_PalAnimCounter,,0,$7E0356,1,,0,Graphics,General,SNES: used as a counter and index for palette animations in various levels.
+SNES_L3ParallaxTable,,0,$7E0357,8,,0,Camera,General,(TOFIX)
+,,0,$7E035F,13,,0,Empty,General,Unused. Cleared on Overworld load.
 TileChng_VRAM_H,$036C,1,$7E036C,1,,0,Graphics,General,High part of VRAM address to change
 TileChng_VRAM_L,$036D,1,$7E036D,1,,0,Graphics,General,Low part of VRAM address to change
 TileChng_Pats,$036E,4,$7E036E,8,,0,Graphics,General,The four patterns required to change a tile (for Level_ChgTileEvent)
 Level_SizeOrig,$0372,1,$7E0376,1,,0,Level,General,Holds original size (width or height) of level (in screens)
-Level_PipeExitDir,$0373,1,,0,,0,Player,General,"Direction Player is going to exit from a pipe (1 = Up, 2 = Down, 3 = Right, 4 = Left, 5 = In-level Transit)"
-Level_7VertCopy,$0374,1,,0,,0,Level,General,"Just seems to be an unmaintained copy of Level_7Vertical from level load, but that's it"
+Level_PipeExitDir,$0373,1,$7E0377,1,,0,Player,General,"Direction Player is going to exit from a pipe (1 = Up, 2 = Down, 3 = Right, 4 = Left, 5 = In-level Transit)"
+Level_7VertCopy,$0374,1,$7E0378,1,,0,Level,General,"Just seems to be an unmaintained copy of Level_7Vertical from level load, but that's it"
 Level_PipeNotExit,$0375,1,$7E0379,1,,0,Level,General,"If set, pipes do NOT exit to map (i.e. as in pipe junctions)"
 Level_PauseFlag,$0376,1,$7E037A,1,,0,Level,General,"Set to 0 when not paused, or 1 when paused"
-Level_SkipStatusBarUpd,$0377,1,,0,,0,Graphics,General,"When set, skips updating the status bar for one frame (priority graphics buffer changes I think)"
-Raster_State,$0378,1,,0,,0,Graphics,General,"This variable's meaning depends on the Raster_Effect in use; typically 0 is first pass, then more for further scanlines"
-,$0379,7,,0,,0,Empty,General,Unused.
-Scroll_ToVRAMHi,$0380,1,$7E0380,1,,0,Camera,General,"High byte for when pushing a column of tile data to VRAM (Set to $20, Name Table 0, after scroll update)"
+Level_SkipStatusBarUpd,$0377,1,$7E037B,1,,0,Graphics,General,"When set, skips updating the status bar for one frame (priority graphics buffer changes I think)"
+Raster_State,$0378,1,$7E037C,1,,0,Graphics,General,"This variable's meaning depends on the Raster_Effect in use; typically 0 is first pass, then more for further scanlines"
+,$0379,7,$7E037D,3,,0,Empty,General,Unused.
+Scroll_ToVRAMHi,$0380,1,$7E0380,1,,0,Camera,General,"High byte for when pushing a column of tile data to VRAM (Set to $20, Name Table 0, after scroll update)
+SNES: used for the destination VRAM address's high byte during a DMA"
 Scroll_LastCol8,$0381,1,$7E0381,1,,0,Camera,General,Last 8x8 block column that was updated (non-vertical level ONLY)
 Scroll_LastOff8,$0381,1,$7E0381,1,,0,Camera,General,Last 8x8 block offset that was updated (vertical level style ONLY)
 Scroll_PatStrip,$0382,54,$7E0382,64,,0,Camera,General,"(may be less?) This stores a strip of 8x8 blocks, (non-vertical level: top to bottom with 2 columns), to render the next 16 pixel ""sliver"" of screen space"
-Scroll_ToVRAMHA,$03B8,1,,0,,0,Graphics,General,"High byte for when pushing attribute data to VRAM (Set to $23, attribute table 0)"
-Scroll_LastAttr,$03B9,1,,0,,0,Misc.,General,(TOFIX)
-Scroll_AttrStrip,$03BA,14,,0,,0,Graphics,General,(may be less?) This stores a 2x2 block of attribute coloring data
-World_Num_Debug,$03C8,1,,0,,0,Misc.,General,"When debug mode is activated (KKKZSPIU), this is the world you select to start on"
-Map_StarsDeltaX,$03C9,1,,0,,0,Overworld,General,"Delta the stars move in X to reach the Player (always positive, code figures direction)"
-Map_StarsDeltaY,$03CA,1,,0,,0,Overworld,General,"Delta the stars move in Y to reach the Player (always positive, code figures direction)"
-,$03CB,16,,0,,0,Empty,General,Unused.
-Map_Stars_PRelX,$03DB,1,,0,,0,Overworld,General,"During world intro, screen relative position of Player X"
-Map_Stars_PRelY,$03DC,1,,0,,0,Overworld,General,"During world intro, screen relative position of Player Y"
-Player_Power,$03DD,1,,0,,0,Player,General,>>>>>>[P] charge level ($7F max)
+SNES_Scroll_PatStrip_B,,0,$7E03C2,44,,0,Camera,General,(TOFIX)
+Scroll_ToVRAMHA,$03B8,1,$7E03EE,1,,0,Graphics,General,"High byte for when pushing attribute data to VRAM (Set to $23, attribute table 0)"
+Scroll_LastAttr,$03B9,1,$7E03EF,1,,0,Misc.,General,(TOFIX)
+Scroll_AttrStrip,$03BA,14,$7E03F0,14,,0,Graphics,General,(may be less?) This stores a 2x2 block of attribute coloring data
+World_Num_Debug,$03C8,1,$7E03FE,0,,0,Misc.,General,"When debug mode is activated (KKKZSPIU), this is the world you select to start on"
+Map_StarsDeltaX,$03C9,1,$7E03FF,1,,0,Overworld,General,"Delta the stars move in X to reach the Player (always positive, code figures direction)"
+Map_StarsDeltaY,$03CA,1,$7E0400,1,,0,Overworld,General,"Delta the stars move in Y to reach the Player (always positive, code figures direction)"
+,$03CB,16,$7E0401,16,,0,Empty,General,Unused.
+Map_Stars_PRelX,$03DB,1,$7E0411,1,,0,Overworld,General,"During world intro, screen relative position of Player X"
+Map_Stars_PRelY,$03DC,1,$7E0412,1,,0,Overworld,General,"During world intro, screen relative position of Player Y"
+Player_Power,$03DD,1,$7E0413,1,,0,Player,General,>>>>>>[P] charge level ($7F max)
 Level_JctCtl,$03DE,1,$7E0414,1,,0,Level,General,"Level_JctCtl is configured when you enter a door or a pipe
 * When $80, use current values for Level_AltLayout and Level_AltObjects
 * When otherwise non-zero (inc $80), skips setting vertical start position
@@ -476,18 +573,18 @@ Normal values for the junction:
  4 - Generic level exit (where you come up from a pipe in the generic exit area)
  5 - Special Toad House (used for the 1-3 warp whistle)"
 Level_JctFlag,$03DF,1,$7E0415,1,,0,Flag,General,Toggles when you junction
-,$03E0,1,,0,,0,Empty,General,Unused.
-Map_DrawPanState,$03E1,1,,0,,0,Overworld,General,Map draw/pan state
+,$03E0,1,$7E0416,1,,0,Empty,General,Unused.
+Map_DrawPanState,$03E1,1,$7E0417,1,,0,Overworld,General,Map draw/pan state
 ObjGroupRel_Idx,$03E2,1,$7E0418,1,,0,Sprites,General,Holds relative index of object within its group (see PRG000_CA51)
-InvFlip_VAddrHi,$03E3,1,,0,,0,Level,General,Hi byte of VRAM address during inventory flip modifications
-,$03E4,1,,0,,0,Empty,General,Unused.
-InvFlip_Frame,$03E5,1,,0,,0,Misc.,General,"Sort of a ""frame"" of animation during flipping of the inventory box; 0-7 during closing, 8-15 during opening"
-InvFlip_Counter,$03E6,1,,0,,0,Counter,General,"0 = Closed, 4 = Fully Open"
-InvStart_Item,$03E7,1,,0,,0,Misc.,General,"Starting inventory item; typ. $00, $07, $0E, $15 (Rows 1-4)"
-InvHilite_X,$03E8,1,,0,,0,Misc.,General,Current hilite position X coordinate
-InvHilite_Item,$03E9,1,,0,,0,Misc.,General,"Which item in the current row is highlighted, 0-6"
-THouse_ID,$03EA,1,,0,,0,Level,General,An unused ID value that would track boxes already opened in a Toad House (concept unused!)
-THouse_Treasure,$03EB,1,,0,,0,Level,General,"Treasure type you'll get at this Toad House
+InvFlip_VAddrHi,$03E3,1,$7E0419,1,,0,Level,General,Hi byte of VRAM address during inventory flip modifications
+,$03E4,1,$7E041A,1,,0,Empty,General,Unused.
+InvFlip_Frame,$03E5,1,$7E041B,1,,0,Misc.,General,"Sort of a ""frame"" of animation during flipping of the inventory box; 0-7 during closing, 8-15 during opening"
+InvFlip_Counter,$03E6,1,$7E041C,1,,0,Counter,General,"0 = Closed, 4 = Fully Open"
+InvStart_Item,$03E7,1,$7E041D,1,,0,Misc.,General,"Starting inventory item; typ. $00, $07, $0E, $15 (Rows 1-4)"
+InvHilite_X,$03E8,1,$7E041E,1,,0,Misc.,General,Current hilite position X coordinate
+InvHilite_Item,$03E9,1,$7E041F,1,,0,Misc.,General,"Which item in the current row is highlighted, 0-6"
+THouse_ID,$03EA,1,$7E0420,1,,0,Level,General,An unused ID value that would track boxes already opened in a Toad House (concept unused!)
+THouse_Treasure,$03EB,1,$7E0421,1,,0,Level,General,"Treasure type you'll get at this Toad House
 0 = INVALID
 1 = Warp Whistle
 2 = P-Wing
@@ -496,81 +593,81 @@ THouse_Treasure,$03EB,1,,0,,0,Level,General,"Treasure type you'll get at this To
 5 = Hammer
 6 = Random Super Suit
 7 = Random Basic Item"
-Coins_Earned,$03EC,1,,0,,0,Level,General,"A ""buffer"" of coins earned to be added to your total, actual coinage stored in Inventory_Coins[2]"
-Map_Powerup_Poof,$03ED,1,,0,,0,Counter,General,"Counter that handles the ""poof"" effect when a powerup is used on the map (requires Inventory to be open, and forces it to close afterward)"
+Coins_Earned,$03EC,1,$7E0422,1,,0,Level,General,"A ""buffer"" of coins earned to be added to your total, actual coinage stored in Inventory_Coins[2]"
+Map_Powerup_Poof,$03ED,1,$7E0423,1,,0,Counter,General,"Counter that handles the ""poof"" effect when a powerup is used on the map (requires Inventory to be open, and forces it to close afterward)"
 Level_FreeVertScroll,$03EE,1,$7E0424,1,,0,Level,General,"0 = Screen locked at $EF (lowest point) unless flying or climbing a vine
 1 = Free vertical scroll
 2 = Locked at arbitrary point (i.e. whatever Vert_Scroll is, it stays there)"
 Level_7Vertical,$03EF,1,$7E0425,1,,0,Level,General,Set in World 7 vertical type levels
 Level_SelXStart,$03F0,1,$7E0426,1,,0,Level,General,Selects X starting position when level begins (valid values 0-3)
-Update_Request,$03F1,1,,0,,0,Video,General,"This changes the current Raster_Effect and Update_Select and doesn't persist
+Update_Request,$03F1,1,$7E0427,1,,0,Video,General,"This changes the current Raster_Effect and Update_Select and doesn't persist
 1 = 32 pixel partition; common use is for levels with water along the bottom
 2 = Spade game sliders
 3 = ""Water line"" mode (described at ObjHorzAutoScroller_Init)
 $80 = If NOT set, hides sprites that fall beneath the partition (i.e. for fixed water effect)"
-Map_Starman,$03F2,1,,0,,0,Overworld,General,Player used a Starman!
-Map_Power_Disp,$03F3,1,,0,,0,Overworld,General,"This is the powerup currently DISPLAYED on the map; it should be the same as $0746 World_Map_Power, except for Judgem's Cloud"
-Map_Warp_PrevWorld,$03F4,1,,0,,0,Overworld,General,The world you're coming FROM when warping (also used as output from warp zone what world you're going to)
-,$03F5,11,,0,,0,Empty,General,Unused.
-,$0400,27,,0,,0,Empty,Level,Unused.
-Roulette_Pos,$0400,3,,0,,0,Bonus Game,Bonus Game,Horizontal position of each row
-Roulette_PosHi,$0403,3,,0,,0,Bonus Game,Bonus Game,Hi part of Roulette_Pos
-Roulette_ShapeLock,$0406,3,,0,,0,Bonus Game,Bonus Game,"Locked position of each row (0 = Mushroom, 1 = Flower, 2 = Mushroom, 3 = Star)"
-Roulette_ConfigRun,$0409,1,,0,,0,Bonus Game,Bonus Game,"0 = Configuring, 1 = Running"
-Roulette_ConfigState,$040A,1,,0,,0,Bonus Game,Bonus Game,Early configuration state
+Map_Starman,$03F2,1,$7E0428,1,,0,Overworld,General,Player used a Starman!
+Map_Power_Disp,$03F3,1,$7E0429,1,,0,Overworld,General,"This is the powerup currently DISPLAYED on the map; it should be the same as $0746 World_Map_Power, except for Judgem's Cloud"
+Map_Warp_PrevWorld,$03F4,1,$7E042A,1,,0,Overworld,General,The world you're coming FROM when warping (also used as output from warp zone what world you're going to)
+,$03F5,11,$7E042B,183,,0,Empty,General,Unused.
+,$0400,27,$7E1000,0,,0,Empty,Level,Unused.
+Roulette_Pos,$0400,3,$7E1000,0,,0,Bonus Game,Bonus Game,Horizontal position of each row
+Roulette_PosHi,$0403,3,$7E1003,3,,0,Bonus Game,Bonus Game,Hi part of Roulette_Pos
+Roulette_ShapeLock,$0406,3,$7E1006,3,,0,Bonus Game,Bonus Game,"Locked position of each row (0 = Mushroom, 1 = Flower, 2 = Mushroom, 3 = Star)"
+Roulette_ConfigRun,$0409,1,$7E1009,1,,0,Bonus Game,Bonus Game,"0 = Configuring, 1 = Running"
+Roulette_ConfigState,$040A,1,$7E100A,1,,0,Bonus Game,Bonus Game,Early configuration state
 Roulette_RunState,$040B,1,$7E100B,1,,0,Bonus Game,Bonus Game,Running state of game
-Roulette_xUpY,$040C,1,,0,,0,Bonus Game,Bonus Game,"""x Up"" display Y position (overlaps first byte of Roulette_StopState)"
-Roulette_StopState,$040C,3,,0,,0,Bonus Game,Bonus Game,"Current ""state"" of each row while it is coming to a stop (1+)"
-Roulette_LivesToGive,$040D,1,,0,,0,Bonus Game,Bonus Game,Lives left to give in reward (overlaps second byte of Roulette_StopState)
-Roulette_Speed,$040F,3,,0,,0,Bonus Game,Bonus Game,Movement speed of each row (4.4FP)
-Roulette_StopCnt,$0412,3,,0,,0,Counter,Bonus Game,Decrements to zero while each row is stopping
-Roulette_PosFrac,$0415,3,,0,,0,Bonus Game,Bonus Game,Fractional accumulator for position of row 1-3
-,$0418,1,,0,,0,Empty,Bonus Game,Unused.
-Roulette_Turns,$0419,1,,0,,0,Bonus Game,Bonus Game,"UNUSED ""Turns Remaining"" (if > 0, and you lose Roulette, hit a button and spin again!)"
-,$041A,12,,0,,0,Empty,Bonus Game,Unused.
+Roulette_xUpY,$040C,1,$7E100C,1,,0,Bonus Game,Bonus Game,"""x Up"" display Y position (overlaps first byte of Roulette_StopState)"
+Roulette_StopState,$040C,3,$7E100C,3,,0,Bonus Game,Bonus Game,"Current ""state"" of each row while it is coming to a stop (1+)"
+Roulette_LivesToGive,$040D,1,$7E100D,1,,0,Bonus Game,Bonus Game,Lives left to give in reward (overlaps second byte of Roulette_StopState)
+Roulette_Speed,$040F,3,$7E100F,3,,0,Bonus Game,Bonus Game,Movement speed of each row (4.4FP)
+Roulette_StopCnt,$0412,3,$7E1012,3,,0,Counter,Bonus Game,Decrements to zero while each row is stopping
+Roulette_PosFrac,$0415,3,$7E1015,3,,0,Bonus Game,Bonus Game,Fractional accumulator for position of row 1-3
+,$0418,1,$7E1018,1,,0,Empty,Bonus Game,Unused.
+Roulette_Turns,$0419,1,$7E1019,1,,0,Bonus Game,Bonus Game,"UNUSED ""Turns Remaining"" (if > 0, and you lose Roulette, hit a button and spin again!)"
+,$041A,12,$7E101A,12,,0,Empty,Bonus Game,Unused.
 Fade_State,$041B,1,$7E101B,1,,0,Level,Level,"0 = Nothing, 1 = Fade in, 3 = Fade out"
 Fade_Tick,$041C,1,$7E101C,1,,0,Counter,Level,Ticks down and then decrements Fade_Level
 Fade_Level,$041D,1,$7E101D,1,,0,Level,Level,"4 to 0, fade in level"
 FadeOut_Cancel,$041E,1,$7E101E,1,,0,Level,Level,"If set, the next attempted fade out will be cancelled, which then resets this to zero"
-Player_AllowAirJump,$041F,1,,0,,0,Counter,Level,"Counts down to zero, but while set, you can jump in the air"
-Player_XVelAdj,$0420,1,,0,,0,Player,Level,Applies additional value to the X Velocity
-CineKing_Frame,$0421,1,,0,,0,Level,Level,King's animation frame (NOTE: Shared with Objects_Var7 first byte)
-Objects_Var7,$0421,8,,0,,0,Sprites,Level,General object variable 7
-Bonus_PrizeX,$0426,1,,0,,0,Bonus Game,Bonus Game,UNUSED Prize sprite X
-Card_SelectX,$0426,1,,0,,0,Bonus Game,Bonus Game,Card cursor X (NOTE: Shared with Bonus_PrizeX)
-Bonus_PrizeY,$0427,1,,0,,0,Bonus Game,Bonus Game,UNUSED Prize sprite Y
-Card_SelectY,$0427,1,,0,,0,Bonus Game,Bonus Game,Card cursor Y (NOTE: Shared with Bonus_PrizeY)
-Bonus_CurBufOffset,$0428,1,,0,,0,Bonus Game,Bonus Game,Offset in graphics buffer while generating instruction box
-Card_Index,$0428,1,,0,,0,Bonus Game,Bonus Game,"Currently selected card in ""N-Spade"" Card game (NOTE: Shared with Bonus_CurBufOffset)"
-,$0429,56,,0,,0,Empty,Level,Unused.
-Card_FirstIndex,$0429,1,,0,,0,Bonus Game,Bonus Game,Card_Index of the first card you flipped (in case you get it wrong on the second...)
-Card_SelectXOrig,$042A,1,,0,,0,Bonus Game,Bonus Game,Card cursor original X
-Bonus_Round2,$042A,1,,0,,0,Bonus Game,Bonus Game,"UNUSED Picks which ""Round 2"" game would be played (NOTE: Shared with Card_SelectXOrig)"
-Card_MoveDelay,$042B,1,,0,,0,Bonus Game,Bonus Game,"Decrements to zero; if not zero, can't move on N-Spade game"
-Card_SprRAMOff,$042C,1,,0,,0,Bonus Game,Bonus Game,Sprite RAM offset after cursor is drawn; for drawing card flip
-Card_AnimTick,$042D,1,,0,,0,Counter,Bonus Game,"Animation tick, decrements to zero"
-Card_VRAM_L,$042E,1,,0,,0,Bonus Game,Bonus Game,Low part of VRAM address of N-Spade card to modify
-Card_VRAM_H,$042F,1,,0,,0,Bonus Game,Bonus Game,High part of VRAM address of N-Spade card to modify
-Card_FlipCount,$0430,1,,0,,0,Bonus Game,Bonus Game,+1 for every card flip
-Card_MatchCard,$0431,1,,0,,0,Bonus Game,Bonus Game,"Card to match, i.e. the first card you selected of the pair"
-Card_UnusedVL,$0432,1,,0,,0,Bonus Game,Bonus Game,?? Some VRAM Low; Seems to only be part of an unused routine
-Card_UnusedVH,$0433,1,,0,,0,Bonus Game,Bonus Game,?? Some VRAM High; Seems to only be part of an unused routine
-Bonus_GameHost,$0434,1,,0,,0,Bonus Game,Bonus Game,"0 = Toad Host: The only one we ever got
+Player_AllowAirJump,$041F,1,$7E101F,1,,0,Counter,Level,"Counts down to zero, but while set, you can jump in the air"
+Player_XVelAdj,$0420,1,$7E1020,1,,0,Player,Level,Applies additional value to the X Velocity
+CineKing_Frame,$0421,1,$7E1021,1,,0,Level,Level,King's animation frame (NOTE: Shared with Objects_Var7 first byte)
+Objects_Var7,$0421,8,$7E1021,8,,0,Sprites,Level,General object variable 7
+Bonus_PrizeX,$0426,1,$7E1026,1,,0,Bonus Game,Bonus Game,UNUSED Prize sprite X
+Card_SelectX,$0426,1,$7E1026,1,,0,Bonus Game,Bonus Game,Card cursor X (NOTE: Shared with Bonus_PrizeX)
+Bonus_PrizeY,$0427,1,$7E1027,1,,0,Bonus Game,Bonus Game,UNUSED Prize sprite Y
+Card_SelectY,$0427,1,$7E1027,1,,0,Bonus Game,Bonus Game,Card cursor Y (NOTE: Shared with Bonus_PrizeY)
+Bonus_CurBufOffset,$0428,1,$7E1028,1,,0,Bonus Game,Bonus Game,Offset in graphics buffer while generating instruction box
+Card_Index,$0428,1,$7E1028,1,,0,Bonus Game,Bonus Game,"Currently selected card in ""N-Spade"" Card game (NOTE: Shared with Bonus_CurBufOffset)"
+,$0429,56,$7E1029,56,,0,Empty,Level,Unused.
+Card_FirstIndex,$0429,1,$7E1029,1,,0,Bonus Game,Bonus Game,Card_Index of the first card you flipped (in case you get it wrong on the second...)
+Card_SelectXOrig,$042A,1,$7E102A,1,,0,Bonus Game,Bonus Game,Card cursor original X
+Bonus_Round2,$042A,1,$7E102A,1,,0,Bonus Game,Bonus Game,"UNUSED Picks which ""Round 2"" game would be played (NOTE: Shared with Card_SelectXOrig)"
+Card_MoveDelay,$042B,1,$7E102B,1,,0,Bonus Game,Bonus Game,"Decrements to zero; if not zero, can't move on N-Spade game"
+Card_SprRAMOff,$042C,1,$7E102C,1,,0,Bonus Game,Bonus Game,Sprite RAM offset after cursor is drawn; for drawing card flip
+Card_AnimTick,$042D,1,$7E102D,1,,0,Counter,Bonus Game,"Animation tick, decrements to zero"
+Card_VRAM_L,$042E,1,$7E102E,1,,0,Bonus Game,Bonus Game,Low part of VRAM address of N-Spade card to modify
+Card_VRAM_H,$042F,1,$7E102F,1,,0,Bonus Game,Bonus Game,High part of VRAM address of N-Spade card to modify
+Card_FlipCount,$0430,1,$7E1030,1,,0,Bonus Game,Bonus Game,+1 for every card flip
+Card_MatchCard,$0431,1,$7E1031,1,,0,Bonus Game,Bonus Game,"Card to match, i.e. the first card you selected of the pair"
+Card_UnusedVL,$0432,1,$7E1032,1,,0,Bonus Game,Bonus Game,?? Some VRAM Low; Seems to only be part of an unused routine
+Card_UnusedVH,$0433,1,$7E1033,1,,0,Bonus Game,Bonus Game,?? Some VRAM High; Seems to only be part of an unused routine
+Bonus_GameHost,$0434,1,$7E1034,1,,0,Bonus Game,Bonus Game,"0 = Toad Host: The only one we ever got
 All others are UNUSED...
 1 = Koopa Troopa Host + ""Prize"" Game
 2 = Koopa Troopa Host, no ""Prize"" Game
 3 = Hammer Bro
 NOTE: Shared with Card_GameState"
-Card_GameState,$0434,1,,0,,0,Bonus Game,Bonus Game,State of N-Spade card game
-Card_TurnsRemain,$0435,1,,0,,0,Bonus Game,Bonus Game,Number of turns remaining
-Card_FlipFrame,$0436,1,,0,,0,Bonus Game,Bonus Game,Frame of flipping card
-Card_UnusedArray,$0437,4,,0,,0,Bonus Game,Bonus Game,?? (TOFIX)
-Card_UnusedAttr,$043B,1,,0,,0,Bonus Game,Bonus Game,Seems to only be part of an unused routine; attribute table offset of some sort
-Card_UnusedArrIdx,$043C,1,,0,,0,Bonus Game,Bonus Game,Seems to only be part of an unused routine; index for Card_UnusedArrIdx
-Card_Matches,$043D,1,,0,,0,Bonus Game,Bonus Game,"Matches (local, this round; Seems to only be used as part of the unused routine)"
-Card_CoinsToGive,$043E,1,,0,,0,Bonus Game,Bonus Game,"If greater than zero, coins are being given"
-,$043F,1,,0,,0,Empty,Bonus Game,Unused.
-Bonus_GameState,$0440,1,,0,,0,Bonus Game,Bonus Game,"0 = ?
+Card_GameState,$0434,1,$7E1034,1,,0,Bonus Game,Bonus Game,State of N-Spade card game
+Card_TurnsRemain,$0435,1,$7E1035,1,,0,Bonus Game,Bonus Game,Number of turns remaining
+Card_FlipFrame,$0436,1,$7E1036,1,,0,Bonus Game,Bonus Game,Frame of flipping card
+Card_UnusedArray,$0437,4,$7E1037,4,,0,Bonus Game,Bonus Game,?? (TOFIX)
+Card_UnusedAttr,$043B,1,$7E103B,1,,0,Bonus Game,Bonus Game,Seems to only be part of an unused routine; attribute table offset of some sort
+Card_UnusedArrIdx,$043C,1,$7E103C,1,,0,Bonus Game,Bonus Game,Seems to only be part of an unused routine; index for Card_UnusedArrIdx
+Card_Matches,$043D,1,$7E103D,1,,0,Bonus Game,Bonus Game,"Matches (local, this round; Seems to only be used as part of the unused routine)"
+Card_CoinsToGive,$043E,1,$7E103E,1,,0,Bonus Game,Bonus Game,"If greater than zero, coins are being given"
+,$043F,1,$7E103F,1,,0,Empty,Bonus Game,Unused.
+Bonus_GameState,$0440,1,$7E1040,1,,0,Bonus Game,Bonus Game,"0 = ?
 1 = Giving instructions die game
 2 = Rotating ""die""
 3 = Coin spurt prize
@@ -580,8 +677,8 @@ Bonus_GameState,$0440,1,,0,,0,Bonus Game,Bonus Game,"0 = ?
 7 = Giving instructions
 8 = Pause before proceeding
 9 = Exiting"
-Card_InitState,$0441,1,,0,,0,Bonus Game,Bonus Game,Initialization state of N-Spade card game
-Bonus_GameType,$0442,1,,0,,0,Bonus Game,Bonus Game,"This appears to determine what game you're about to play. This also reveals some of the greatest questionable loss in SMB3...
+Card_InitState,$0441,1,$7E1041,1,,0,Bonus Game,Bonus Game,Initialization state of N-Spade card game
+Bonus_GameType,$0442,1,$7E1042,1,,0,Bonus Game,Bonus Game,"This appears to determine what game you're about to play. This also reveals some of the greatest questionable loss in SMB3...
 When this value is anything besides 1 or 2, it plays what I SUPPOSE was a ""roulette"" game? With a fixed graphics patch, it appears to be a die cycling 1-6.
 
 0 = Japanese text, translated as:
@@ -595,40 +692,40 @@ When this value is anything besides 1 or 2, it plays what I SUPPOSE was a ""roul
 5 = Japanese: ""If an odd number appears, I'll let you play the Roulette Game.""
 6 = Japanese: ""If an even number appears, I'll let you play the Card Game.""
 7 = Japanese: ""2, return (?)"""
-Bonus_KTPrize,$0443,1,,0,,0,Bonus Game,Bonus Game,"UNUSED Koopa Troopa's ""Prize"" Game Prize ID (0 = Mushroom, 1 = Star, 2 = Flower, 3 = Judgem's, by BMF54123's patch)"
-,$0444,29,,0,,0,Empty,Bonus Game,Unused.
-Map_EntTran_VLHalf,$0444,1,,0,,0,Overworld,Overworld,"When 1, offset starts vertically ""lower half"" (at $F0 of first screen)"
-Map_EntTran_TBCnt,$0445,1,,0,,0,Counter,Overworld,Decreasing counter as the transition moves inward top/bottom
-Map_EntTran_LRCnt,$0446,1,,0,,0,Counter,Overworld,Decreasing counter as the transition moves inward left/right
-Map_W8D_VAddrH,$0447,1,,0,,0,Overworld,Overworld,World 8 Darkness - overlaps with Map_EntTran_BVAddrH (TOFIX)
-Map_EntTran_BVAddrH,$0447,4,,0,,0,Overworld,Overworld,Each border's current high part of VRAM address
-Map_W8D_VAddrL,$044B,1,,0,,0,Overworld,Overworld,World 8 Darkness - overlaps with Map_EntTran_BVAddrL (TOFIX)
-Map_EntTran_BVAddrL,$044B,4,,0,,0,Overworld,Overworld,Each border's current low part of VRAM address
-Map_EntTran_BorderLoop,$044F,1,,0,,0,Counter,Overworld,Border loop counter
-Map_EntTran_Cnt,$0450,1,,0,,0,Counter,Overworld,(TOFIX)
-Map_EntTran_VAddrH,$0451,1,,0,,0,Overworld,Overworld,High part of VRAM address to modify
-Map_W8D_VAddrH2,$0451,1,,0,,0,Overworld,Overworld,World 8 Darkness - overlaps with Map_EntTran_VAddrH (TOFIX)
-Map_EntTran_VAddrHAdj,$0452,1,,0,,0,Overworld,Overworld,"An adjusted version of the high address as needed to wrap (used in removed ""box out"" version only)"
-Map_EntTran_VAddrL,$0453,1,,0,,0,Overworld,Overworld,Low part of VRAM address to modify
-Map_W8D_VAddrL2,$0453,1,,0,,0,Overworld,Overworld,World 8 Darkness - overlaps with Map_EntTran_VAddrL (TOFIX)
-Map_EntTran_TileOff,$0454,1,,0,,0,Level,Overworld,"Offset into tile memory (used in removed ""box out"" version only)"
-Map_EntTran_Tile8x8,$0455,1,,0,,0,Level,Overworld,"Offset to which 8x8 pattern of the tile we're grabbing that we need (used in removed ""box out"" version only)"
-Map_W8D_TileOff,$0455,1,,0,,0,Overworld,Overworld,"World 8 Darkness - In-tile offset (0 = upper left, 1 = lower left, 2 = upper right, 3 = lower right)
+Bonus_KTPrize,$0443,1,$7E1043,1,,0,Bonus Game,Bonus Game,"UNUSED Koopa Troopa's ""Prize"" Game Prize ID (0 = Mushroom, 1 = Star, 2 = Flower, 3 = Judgem's, by BMF54123's patch)"
+,$0444,29,$7E1044,29,,0,Empty,Bonus Game,Unused.
+Map_EntTran_VLHalf,$0444,1,$7E1044,1,,0,Overworld,Overworld,"When 1, offset starts vertically ""lower half"" (at $F0 of first screen)"
+Map_EntTran_TBCnt,$0445,1,$7E1045,1,,0,Counter,Overworld,Decreasing counter as the transition moves inward top/bottom
+Map_EntTran_LRCnt,$0446,1,$7E1046,1,,0,Counter,Overworld,Decreasing counter as the transition moves inward left/right
+Map_W8D_VAddrH,$0447,1,$7E1047,1,,0,Overworld,Overworld,World 8 Darkness - overlaps with Map_EntTran_BVAddrH (TOFIX)
+Map_EntTran_BVAddrH,$0447,4,$7E1047,4,,0,Overworld,Overworld,Each border's current high part of VRAM address
+Map_W8D_VAddrL,$044B,1,$7E104B,1,,0,Overworld,Overworld,World 8 Darkness - overlaps with Map_EntTran_BVAddrL (TOFIX)
+Map_EntTran_BVAddrL,$044B,4,$7E104B,4,,0,Overworld,Overworld,Each border's current low part of VRAM address
+Map_EntTran_BorderLoop,$044F,1,$7E104F,1,,0,Counter,Overworld,Border loop counter
+Map_EntTran_Cnt,$0450,1,$7E1050,1,,0,Counter,Overworld,(TOFIX)
+Map_EntTran_VAddrH,$0451,1,$7E1051,1,,0,Overworld,Overworld,High part of VRAM address to modify
+Map_W8D_VAddrH2,$0451,1,$7E1051,1,,0,Overworld,Overworld,World 8 Darkness - overlaps with Map_EntTran_VAddrH (TOFIX)
+Map_EntTran_VAddrHAdj,$0452,1,$7E1052,1,,0,Overworld,Overworld,"An adjusted version of the high address as needed to wrap (used in removed ""box out"" version only)"
+Map_EntTran_VAddrL,$0453,1,$7E1053,1,,0,Overworld,Overworld,Low part of VRAM address to modify
+Map_W8D_VAddrL2,$0453,1,$7E1053,1,,0,Overworld,Overworld,World 8 Darkness - overlaps with Map_EntTran_VAddrL (TOFIX)
+Map_EntTran_TileOff,$0454,1,$7E1054,1,,0,Level,Overworld,"Offset into tile memory (used in removed ""box out"" version only)"
+Map_EntTran_Tile8x8,$0455,1,$7E1055,1,,0,Level,Overworld,"Offset to which 8x8 pattern of the tile we're grabbing that we need (used in removed ""box out"" version only)"
+Map_W8D_TileOff,$0455,1,$7E1055,1,,0,Overworld,Overworld,"World 8 Darkness - In-tile offset (0 = upper left, 1 = lower left, 2 = upper right, 3 = lower right)
 Overlaps with Map_EntTran_Tile8x8"
-Map_EntTran_VRAMGap,$0456,1,,0,,0,Level,Overworld,"Sets gap (i.e. 1 for vertical, 32 for horizontal; used in removed ""box out"" version only)"
-,$0457,1,,0,,0,Empty,Overworld,Unused.
-Map_W8D_YOff,$0458,1,,0,,0,Overworld,Overworld,Y Offset from Player when doing darkness
-Map_W8D_XOff,$0459,1,,0,,0,Overworld,Overworld,X Offset from Player when doing darkness
+Map_EntTran_VRAMGap,$0456,1,$7E1056,1,,0,Level,Overworld,"Sets gap (i.e. 1 for vertical, 32 for horizontal; used in removed ""box out"" version only)"
+,$0457,1,$7E1057,1,,0,Empty,Overworld,Unused.
+Map_W8D_YOff,$0458,1,$7E1058,1,,0,Overworld,Overworld,Y Offset from Player when doing darkness
+Map_W8D_XOff,$0459,1,$7E1059,1,,0,Overworld,Overworld,X Offset from Player when doing darkness
 Map_W8D_RC,$045A,1,$7E105A,1,,0,Overworld,Overworld,"Row in the upper bits, column in the lower bits"
-Map_W8D_Dir,$045B,1,,0,,0,Overworld,Overworld,"Direction of travel in darkness (1 = Right, 2 = Left, 4 = Down, 8 = Up)"
-Map_W8D_X,$045C,1,,0,,0,Overworld,Overworld,World 8 Darkness - (TOFIX)
-Map_W8D_Y,$045D,1,,0,,0,Overworld,Overworld,World 8 Darkness - (TOFIX)
-Map_W8D_Idx,$045E,1,,0,,0,Overworld,Overworld,World 8 Darkness - (TOFIX)
-Map_EntTran_Temp,$045F,1,,0,,0,Overworld,Overworld,Seems to me a multi-purpose value in entrance transition
-Map_EntTran_InitValIdx,$0460,1,,0,,0,Overworld,Overworld,Selects an index of values to initialize by (TOFIX)
+Map_W8D_Dir,$045B,1,$7E105B,1,,0,Overworld,Overworld,"Direction of travel in darkness (1 = Right, 2 = Left, 4 = Down, 8 = Up)"
+Map_W8D_X,$045C,1,$7E105C,1,,0,Overworld,Overworld,World 8 Darkness - (TOFIX)
+Map_W8D_Y,$045D,1,$7E105D,1,,0,Overworld,Overworld,World 8 Darkness - (TOFIX)
+Map_W8D_Idx,$045E,1,$7E105E,1,,0,Overworld,Overworld,World 8 Darkness - (TOFIX)
+Map_EntTran_Temp,$045F,1,$7E105F,1,,0,Overworld,Overworld,Seems to me a multi-purpose value in entrance transition
+Map_EntTran_InitValIdx,$0460,1,$7E1060,1,,0,Overworld,Overworld,Selects an index of values to initialize by (TOFIX)
 Level_MusicQueue,$0461,1,$7E1061,1,,0,Audio,General,Requests a song from Set 2A/B (used to allow delayed start)
 Level_MusicQueueRestore,$0462,1,$7E1062,1,,0,Audio,General,"What to ""restore"" the BGM to when it changes (e.g. Starman, P-Switch, etc.)"
-,$0463,109,,0,,0,Empty,General,Unused.
+,$0463,109,$7E1063,413,,0,Empty,General,Unused.
 Music_TriTrkPos,$04D0,1,,0,,0,Audio,General,Offset of triangle track in currently playing index
 Music_NseTrkPos,$04D1,1,,0,,0,Audio,General,Offset of noise track in currently playing index
 Music_PCMTrkPos,$04D2,1,,0,,0,Audio,General,Offset of DMC track in currently playing index
@@ -677,89 +774,90 @@ Music_LOST4FC,$04FC,1,,0,,0,Audio,General,"AFAIK, value in music engine that is 
 Music_RestH_Base,$04FD,1,,0,,0,Audio,General,Base offset into Music_RestH_LUT
 Music_Sq2TrkOff,$04FE,1,,0,,0,Audio,General,Offset of square wave 2 track in currently playing index
 Music_Sq1TrkOff,$04FF,1,,0,,0,Audio,General,Offset of square wave 1 track in currently playing index
-,$0500,16,,0,,0,Empty,Level,Unused.
-,$0500,231,,0,,0,Empty,Bonus Game,Unused.
-,$0500,16,,0,,0,Empty,Title Screen,Unused.
+,,0,$7E04E3,29,,0,Empty,General,Unused.
+,$0500,16,$7E0500,16,,0,Empty,Level,Unused.
+,$0500,231,$7E0500,231,,0,Empty,Bonus Game,Unused.
+,$0500,16,$7E0500,16,,0,Empty,Title Screen,Unused.
 Map_Object_ActY,$0500,15,$7E0500,15,,0,Overworld,Overworld,"For map objects, their actual display Y coordinate (as it may modify, esp. with marchers)"
-Map_Object_ActX,$050F,15,,0,,0,Overworld,Overworld,"For map objects, their actual display X coordinate (as it may modify, esp. with marchers)"
-Event_Countdown,$0510,1,,0,,0,Counter,Level,"Event_Countdown is context dependent; without context, does nothing
+Map_Object_ActX,$050F,15,$7E050F,15,,0,Overworld,Overworld,"For map objects, their actual display X coordinate (as it may modify, esp. with marchers)"
+Event_Countdown,$0510,1,$7E0510,1,,0,Counter,Level,"Event_Countdown is context dependent; without context, does nothing
 * When you come out of a pipe, this counter decrements until the pipe should be finished
 * When you die, counts down until dropping back to map"
-Title_MLAccelCnt,$0510,1,,0,,0,Counter,Title Screen,"Constant moving counter which overflows to provide a more ""natural"" acceleration to the Bros"
-Player_TailCount,$0511,1,,0,,0,Player,Level,Determines display frame of tail wag
-Title_MarioPoof,$0511,1,,0,,0,Counter,Title Screen,"Countdown of Mario's ""poof"" when he collects the power up"
-Title_MLHoldTick,$0512,1,,0,,0,Title Screen/Ending,Title Screen,"Set to $40 when Mario/Luigi are ""held"" (count down to zero)"
+Title_MLAccelCnt,$0510,1,$7E0510,1,,0,Counter,Title Screen,"Constant moving counter which overflows to provide a more ""natural"" acceleration to the Bros"
+Player_TailCount,$0511,1,$7E0511,1,,0,Player,Level,Determines display frame of tail wag
+Title_MarioPoof,$0511,1,$7E0511,1,,0,Counter,Title Screen,"Countdown of Mario's ""poof"" when he collects the power up"
+Title_MLHoldTick,$0512,1,$7E0512,1,,0,Title Screen/Ending,Title Screen,"Set to $40 when Mario/Luigi are ""held"" (count down to zero)"
 Player_InAir_OLD,$0512,1,$7E0512,1,,0,Player,Level,"Stores backup of Player_InAir
 SNES: not utilized."
-Player_FireCount,$0513,1,,0,,0,Player,Level,"Player shoots fireball/hammer, sets sprite frame (shared with Player_FrogHopCnt)"
-Title_ObjVar,$0513,6,,0,,0,Title Screen/Ending,Title Screen,Minor objects user-defined variable 1 (automatically decrements if not zero!)
-Player_FrogHopCnt,$0513,1,,0,,0,Counter,Level,Counter used for frog hopping along the ground (shared with Player_FireCount)
-,$0514,1,,0,,0,Empty,Level,Unused.
-Player_PMeterCnt,$0515,1,,0,,0,Counter,Level,Tick counter used to count when to increase/decrease Power Meter
-B10Coin_Timer,$0516,1,,0,,0,Counter,Level,"Decrements until zero, which is how much time you have to get the max coins from a 10 coin block"
-Player_TailAttack,$0517,1,,0,,0,Counter,Level,"Initiailized to $12; counts down to zero, performs tail attack!"
-CineKing_Timer,$0518,1,,0,,0,Counter,Level,Timer; decrements to zero (shares Objects_Timer first byte)
+Player_FireCount,$0513,1,$7E0513,1,,0,Player,Level,"Player shoots fireball/hammer, sets sprite frame (shared with Player_FrogHopCnt)"
+Title_ObjVar,$0513,6,$7E0513,6,,0,Title Screen/Ending,Title Screen,Minor objects user-defined variable 1 (automatically decrements if not zero!)
+Player_FrogHopCnt,$0513,1,$7E0513,1,,0,Counter,Level,Counter used for frog hopping along the ground (shared with Player_FireCount)
+,$0514,1,$7E0514,1,,0,Empty,Level,Unused.
+Player_PMeterCnt,$0515,1,$7E0515,1,,0,Counter,Level,Tick counter used to count when to increase/decrease Power Meter
+B10Coin_Timer,$0516,1,$7E0516,1,,0,Counter,Level,"Decrements until zero, which is how much time you have to get the max coins from a 10 coin block"
+Player_TailAttack,$0517,1,$7E0517,1,,0,Counter,Level,"Initiailized to $12; counts down to zero, performs tail attack!"
+CineKing_Timer,$0518,1,$7E0518,1,,0,Counter,Level,Timer; decrements to zero (shares Objects_Timer first byte)
 Objects_Timer,$0518,8,$7E0518,8,,0,Sprites,Level,"""Timer"" values; automatically decrements to zero"
-Title_ObjVar2,$0519,6,,0,,0,Title Screen/Ending,Title Screen,Minor objects user-defined variable 2
-Map_Object_ActXH,$051E,15,,0,,0,Overworld,Overworld,"For map objects, their actual display X Hi byte (as it may modify, esp. with marchers)"
-Title_ObjFrame,$051F,1,,0,,0,Title Screen/Ending,Title Screen,"Minor object ""frame""; adds 2x the value here to the pattern selection for the object's sprites"
-Objects_Timer2,$0520,8,,0,,0,Sprites,Level,"""Timer"" values; automatically decrements to zero "
-,$0525,219,,0,,0,Empty,Title Screen,Unused.
-Level_BlockChgXHi,$0528,1,,0,,0,Player,Level,Player X High value when block change was queued
-Level_BlockChgXLo,$0529,1,,0,,0,Player,Level,Player X Low value when block change was queued
-Level_BlockChgYHi,$052A,1,,0,,0,Player,Level,Player Y High value when block change was queued
-Level_BlockChgYLo,$052B,1,,0,,0,Player,Level,Player Y Low value when block change was queued
-Level_BlkBump_Pos,$052C,2,,0,,0,Sprites,Level,"Block bump effect slot ""position"" (from 10 down, ""position"" of bounce)"
-Map_Object_Data,$052D,15,,0,,0,Overworld,Overworld,"For marching objects, 0/1 for their direction, could be anything though"
-Level_BlkBump,$052E,3,,0,,0,Sprites,Level,"Block bump effect slot (use Level_ChgTileEvent value, or 0 for inactive)"
-Level_BlkBump_XHi,$0531,3,,0,,0,Sprites,Level,Block bump slot X Hi
-Level_BlkBump_XLo,$0534,3,,0,,0,Sprites,Level,Block bump slot X Lo
-Level_BlkBump_YHi,$0537,3,,0,,0,Sprites,Level,Block bump slot Y Hi
-Level_BlkBump_YLo,$053A,3,,0,,0,Sprites,Level,Block bump slot Y Lo
-Map_March_Count,$053C,15,,0,,0,Overworld,Overworld,"Simply counts and overflows, but used to determine position of marching map objects (PER ID, not object index ... Actually is seems they go back and forth on that??)"
-,$053D,8,,0,,0,Empty,Level,Unused.
-Level_VertScrollH,$0542,1,,0,,0,Camera,Level,"Alternate VertScroll_Hi used by engine, adjusted before being sent to Vert_Scroll_Hi"
+Title_ObjVar2,$0519,6,$7E0519,6,,0,Title Screen/Ending,Title Screen,Minor objects user-defined variable 2
+Map_Object_ActXH,$051E,15,$7E051E,15,,0,Overworld,Overworld,"For map objects, their actual display X Hi byte (as it may modify, esp. with marchers)"
+Title_ObjFrame,$051F,1,$7E051F,1,,0,Title Screen/Ending,Title Screen,"Minor object ""frame""; adds 2x the value here to the pattern selection for the object's sprites"
+Objects_Timer2,$0520,8,$7E0520,8,,0,Sprites,Level,"""Timer"" values; automatically decrements to zero "
+,$0525,219,$7E0525,219,,0,Empty,Title Screen,Unused.
+Level_BlockChgXHi,$0528,1,$7E0528,1,,0,Player,Level,Player X High value when block change was queued
+Level_BlockChgXLo,$0529,1,$7E0529,1,,0,Player,Level,Player X Low value when block change was queued
+Level_BlockChgYHi,$052A,1,$7E052A,1,,0,Player,Level,Player Y High value when block change was queued
+Level_BlockChgYLo,$052B,1,$7E052B,1,,0,Player,Level,Player Y Low value when block change was queued
+Level_BlkBump_Pos,$052C,2,$7E052C,2,,0,Sprites,Level,"Block bump effect slot ""position"" (from 10 down, ""position"" of bounce)"
+Map_Object_Data,$052D,15,$7E052D,15,,0,Overworld,Overworld,"For marching objects, 0/1 for their direction, could be anything though"
+Level_BlkBump,$052E,3,$7E052E,3,,0,Sprites,Level,"Block bump effect slot (use Level_ChgTileEvent value, or 0 for inactive)"
+Level_BlkBump_XHi,$0531,3,$7E0531,3,,0,Sprites,Level,Block bump slot X Hi
+Level_BlkBump_XLo,$0534,3,$7E0534,3,,0,Sprites,Level,Block bump slot X Lo
+Level_BlkBump_YHi,$0537,3,$7E0537,3,,0,Sprites,Level,Block bump slot Y Hi
+Level_BlkBump_YLo,$053A,3,$7E053A,3,,0,Sprites,Level,Block bump slot Y Lo
+Map_March_Count,$053C,15,$7E053C,15,,0,Overworld,Overworld,"Simply counts and overflows, but used to determine position of marching map objects (PER ID, not object index ... Actually is seems they go back and forth on that??)"
+,$053D,8,$7E053D,8,,0,Empty,Level,Unused.
+Level_VertScrollH,$0542,1,$7E0542,1,,0,Camera,Level,"Alternate VertScroll_Hi used by engine, adjusted before being sent to Vert_Scroll_Hi"
 Level_VertScroll,$0543,1,$7E0543,1,,0,Camera,Level,"Alternate VertScroll used by engine, adjusted before being sent to Vert_Scroll"
-Player_AboveTop,$0544,1,,0,,0,Flag,Level,"If Player is above top of level, this is $FF (-1), otherwise it is zero"
-Level_InitAction,$0545,1,,0,,0,Level,Level,AT LEVEL INITIALIZATION ONLY: Performs a specific initialization routine (NOTE: Shared with Player_Slide)
-Player_Slide,$0545,1,,0,,0,Player,Level,"Positive values sliding forward, negative values sliding backward; directly sets Player_XVel"
-Player_UphillFlag,$0546,1,,0,,0,Flag,Level,"When set, Player is walking uphill, and uses speed index value at Player_UphillSpeedIdx"
-,$054B,60,,0,,0,Empty,Overworld,Unused.
-Player_Flip,$054F,1,,0,,0,Flag,Level,"Invincibility Somersault is used when set; only works in air, reset on ground"
-Level_AirshipH,$0550,1,,0,,0,Level,Level,Height of the airship during the Airship Intro (shared with Player_KuriboDir)
-Player_KuriboDir,$0550,1,,0,,0,Player,Level,"While Kuribo's shoe is moving: 0 - Not requesting move, 1 - move right, 2 - move left"
-Player_Grow,$0551,1,,0,,0,Player,Level,"Tick counter used to animate growth into Super Mario (20 is starting value, or 2f to shrink)"
-Player_FlashInv,$0552,1,,0,,0,Player,Level,"Player ""flashing invincibility"" after being hit, counts down to zero"
-Player_StarInv,$0553,1,,0,,0,Counter,Level,"Starman Invincibility counter; full/fatal invincibility, counts down to zero"
-Player_SuitLost,$0554,1,,0,,0,Counter,Level,"Suit lost to hit discard ""poof"" counter"
-Player_StarOff,$0555,1,,0,,0,Counter,Level,"Starman Invincibility wear-off (the last second or so when it slows and vanishes), counts down to zero"
-Player_HaltTick,$0556,1,,0,,0,Counter,Level,"When non-zero, all action halts until this countdown hits zero"
-Player_Kick,$0557,1,,0,,0,Counter,Level,"Kick frame in use, counts down to zero"
-Player_PipeFace,$0558,1,,0,,0,Counter,Level,"Player forward frame, used for vertical pipe entrance, counts down to zero"
-Player_EndLevel,$0559,1,,0,,0,Counter,Level,Player's end of level run-off until count down to zero (player will actually wrap around horizontally if too large)
-Level_AirshipCtl,$055A,1,,0,,0,Level,Level,"Airship control -- 1 = run and jump to catch air ship, 2 = climb to enter, 3 = enter"
-,$055B,1,,0,,0,Empty,Level,Unused.
-Counter_Wiggly,$055C,1,,0,,0,Counter,Level,"""Wiggly"" counter, provides rippled movement (like the airship rising during its intro)"
+Player_AboveTop,$0544,1,$7E0544,1,,0,Flag,Level,"If Player is above top of level, this is $FF (-1), otherwise it is zero"
+Level_InitAction,$0545,1,$7E0545,1,,0,Level,Level,AT LEVEL INITIALIZATION ONLY: Performs a specific initialization routine (NOTE: Shared with Player_Slide)
+Player_Slide,$0545,1,$7E0545,1,,0,Player,Level,"Positive values sliding forward, negative values sliding backward; directly sets Player_XVel"
+Player_UphillFlag,$0546,1,$7E0546,1,,0,Flag,Level,"When set, Player is walking uphill, and uses speed index value at Player_UphillSpeedIdx"
+,$054B,60,$7E054B,60,,0,Empty,Overworld,Unused.
+Player_Flip,$054F,1,$7E054F,1,,0,Flag,Level,"Invincibility Somersault is used when set; only works in air, reset on ground"
+Level_AirshipH,$0550,1,$7E0550,1,,0,Level,Level,Height of the airship during the Airship Intro (shared with Player_KuriboDir)
+Player_KuriboDir,$0550,1,$7E0550,1,,0,Player,Level,"While Kuribo's shoe is moving: 0 - Not requesting move, 1 - move right, 2 - move left"
+Player_Grow,$0551,1,$7E0551,1,,0,Player,Level,"Tick counter used to animate growth into Super Mario (20 is starting value, or 2f to shrink)"
+Player_FlashInv,$0552,1,$7E0552,1,,0,Player,Level,"Player ""flashing invincibility"" after being hit, counts down to zero"
+Player_StarInv,$0553,1,$7E0553,1,,0,Counter,Level,"Starman Invincibility counter; full/fatal invincibility, counts down to zero"
+Player_SuitLost,$0554,1,$7E0554,1,,0,Counter,Level,"Suit lost to hit discard ""poof"" counter"
+Player_StarOff,$0555,1,$7E0555,1,,0,Counter,Level,"Starman Invincibility wear-off (the last second or so when it slows and vanishes), counts down to zero"
+Player_HaltTick,$0556,1,$7E0556,1,,0,Counter,Level,"When non-zero, all action halts until this countdown hits zero"
+Player_Kick,$0557,1,$7E0557,1,,0,Counter,Level,"Kick frame in use, counts down to zero"
+Player_PipeFace,$0558,1,$7E0558,1,,0,Counter,Level,"Player forward frame, used for vertical pipe entrance, counts down to zero"
+Player_EndLevel,$0559,1,$7E0559,1,,0,Counter,Level,Player's end of level run-off until count down to zero (player will actually wrap around horizontally if too large)
+Level_AirshipCtl,$055A,1,$7E055A,1,,0,Level,Level,"Airship control -- 1 = run and jump to catch air ship, 2 = climb to enter, 3 = enter"
+,$055B,1,$7E055B,1,,0,Empty,Level,Unused.
+Counter_Wiggly,$055C,1,$7E055C,1,,0,Counter,Level,"""Wiggly"" counter, provides rippled movement (like the airship rising during its intro)"
 Counter_7to0,$055D,1,$7E055D,1,,0,Counter,Level,Counter that runs from 7 to 0 continuously while level is in progress
-,$055E,1,,0,,0,Empty,Level,Unused.
-LevelPartialInit,$055F,1,,0,,0,Level,Level,"When set, performs a partial reinitialization of level data (notably does not perform the Level InitAction unless it is airship related)"
+,$055E,1,$7E055E,1,,0,Empty,Level,Unused.
+LevelPartialInit,$055F,1,$7E055F,1,,0,Level,Level,"When set, performs a partial reinitialization of level data (notably does not perform the Level InitAction unless it is airship related)"
 Level_TilesetIdx,$0560,1,$7E0560,1,,0,Level,Level,"Holds Level_Tileset as an ""index"" value instead, relative to levels (i.e. Level_Tileset - 1)"
-Level_ChangeReset,$0561,1,,0,,0,Level,Level,"When set to zero, a mass reset is performed (used when changing ""scenes"" in a single level)"
+Level_ChangeReset,$0561,1,$7E0561,1,,0,Level,Level,"When set to zero, a mass reset is performed (used when changing ""scenes"" in a single level)"
 Level_UnusedFlag,$0562,1,$7E0562,1,,0,Level,Level,"Unused; only set in a couple places, but never read back!"
-Level_SlopeEn,$0563,1,,0,,0,Flag,Level,"If set, enables slope tiles (otherwise they're considered flat top-only solids)"
-Level_ChgTileEvent,$0564,1,,0,,0,Level,Level,"When non-zero, queues a ""change tile"" event (TOFIX)"
-Level_NoStopCnt,$0565,1,,0,,0,Counter,Level,"A counter which continuously increments unless something is ""stopping"" the action"
+Level_SlopeEn,$0563,1,$7E0563,1,,0,Flag,Level,"If set, enables slope tiles (otherwise they're considered flat top-only solids)"
+Level_ChgTileEvent,$0564,1,$7E0564,1,,0,Level,Level,"When non-zero, queues a ""change tile"" event (TOFIX)"
+Level_NoStopCnt,$0565,1,$7E0565,1,,0,Counter,Level,"A counter which continuously increments unless something is ""stopping"" the action"
 Level_Event,$0566,1,$7E0566,1,,0,Level,Level,"Check ""LevelEvent_Do"" for values; 0 means nothing (TOFIX)"
-Level_PSwitchCnt,$0567,1,,0,,0,Counter,Level,"When non-zero, P-Switch is active (init @ $80); counts down to zero and restarts music"
-,$0568,1,,0,,0,Empty,Level,Unused.
-Player_SlideRate,$0569,1,,0,,0,Player,Level,"While Player is sliding, this is added to X Velocity (does not persist, however)"
-,$056A,1,,0,,0,Empty,Level,Unused.
-Player_IsClimbing,$056B,1,,0,,0,Flag,Level,Set when Player is climing vine
-Player_FlipBits_OLD,$056C,1,,0,,0,Player,Level,Holds backup of Player_FlipBits
-Player_HitCeiling,$056D,1,,0,,0,Flag,Level,Flag set when Player has just hit head off ceiling
-Player_FlyTime,$056E,1,,0,,0,Counter,Level,"When > 0, Player can fly (for power ups that do so); decrements (unless $FF) to 0"
+Level_PSwitchCnt,$0567,1,$7E0567,1,,0,Counter,Level,"When non-zero, P-Switch is active (init @ $80); counts down to zero and restarts music"
+,$0568,1,$7E0568,1,,0,Empty,Level,Unused.
+Player_SlideRate,$0569,1,$7E0569,1,,0,Player,Level,"While Player is sliding, this is added to X Velocity (does not persist, however)"
+,$056A,1,$7E056A,1,,0,Empty,Level,Unused.
+Player_IsClimbing,$056B,1,$7E056B,1,,0,Flag,Level,Set when Player is climing vine
+Player_FlipBits_OLD,$056C,1,$7E056C,1,,0,Player,Level,Holds backup of Player_FlipBits
+Player_HitCeiling,$056D,1,$7E056D,1,,0,Flag,Level,Flag set when Player has just hit head off ceiling
+Player_FlyTime,$056E,1,$7E056E,1,,0,Counter,Level,"When > 0, Player can fly (for power ups that do so); decrements (unless $FF) to 0"
 Player_IsDucking,$056F,1,$7E056F,1,,0,Flag,Level,Set when Player is ducking down
-Player_WhiteBlkCnt,$0570,1,,0,,0,Counter,Level,White block counter; counts up while Player is standing on white block and holding down
+Player_WhiteBlkCnt,$0570,1,$7E0570,1,,0,Counter,Level,White block counter; counts up while Player is standing on white block and holding down
 Level_PipeMove,$0571,1,$7E0571,1,,0,Level,Level,"Level_PipeMove is set to various values that dictate how Player is moving within a pipe
 
 The lower 2 bits form a direction as follows:
@@ -777,120 +875,121 @@ If bit 7 ($80) is NOT set, then we're just entering the pipe, and next 3 bits sa
 101xx - In-level transit (a la World 7 pipe mazes and other places; does not set Level_JctCtl)
 
 If bit 7 IS set, we're moving through the pipe (either exiting out one end or in-transit)"
-Level_CoinHeav,$0572,1,,0,,0,Level,Level,"Enter coin heaven when set $80; Increments; at $D0, ""soft jump"" arrival; terminates at wrap to $00"
-Player_MoveLR,$0573,1,,0,,0,Player,Level,"0 - Not moving left/right, 1 - Moving left, 2 - Moving right (reversed from the pad input)"
-Player_WalkAnimTicks,$0574,1,,0,,0,Player,Level,Ticks between animation frames of walking; max value varies by Player's X velocity
-Player_InWater,$0575,1,,0,,0,Flag,Level,"Set for when in water (1 = Regular water specifically, other non-zero values indicate waterfall)"
-Player_SwimCnt,$0576,1,,0,,0,Counter,Level,Swim counter FIXME Describe better 0-3 (TOFIX)
-Player_Kuribo,$0577,1,,0,,0,Flag,Level,Set for Kuribo's Shoe active
-Player_QueueSuit,$0578,1,,0,,0,Player,Level,"Queues a suit change (values like Player_Suit, but add 1, EXCEPT: $0F = Statue enable, $40 = Splash, $80 = Kuribo's Shoe)"
-Player_mGoomba,$0579,1,,0,,0,Flag,Level,Player is caught by a micro Goomba (jump short)
-Player_Statue,$057A,1,,0,,0,Counter,Level,Player is in Tanooki Statue mode; counts down to zero
-Player_RunFlag,$057B,1,,0,,0,Flag,Level,"Set while Player is actually considered ""running"" (holding down B and at enough speed; doesn't persist)"
-Player_Bounce,$057C,1,,0,,0,Sprites,Level,Set to cause block bounce (upper 4 bits specifies what kind of block will be bounced)
-Player_BounceDir,$057D,1,,0,,0,Player,Level,"Direction of Player bounce -- 0 = Down, 1 = Up, 2 = Left, 3 = Right"
-Player_BounceObj,$057E,1,,0,,0,Sprites,Level,Set if it was a kicked shelled object that hit the bounce block (i.e. don't bounce the Player if the object is the one that hit) 
-Counter_ByPlayerSpd,$057F,1,,0,,0,Counter,Level,A counter which increments faster as the Player goes faster
+Level_CoinHeav,$0572,1,$7E0572,1,,0,Level,Level,"Enter coin heaven when set $80; Increments; at $D0, ""soft jump"" arrival; terminates at wrap to $00"
+Player_MoveLR,$0573,1,$7E0573,1,,0,Player,Level,"0 - Not moving left/right, 1 - Moving left, 2 - Moving right (reversed from the pad input)"
+Player_WalkAnimTicks,$0574,1,$7E0574,1,,0,Player,Level,Ticks between animation frames of walking; max value varies by Player's X velocity
+Player_InWater,$0575,1,$7E0575,1,,0,Flag,Level,"Set for when in water (1 = Regular water specifically, other non-zero values indicate waterfall)"
+Player_SwimCnt,$0576,1,$7E0576,1,,0,Counter,Level,Swim counter FIXME Describe better 0-3 (TOFIX)
+Player_Kuribo,$0577,1,$7E0577,1,,0,Flag,Level,Set for Kuribo's Shoe active
+Player_QueueSuit,$0578,1,$7E0578,1,,0,Player,Level,"Queues a suit change (values like Player_Suit, but add 1, EXCEPT: $0F = Statue enable, $40 = Splash, $80 = Kuribo's Shoe)"
+Player_mGoomba,$0579,1,$7E0579,1,,0,Flag,Level,Player is caught by a micro Goomba (jump short)
+Player_Statue,$057A,1,$7E057A,1,,0,Counter,Level,Player is in Tanooki Statue mode; counts down to zero
+Player_RunFlag,$057B,1,$7E057B,1,,0,Flag,Level,"Set while Player is actually considered ""running"" (holding down B and at enough speed; doesn't persist)"
+Player_Bounce,$057C,1,$7E057C,1,,0,Sprites,Level,Set to cause block bounce (upper 4 bits specifies what kind of block will be bounced)
+Player_BounceDir,$057D,1,$7E057D,1,,0,Player,Level,"Direction of Player bounce -- 0 = Down, 1 = Up, 2 = Left, 3 = Right"
+Player_BounceObj,$057E,1,$7E057E,1,,0,Sprites,Level,Set if it was a kicked shelled object that hit the bounce block (i.e. don't bounce the Player if the object is the one that hit) 
+Counter_ByPlayerSpd,$057F,1,$7E057F,1,,0,Counter,Level,A counter which increments faster as the Player goes faster
 Level_HAutoScroll,$0580,1,$7E0580,1,,0,Flag,Level,"When set to 1, ""auto horizontal scroll"" is active (this can be toggled mid-level)"
-B10Coin_Count,$0581,1,,0,,0,Counter,Level,"Decrements until -1, you continue to get a coin until it does so"
-B10Coin_ID,$0582,1,,0,,0,Level,Level,Forms a sort of unique ID so game knows if you've switched blocks
-Player_OffScreen,$0583,1,,0,,0,Flag,Level,Set when Player is completely off screen
-FloatLevel_PlayerWaterStat,$0584,1,,0,,0,Player,Level,"For levels that ""float"" and have a fixed set of water at the bottom
+B10Coin_Count,$0581,1,$7E0581,1,,0,Counter,Level,"Decrements until -1, you continue to get a coin until it does so"
+B10Coin_ID,$0582,1,$7E0582,1,,0,Level,Level,Forms a sort of unique ID so game knows if you've switched blocks
+Player_OffScreen,$0583,1,$7E0583,1,,0,Flag,Level,Set when Player is completely off screen
+FloatLevel_PlayerWaterStat,$0584,1,$7E0584,1,,0,Player,Level,"For levels that ""float"" and have a fixed set of water at the bottom
 Bit 6: Set if Player is beneath bottom of water
 Bit 7: Set if beneath top of water"
-Player_LowClearance,$0585,1,,0,,0,Flag,Level,"Set when Player is in a ""low clearance"" situation (big Mario in a single block high tunnel)"
-PUp_StarManFlash,$0586,1,,0,,0,Flag,Level,Set when a Starman is bouncing about so it cycles colors! (also used to get super suit if set in advance)
-Map_Objects_Vis,$0587,15,,0,,0,Overworld,Overworld,"Set for map objects as visible, clear if it's not"
-Player_Behind_En,$0587,1,,0,,0,Flag,Level,"Specifies whether the ""Behind the scenes"" effect is actually active
+Player_LowClearance,$0585,1,$7E0585,1,,0,Flag,Level,"Set when Player is in a ""low clearance"" situation (big Mario in a single block high tunnel)"
+PUp_StarManFlash,$0586,1,$7E0586,1,,0,Flag,Level,Set when a Starman is bouncing about so it cycles colors! (also used to get super suit if set in advance)
+Map_Objects_Vis,$0587,15,$7E0587,15,,0,Overworld,Overworld,"Set for map objects as visible, clear if it's not"
+Player_Behind_En,$0587,1,$7E0587,1,,0,Flag,Level,"Specifies whether the ""Behind the scenes"" effect is actually active
 If the Player has stepped out from behind the background, it can be still active, but he won't get the effect of it!"
-Player_Behind,$0588,1,,0,,0,Flag,Level,"When non-zero, Player is ""behind the scenes"" (as by white block)"
-Player_Slippery,$0589,1,,0,,0,Player,Level,"0 = Ground is not slippery, 1 = Ground is a little slippery, 2 = Ground is REALLY slippery"
-Player_SandSink,$058A,1,,0,,0,Flag,Level,"Sinking in quicksand! (holds Y when quicksand hit in upper 4 bits, bit 0 sets '0' jumping, '1' sinking)"
-Player_PartDetEn,$058B,1,,0,,0,Player,Level,"""32 Pixel Partition Detection"" enabler
+Player_Behind,$0588,1,$7E0588,1,,0,Flag,Level,"When non-zero, Player is ""behind the scenes"" (as by white block)"
+Player_Slippery,$0589,1,$7E0589,1,,0,Player,Level,"0 = Ground is not slippery, 1 = Ground is a little slippery, 2 = Ground is REALLY slippery"
+Player_SandSink,$058A,1,$7E058A,1,,0,Flag,Level,"Sinking in quicksand! (holds Y when quicksand hit in upper 4 bits, bit 0 sets '0' jumping, '1' sinking)"
+Player_PartDetEn,$058B,1,$7E058B,1,,0,Player,Level,"""32 Pixel Partition Detection"" enabler
 When set, if Player Y >= 160, Player detects bottom two rows of tiles implicitly
 Used with Update_Request = UPDATERASTER_32PIXPART if there's a floor (i.e. NOT used in levels with fixed water; for that, see FloatLevel_PlayerWaterStat)"
-Player_InPipe,$058C,1,,0,,0,Flag,Level,Player is going through pipe
-Player_MushFall,$058D,1,,0,,0,Flag,Level,"Set to 0 when mushroom is to fall to the left, 1 to the right"
+Player_InPipe,$058C,1,$7E058C,1,,0,Flag,Level,Player is going through pipe
+Player_MushFall,$058D,1,$7E058D,1,,0,Flag,Level,"Set to 0 when mushroom is to fall to the left, 1 to the right"
 Player_SprOff,$058E,1,$7E00C4,2,,0,Player,Level,"Player sprite offset (NOTE: Should be multiples of 4, otherwise bad unaligned stuff happens!)"
 Object_SprRAM,$058F,8,$7E00C6,9,,0,Sprites,Level,"Sprite_RAM offset by object
 
 SNES: offset into Sprite_RAM for empty object slots, set by Object_GetRandNearUnusedSpr. ninth slot is not used, but is set due to a 16-bit write when writing to the last slot."
-Map_MarchInit,$0596,1,,0,,0,Overworld,Overworld,Set when marching data has been initialized (done once per marching cycle on the map)
+,,0,$7E058E,9,,0,Emtpy,Level,Unused.
+Map_MarchInit,$0596,1,$7E0596,1,,0,Overworld,Overworld,Set when marching data has been initialized (done once per marching cycle on the map)
 Map_InCanoe_Flag,$0597,1,$7E0597,1,,0,Misc.,Overworld,"Set when Player is in Canoe (modifies movement, allows movement in water, etc.)"
 SpecialObj_Var2,$0597,8,$7E0597,8,,0,Sprites,Level,General purpose variable 2
 World_8_Dark,$0598,1,$7E0598,1,,0,Overworld,Overworld,"Darkness on World 8 Map, level 2 -- counts 0-7 while setting up the effect"
-World_Map_AnimF,$0599,1,,0,,0,Overworld,Overworld,"World map animation frame (for bushes, etc.)"
-World_Map_AnimT,$059A,1,,0,,0,Overworld,Overworld,World map animation tick
-,$059B,101,,0,,0,Empty,Overworld,Unused.
-,$059F,2,,0,,0,Empty,Level,Unused.
-SpecialObj_YVelFrac,$05A1,8,,0,,0,Sprites,Level,Y velocity fractional accumulator
-,$05A9,2,,0,,0,Empty,Level,Unused.
-SpecialObj_XVelFrac,$05AB,8,,0,,0,Sprites,Level,X velocity fractional accumulator
-,$05B3,2,,0,,0,Empty,Level,Unused.
+World_Map_AnimF,$0599,1,$7E0599,1,,0,Overworld,Overworld,"World map animation frame (for bushes, etc.)"
+World_Map_AnimT,$059A,1,$7E059A,1,,0,Overworld,Overworld,World map animation tick
+,$059B,101,$7E059B,101,,0,Empty,Overworld,Unused.
+,$059F,2,$7E059F,2,,0,Empty,Level,Unused.
+SpecialObj_YVelFrac,$05A1,8,$7E05A1,8,,0,Sprites,Level,Y velocity fractional accumulator
+,$05A9,2,$7E05A9,2,,0,Empty,Level,Unused.
+SpecialObj_XVelFrac,$05AB,8,$7E05AB,8,,0,Sprites,Level,X velocity fractional accumulator
+,$05B3,2,$7E05B3,2,,0,Empty,Level,Unused.
 SpecialObj_Var3,$05B5,8,$7E05B5,8,,0,Sprites,Level,General purpose variable 3
-,$05BD,2,,0,,0,Empty,Level,Unused.
-SpecialObj_YLo,$05BF,8,,0,,0,Sprites,Level,Y low coordinate of special object
-,$05C7,2,,0,,0,Empty,Level,Unused.
-SpecialObj_XLo,$05C9,8,,0,,0,Sprites,Level,X low coordinate of special object
-,$05D1,2,,0,,0,Empty,Level,Unused.
-SpecialObj_YVel,$05D3,8,,0,,0,Sprites,Level,Y Velocity of special object
-,$05DB,2,,0,,0,Empty,Level,Unused.
-SpecialObj_XVel,$05DD,8,,0,,0,Sprites,Level,X Velocity of special object
-,$05E5,8,,0,,0,Empty,Level,Unused.
-BonusText_VH,$05E7,1,,0,,0,Bonus Game,Bonus Game,(TOFIX)
-BonusText_VL,$05E8,1,,0,,0,Bonus Game,Bonus Game,(TOFIX)
-,$05E9,23,,0,,0,Empty,Bonus Game,Unused.
-Misc_Counter,$05ED,1,,0,,0,Counter,Level,Miscellaneous loop counter ?
-Level_TimerMSD,$05EE,1,,0,,0,Level,Level,Leftmost / most significant digit on timer
-Level_TimerMid,$05EF,1,,0,,0,Level,Level,Middle digit on timer
-Level_TimerLSD,$05F0,1,,0,,0,Level,Level,Rightmost / least significant digit on timer
-Level_TimerTick,$05F1,1,,0,,0,Counter,Level,Timer decrementing tick
-Inventory_Open,$05F2,1,,0,,0,Flag,Level,"Set when inventory panel is open, also used to dictate whether it is ""opening"" (1) or ""closing"" (0)"
-Level_TimerEn,$05F3,1,,0,,0,Flag,Level,"Set to disable clock (bit 7 will also disable level animations, e.g. '?s')"
-Kill_Tally,$05F4,1,,0,,0,Player,Level,Counter that increases with each successful hit of an object without touching the ground
-Objects_KillTally,$05F5,5,,0,,0,Sprites,Level,OBJECT SLOTS 0 - 4 ONLY: Kill_Tally for a kicked shell as it hits other enemies 
-PlayerProj_YHi,$05FA,2,,0,,0,Sprites,Level,Player projectile Y Hi
-Level_AScrlConfig,$05FC,1,,0,,0,Camera,Level,"$01 = Enables auto scroll coordinate adjustments of any sort
+,$05BD,2,$7E05BD,2,,0,Empty,Level,Unused.
+SpecialObj_YLo,$05BF,8,$7E05BF,8,,0,Sprites,Level,Y low coordinate of special object
+,$05C7,2,$7E05C7,2,,0,Empty,Level,Unused.
+SpecialObj_XLo,$05C9,8,$7E05C9,8,,0,Sprites,Level,X low coordinate of special object
+,$05D1,2,$7E05D1,2,,0,Empty,Level,Unused.
+SpecialObj_YVel,$05D3,8,$7E05D3,8,,0,Sprites,Level,Y Velocity of special object
+,$05DB,2,$7E05DB,2,,0,Empty,Level,Unused.
+SpecialObj_XVel,$05DD,8,$7E05DD,8,,0,Sprites,Level,X Velocity of special object
+,$05E5,8,$7E05E5,8,,0,Empty,Level,Unused.
+BonusText_VH,$05E7,1,$7E05E7,1,,0,Bonus Game,Bonus Game,(TOFIX)
+BonusText_VL,$05E8,1,$7E05E8,1,,0,Bonus Game,Bonus Game,(TOFIX)
+,$05E9,23,$7E05E9,23,,0,Empty,Bonus Game,Unused.
+Misc_Counter,$05ED,1,$7E05ED,1,,0,Counter,Level,Miscellaneous loop counter ?
+Level_TimerMSD,$05EE,1,$7E05EE,1,,0,Level,Level,Leftmost / most significant digit on timer
+Level_TimerMid,$05EF,1,$7E05EF,1,,0,Level,Level,Middle digit on timer
+Level_TimerLSD,$05F0,1,$7E05F0,1,,0,Level,Level,Rightmost / least significant digit on timer
+Level_TimerTick,$05F1,1,$7E05F1,1,,0,Counter,Level,Timer decrementing tick
+Inventory_Open,$05F2,1,$7E05F2,1,,0,Flag,Level,"Set when inventory panel is open, also used to dictate whether it is ""opening"" (1) or ""closing"" (0)"
+Level_TimerEn,$05F3,1,$7E05F3,1,,0,Flag,Level,"Set to disable clock (bit 7 will also disable level animations, e.g. '?s')"
+Kill_Tally,$05F4,1,$7E05F4,1,,0,Player,Level,Counter that increases with each successful hit of an object without touching the ground
+Objects_KillTally,$05F5,5,$7E05F5,5,,0,Sprites,Level,OBJECT SLOTS 0 - 4 ONLY: Kill_Tally for a kicked shell as it hits other enemies 
+PlayerProj_YHi,$05FA,2,$7E05FA,2,,0,Sprites,Level,Player projectile Y Hi
+Level_AScrlConfig,$05FC,1,$7E05FC,1,,0,Camera,Level,"$01 = Enables auto scroll coordinate adjustments of any sort
 $80 = Disables horizontal auto scroll coordinate adjustment (generally if Horz Auto Scroll is not in use)"
-Cine_ToadKing,$05FD,1,,0,,0,Level,Level,"Set to 1, initializes Toad and transformed king; set to 2 while running that cinematic"
-AScrlURDiag_WrapState_Copy,$05FE,1,,0,,0,Camera,Level,Copy of AScrlURDiag_WrapState
-AScrlURDiag_WrapState,$05FF,1,,0,,0,Camera,Level,"The diagonal auto scroller wraps vertically several times to give the illusion of a long vertical strip.  AScrlURDiag_WrapState is set to 1 and 2 during this process which makes it possible.
+Cine_ToadKing,$05FD,1,$7E05FD,1,,0,Level,Level,"Set to 1, initializes Toad and transformed king; set to 2 while running that cinematic"
+AScrlURDiag_WrapState_Copy,$05FE,1,$7E05FE,0,,0,Camera,Level,Copy of AScrlURDiag_WrapState
+AScrlURDiag_WrapState,$05FF,1,$7E05FF,0,,0,Camera,Level,"The diagonal auto scroller wraps vertically several times to give the illusion of a long vertical strip.  AScrlURDiag_WrapState is set to 1 and 2 during this process which makes it possible.
 Objects that need to offset themselves to cope with this behavior utilize AScrlURDiag_WrapState_Copy to stay in sync. (TOFIX)"
 Ending_CmdBuffer,$0600,192,,0,,0,Title Screen/Ending,Ending,Buffer used during ending sequence
-,$0600,2,,0,,0,Empty,Level,Unused
-Level_Tile_Head,$0602,1,,0,,0,Player,Level,Tile at Player's head
-Level_Tile_GndL,$0603,1,,0,,0,Player,Level,Tile at Player's feet left
-Level_Tile_GndR,$0604,1,,0,,0,Player,Level,Tile at Player's feet right
-Level_Tile_InFL,$0605,1,,0,,0,Player,Level,"Tile ""in front"" of Player (""lower"", at feet)"
-Level_Tile_InFU,$0606,1,,0,,0,Player,Level,"Tile ""in front"" of Player (""upper"", at face)"
-Level_Tile_Whack,$0607,1,,0,,0,Player,Level,Tile last hit by tail attack or shell
-Level_Tile_Quad,$0608,4,,0,,0,Player,Level,Quadrant of tile for each of the positions above
-,$060C,1,,0,,0,Empty,Level,Unused
-Level_Tile_Slope,$060D,4,,0,,0,Player,Level,"Slope of tile for each of the positions above (first byte also used by objects)
+,$0600,2,$7E0600,2,,0,Empty,Level,Unused
+Level_Tile_Head,$0602,1,$7E0602,1,,0,Player,Level,Tile at Player's head
+Level_Tile_GndL,$0603,1,$7E0603,1,,0,Player,Level,Tile at Player's feet left
+Level_Tile_GndR,$0604,1,$7E0604,1,,0,Player,Level,Tile at Player's feet right
+Level_Tile_InFL,$0605,1,$7E0605,1,,0,Player,Level,"Tile ""in front"" of Player (""lower"", at feet)"
+Level_Tile_InFU,$0606,1,$7E0606,1,,0,Player,Level,"Tile ""in front"" of Player (""upper"", at face)"
+Level_Tile_Whack,$0607,1,$7E0607,1,,0,Player,Level,Tile last hit by tail attack or shell
+Level_Tile_Quad,$0608,4,$7E0608,4,,0,Player,Level,Quadrant of tile for each of the positions above
+,$060C,1,$7E060C,1,,0,Empty,Level,Unused
+Level_Tile_Slope,$060D,4,$7E060D,4,,0,Player,Level,"Slope of tile for each of the positions above (first byte also used by objects)
 0: Slope shape at feet
 1: Slope shape at head
 2: ""in front"" of Player (""lower"", at feet)
 3: ""in front"" of Player (""upper"", at face)"
-,$0611,1,,0,,,Empty,Level,Unused
+,$0611,1,$7E0611,1,,,Empty,Level,Unused
 Scroll_Cols2Upd,$0612,1,$7E0612,1,,0,Graphics,Level,Number of 8x8 columns to update (typically set to 32 for a full dirty update)
-,$0613,6,,0,,0,Empty,Level,Unused
-Bonus_CoinsYVel,$0619,6,,0,,0,Bonus Game,Level,UNUSED Bonus game coins Y velocity
-Bonus_CoinsY,$061F,6,,0,,0,Bonus Game,Level,UNUSED Bonus game coins Y
-Bonus_CoinsXVel,$0625,6,,0,,0,Bonus Game,Level,UNUSED Bonus game coins X velocity
-Bonus_CoinsX,$062B,6,,0,,0,Bonus Game,Level,UNUSED Bonus game coins X
-Bonus_CoinsYVelFrac,$0631,6,,0,,0,Bonus Game,Level,UNUSED Bonus game coins Y velocity fractional accumulator
-,$0637,6,,0,,0,Empty,Level,Unused
-Bonus_CoinsXVelFrac,$063D,6,,0,,0,Bonus Game,Level,UNUSED Bonus game coins X velocity fractional accumulator
-,$0643,8,,0,,0,Empty,Level,Unused
-Object_TileFeet,$064B,1,,0,,0,Sprites,Level,"Object tile detected at ""feet"" of object"
-Object_TileWall,$064C,1,,0,,0,Sprites,Level,"Object tile detected in front of object, i.e. a wall"
-,$064D,1,,0,,0,Empty,Level,Unused
-Object_AttrFeet,$064E,1,,0,,0,Sprites,Level,Object tile quadrant of Object_TileFeet
-Object_AttrWall,$064F,1,,0,,0,Sprites,Level,Object tile quadrant of Object_TileWall
-,$0650,1,,0,,0,Empty,Level,Unused
-Objects_SprHVis,$0651,8,,0,,0,Sprites,Level,Flags; Bits 7-2 set when each 8x16 sprite is horizontally off-screen (left-to-right from MSb)
-Objects_SpawnIdx,$0659,8,,0,,0,Sprites,Level,Holds the index into level data that this object was spawned from
-Objects_State,$0661,8,,0,,0,Sprites,Level,"0 = Dead/Empty
+,$0613,6,$7E0613,6,,0,Empty,Level,Unused
+Bonus_CoinsYVel,$0619,6,$7E0619,6,,0,Bonus Game,Level,UNUSED Bonus game coins Y velocity
+Bonus_CoinsY,$061F,6,$7E061F,6,,0,Bonus Game,Level,UNUSED Bonus game coins Y
+Bonus_CoinsXVel,$0625,6,$7E0625,6,,0,Bonus Game,Level,UNUSED Bonus game coins X velocity
+Bonus_CoinsX,$062B,6,$7E062B,6,,0,Bonus Game,Level,UNUSED Bonus game coins X
+Bonus_CoinsYVelFrac,$0631,6,$7E0631,6,,0,Bonus Game,Level,UNUSED Bonus game coins Y velocity fractional accumulator
+,$0637,6,$7E0637,6,,0,Empty,Level,Unused
+Bonus_CoinsXVelFrac,$063D,6,$7E063D,6,,0,Bonus Game,Level,UNUSED Bonus game coins X velocity fractional accumulator
+,$0643,8,$7E0643,8,,0,Empty,Level,Unused
+Object_TileFeet,$064B,1,$7E064B,1,,0,Sprites,Level,"Object tile detected at ""feet"" of object"
+Object_TileWall,$064C,1,$7E064C,1,,0,Sprites,Level,"Object tile detected in front of object, i.e. a wall"
+,$064D,1,$7E064D,1,,0,Empty,Level,Unused
+Object_AttrFeet,$064E,1,$7E064E,1,,0,Sprites,Level,Object tile quadrant of Object_TileFeet
+Object_AttrWall,$064F,1,$7E064F,1,,0,Sprites,Level,Object tile quadrant of Object_TileWall
+,$0650,1,$7E0650,1,,0,Empty,Level,Unused
+Objects_SprHVis,$0651,8,$7E0651,8,,0,Sprites,Level,Flags; Bits 7-2 set when each 8x16 sprite is horizontally off-screen (left-to-right from MSb)
+Objects_SpawnIdx,$0659,8,$7E0659,8,,0,Sprites,Level,Holds the index into level data that this object was spawned from
+Objects_State,$0661,8,$7E0661,8,,0,Sprites,Level,"0 = Dead/Empty
 1 = Init
 2 = Normal (typical operation)
 3 = Shelled (shelled enemy post-stomp)
@@ -905,173 +1004,193 @@ Objects_FlipBits,$0679,8,$7E0679,8,,0,Sprites,Level,Applied sprite attributes fo
 Objects_SprVVis,$0681,8,$7E0681,8,,0,Sprites,Level,Flags; Bits 3-0 set when each 8x16 sprite is vertically off-screen (top-to-bottom from MSb)
 Objects_Var1,$0689,8,$7E0689,8,,0,Sprites,Level,Generic variable 1 for objects
 Objects_Var2,$0691,8,$7E0691,8,,0,Sprites,Level,Generic variable 2 for objects
-Unused699,$0699,1,,0,,0,Empty,Level,"Absolutely no idea, it is set once in one place and never used again... MAY be lost bonus game related?"
-Bonus_DieCnt,$069A,1,,0,,0,Bonus Game,Level,"UNUSED Bonus Game Die counter
+Unused699,$0699,1,$7E0699,1,,0,Empty,Level,"Absolutely no idea, it is set once in one place and never used again... MAY be lost bonus game related?"
+Bonus_DieCnt,$069A,1,$7E069A,1,,0,Bonus Game,Level,"UNUSED Bonus Game Die counter
 While the die is rotating, just used as a counter 0 to 3 to time the rolling animation. After Player would press 'A', this value is immediately set to 0.
 In the case of the odd/even game, if the Player ""won"", it is set to 5 or 6."
-,$069B,1,,0,,0,Empty,Level,Unused
-Score_Earned,$069C,2,,0,,0,Misc.,Level,"(16-bit value) A ""buffer"" of score earned to be added to your total, total score stored in Player_Score"
-Score_Temp,$069E,1,,0,,0,Misc.,Level,Temp used when figuring out to display a 3-byte integer worth of score
-,$069F,5,,0,,0,Empty,Level,Unused
-Player_IsHolding,$06A4,1,,0,,0,Flag,Level,Set when Player is holding something (animation effect only)
-Player_ISHolding_OLD,$06A5,1,,0,,0,Player,Level,Holds onto whether Player WAS holding onto something (so we can be sure to clear Player_IsHolding)
-Objects_Timer3,$06A6,5,,0,,0,Player,Level,"Used as the ""wake up"" out of shell timer
+,$069B,1,$7E069B,1,,0,Empty,Level,Unused
+Score_Earned,$069C,2,$7E069C,2,,0,Misc.,Level,"(16-bit value) A ""buffer"" of score earned to be added to your total, total score stored in Player_Score"
+Score_Temp,$069E,1,$7E069E,1,,0,Misc.,Level,Temp used when figuring out to display a 3-byte integer worth of score
+,$069F,5,$7E069F,5,,0,Empty,Level,Unused
+Player_IsHolding,$06A4,1,$7E06A4,1,,0,Flag,Level,Set when Player is holding something (animation effect only)
+Player_ISHolding_OLD,$06A5,1,$7E06A5,1,,0,Player,Level,Holds onto whether Player WAS holding onto something (so we can be sure to clear Player_IsHolding)
+Objects_Timer3,$06A6,5,$7E06A6,5,,0,Player,Level,"Used as the ""wake up"" out of shell timer
 If timer is less than $60, it decrements normally, otherwise...
 If object is in state 2, timer decrements normally
 If object is in state 4 (being held), timer only decrements every 4 ticks
 In all other states, timer decrements every 2 ticks"
-Objects_Timer4,$06AB,5,,0,,0,Sprites,Level,"""Timer"" values; automatically decrements to zero (used in ""shakin' awake"" effect)"
-,$06B0,3,,0,,0,Empty,Level,Unused
-Object_SlopeHeight,$06B3,1,,0,,0,Sprites,Level,Object calculated slope height
-Buffer_Occupied,$06B4,2,,0,,0,Flag,Level,Set if respective Object_BufferX/Y buffer is already taken by an object
-Player_Microgoomba,$06B6,1,,0,,0,Flag,Level,Microgoomba stuck to Player
-Player_UphillSpeedIdx,$06B6,1,,0,,0,Player,Level,Override when Player_UphillFlag is set (shared with Player_Microgoomba)
-Objects_InWater,$06B7,5,,0,,0,Sprites,Level,Set when object is in water
-,$06BC,1,,0,,0,Empty,Level,Unused
-SpecialObj_Var1,$06BD,8,,0,,0,Sprites,Level,General purpose variable 1
-,$06C5,2,,0,,0,Empty,Level,Unused.
-SpecialObj_Data,$06C7,8,,0,,0,Sprites,Level,"Special object ""data"" field, defined by object"
-,$06CF,2,,0,,0,Empty,Level,Unused.
-SpecialObj_Timer,$06D1,8,,0,,0,Sprites,Level,"""Timer"" values; automatically decrements to zero"
-,$06D9,2,,0,,0,Empty,Level,Unused.
-CannonFire_Var,$06DB,8,,0,,0,Sprites,Level,(TOFIX)
-CannonFire_Timer,$06E3,8,,0,,0,Sprites,Level,"Cannon Fire timer, decrements to zero"
-Objects_QSandCtr,$06EB,8,,0,,0,Sprites,Level,"When enemy has fallen into quicksand, increments until $90 which deletes it"
-,$06F3,13,,0,,0,Empty,Level,Unused.
-TileAddr_Off,$0700,1,,0,,0,Level,General,"During level loading, specifies an offset into the current Mem_Tile_Addr setting"
-LevLoad_Unused1,$0701,1,,0,,0,Empty,General,Unused. Initialized at level load.
-LevLoad_Unused2,$0702,1,,0,,0,Empty,General,Unused. Initialized at level load.
-LevLoad_Unused3,$0703,1,,0,,0,Empty,General,Unused. Initialized at level load.
-LevLoad_Unused4,$0704,1,,0,,0,Empty,General,Unused. Initialized at level load.
-,$0705,1,,0,,0,Empty,General,Unused.
-LL_ShapeDef,$0706,1,,0,,0,Level,General,"During level loading, defines a shape of something (context-specific)"
+Objects_Timer4,$06AB,5,$7E06AB,5,,0,Sprites,Level,"""Timer"" values; automatically decrements to zero (used in ""shakin' awake"" effect)"
+,$06B0,3,$7E06B0,3,,0,Empty,Level,Unused
+Object_SlopeHeight,$06B3,1,$7E06B3,1,,0,Sprites,Level,Object calculated slope height
+Buffer_Occupied,$06B4,2,$7E06B4,2,,0,Flag,Level,Set if respective Object_BufferX/Y buffer is already taken by an object
+Player_Microgoomba,$06B6,1,$7E06B6,1,,0,Flag,Level,Microgoomba stuck to Player
+Player_UphillSpeedIdx,$06B6,1,$7E06B6,1,,0,Player,Level,Override when Player_UphillFlag is set (shared with Player_Microgoomba)
+Objects_InWater,$06B7,5,$7E06B7,5,,0,Sprites,Level,Set when object is in water
+,$06BC,1,$7E06BC,1,,0,Empty,Level,Unused
+SpecialObj_Var1,$06BD,8,$7E06BD,8,,0,Sprites,Level,General purpose variable 1
+,$06C5,2,$7E06C5,2,,0,Empty,Level,Unused.
+SpecialObj_Data,$06C7,8,$7E06C7,8,,0,Sprites,Level,"Special object ""data"" field, defined by object"
+,$06CF,2,$7E06CF,2,,0,Empty,Level,Unused.
+SpecialObj_Timer,$06D1,8,$7E06D1,8,,0,Sprites,Level,"""Timer"" values; automatically decrements to zero"
+,$06D9,2,$7E06D9,2,,0,Empty,Level,Unused.
+CannonFire_Var,$06DB,8,$7E06DB,8,,0,Sprites,Level,(TOFIX)
+CannonFire_Timer,$06E3,8,$7E06E3,8,,0,Sprites,Level,"Cannon Fire timer, decrements to zero"
+Objects_QSandCtr,$06EB,8,$7E06EB,0,,0,Sprites,Level,"When enemy has fallen into quicksand, increments until $90 which deletes it"
+,$06F3,13,$7E06F3,13,,0,Empty,Level,Unused.
+TileAddr_Off,$0700,1,$7E0700,1,,0,Level,General,"During level loading, specifies an offset into the current Mem_Tile_Addr setting"
+LevLoad_Unused1,$0701,1,$7E0701,1,,0,Empty,General,Unused. Initialized at level load.
+LevLoad_Unused2,$0702,1,$7E0702,1,,0,Empty,General,Unused. Initialized at level load.
+LevLoad_Unused3,$0703,1,$7E0703,1,,0,Empty,General,Unused. Initialized at level load.
+LevLoad_Unused4,$0704,1,$7E0704,1,,0,Empty,General,Unused. Initialized at level load.
+,$0705,1,$7E0705,1,,0,Empty,General,Unused.
+LL_ShapeDef,$0706,1,$7E0706,1,,0,Level,General,"During level loading, defines a shape of something (context-specific)"
 Scroll_UpdAttrFlag,$0707,1,$7E0707,1,,0,Bonus Game,General,Set when it is time to update attributes
-,$0708,2,,0,,0,Empty,General,Unused.
+,$0708,2,$7E0708,2,,0,Empty,General,Unused.
 Level_Tileset,$070A,1,$7E070A,1,,0,Level,General,Different tilesets which changes the detection and meaning in levels (TOFIX)
-Bonus_UnusedVH,$070B,1,,0,,0,Bonus Game,General,VRAM High address ?? Seems to only be part of an unused routine
-ToadTalk_VH,$070B,1,,0,,0,Level,General,"Cinematic Toad & King / ""Toad House"" Toad VRAM Address High"
-Bonus_UnusedVL,$070C,1,,0,,0,Bonus Game,General,VRAM Low address ?? Seems to only be part of an unused routine
-ToadTalk_VL,$070C,1,,0,,0,Level,General,"Cinematic Toad & King / ""Toad House"" Toad VRAM Address Low"
-BonusText_CPos,$070D,1,,0,,0,Bonus Game,General,(TOFIX)
-ToadTalk_CPos,$070D,1,,0,,0,Level,General,"Cinematic Toad & King / ""Toad House"" Toad Character Position"
-BonusText_CharPause,$070E,1,,0,,0,Counter,General,Counter that decrements to zero between letters
-Bonus_UnusedFlag,$070F,1,,0,,0,Flag,General,Doesn't do much besides block an unused subroutine
-Map_Pan_Count,$0710,1,,0,,0,Counter,General,"Map is panning, counts to zero (Scroll_LastDir sets which direction we're panning)"
-Bonus_Timer,$0711,1,,0,,0,Counter,General,Decrements to zero
-Map_Intro_Tick,$0711,1,,0,,0,Counter,General,"Counts down to zero while displaying the ""World X"" intro"
-CineKing_Timer2,$0711,1,,0,,0,Counter,General,Timer; decrements to zero
-,$0712,1,,0,,0,Empty,General,Unused.
-Map_ReturnStatus,$0713,1,,0,,0,Overworld,General,"When 0, level panel is cleared; otherwise, Player is considered to have died (decrements life!)"
-MaxPower_Tick,$0714,1,,0,,0,Player,General,"When Player has maximum ""power"" charge, this counts for the flashing [P]"
+Bonus_UnusedVH,$070B,1,$7E070B,1,,0,Bonus Game,General,VRAM High address ?? Seems to only be part of an unused routine
+ToadTalk_VH,$070B,1,$7E070B,1,,0,Level,General,"Cinematic Toad & King / ""Toad House"" Toad VRAM Address High"
+Bonus_UnusedVL,$070C,1,$7E070C,1,,0,Bonus Game,General,VRAM Low address ?? Seems to only be part of an unused routine
+ToadTalk_VL,$070C,1,$7E070C,1,,0,Level,General,"Cinematic Toad & King / ""Toad House"" Toad VRAM Address Low"
+BonusText_CPos,$070D,1,$7E070D,1,,0,Bonus Game,General,(TOFIX)
+ToadTalk_CPos,$070D,1,$7E070D,1,,0,Level,General,"Cinematic Toad & King / ""Toad House"" Toad Character Position"
+BonusText_CharPause,$070E,1,$7E070E,1,,0,Counter,General,Counter that decrements to zero between letters
+Bonus_UnusedFlag,$070F,1,$7E070F,1,,0,Flag,General,Doesn't do much besides block an unused subroutine
+Map_Pan_Count,$0710,1,$7E0710,1,,0,Counter,General,"Map is panning, counts to zero (Scroll_LastDir sets which direction we're panning)"
+Bonus_Timer,$0711,1,$7E0711,1,,0,Counter,General,Decrements to zero
+Map_Intro_Tick,$0711,1,$7E0711,1,,0,Counter,General,"Counts down to zero while displaying the ""World X"" intro"
+CineKing_Timer2,$0711,1,$7E0711,1,,0,Counter,General,Timer; decrements to zero
+,$0712,1,$7E0712,1,,0,Empty,General,Unused.
+Map_ReturnStatus,$0713,1,$7E0713,1,,0,Overworld,General,"When 0, level panel is cleared; otherwise, Player is considered to have died (decrements life!)"
+MaxPower_Tick,$0714,1,$7E0714,1,,0,Player,General,"When Player has maximum ""power"" charge, this counts for the flashing [P]"
 Player_Score,$0715,3,$7E0715,3,,0,Misc.,General,"Treated as 3-byte integer, with least significant zero on display not part of this value"
-,$0718,1,,0,,0,Empty,General,Unused.
-PatTable_BankSel,$0719,6,,0,,0,Graphics,General,Provides an array of 6 pages to set the entire Pattern Table [BG_Full_CHRROM_Switch]
-PAGE_C000,$071F,1,,0,,0,Hardware Mirror,General,Page to set PRG ROM C000 (PRGROM_Change_Both)
-PAGE_A000,$0720,1,,0,,0,Hardware Mirror,General,Page to set PRG ROM A000 (PRGROM_Change_Both)
-PAGE_CMD,$0721,1,,0,,0,Hardware Mirror,General,"When using PRGROM_Change_Both2 or PRGROM_Change_A000, this value stores the MMC3 command"
-Map_Prev_XOff,$0722,2,,0,,0,Overworld,General,(Mario/Luigi) Stores previous scroll X offset on map
-Map_Prev_XHi,$0724,2,,0,,0,Overworld,General,"(Mario/Luigi) Stores previous ""hi byte"" of map X"
+,$0718,1,$7E0718,1,,0,Empty,General,Unused.
+PatTable_BankSel,$0719,6,$7E0719,6,,0,Graphics,General,Provides an array of 6 pages to set the entire Pattern Table [BG_Full_CHRROM_Switch]
+PAGE_C000,$071F,1,$7E071F,1,,0,Hardware Mirror,General,Page to set PRG ROM C000 (PRGROM_Change_Both)
+PAGE_A000,$0720,1,$7E0720,1,,0,Hardware Mirror,General,Page to set PRG ROM A000 (PRGROM_Change_Both)
+PAGE_CMD,$0721,1,$7E0721,1,,0,Hardware Mirror,General,"When using PRGROM_Change_Both2 or PRGROM_Change_A000, this value stores the MMC3 command"
+Map_Prev_XOff,$0722,2,$7E0722,2,,0,Overworld,General,(Mario/Luigi) Stores previous scroll X offset on map
+Map_Prev_XHi,$0724,2,$7E0724,2,,0,Overworld,General,"(Mario/Luigi) Stores previous ""hi byte"" of map X"
 Player_Current,$0726,1,$7E0726,1,,0,Player,General,"Which Player is currently up (0 = Mario, 1 = Luigi)"
-World_Num,$0727,1,,0,,0,Overworld,General,"Current world index (0-8, where 0 = World 1, 7 = World 8, 8 = World 9 / Warp Zone)"
-World_EnterState,$0728,1,,0,,0,Overworld,General,"State variable during ""world X"" intro entrance, set to 3 when entering a level; overlaps GameOver_State"
-GameOver_State,$0728,1,,0,,0,Overworld,General,"State variable used during ""Gameover!"" sequence only; overlaps World_EnterState"
-CineKing_State,$0728,1,,0,,0,Level,General,State of King-got-his-wand-back sequence
+World_Num,$0727,1,$7E0727,1,,0,Overworld,General,"Current world index (0-8, where 0 = World 1, 7 = World 8, 8 = World 9 / Warp Zone)"
+World_EnterState,$0728,1,$7E0728,1,,0,Overworld,General,"State variable during ""world X"" intro entrance, set to 3 when entering a level; overlaps GameOver_State"
+GameOver_State,$0728,1,$7E0728,1,,0,Overworld,General,"State variable used during ""Gameover!"" sequence only; overlaps World_EnterState"
+CineKing_State,$0728,1,$7E0728,1,,0,Level,General,State of King-got-his-wand-back sequence
 Map_Operation,$0729,1,$7E0729,1,,0,Overworld,General,"Current ""operation"" happening on map (See Map_DoOperation in PRG010)"
-,$072A,1,,0,,0,Empty,General,Unused.
-Total_Players,$072B,1,,0,,0,Misc.,General,"Total players (0 = 1P, 1 = 2P)"
-Map_Unused72C,$072C,1,,0,,0,Empty,General,"No apparent use; only assigned to, but never read back"
-Bonus_DDDD,$072D,1,,0,,0,Bonus Game,General,?? Set to '1' if you exit the unused bonus game BONUS_UNUSED_DDDD
-Map_HandState,$072E,1,,0,,0,Overworld,General,Hand trap state (TOFIX)
-,$072F,1,,0,,0,Empty,General,Unused.
-Map_WW_Backup_Y,$0730,1,,0,,0,Overworld,General,Warp Whistle wind backs up the Player's map Y
-Map_WW_Backup_XH,$0731,1,,0,,0,Overworld,General,Warp Whistle wind backs up the Player's map X Hi byte
-Map_WW_Backup_X,$0732,1,,0,,0,Overworld,General,Warp Whistle wind backs up the Player's map X
-Map_WW_Backup_UPV2,$0733,1,,0,,0,Overworld,General,Warp Whistle wind backs up Map_UnusedPlayerVal2
-,$0734,2,,0,,0,Empty,General,Unused.
-Player_Lives,$0736,2,,0,,0,Player,General,(Mario/Luigi) Player's lives
-Map_Unused738,$0738,1,,0,,0,Empty,General,Index used in some dead code in PRG011; sometimes index of unused array Map_Unused7DC6
-ClearPattern,$0739,1,$7E0739,1,,0,Graphics,General,Set by ClearPattern_ByTileset for use in Clear_Nametable_Short
-PalSel_Tile_Colors,$073A,1,,0,,0,Palettes,General,Stores value to index which tile color set to use when palette loading routine is called
-PalSel_Obj_Colors,$073B,1,,0,,0,Palettes,General,Stores value to index which object color set to use when palette loading routine is called
-Player_FallToKing,$073C,2,,0,,0,Player,General,(Mario/Luigi) Player will fall to king when Level_ExitToMap is nonzero (instead of map)
-Map_Player_SkidBack,$073E,2,,0,,0,Overworld,General,"(Mario/Luigi) Set to '1' if Player died last turn or otherwise ejected (that is, they DID skid from their last turn, not necessarily currently skidding)"
-Map_NSpadeMatches,$0740,1,,0,,0,Overworld,General,Keeps count of N-Spade matches of active session (9 means game is done)
-Map_NSpadeInProg,$0741,1,,0,,0,Flag,General,"If set, there's an N-Spade game ""in progress"" (so if you lose, you pick it up later)"
-Map_Airship_Trav,$0742,1,,0,,0,Overworld,General,"Airship's current travel-table offset (randomly offset by 0-2, spices up life)"
-,$0743,2,,0,,0,Empty,General,Unused.
-Map_DoFortressFX,$0745,1,,0,,0,Overworld,General,"Bust locks, build bridges, whatever after Mini-Fortress is toppled"
-World_Map_Power,$0746,2,,0,,0,Overworld,General,"(Mario/Luigi) MAP Power up # (1 - big, 2 - Fire, 3 - Leaf, 4 - Frog, 5 - Tanooki, 6 - Hammer, 7 - Judgems, 8 - Pwing, 9 - Star)"
-,$0748,1,,0,,0,Empty,General,Unused.
-Map_Unused749,$0749,2,,0,,0,Overworld,General,(Mario/Luigi) ? Another value just set once and never read back!
-,$074B,1,,0,,0,Empty,General,Unused.
-Object_VelCarry,$074C,1,,0,,0,Flag,General,'1' when last Object Velocity fraction accumulation rolled over
-Player_XVelFrac,$074D,1,,0,,0,Player,General,X velocity fractional accumulator
-Objects_XVelFrac,$074E,8,,0,,0,Sprites,General,Other object's X velocity fractional accumulator
-,$0756,1,,0,,0,Empty,General,Unused.
-THouse_UnusedFlag,$0757,1,,0,,0,Flag,General,"Cleared when Toad House gives you an item, but never used otherwise"
-,$0758,7,,0,,0,Empty,General,Unused.
-Player_YVelFrac,$075F,1,,0,,0,Player,General,Y velocity fractional accumulator
-Objects_YVelFrac,$0760,8,,0,,0,Sprites,General,Other object's Y velocity fractional accumulator
-Objects_ColorCycle,$0768,8,,0,,0,Sprites,General,"Cycles colors of object and decrements to zero (e.g. ""Melting"" ice block, starman, etc.)"
+,$072A,1,$7E072A,1,,0,Empty,General,Unused.
+Total_Players,$072B,1,$7E072B,1,,0,Misc.,General,"Total players (0 = 1P, 1 = 2P)"
+Map_Unused72C,$072C,1,$7E072C,1,,0,Empty,General,"No apparent use; only assigned to, but never read back"
+Bonus_DDDD,$072D,1,$7E072D,1,,0,Bonus Game,General,?? Set to '1' if you exit the unused bonus game BONUS_UNUSED_DDDD
+Map_HandState,$072E,1,$7E072E,1,,0,Overworld,General,Hand trap state (TOFIX)
+,$072F,1,$7E072F,1,,0,Empty,General,Unused.
+Map_WW_Backup_Y,$0730,1,$7E0730,1,,0,Overworld,General,Warp Whistle wind backs up the Player's map Y
+Map_WW_Backup_XH,$0731,1,$7E0731,1,,0,Overworld,General,Warp Whistle wind backs up the Player's map X Hi byte
+Map_WW_Backup_X,$0732,1,$7E0732,1,,0,Overworld,General,Warp Whistle wind backs up the Player's map X
+Map_WW_Backup_UPV2,$0733,1,$7E0733,1,,0,Overworld,General,Warp Whistle wind backs up Map_UnusedPlayerVal2
+,$0734,2,$7E0734,2,,0,Empty,General,Unused.
+Player_Lives,$0736,2,$7E0736,2,,0,Player,General,(Mario/Luigi) Player's lives
+Map_Unused738,$0738,1,$7E0738,1,,0,Empty,General,Index used in some dead code in PRG011; sometimes index of unused array Map_Unused7DC6
+ClearPattern,$0739,1,$7E0739,2,,0,Graphics,General,Set by ClearPattern_ByTileset for use in Clear_Nametable_Short
+PalSel_Tile_Colors,$073A,1,$7E073B,1,,0,Palettes,General,Stores value to index which tile color set to use when palette loading routine is called
+PalSel_Obj_Colors,$073B,1,$7E073C,1,,0,Palettes,General,Stores value to index which object color set to use when palette loading routine is called
+Player_FallToKing,$073C,2,$7E073D,2,,0,Player,General,(Mario/Luigi) Player will fall to king when Level_ExitToMap is nonzero (instead of map)
+Map_Player_SkidBack,$073E,2,$7E073F,2,,0,Overworld,General,"(Mario/Luigi) Set to '1' if Player died last turn or otherwise ejected (that is, they DID skid from their last turn, not necessarily currently skidding)"
+Map_NSpadeMatches,$0740,1,$7E0741,1,,0,Overworld,General,Keeps count of N-Spade matches of active session (9 means game is done)
+Map_NSpadeInProg,$0741,1,$7E0742,1,,0,Flag,General,"If set, there's an N-Spade game ""in progress"" (so if you lose, you pick it up later)"
+Map_Airship_Trav,$0742,1,$7E0743,1,,0,Overworld,General,"Airship's current travel-table offset (randomly offset by 0-2, spices up life)"
+,$0743,2,$7E0744,2,,0,Empty,General,Unused.
+Map_DoFortressFX,$0745,1,$7E0746,1,,0,Overworld,General,"Bust locks, build bridges, whatever after Mini-Fortress is toppled"
+World_Map_Power,$0746,2,$7E0747,2,,0,Overworld,General,"(Mario/Luigi) MAP Power up # (1 - big, 2 - Fire, 3 - Leaf, 4 - Frog, 5 - Tanooki, 6 - Hammer, 7 - Judgems, 8 - Pwing, 9 - Star)"
+,$0748,1,$7E0749,1,,0,Empty,General,Unused.
+Map_Unused749,$0749,2,$7E074A,2,,0,Overworld,General,(Mario/Luigi) ? Another value just set once and never read back!
+,$074B,1,$7E074C,1,,0,Empty,General,Unused.
+Object_VelCarry,$074C,1,$7E074D,1,,0,Flag,General,'1' when last Object Velocity fraction accumulation rolled over
+Player_XVelFrac,$074D,1,$7E074E,1,,0,Player,General,X velocity fractional accumulator
+Objects_XVelFrac,$074E,8,$7E074F,8,,0,Sprites,General,Other object's X velocity fractional accumulator
+,$0756,1,$7E0757,1,,0,Empty,General,Unused.
+THouse_UnusedFlag,$0757,1,$7E0758,1,,0,Flag,General,"Cleared when Toad House gives you an item, but never used otherwise"
+,$0758,7,$7E0759,7,,0,Empty,General,Unused.
+Player_YVelFrac,$075F,1,$7E0760,1,,0,Player,General,Y velocity fractional accumulator
+Objects_YVelFrac,$0760,8,$7E0761,8,,0,Sprites,General,Other object's Y velocity fractional accumulator
+Objects_ColorCycle,$0768,8,$7E0769,8,,0,Sprites,General,"Cycles colors of object and decrements to zero (e.g. ""Melting"" ice block, starman, etc.)"
 Objects_Var6,$0770,5,$7E0771,5,,0,Sprites,General,"General purpose variable 6
 
 Special hardcoded behavior for the following objects ONLY:
 OBJ_FIRECHOMP, OBJ_CHAINCHOMPFREE, OBJ_BLOOPERCHILDSHOOT, OBJ_BLOOPERWITHKIDS, or OBJ_FIRESNAKE
 ... as the X/Y buffer slot they occupy (see Object_Delete)"
-Objects_TargetingXVal,$0775,5,,0,,0,Sprites,General,X velocity result of Object_CalcHomingVels for this object OR some other X pixel target
-King_Y,$077A,1,,0,,0,Sprites,General,Y position (NOTE: shared with Objects_TargetingYVal)
-Objects_TargetingYVal,$077A,5,,0,,0,Sprites,General,Y velocity result of Object_CalcHomingVels for this object OR some other Y pixel target
-Pipe_TransYDelta,$077F,1,,0,,0,Level,General,In-level transit pipe Y delta value (WARNING: Shared with Level_ScrollDiffV)
-Level_ScrollDiffV,$077F,1,,0,,0,Camera,General,Difference between desired vertical and the current Vert_Scroll (WARNING: Shared with Pipe_TransYDelta)
-Level_ScrollDiffH,$0780,1,,0,,0,Camera,General,Difference between desired horizontal and the current Horz_Scroll
-Random_Pool,$0781,10,,0,,0,Misc.,General,Data pool for pseudo-random number generator algorithm
-Map_PlayerLost2PVs,$078B,1,,0,,0,Battle Mode,General,"When > 0, (1=Mario, 2=Luigi) doesn't lose a life for ""death"" exiting to map, but does lose their turn"
-,$078C,1,,0,,0,Empty,General,Unused.
+Objects_TargetingXVal,$0775,5,$7E0776,5,,0,Sprites,General,X velocity result of Object_CalcHomingVels for this object OR some other X pixel target
+King_Y,$077A,1,$7E077B,1,,0,Sprites,General,Y position (NOTE: shared with Objects_TargetingYVal)
+Objects_TargetingYVal,$077A,5,$7E077B,5,,0,Sprites,General,Y velocity result of Object_CalcHomingVels for this object OR some other Y pixel target
+Pipe_TransYDelta,$077F,1,$7E0780,1,,0,Level,General,In-level transit pipe Y delta value (WARNING: Shared with Level_ScrollDiffV)
+Level_ScrollDiffV,$077F,1,$7E0780,1,,0,Camera,General,Difference between desired vertical and the current Vert_Scroll (WARNING: Shared with Pipe_TransYDelta)
+Level_ScrollDiffH,$0780,1,$7E0781,1,,0,Camera,General,Difference between desired horizontal and the current Horz_Scroll
+Random_Pool,$0781,10,$7E0782,10,,0,Misc.,General,Data pool for pseudo-random number generator algorithm
+Map_PlayerLost2PVs,$078B,1,$7E078C,1,,0,Battle Mode,General,"When > 0, (1=Mario, 2=Luigi) doesn't lose a life for ""death"" exiting to map, but does lose their turn"
+,$078C,1,$7E078D,1,,0,Empty,General,Unused.
 Player_RescuePrincess,$078D,1,$7E078E,1,,0,Level,General,Player will jump to the princess rescue when Level_ExitToMap is nonzero (instead of map)
-,$078E,8,,0,,0,Empty,General,Unused.
-Objects_PlayerHitStat,$0796,8,,0,,0,Player,General,"Player hit status
+,$078E,8,$7E078F,8,,0,Empty,General,Unused.
+Objects_PlayerHitStat,$0796,8,$7E0797,8,,0,Player,General,"Player hit status
 Bit 0 - Set if Player's bbox bottom is HIGHER than object's bbox bottom
 Bit 1 - Set if Player's bbox left edge is to the LEFT of object's bbox left edge
 Bit 4 - Set if Player tail attacked an object"
-Scores_Value,$079E,5,,0,,0,Sprites,General,"score ""value""; '0' none, (10, 20, 40, 80, 100, 200, 400, 800, 1000, 2000, 4000, 8000, 1-up)"
-Scores_Counter,$07A3,5,,0,,0,Sprites,General,"""counter"" until score disappears"
-Scores_Y,$07A8,5,,0,,0,Sprites,General,Score's Y
-Scores_X,$07AD,5,,0,,0,Sprites,General,Score's X
-LRBounce_Y,$07B2,1,,0,,0,Sprites,General,Left/right bouncer as sprite Y ($FF is disabled)
-LRBounce_X,$07B3,1,,0,,0,Sprites,General,Left/right bouncer as sprite X
-LRBounce_Vel,$07B4,1,,0,,0,Sprites,General,Left/right bouncer absolute value of X velocity
-Objects_Slope,$07B5,5,,0,,0,Sprites,General,Absolute slope calc value
-,$07BA,1,,0,,0,Empty,General,Unused.
-World3_Bridge,$07BB,1,,0,,0,Flag,General,"0 - Bridges are down, 1 - Bridges are up"
-ArrowPlat_IsActive,$07BC,1,,0,,0,Flag,General,Set if arrow platform is active
-Level_GetWandState,$07BD,1,,0,,0,Level,General,See Koopaling code in PRG001 (TOFIX)
-Video_DoPalUpd,$07BE,1,,0,,0,Palettes,General,Name consistent with Video_Upd_Table (TOFIX)
+Scores_Value,$079E,5,$7E079F,5,,0,Sprites,General,"score ""value""; '0' none, (10, 20, 40, 80, 100, 200, 400, 800, 1000, 2000, 4000, 8000, 1-up)"
+Scores_Counter,$07A3,5,$7E07A4,5,,0,Sprites,General,"""counter"" until score disappears"
+Scores_Y,$07A8,5,$7E07A9,5,,0,Sprites,General,Score's Y
+Scores_X,$07AD,5,$7E07AE,5,,0,Sprites,General,Score's X
+LRBounce_Y,$07B2,1,$7E07B3,1,,0,Sprites,General,Left/right bouncer as sprite Y ($FF is disabled)
+LRBounce_X,$07B3,1,$7E07B4,1,,0,Sprites,General,Left/right bouncer as sprite X
+LRBounce_Vel,$07B4,1,$7E07B5,1,,0,Sprites,General,Left/right bouncer absolute value of X velocity
+Objects_Slope,$07B5,5,$7E07B6,5,,0,Sprites,General,Absolute slope calc value
+,$07BA,1,$7E07BB,1,,0,Empty,General,Unused.
+World3_Bridge,$07BB,1,$7E07BC,1,,0,Flag,General,"0 - Bridges are down, 1 - Bridges are up"
+ArrowPlat_IsActive,$07BC,1,$7E07BC,1,,0,Flag,General,Set if arrow platform is active
+Level_GetWandState,$07BD,1,$7E07BE,1,,0,Level,General,See Koopaling code in PRG001 (TOFIX)
+Video_DoPalUpd,$07BE,1,$7E07BF,1,,0,Palettes,General,Name consistent with Video_Upd_Table (TOFIX)
 Palette_AddrHi,$07BE,1,,0,,0,Palettes,General,Stores high part of palette address when committing palettes
 Palette_AddrLo,$07BF,1,,0,,0,Palettes,General,Stores low part of palette address when committing palettes
 Palette_BufCnt,$07C0,1,,0,,0,Palettes,General,32 for updating entire palette
-Palette_Buffer,$07C1,32,$7E07C9,26,,0,Palettes,General,"Buffer of palette bytes to commit, used for fade in/out
+,,0,$7E07C0,0,,0,Empty,General,Unused.
+Palette_Buffer,$07C1,32,$7E07C9,32,,0,Palettes,General,"Buffer of palette bytes to commit, used for fade in/out
 SNES: only written to during airship coin glow effect, which remains unutilized"
-Palette_Term,$07E1,1,,0,,0,Palettes,General,"Set to zero as terminator, per requirement of the Video_Upd_Table format"
+Palette_Term,$07E1,1,,1,,0,Palettes,General,"Set to zero as terminator, per requirement of the Video_Upd_Table format"
 BigQBlock_GotIt,$07E2,1,$7E07E3,1,,0,Level,General,"Big ? Blocks can only be retrieved once; this is a bitfield that marks which ones you've gotten by setting a bit per screen space in the Big ? Block area.
 Basically, if you reenter a Big ? Block area after opening it, it won't reappear! See ObjInit_BigQBlock and ObjNorm_BigQBlock for usage...
-NOTE: This is cleared completely upon Player death which works since levels are not re-enterable, but still seems a bit extreme..."
-,$07E3,13,,0,,0,Empty,General,Unused.
-DMC_Queue,$07F0,1,,0,,0,Audio,General,Stores value to play on DMC
-DMC_Current,$07F1,1,,0,,0,Audio,General,Currently playing DMC sound
-Sound_Sq1_CurFL,$07F2,1,,0,,0,Audio,General,"Holds current ""low"" frequency of Square Wave 1 (Warning: Must be +4 to Sound_Sq2_CurFL, see PRG031_E808)"
-Music_NseStart,$07F3,1,,0,,0,Audio,General,"Holds the starting offset of the noise track (CHECK: Reuse of $07F3, is this bad??)"
-,$07F4,1,,0,,0,Empty,General,Unused.
-Music2_Hold,$07F5,1,,0,,0,Audio,General,"A very little used feature, Music Set 1 overrides Music Set 2, but after a M1 song finishes, it restarts the M2 song"
-Sound_Sq2_CurFL,$07F6,1,,0,,0,Audio,General,"Holds current ""low"" frequency of Square Wave 1 (Warning: Must be +4 from Sound_Sq1_CurFL, see PRG031_E808)"
-Music_Sq2Patch,$07F7,1,,0,,0,Audio,General,"Current ""instrument patch"" for Square 2 (only upper 4 bits stored, 0ppp 0000)"
-Music_Sq1Patch,$07F8,1,,0,,0,Audio,General,"Current ""instrument patch"" for Square 1 (only upper 4 bits stored, 0ppp 0000)"
-,$07F9,1,,0,,0,Empty,General,Unused.
-Sound_Map_L2Hld,$07FA,1,,0,,0,Audio,General,"Same as Sound_Map_LHold, used for the secondary track (Warning: Will be affected by triangle, see PRG031_E808)"
-Sound_Map_Len2,$07FB,1,,0,,0,Audio,General,"Same as Sound_Map_Len, used for the secondary track"
-Sound_Map_LHold,$07FC,1,,0,,0,Audio,General,"Current length setting, used as delay after each byte of map sound (changed by special bytes in range $80-$FF)"
-Sound_Map_Len,$07FD,1,,0,,0,Audio,General,Countdown tick for current note/rest that map sound effect is on
-Sound_Map_Off2,$07FE,1,,0,,0,Audio,General,"Same as Sound_Map_Off, used for the secondary track"
-Sound_Unused7FF,$07FF,1,,0,,0,Empty,General,"Cleared once, never used otherwise"
+NOTE: This is cleared completely upon Player death which works since levels are not re-enterable, but still seems a bit extreme...
+SNES: This clashes with some earlier variables!"
+,$07E3,13,$7E07E4,13,,0,Empty,General,Unused.
+DMC_Queue,$07F0,1,,1,,0,Audio,General,Stores value to play on DMC
+DMC_Current,$07F1,1,,1,,0,Audio,General,Currently playing DMC sound
+Sound_Sq1_CurFL,$07F2,1,,1,,0,Audio,General,"Holds current ""low"" frequency of Square Wave 1 (Warning: Must be +4 to Sound_Sq2_CurFL, see PRG031_E808)"
+Music_NseStart,$07F3,1,,1,,0,Audio,General,"Holds the starting offset of the noise track (CHECK: Reuse of $07F3, is this bad??)"
+,$07F4,1,,1,,0,Empty,General,Unused.
+Music2_Hold,$07F5,1,,1,,0,Audio,General,"A very little used feature, Music Set 1 overrides Music Set 2, but after a M1 song finishes, it restarts the M2 song"
+Sound_Sq2_CurFL,$07F6,1,,1,,0,Audio,General,"Holds current ""low"" frequency of Square Wave 1 (Warning: Must be +4 from Sound_Sq1_CurFL, see PRG031_E808)"
+Music_Sq2Patch,$07F7,1,,1,,0,Audio,General,"Current ""instrument patch"" for Square 2 (only upper 4 bits stored, 0ppp 0000)"
+Music_Sq1Patch,$07F8,1,,1,,0,Audio,General,"Current ""instrument patch"" for Square 1 (only upper 4 bits stored, 0ppp 0000)"
+,$07F9,1,,1,,0,Empty,General,Unused.
+Sound_Map_L2Hld,$07FA,1,,1,,0,Audio,General,"Same as Sound_Map_LHold, used for the secondary track (Warning: Will be affected by triangle, see PRG031_E808)"
+Sound_Map_Len2,$07FB,1,,1,,0,Audio,General,"Same as Sound_Map_Len, used for the secondary track"
+Sound_Map_LHold,$07FC,1,,1,,0,Audio,General,"Current length setting, used as delay after each byte of map sound (changed by special bytes in range $80-$FF)"
+Sound_Map_Len,$07FD,1,,1,,0,Audio,General,Countdown tick for current note/rest that map sound effect is on
+Sound_Map_Off2,$07FE,1,,1,,0,Audio,General,"Same as Sound_Map_Off, used for the secondary track"
+Sound_Unused7FF,$07FF,1,,1,,0,Empty,General,"Cleared once, never used otherwise"
+SNES_SoundCh1,,0,$7E1200,1,,0,Audio,General,"APU Port 0, set to send a command to SP0"
+SNES_SoundCh2,,0,$7E1201,1,,0,Audio,General,"APU Port 1, set to send a command to SPC"
+SNES_SoundCh3,,0,$7E1202,1,,0,Audio,General,"APU Port 2, set to send a command to SPC"
+SNES_SoundCh4,,0,$7E1203,1,,0,Audio,General,"APU Port 3, set to send a command to SPC"
+SNES_SoundCh1_Cur,,0,$7E1204,1,,0,Audio,General,"APU Port 0, currently playing"
+SNES_SoundCh2_Cur,,0,$7E1205,1,,0,Audio,General,"APU Port 1, currently playing"
+SNES_SoundCh3_Cur,,0,$7E1206,1,,0,Audio,General,"APU Port 2, currently playing"
+SNES_SoundCh4_Cur,,0,$7E1207,1,,0,Audio,General,"APU Port 3, currently playing"
+,,0,$7E1208,1,,0,Empty,General,"Cleared once on reset, never used otherwise"
+,,0,$7E1209,1,,0,Empty,General,"Cleared once on reset, never used otherwise"
+SNES_SoundCh1_ClearCnt,,0,$7E120A,1,,0,Audio,General,"Counter for APU Port 0. On APU0 new write, reset and increase to 4 before port is cleared."
+SNES_SoundCh2_ClearCnt,,0,$7E120B,1,,0,Audio,General,"Counter for APU Port 1. On APU1 new write, reset and increase to 4 before port is cleared."
+SNES_SoundCh3_ClearTmr,,0,$7E120C,1,,0,Audio,General,"Counter for APU Port 2. On APU2 new write, set to 4 and decrease to 0 before port is cleared."
+SNES_SoundCh4_ClearCnt,,0,$7E120D,1,,0,Audio,General,"Counter for APU Port 3. On APU3 new write, reset and increase to 4 before port is cleared."
+,,0,$7E120E,1,,0,Empty,General,"Cleared once on reset, never used otherwise"
+SNES_SoundCh4_TmpVar,,0,$7E120F,1,,0,Audio,General,Temporary variable for APU Port 3
+,,0,$7E1210,240,,0,Empty,General,"Cleared once on reset, never used otherwise"
+SNES_PaletteUploadFlag,,0,$7E1500,1,,0,Palettes,General,"When non-zero, flag the palette to be uploaded to CGRAM."
 Tile_Mem,$6000,6480,$7E2000,6480,,0,Misc.,General,"Space used to store the 16x16 ""tiles"" that make up the World Map or Level
 
 Vertical level max size is 15 rows * 16 columns * 16 screens = 3840 ($0F00) bytes
@@ -1272,7 +1391,6 @@ Splash_DisTimer,$7A45,1,,0,,0,Player,General,Player water splashes are disabled 
 ShellKillFlash_Cnt,$7A46,1,,0,,0,Sprites,General,"""Shell Kill Flash"" counter"
 ShellKillFlash_Y,$7A47,1,$7E1A47,0,,0,Sprites,General,"""Shell Kill Flash"" Y"
 ShellKillFlash_X,$7A48,1,,0,,0,Sprites,General,"""Shell Kill Flash"" X"
-SNES_ShellKillFlash_XHi,,0,$7E027E,1,,0,Sprites,General,"SNES: ""Shell Kill Flash"" XHi"
 Objects_DisPatChng,$7A49,6,,0,,0,Sprites,General,"If set, this object no longer enforces a pattern bank change"
 ObjSplash_DisTimer,$7A4F,6,,0,,0,Sprites,General,Object water/lava splashes are disabled until decrements to zero
 PlayerProj_XVelFrac,$7A55,2,,0,,0,Sprites,General,Player Projectile X velocity fractional accumulator
@@ -1309,14 +1427,14 @@ Object_BufferX,$7C20,64,$7E1C20,64,,0,Sprites,General,"For certain objects that 
 Buffer_Occupied determines which of the two buffers is free, if any at all. The object will hold onto it then."
 Object_BufferY,$7C60,64,,0,,0,Sprites,General,"For certain objects that require a buffer of Y values
 Buffer_Occupied determines which of the two buffers is free, if any at all. The object will hold onto it then."
-ChainChomp_ChainX1,$7CA0,5,,0,,0,Sprites,General,Chain Link 1 X
-ChainChomp_ChainX2,$7CA5,5,,0,,0,Sprites,General,Chain Link 2 X
-ChainChomp_ChainX3,$7CAA,5,,0,,0,Sprites,General,Chain Link 3 X
-ChainChomp_ChainX4,$7CAF,5,,0,,0,Sprites,General,Chain Link 4 X
-ChainChomp_ChainY1,$7CB4,5,,0,,0,Sprites,General,Chain Link 1 Y
-ChainChomp_ChainY2,$7CB9,5,,0,,0,Sprites,General,Chain Link 2 Y
-ChainChomp_ChainY3,$7CBE,5,,0,,0,Sprites,General,Chain Link 3 Y
-ChainChomp_ChainY4,$7CC3,5,,0,,0,Sprites,General,Chain Link 4 Y
+ChainChomp_ChainX1,$7CA0,5,$7E1CA0,5,,0,Sprites,General,Chain Link 1 X
+ChainChomp_ChainX2,$7CA5,5,$7E1CA5,5,,0,Sprites,General,Chain Link 2 X
+ChainChomp_ChainX3,$7CAA,5,$7E1CAA,5,,0,Sprites,General,Chain Link 3 X
+ChainChomp_ChainX4,$7CAF,5,$7E1CAF,5,,0,Sprites,General,Chain Link 4 X
+ChainChomp_ChainY1,$7CB4,5,$7E1CB4,5,,0,Sprites,General,Chain Link 1 Y
+ChainChomp_ChainY2,$7CB9,5,$7E1CB9,5,,0,Sprites,General,Chain Link 2 Y
+ChainChomp_ChainY3,$7CBE,5,$7E1CBE,5,,0,Sprites,General,Chain Link 3 Y
+ChainChomp_ChainY4,$7CC3,5,$7E1CC3,5,,0,Sprites,General,Chain Link 4 Y
 Objects_Var10,$7CC8,5,$7E1CC8,5,,0,Sprites,General,Generic object variable 10
 Objects_Var11,$7CCD,5,$7E1CCD,5,,0,Sprites,General,Generic object variable 11
 Objects_Var12,$7CD2,5,$7E1CD2,5,,0,Sprites,General,Generic object variable 12
@@ -1359,7 +1477,7 @@ Map_GameOver_CursorY,$7DCB,1,,0,,0,Overworld,General,Game Over popup cursor Y ($
 ,$7DCC,9,,0,,0,Empty,General,Unused.
 Map_PrevMoveDir,$7DD5,1,,0,,0,Overworld,General,Last SUCCESSFUL (allowed) movement direction on map R01 L02 D04 U08
 ,$7DD6,8,,0,,0,Empty,General,Unused.
-Pal_Data,$7DDE,32,$7E1300,200,,0,Palettes,General,"Holds an entire bg/sprite palette (this is the MASTER palette, what fades target, and others may source for ""original"" colors!)"
+Pal_Data,$7DDE,32,$7E1300,512,,0,Palettes,General,"Holds an entire bg/sprite palette (this is the MASTER palette, what fades target, and others may source for ""original"" colors!)"
 Level_AltLayout,$7DFE,2,,0,,0,Level,General,"Pointer to level's ""alternate"" layout (when you go into bonus pipe, etc.)"
 Level_AltObjects,$7E00,2,,0,,0,Level,General,"Pointer to level's ""alternate"" object set (when you go into bonus pipe, etc.)"
 Level_BlockGrabHitMem,$7E02,128,,0,,0,Level,General,"Records coins and 1-ups grabbed, so they don't come back if you switch areas"
@@ -1428,7 +1546,6 @@ BrickBust_YVel,$7FA3,3,$7E1FA5,3,,0,Sprites,General,Brick bust Y velocity
 BrickBust_XDist,$7FA6,3,$7E1FA8,3,,0,Sprites,General,Brick bust X split
 BrickBust_YLwr,$7FA9,3,$7E1FAB,3,,0,Sprites,General,Brick bust lower chunks Y
 BrickBust_HEn,$7FAC,3,$7E1FAE,3,,0,Sprites,General,"Bits to hide chunks (Bit 0 = Right, 1 = Left, 2 = Lower, 3 = Upper) OR poof counter"
-SNES_BrickBust_XHi,,0,$7E02AE,1,,0,Sprites,General,SNES: Brick bust XHi split
 SNES_BrickBust_YUprHi,$7FAF,3,$7E1FB1,3,,0,Sprites,General,"NES: Unused.
 SNES: Brick bust upper chunks Y, high byte"
 CoinPUp_State,$7FB2,4,$7E1FB4,4,,0,Sprites,General,"State of up to 4 ""Power Up"" coins (i.e. coins that come out of ? blocks and bricks)"

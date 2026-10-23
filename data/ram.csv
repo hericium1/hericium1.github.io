@@ -97,12 +97,15 @@ SNES: Unused."
 Ending2_PicState,$0075,1,$7E0043,1,,0,Title Screen/Ending,Ending,Ending part 2 picture loader state
 Title_XPosHi,$0075,8,$7E0043,8,,0,Title Screen/Ending,Title Screen,"""High"" part of the extended precision X position for all objects"
 World_Map_Y,$0075,2,$7E0043,2,,0,Overworld,Overworld,(Mario/Luigi) Y pixel coordinate position of Mario on world map
-Vs_State,$0075,1,$7E0043,1,,0,Battle Mode,Battle Mode,2P Vs Mode state
+,,0,$7E0043,49,,0,Empty,Battle Mode,Unused.
+Vs_State,$0075,1,$7E0075,1,,0,Battle Mode,Battle Mode,2P Vs Mode state
 Player_XHi,$0075,1,$7E0043,1,,0,Player,Level,Player X Hi
 Ending2_ClearLen,$0076,1,$7E0044,1,,0,Title Screen/Ending,Ending,Length of clear run
-Vs_IsPaused,$0076,1,$7E0044,1,,0,Battle Mode,Battle Mode,"If set, 2P Vs is paused"
+Vs_IsPaused,$0076,1,$7E0076,1,,0,Battle Mode,Battle Mode,"If set, 2P Vs is paused"
 Objects_XHi,$0076,8,$7E0044,8,,0,Sprites,Level,Other object's X Hi positions
-,$0077,125,$7E0045,125,,0,Empty,Battle Mode,Unused.
+,$0077,125,$7E0077,22,,0,Empty,Battle Mode,Unused.
+,,0,$7E0090,25,,0,Empty,Battle Mode,Unused.
+,,0,$7E00AA,25,,0,Empty,Battle Mode,Unused.
 Ending2_ClearPat,$0077,1,$7E0045,1,,0,Title Screen/Ending,Ending,Pattern to clear the screen with
 World_Map_XHi,$0077,2,$7E0045,2,,0,Overworld,Overworld,(Mario/Luigi) X pixel (hi byte) coordinate position of Mario on world map
 Ending2_PicVRAMH,$0078,1,$7E0046,1,,0,Title Screen/Ending,Ending,Ending part 2 picture VRAM Hi
@@ -515,7 +518,7 @@ SNES_Vs_PlayerMatchWinCount,,0,$7E02DE,2,,0,Battle Mode,,(TOFIX)
 (TOFIX),,0,$7E02E3,2,,0,,,(TOFIX)
 ,,0,$7E02E5,27,,0,Empty,General,Unused. Cleared on Overworld load.
 Graphics_BufCnt,$0300,1,$7E1600,1,,0,Graphics,General,first byte holds current position within buffer (Graphics_Buffer+) to store info
-SNES_Graphics_BufCntHi,,0,$7E1601,1,,0,Graphics,General,High byte of previous.
+SNES_Graphics_BufCntHi,,0,$7E1601,1,,0,Graphics,General,High byte of previous. NOTE: sometimes this high byte is not read by some writes to the buffer!
 Graphics_Buffer,$0301,107,$7E1602,510,,0,Graphics,General,"Simple (and small!) delayed write buffer; uses same format as Video_Upd_Table in PRG030, get format info there"
 ,,0,$7E0300,73,,0,Empty,General,Unused. Cleared on Overworld load.
 SNES_Timer_PauseCooldown,,0,$7E0349,1,,0,Misc.,General,"Generic timer, counts to zero during levels/overworld. Prevents pause from being pressed. Set to #$10 at level/world initialize, but never written to otherwise."
@@ -1191,222 +1194,301 @@ SNES_SoundCh4_ClearCnt,,0,$7E120D,1,,0,Audio,General,"Counter for APU Port 3. On
 SNES_SoundCh4_TmpVar,,0,$7E120F,1,,0,Audio,General,Temporary variable for APU Port 3
 ,,0,$7E1210,240,,0,Empty,General,"Cleared once on reset, never used otherwise"
 SNES_PaletteUploadFlag,,0,$7E1500,1,,0,Palettes,General,"When non-zero, flag the palette to be uploaded to CGRAM."
+SNES_UnusedUpd1501,,0,$7E1501,1,,0,Misc.,General,Unused. Set to #$06 during Title_IntroSkip
+,,0,$7E1502,1,,0,Empty,General,
+SNES_OWMusicBankLoaded,,0,$7E1503,1,,0,Misc.,General,Set as non-zero if overworld music bank is loaded. Also will fade out music if a pipe is entered while this is set (used in pipe junctions)
+,,0,$7E1504,252,,0,Empty,General,Unused.
 Tile_Mem,$6000,6480,$7E2000,6480,,0,Misc.,General,"Space used to store the 16x16 ""tiles"" that make up the World Map or Level
 
 Vertical level max size is 15 rows * 16 columns * 16 screens = 3840 ($0F00) bytes
 Non-vertical level max size is 27 rows * 16 columns * 15 screens = 6480 ($1950) bytes"
-Vs_PlayerFrame,$6800,2,$7E008D,2,,0,Battle Mode,Battle Mode,Mario/Luigi Frame
+Vs_PlayerFrame,$6800,2,$7E008D,3,,0,Battle Mode,Battle Mode,"Mario/Luigi Frame
+SNES: 8F is accidentally written to on initialization"
 Vs_MemStart,$6800,1,$7E1800,0,,0,Battle Mode,Battle Mode,"Should be at ""top""; this point and 512 bytes forward are cleared at start of 2P Vs"
 Vs_PlayerState,$6802,2,$7E1800,2,,0,Battle Mode,Battle Mode,"Mario/Luigi State (0=Init, 1=Normal, 2=Dying, 3=Ladder climbing)"
-Vs_ObjectState,$6804,12,,0,,0,Battle Mode,Battle Mode,"Objects State (0=Dead/empty, 1=Normal, 2=Flipped over, 3=Dying)"
-,$6810,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_PlayerBlkHitCnt,$6811,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Hit block counter value
-Vs_PlayerY,$6813,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Y
-Vs_ObjectsY,$6815,12,,0,,0,Battle Mode,Battle Mode,Objects Y
-,$6821,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_PlayerBlkHitY,$6822,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Aligned Y position where block was hit
-Vs_PlayerX,$6824,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi X
-Vs_ObjectsX,$6826,12,,0,,0,Battle Mode,Battle Mode,Objects X
-,$6832,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_PlayerBlkHitX,$6833,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Aligned Y position where block was hit
-Vs_PlayerYVel,$6835,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Y Velocity
-Vs_ObjectYVel,$6837,12,,0,,0,Battle Mode,Battle Mode,Objects Y Velocity
-,$6843,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_PlayerBlkHitYVel,$6844,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Hit block Y velocity
-Vs_PlayerXVel,$6846,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi X Velocity
-Vs_ObjectXVel,$6848,12,,0,,0,Battle Mode,Battle Mode,Objects X Velocity
-,$6854,3,,0,,0,Empty,Battle Mode,Unused.
-Vs_PlayerClimbFrame,$6857,2,,0,,0,Battle Mode,Battle Mode,Incremented as Player climbs
-Vs_ObjectAnimCnt,$6859,12,,0,,0,Battle Mode,Battle Mode,A continuous counter per object for animating (typically 2 frames)
-,$6865,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_PlayerDir,$6866,2,,0,,0,Battle Mode,Battle Mode,"Mario/Luigi direction (1=Right, 2=Left)"
-Vs_ObjectDir,$6868,12,,0,,0,Battle Mode,Battle Mode,"Objects direction (1=Right, 2=Left)"
-,$6874,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_PlayerYVelFrac,$6875,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Y velocity fractional accumulator
-Vs_ObjectYVelFrac,$6877,12,,0,,0,Battle Mode,Battle Mode,Objects Y velocity fractional accumulator
-,$6883,3,,0,,0,Empty,Battle Mode,Unused.
-Vs_PlayerXVelFrac,$6886,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi X velocity fractional accumulator
-Vs_ObjectXVelFrac,$6888,12,,0,,0,Battle Mode,Battle Mode,Objects X velocity fractional accumulator
-,$6894,3,,0,,0,Empty,Battle Mode,Unused.
-Vs_PlayerDetStat,$6897,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi detection status
-Vs_ObjectDetStat,$6899,12,,0,,0,Battle Mode,Battle Mode,Objects detection status
-,$68A5,3,,0,,0,Empty,Battle Mode,Unused.
-Vs_ObjectVar1,$68A8,12,,0,,0,Battle Mode,Battle Mode,General variable 1
-,$68B4,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_PlayerKick,$68B5,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Player is kicking until decrements to zero
-Vs_PlayerDizzy,$68B7,2,,0,,0,Battle Mode,Battle Mode,"Mario/Luigi Player ""dizzy"" face until decrements to zero"
-Vs_PlayerStick,$68B9,2,,0,,0,Battle Mode,Battle Mode,"Mario/Luigi Mario/Luigi Player ""sticking"" to ceiling; decrements to zero"
-Vs_PlayerBumpTimer,$68BB,1,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Players bumped off eachother (and can't again until zero); decrements to zero
-Vs_POWBlockCnt,$68BC,1,,0,,0,Battle Mode,Battle Mode,"POW block counter; decrements to zero; until then, POW shaking!"
-Vs_ObjectId,$68BD,12,,0,,0,Battle Mode,Battle Mode,Objects ID (TOFIX)
-,$68C9,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_ObjectSprRAMOff,$68CA,1,,0,,0,Battle Mode,Battle Mode,Current object Sprite RAM offset
-Vs_ObjectSprRAMSel,$68CB,1,,0,,0,Battle Mode,Battle Mode,Counter that runs $D to $0 (inclusive) and helps distribute Sprite RAM offsets among the objects
-Vs_EnemyCount,$68CC,1,,0,,0,Battle Mode,Battle Mode,Number of spawned enemies (in the typical game)
-Vs_PlayerHaltTimer,$68CD,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi timer which halts gameplay; decrements to zero
-Vs_ObjHaltTimer,$68CF,12,,0,,0,Battle Mode,Battle Mode,Object timer which halts object when greater than zero; decrements to zero
-,$68DB,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_ObjectTimer3,$68DC,12,,0,,0,Battle Mode,Battle Mode,"Object timer, decrements"
-,$68E8,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_PlayerCnt,$68E9,2,,0,,0,Battle Mode,Battle Mode,"Mario/Luigi ""counter"" value; decrements to zero"
-Vs_EnemyGetUpTimer,$68EB,12,,0,,0,Battle Mode,Battle Mode,Timer for flipped-over enemy; decrements to zero
-,$68F7,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_PlayerJumped,$68F8,2,,0,,0,Battle Mode,Battle Mode,Set to 1 if Player jumped; prevents Player from jumping again until they hit floor
-Vs_PlayerTileL,$68FA,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Tile detected at Player's feet
-Vs_ObjectTileL,$68FC,12,,0,,0,Battle Mode,Battle Mode,Tile detected at objects's feet
-,$6908,2,,0,,0,Empty,Battle Mode,Unused.
-Vs_PlayerBlkHit,$690A,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Holds Tile_Mem offset to bounce block they hit
-Vs_PlayerFlashInv,$690C,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Flashing invicibility (?)
-Vs_SpawnCnt2,$690E,1,,0,,0,Battle Mode,Battle Mode,FIXME describe better (TOFIX)
-Vs_TooLongCnt,$690F,1,,0,,0,Battle Mode,Battle Mode,"Increments after each round of spawning; if it overflows, ""game ender"" fireballs are spawned"
-Vs_CurIndex,$6910,1,,0,,0,Battle Mode,Battle Mode,Current index (Player or object)
-Vs_PlayerTileU,$6911,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Tile detected above Player's feet
-,$6913,13,,0,,0,Empty,Battle Mode,Unused.
-Vs_ObjectPipeTimer,$6920,12,,0,,0,Battle Mode,Battle Mode,Timer used for enemies to exit and emerge from pipes; decrements to zero
-,$692C,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_Random,$692D,3,,0,,0,Battle Mode,Battle Mode,Random generator for 2P Vs mode
-Vs_PlayerCoins,$6930,2,,0,,0,Battle Mode,Battle Mode,Player's coins (in 2P Vs); 5 wins the match
-Vs_TimeToExit,$6932,1,,0,,0,Battle Mode,Battle Mode,Decrements to zero then exits the 2P Vs
-Vs_ObjectIsLast,$6933,12,,0,,0,Battle Mode,Battle Mode,"Set if this is the last object (turns blue, move fast)"
-,$693F,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_POWHits,$6940,1,,0,,0,Battle Mode,Battle Mode,Number of times POW block has been hit (disabled on 3)
-Vs_PlayerYOff,$6941,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Y offset applied
-Vs_UNKGAMECnt,$6943,1,,0,,0,Battle Mode,Battle Mode,"Unknown ""game"" counter; after overflow, we exit"
-Vs_PlayerYHi,$6944,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Y Hi
-Vs_ObjectYHi,$6946,12,,0,,0,Battle Mode,Battle Mode,Object Y Hi
-,$6952,3,,0,,0,Empty,Battle Mode,Unused.
-Vs_ObjectIsAngry,$6955,12,,0,,0,Battle Mode,Battle Mode,Set when Sidestepper is angry (not used for anything else)
-,$6961,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_AngrySidesteppers,$6962,1,,0,,0,Battle Mode,Battle Mode,"When greater than zero, and spawning a Sidestepper, next one is an ""angry"" Sidestepper (then decrement)"
-,$6963,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_ObjectVDir,$6964,12,,0,,0,Battle Mode,Battle Mode,"Objects vertical direction (4=Down, 8=Up)"
-,$6970,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_ObjectRestoreXVel,$6971,12,,0,,0,Battle Mode,Battle Mode,Flipped over object restore X velocity
-,$697D,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_ObjTimer2,$697E,12,,0,,0,Battle Mode,Battle Mode,Object timer; decrements to zero
-,$698A,1,,0,,0,Empty,Battle Mode,Unused.
-Vs_CardFlash,$698B,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi Cycles color for card (when picked up from another Player)
-Vs_HaltTimerBackup,$698D,15,,0,,0,Battle Mode,Battle Mode,Backs up all halt timers
-Vs_EnemySet,$699C,1,,0,,0,Battle Mode,Battle Mode,"Specifies an index of active enemy set, selecting one of the quintuples from Vs_5EnemySets"
-Vs_ObjectXOff,$699D,1,,0,,0,Battle Mode,Battle Mode,A one-shot X offset for display of object FIXME: When?
-Vs_PlayerWalkCnt,$699E,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi counts up and overflows to toggle walk frames
-Vs_PlayerWalkFrame,$69A0,2,,0,,0,Battle Mode,Battle Mode,Mario/Luigi incremented when Vs_PlayerWalkCnt overflows
-Vs_NextObjectIsLast,$69A2,1,,0,,0,Battle Mode,Battle Mode,"If there are 5 enemies and this is set, next enemy out is the ""last"" (turns blue, moves fast)"
-Vs_xUpCnt,$69A3,2,,0,,0,Battle Mode,Battle Mode,"Mario/Luigi ""x Up"" counter"
-Vs_xUpY,$69A5,2,,0,,0,Battle Mode,Battle Mode,"Mario/Luigi ""x Up"" Y pos"
-Vs_xUpX,$69A7,2,,0,,0,Battle Mode,Battle Mode,"Mario/Luigi ""x Up"" X pos"
-Vs_xUpLives,$69A9,2,,0,,0,Battle Mode,Battle Mode,"Mario/Luigi ""x Up"" Lives amount (1, 2, 3, 5)"
-Vs_SpawnCnt,$69AB,1,,0,,0,Battle Mode,Battle Mode,Spawn counter; increments and triggers spawning
-,$69AC,4004,,0,,0,Empty,Battle Mode,Unused.
+Vs_ObjectState,$6804,12,$7E1802,12,,0,Battle Mode,Battle Mode,"Objects State (0=Dead/empty, 1=Normal, 2=Flipped over, 3=Dying)"
+,$6810,1,$7E180E,1,,0,Empty,Battle Mode,Unused.
+Vs_PlayerBlkHitCnt,$6811,2,$7E180F,2,,0,Battle Mode,Battle Mode,Mario/Luigi Hit block counter value
+Vs_PlayerY,$6813,2,$7E1811,2,,0,Battle Mode,Battle Mode,Mario/Luigi Y
+Vs_ObjectsY,$6815,12,$7E1813,12,,0,Battle Mode,Battle Mode,Objects Y
+,$6821,1,$7E181F,1,,0,Empty,Battle Mode,Unused.
+Vs_PlayerBlkHitY,$6822,2,$7E1820,2,,0,Battle Mode,Battle Mode,Mario/Luigi Aligned Y position where block was hit
+Vs_PlayerX,$6824,2,$7E1822,2,,0,Battle Mode,Battle Mode,Mario/Luigi X
+Vs_ObjectsX,$6826,12,$7E1824,12,,0,Battle Mode,Battle Mode,Objects X
+,$6832,1,$7E1830,1,,0,Empty,Battle Mode,Unused.
+Vs_PlayerBlkHitX,$6833,2,$7E1831,2,,0,Battle Mode,Battle Mode,Mario/Luigi Aligned Y position where block was hit
+Vs_PlayerYVel,$6835,2,$7E1833,2,,0,Battle Mode,Battle Mode,Mario/Luigi Y Velocity
+Vs_ObjectYVel,$6837,12,$7E1835,12,,0,Battle Mode,Battle Mode,Objects Y Velocity
+,$6843,1,$7E1841,1,,0,Empty,Battle Mode,Unused.
+Vs_PlayerBlkHitYVel,$6844,2,$7E1842,2,,0,Battle Mode,Battle Mode,Mario/Luigi Hit block Y velocity
+Vs_PlayerXVel,$6846,2,$7E1844,2,,0,Battle Mode,Battle Mode,Mario/Luigi X Velocity
+Vs_ObjectXVel,$6848,12,$7E1846,12,,0,Battle Mode,Battle Mode,Objects X Velocity
+,$6854,3,$7E1852,3,,0,Empty,Battle Mode,Unused.
+Vs_PlayerClimbFrame,$6857,2,$7E1855,2,,0,Battle Mode,Battle Mode,Incremented as Player climbs
+Vs_ObjectAnimCnt,$6859,12,$7E1858,12,,0,Battle Mode,Battle Mode,A continuous counter per object for animating (typically 2 frames)
+,$6865,1,$7E1863,1,,0,Empty,Battle Mode,Unused.
+Vs_PlayerDir,$6866,2,$7E1864,2,,0,Battle Mode,Battle Mode,"Mario/Luigi direction (1=Right, 2=Left)"
+Vs_ObjectDir,$6868,12,$7E1866,12,,0,Battle Mode,Battle Mode,"Objects direction (1=Right, 2=Left)"
+,$6874,1,$7E1872,1,,0,Empty,Battle Mode,Unused.
+Vs_PlayerYVelFrac,$6875,2,$7E1873,2,,0,Battle Mode,Battle Mode,Mario/Luigi Y velocity fractional accumulator
+Vs_ObjectYVelFrac,$6877,12,$7E1875,12,,0,Battle Mode,Battle Mode,Objects Y velocity fractional accumulator
+,$6883,3,$7E1881,3,,0,Empty,Battle Mode,Unused.
+Vs_PlayerXVelFrac,$6886,2,$7E1884,2,,0,Battle Mode,Battle Mode,Mario/Luigi X velocity fractional accumulator
+Vs_ObjectXVelFrac,$6888,12,$7E1886,12,,0,Battle Mode,Battle Mode,Objects X velocity fractional accumulator
+,$6894,3,$7E1892,3,,0,Empty,Battle Mode,Unused.
+Vs_PlayerDetStat,$6897,2,$7E1895,2,,0,Battle Mode,Battle Mode,Mario/Luigi detection status
+Vs_ObjectDetStat,$6899,12,$7E1897,12,,0,Battle Mode,Battle Mode,Objects detection status
+,$68A5,3,$7E18A3,3,,0,Empty,Battle Mode,Unused.
+Vs_ObjectVar1,$68A8,12,$7E18A6,12,,0,Battle Mode,Battle Mode,General variable 1
+,$68B4,1,$7E18B2,1,,0,Empty,Battle Mode,Unused.
+Vs_PlayerKick,$68B5,2,$7E18B3,2,,0,Battle Mode,Battle Mode,Mario/Luigi Player is kicking until decrements to zero
+Vs_PlayerDizzy,$68B7,2,$7E18B5,2,,0,Battle Mode,Battle Mode,"Mario/Luigi Player ""dizzy"" face until decrements to zero"
+Vs_PlayerStick,$68B9,2,$7E18B7,2,,0,Battle Mode,Battle Mode,"Mario/Luigi Mario/Luigi Player ""sticking"" to ceiling; decrements to zero"
+Vs_PlayerBumpTimer,$68BB,1,$7E18B9,1,,0,Battle Mode,Battle Mode,Mario/Luigi Players bumped off eachother (and can't again until zero); decrements to zero
+Vs_POWBlockCnt,$68BC,1,$7E18BA,1,,0,Battle Mode,Battle Mode,"POW block counter; decrements to zero; until then, POW shaking!"
+Vs_ObjectId,$68BD,12,$7E18BB,12,,0,Battle Mode,Battle Mode,Objects ID (TOFIX)
+,$68C9,1,$7E18C7,1,,0,Empty,Battle Mode,Unused.
+Vs_ObjectSprRAMOff,$68CA,1,$7E18C8,1,,0,Battle Mode,Battle Mode,Current object Sprite RAM offset
+Vs_ObjectSprRAMSel,$68CB,1,$7E18C9,1,,0,Battle Mode,Battle Mode,Counter that runs $D to $0 (inclusive) and helps distribute Sprite RAM offsets among the objects
+Vs_EnemyCount,$68CC,1,$7E18CA,1,,0,Battle Mode,Battle Mode,Number of spawned enemies (in the typical game)
+Vs_PlayerHaltTimer,$68CD,2,$7E18CB,2,,0,Battle Mode,Battle Mode,Mario/Luigi timer which halts gameplay; decrements to zero
+Vs_ObjHaltTimer,$68CF,12,$7E18CD,12,,0,Battle Mode,Battle Mode,Object timer which halts object when greater than zero; decrements to zero
+,$68DB,1,$7E18D9,1,,0,Empty,Battle Mode,Unused.
+Vs_ObjectTimer3,$68DC,12,$7E18DA,12,,0,Battle Mode,Battle Mode,"Object timer, decrements"
+,$68E8,1,$7E18E6,1,,0,Empty,Battle Mode,Unused.
+Vs_PlayerCnt,$68E9,2,$7E18E7,2,,0,Battle Mode,Battle Mode,"Mario/Luigi ""counter"" value; decrements to zero"
+Vs_EnemyGetUpTimer,$68EB,12,$7E18E9,12,,0,Battle Mode,Battle Mode,Timer for flipped-over enemy; decrements to zero
+,$68F7,1,$7E18F5,1,,0,Empty,Battle Mode,Unused.
+Vs_PlayerJumped,$68F8,2,$7E18F6,2,,0,Battle Mode,Battle Mode,Set to 1 if Player jumped; prevents Player from jumping again until they hit floor
+Vs_PlayerTileL,$68FA,2,$7E18F8,2,,0,Battle Mode,Battle Mode,Mario/Luigi Tile detected at Player's feet
+Vs_ObjectTileL,$68FC,12,$7E18FA,12,,0,Battle Mode,Battle Mode,Tile detected at objects's feet
+,$6908,2,$7E1906,2,,0,Empty,Battle Mode,Unused.
+Vs_PlayerBlkHit,$690A,2,$7E1908,2,,0,Battle Mode,Battle Mode,Mario/Luigi Holds Tile_Mem offset to bounce block they hit
+Vs_PlayerFlashInv,$690C,2,$7E190A,2,,0,Battle Mode,Battle Mode,Mario/Luigi Flashing invicibility (?)
+Vs_SpawnCnt2,$690E,1,$7E190C,1,,0,Battle Mode,Battle Mode,FIXME describe better (TOFIX)
+Vs_TooLongCnt,$690F,1,$7E190D,1,,0,Battle Mode,Battle Mode,"Increments after each round of spawning; if it overflows, ""game ender"" fireballs are spawned"
+Vs_CurIndex,$6910,1,$7E190E,1,,0,Battle Mode,Battle Mode,Current index (Player or object)
+Vs_PlayerTileU,$6911,2,$7E190F,2,,0,Battle Mode,Battle Mode,Mario/Luigi Tile detected above Player's feet
+,$6913,13,$7E1911,13,,0,Empty,Battle Mode,Unused.
+Vs_ObjectPipeTimer,$6920,12,$7E191E,12,,0,Battle Mode,Battle Mode,Timer used for enemies to exit and emerge from pipes; decrements to zero
+,$692C,1,$7E192A,1,,0,Empty,Battle Mode,Unused.
+Vs_Random,$692D,3,$7E192B,3,,0,Battle Mode,Battle Mode,Random generator for 2P Vs mode
+Vs_PlayerCoins,$6930,2,$7E192E,2,,0,Battle Mode,Battle Mode,Player's coins (in 2P Vs); 5 wins the match
+Vs_TimeToExit,$6932,1,$7E1930,1,,0,Battle Mode,Battle Mode,Decrements to zero then exits the 2P Vs
+Vs_ObjectIsLast,$6933,12,$7E1931,12,,0,Battle Mode,Battle Mode,"Set if this is the last object (turns blue, move fast)"
+,$693F,1,$7E193D,1,,0,Empty,Battle Mode,Unused.
+Vs_POWHits,$6940,1,$7E193E,1,,0,Battle Mode,Battle Mode,Number of times POW block has been hit (disabled on 3)
+Vs_PlayerYOff,$6941,2,$7E193F,2,,0,Battle Mode,Battle Mode,Mario/Luigi Y offset applied
+Vs_UNKGAMECnt,$6943,1,$7E1941,1,,0,Battle Mode,Battle Mode,"Unknown ""game"" counter; after overflow, we exit"
+Vs_PlayerYHi,$6944,2,$7E1942,2,,0,Battle Mode,Battle Mode,Mario/Luigi Y Hi
+Vs_ObjectYHi,$6946,12,$7E1944,12,,0,Battle Mode,Battle Mode,Object Y Hi
+,$6952,3,$7E1950,3,,0,Empty,Battle Mode,Unused.
+Vs_ObjectIsAngry,$6955,12,$7E1953,12,,0,Battle Mode,Battle Mode,Set when Sidestepper is angry (not used for anything else)
+,$6961,1,$7E195F,1,,0,Empty,Battle Mode,Unused.
+Vs_AngrySidesteppers,$6962,1,$7E1960,1,,0,Battle Mode,Battle Mode,"When greater than zero, and spawning a Sidestepper, next one is an ""angry"" Sidestepper (then decrement)"
+,$6963,1,$7E1961,1,,0,Empty,Battle Mode,Unused.
+Vs_ObjectVDir,$6964,12,$7E1962,12,,0,Battle Mode,Battle Mode,"Objects vertical direction (4=Down, 8=Up)"
+,$6970,1,$7E196E,1,,0,Empty,Battle Mode,Unused.
+Vs_ObjectRestoreXVel,$6971,12,$7E196F,12,,0,Battle Mode,Battle Mode,Flipped over object restore X velocity
+,$697D,1,$7E197B,1,,0,Empty,Battle Mode,Unused.
+Vs_ObjTimer2,$697E,12,$7E197C,12,,0,Battle Mode,Battle Mode,Object timer; decrements to zero
+,$698A,1,$7E1988,1,,0,Empty,Battle Mode,Unused.
+Vs_CardFlash,$698B,2,$7E1989,2,,0,Battle Mode,Battle Mode,Mario/Luigi Cycles color for card (when picked up from another Player)
+Vs_HaltTimerBackup,$698D,15,$7E198B,15,,0,Battle Mode,Battle Mode,Backs up all halt timers
+Vs_EnemySet,$699C,1,$7E199A,1,,0,Battle Mode,Battle Mode,"Specifies an index of active enemy set, selecting one of the quintuples from Vs_5EnemySets"
+Vs_ObjectXOff,$699D,1,$7E199B,1,,0,Battle Mode,Battle Mode,A one-shot X offset for display of object FIXME: When?
+Vs_PlayerWalkCnt,$699E,2,$7E199C,2,,0,Battle Mode,Battle Mode,Mario/Luigi counts up and overflows to toggle walk frames
+Vs_PlayerWalkFrame,$69A0,2,$7E199E,2,,0,Battle Mode,Battle Mode,Mario/Luigi incremented when Vs_PlayerWalkCnt overflows
+Vs_NextObjectIsLast,$69A2,1,$7E19A0,1,,0,Battle Mode,Battle Mode,"If there are 5 enemies and this is set, next enemy out is the ""last"" (turns blue, moves fast)"
+Vs_xUpCnt,$69A3,2,$7E19A1,2,,0,Battle Mode,Battle Mode,"Mario/Luigi ""x Up"" counter"
+Vs_xUpY,$69A5,2,$7E19A3,2,,0,Battle Mode,Battle Mode,"Mario/Luigi ""x Up"" Y pos"
+Vs_xUpX,$69A7,2,$7E19A5,2,,0,Battle Mode,Battle Mode,"Mario/Luigi ""x Up"" X pos"
+Vs_xUpLives,$69A9,2,$7E19A7,2,,0,Battle Mode,Battle Mode,"Mario/Luigi ""x Up"" Lives amount (1, 2, 3, 5)"
+Vs_SpawnCnt,$69AB,1,$7E00A9,1,,0,Battle Mode,Battle Mode,"Spawn counter; increments and triggers spawning
+SNES: this is in zero page area."
+,$69AC,4004,$7E19A9,2,,0,Empty,Battle Mode,Unused.
+SNES_Vs_PlayerPUp,,0,$7E19AB,2,,0,Battle Mode,Battle Mode,(TOFIX)
+SNES_Vs_PlayerIsDucking,,0,$7E19AD,2,,0,Battle Mode,Battle Mode,(TOFIX)
+SNES_Vs_PlayerGrow,,0,$7E19AF,2,,0,Battle Mode,Battle Mode,(TOFIX)
+SNES_Vs_PlayerQueueSuit,,0,$7E19B1,2,,0,Battle Mode,Battle Mode,(TOFIX)
+SNES_Vs_PlayerFlashInv,,0,$7E19B3,2,,0,Battle Mode,Battle Mode,(TOFIX)
+SNES_Vs_PlayerFlashInvHold,,0,$7E19B5,2,,0,Battle Mode,Battle Mode,(TOFIX)
+SNES_Vs_MushX,,0,$7E19B7,1,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E19B8,1,,0,Empty,Battle Mode,Unused.
+SNES_Vs_MushY,,0,$7E19B9,1,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E19BA,1,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E19BB,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E19BC,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E19BD,1,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E19BE,2,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E19C0,1,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E19C1,4,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E19C5,8,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E19CD,1,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E19CE,8,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E19D6,1,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E19D7,8,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E19DF,1,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E19E0,8,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E19E8,1,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E19E9,8,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E19F1,1,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E19F2,8,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E19FA,1,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E19FB,8,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E1A03,1,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E1A04,8,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E1A0C,1,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E1A0D,8,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E1A15,1,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E1A16,8,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E1A1E,1,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E1A1F,8,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E1A27,1,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E1A28,1,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E1A29,1,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E1A2A,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A2B,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A2C,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A2D,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A2E,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A2F,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A30,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A31,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A32,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A33,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A34,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A35,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A36,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A37,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A38,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A39,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A3A,2,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A3C,2,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A3E,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A3F,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A40,12,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E1A4C,1,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E1A4D,12,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E1A59,1,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E1A5A,12,,0,Battle Mode,Battle Mode,(TOFIX)
+,,0,$7E1A66,1,,0,Empty,Battle Mode,Unused.
+(TOFIX),,0,$7E1A67,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A68,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A69,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A6A,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A6B,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A6C,1,,0,Battle Mode,Battle Mode,(TOFIX)
+(TOFIX),,0,$7E1A6D,1,,0,Battle Mode,Battle Mode,(TOFIX)
 Map_MoveRepeat,$7950,2,$7E3950,2,,0,Overworld,General,(Mario/Luigi) counts up to $18 and then you keep moving without pause
-AScrlURDiag_OffsetX,$7952,1,,0,,0,Camera,General,"When diagonal autoscroller is wrapping, this holds an X offset for Player/Objects to temporarily correct"
-AScrlURDiag_OffsetY,$7953,1,,0,,0,Camera,General,"When diagonal autoscroller is wrapping, this holds an Y offset for Player/Objects to temporarily correct"
-StatusBar_UpdFl,$7954,1,,0,,0,Misc.,General,Status bar Update Flag; toggles so to update status bar only every other frame
+AScrlURDiag_OffsetX,$7952,1,$7E3952,1,,0,Camera,General,"When diagonal autoscroller is wrapping, this holds an X offset for Player/Objects to temporarily correct"
+AScrlURDiag_OffsetY,$7953,1,$7E3953,1,,0,Camera,General,"When diagonal autoscroller is wrapping, this holds an Y offset for Player/Objects to temporarily correct"
+StatusBar_UpdFl,$7954,1,$7E3954,1,,0,Misc.,General,Status bar Update Flag; toggles so to update status bar only every other frame
 UpdSel_Disable,$7955,1,$7E3955,1,,0,Misc.,General,"When set, disables the Update_Select routine during the NMI, which halts most activity due to no reported V-Blanking"
-Map_Objects_Itm,$7956,13,,0,,0,Overworld,General,"""Item given by"" map objects"
-Level_TreasureItem,$7963,1,,0,,0,Level,General,Item that will be given by treasure box; set by the object OBJ_TREASURESET by its row (TOFIX)
+Map_Objects_Itm,$7956,13,$7E3956,13,,0,Overworld,General,"""Item given by"" map objects"
+Level_TreasureItem,$7963,1,$7E3963,1,,0,Level,General,Item that will be given by treasure box; set by the object OBJ_TREASURESET by its row (TOFIX)
 Reset_Latch,$7964,1,,0,,0,Misc.,General,"If this value is anything besides $5A, the reset is run (I assume this is considered a safe value in case of data corruption, e.g. from runaway generator)"
-Map_BonusType,$7965,1,,0,,0,Overworld,General,"0 = No bonus, 1 = White Toad House, 2 = UNKNOWN WHITE THING (MAPOBJ_UNK0C)"
-Map_BonusCoinsReqd,$7966,1,,0,,0,Overworld,General,Number of coins you need for White Toad House (or the MAPOBJ_UNK0C thing!); value ranges 0-127
-Coins_ThisLevel,$7967,1,,0,,0,Level,General,Internal counter of coins earned -this level- (so always starts at 0 and increments)
-Map_NSpade_NextScore,$7968,3,,0,,0,Overworld,General,Treated as 3-byte integer
-Map_BonusAppY,$796B,1,,0,,0,Overworld,General,"Map ""white"" bonus appearance Y (set to Player's last ""succeeded"" map position)"
-Map_BonusAppXHi,$796C,1,,0,,0,Overworld,General,"Map ""white"" bonus appearance XHi (set to Player's last ""succeeded"" map position)"
-Map_BonusAppX,$796D,1,,0,,0,Overworld,General,"Map ""white"" bonus appearance X (set to Player's last ""succeeded"" map position)"
-Map_NoLoseTurn,$796E,1,,0,,0,Flag,General,"If set, Player does not lose turn after having completed a level (used for Toad House, pipeways, etc.)"
+Map_BonusType,$7965,1,$7E3964,1,,0,Overworld,General,"0 = No bonus, 1 = White Toad House, 2 = UNKNOWN WHITE THING (MAPOBJ_UNK0C)"
+Map_BonusCoinsReqd,$7966,1,$7E3965,1,,0,Overworld,General,Number of coins you need for White Toad House (or the MAPOBJ_UNK0C thing!); value ranges 0-127
+Coins_ThisLevel,$7967,1,$7E3966,1,,0,Level,General,Internal counter of coins earned -this level- (so always starts at 0 and increments)
+Map_NSpade_NextScore,$7968,3,$7E3967,3,,0,Overworld,General,Treated as 3-byte integer
+Map_BonusAppY,$796B,1,$7E396A,1,,0,Overworld,General,"Map ""white"" bonus appearance Y (set to Player's last ""succeeded"" map position)"
+Map_BonusAppXHi,$796C,1,$7E396B,1,,0,Overworld,General,"Map ""white"" bonus appearance XHi (set to Player's last ""succeeded"" map position)"
+Map_BonusAppX,$796D,1,$7E396C,1,,0,Overworld,General,"Map ""white"" bonus appearance X (set to Player's last ""succeeded"" map position)"
+Map_NoLoseTurn,$796E,1,$7E396D,1,,0,Flag,General,"If set, Player does not lose turn after having completed a level (used for Toad House, pipeways, etc.)"
 Map_Got13Warp,$796F,1,$7E396E,1,,0,Flag,General,Set non-zero if Player already got the 1-3 Warp Whistle
 Map_Anchored,$7970,1,$7E396F,1,,0,Flag,General,Set if anchor is set on this map
-Map_WhiteHouse,$7971,1,$7E3970,0,,0,Flag,General,Set if you have already earned the White Toad House for this world
-Map_CoinShip,$7972,1,$7E3971,0,,0,Flag,General,Set if you have already earned the Coin Ship for this world
-Map_WasInPipeway,$7973,1,,0,,0,Flag,General,Set if you just came out of a pipeway
-EndCard_Flag,$7974,1,,0,,0,Flag,General,Set when End Level card is hit (can determine when level has ended)
-Map_PlyrSprOvrY,$7975,1,,0,,0,Overworld,General,"""Player Sprite Override Y""; If set to $F8 during warp, erases Player's map sprite; otherwise provides a Y to put it at"
-Map_Entered_Y,$7976,2,,0,,0,Overworld,General,(Mario/Luigi) Stores the Y value when you enter a level; this is the Y used if you complete the level
+Map_WhiteHouse,$7971,1,$7E3970,1,,0,Flag,General,Set if you have already earned the White Toad House for this world
+Map_CoinShip,$7972,1,$7E3971,1,,0,Flag,General,Set if you have already earned the Coin Ship for this world
+Map_WasInPipeway,$7973,1,$7E3972,1,,0,Flag,General,Set if you just came out of a pipeway
+EndCard_Flag,$7974,1,$7E3973,1,,0,Flag,General,Set when End Level card is hit (can determine when level has ended)
+Map_PlyrSprOvrY,$7975,1,$7E3974,1,,0,Overworld,General,"""Player Sprite Override Y""; If set to $F8 during warp, erases Player's map sprite; otherwise provides a Y to put it at"
+Map_Entered_Y,$7976,2,$7E3975,2,,0,Overworld,General,(Mario/Luigi) Stores the Y value when you enter a level; this is the Y used if you complete the level
 Map_Entered_XHi,$7978,2,$7E3977,2,,0,Overworld,General,(Mario/Luigi) Hi byte for Map_Entered_X
-Map_Entered_X,$797A,2,,0,,0,Overworld,General,"(Mario/Luigi) Same as Map_Entered_Y, only for X"
-Map_Previous_UnusedPVal2,$797C,2,,0,,0,Overworld,General,(Mario/Luigi) Backup of Map_UnusedPlayerVal2
-Map_Previous_Y,$797E,2,,0,,0,Overworld,General,"(Mario/Luigi) Stores the previous Y you were ""safe"" at; this is the Y you go back to if you die"
-Map_Previous_XHi,$7980,2,,0,,0,Overworld,General,"(Mario/Luigi) Same as Map_Previous_Y, only for XHi"
-Map_Previous_X,$7982,2,,0,,0,Overworld,General,"(Mario/Luigi) Same as Map_Previous_Y, only for X"
-Map_Unused7984,$7984,2,,0,,0,Empty,General,(Mario/Luigi) Unused; cleared and never touched again
-Map_Prev_XOff2,$7986,2,,0,,0,Overworld,General,"(Mario/Luigi) Holds a copy of Map_Prev_XOff, but I'm not sure why?"
-Map_Prev_XHi2,$7988,2,,0,,0,Overworld,General,"(Mario/Luigi) Holds a copy of Map_Prev_XHi, but I'm not sure why?"
-Map_Unused798A,$798A,2,,0,,0,Hardware Mirror,General,(Mario/Luigi) Unused; cleared and never touched again
-Level_Jct_HSHi,$798C,1,,0,,0,Camera,General,Level junction horizontal scroll high value
-Level_Jct_HS,$798D,1,,0,,0,Camera,General,Level junction horizontal scroll value
+Map_Entered_X,$797A,2,$7E3979,2,,0,Overworld,General,"(Mario/Luigi) Same as Map_Entered_Y, only for X"
+Map_Previous_UnusedPVal2,$797C,2,$7E397B,2,,0,Overworld,General,(Mario/Luigi) Backup of Map_UnusedPlayerVal2
+Map_Previous_Y,$797E,2,$7E397D,2,,0,Overworld,General,"(Mario/Luigi) Stores the previous Y you were ""safe"" at; this is the Y you go back to if you die"
+Map_Previous_XHi,$7980,2,$7E397F,2,,0,Overworld,General,"(Mario/Luigi) Same as Map_Previous_Y, only for XHi"
+Map_Previous_X,$7982,2,$7E3981,2,,0,Overworld,General,"(Mario/Luigi) Same as Map_Previous_Y, only for X"
+Map_Unused7984,$7984,2,$7E3983,2,,0,Empty,General,(Mario/Luigi) Unused; cleared and never touched again
+Map_Prev_XOff2,$7986,2,$7E3985,2,,0,Overworld,General,"(Mario/Luigi) Holds a copy of Map_Prev_XOff, but I'm not sure why?"
+Map_Prev_XHi2,$7988,2,$7E3987,2,,0,Overworld,General,"(Mario/Luigi) Holds a copy of Map_Prev_XHi, but I'm not sure why?"
+Map_Unused798A,$798A,2,$7E3989,2,,0,Hardware Mirror,General,(Mario/Luigi) Unused; cleared and never touched again
+Level_Jct_HSHi,$798C,1,$7E398B,1,,0,Camera,General,Level junction horizontal scroll high value
+Level_Jct_HS,$798D,1,$7E398C,1,,0,Camera,General,Level junction horizontal scroll value
 Level_Jct_VSHi,$798E,1,$7E398D,1,,0,Camera,General,Level junction vertical scroll high value
 Level_Jct_VS,$798F,1,$7E398E,1,,0,Camera,General,Level junction vertical scroll value
-,$7990,2,,0,,0,Empty,General,Unused.
-Map_Unused7992,$7992,1,,0,,0,Overworld,General,Value used in some dead code in PRG011; cleared elsewhere (NOT SURE if maybe it sometimes meant Bonus_DiePos?)
-Bonus_DiePos,$7992,1,,0,,0,Bonus Game,General,"UNUSED Die in the lost bonus games, counts 0-5"
-Map_Previous_Dir,$7993,2,,0,,0,Overworld,General,"(Mario/Luigi) Backup movement dir (remember which way Player moved last) (8=Up, 4=Down, 2=Left, 1=Right)"
-Map_Unused7995,$7995,1,$7E3994,0,,0,Empty,General,Unused; cleared but never used otherwise
+,$7990,2,$7E398F,2,,0,Empty,General,Unused.
+Map_Unused7992,$7992,1,$7E3991,1,,0,Overworld,General,Value used in some dead code in PRG011; cleared elsewhere (NOT SURE if maybe it sometimes meant Bonus_DiePos?)
+Bonus_DiePos,$7992,1,$7E3991,1,,0,Bonus Game,General,"UNUSED Die in the lost bonus games, counts 0-5"
+Map_Previous_Dir,$7993,2,$7E3992,2,,0,Overworld,General,"(Mario/Luigi) Backup movement dir (remember which way Player moved last) (8=Up, 4=Down, 2=Left, 1=Right)"
+Map_Unused7995,$7995,1,$7E3994,1,,0,Empty,General,Unused; cleared but never used otherwise
 SNES_PreventLevelClear,,0,$7E3995,1,,0,Overworld,General,"If set, the level will not be cleared once completed.
 This is used to fix any N-Spade game/White Mushroom House clearing any uncompleted tile that it sits on."
 Player_NoSlopeStick,$7996,1,$7E027F,1,,0,Flag,General,"If set, Player does not stick to slopes (noticeable running downhill)"
 ,$7997,105,$7E3996,1642,,0,Empty,General,Unused.
 AScroll_Anchor,$7A00,1,$7E1A00,1,,0,Misc.,General,"Used as starting point for $7A00-$7A14 clear, but never actually used in Auto-Scroll"
-Level_AScrlSelect,$7A01,1,,0,,0,Level,General,Selects auto scroll routine to use (see PRG009_B922) (TOFIX)
-CineKing_WandState,$7A01,1,,0,,0,Sprites,King Post-Transform,"Wand state; 0 = falling, 1 = spinning, 2 = held"
-CineKing_WandFrame,$7A02,1,,0,,0,Sprites,King Post-Transform,Wand frame; 0 to 7
-Level_AScrlLimitSel,$7A02,1,,0,,0,Camera,General,"""Limit Selector"" for the auto scroll (typically selects an end or a start/end pair, depending on style)"
-CineKing_ToadFrame,$7A03,1,,0,,0,Sprites,King Post-Transform,Toad's frame
-Level_AScrlVar,$7A03,1,,0,,0,Camera,General,"Variable used for different things depending on the auto scroll style
+Level_AScrlSelect,$7A01,1,$7E1A01,1,,0,Level,General,Selects auto scroll routine to use (see PRG009_B922) (TOFIX)
+CineKing_WandState,$7A01,1,$7E1A01,1,,0,Sprites,King Post-Transform,"Wand state; 0 = falling, 1 = spinning, 2 = held"
+CineKing_WandFrame,$7A02,1,$7E1A02,1,,0,Sprites,King Post-Transform,Wand frame; 0 to 7
+Level_AScrlLimitSel,$7A02,1,$7E1A02,1,,0,Camera,General,"""Limit Selector"" for the auto scroll (typically selects an end or a start/end pair, depending on style)"
+CineKing_ToadFrame,$7A03,1,$7E1A03,1,,0,Sprites,King Post-Transform,Toad's frame
+Level_AScrlVar,$7A03,1,$7E1A03,1,,0,Camera,General,"Variable used for different things depending on the auto scroll style
 In horizontal scroll style (Level_AScrlSelect = 0), it's the current ""movement"" (see table AScroll_Movement)"
-Level_AScrlLoopSel,$7A04,1,,0,,0,Camera,General,"Currently selected ""movement loop"" (horizontal only, see AScroll_MovementLoopStart; Just a var in others?)"
-CineKing_DiagHi,$7A04,1,,0,,0,Level,King Post-Transform,Text high address value
-,$7A05,3,,0,,0,Empty,King Post-Transform,Unused.
-Level_AScrlMoveRepeat,$7A05,1,,0,,0,Camera,General,"Repeat current move until zero (decrements each full expiration of Level_AScrlMoveTicks); $FF when on last move, passes control to movement loop"
-Level_AScrlLoopCurMove,$7A06,1,,0,,0,Camera,General,"Current ""movement loop"" index (into AScroll_MovementLoop)"
-Level_AScrlSclLastDir,$7A07,1,,0,,0,Camera,General,"Auto scroll ""Scroll_LastDir"""
-CineKing_TimerT,$7A08,1,,0,,0,Sprites,King Post-Transform,Cheering Toad animation Timer
-Level_AScrlMoveTicks,$7A08,1,,0,,0,Camera,General,"Counts down to zero, decrements Level_AScrlMoveRepeat (goes to next ""movement"")"
-CineKing_Timer3,$7A09,1,,0,,0,Counter,King Post-Transform,Timer decremented every 4 ticks (does not appear to be used!)
-Level_AScrlTimer,$7A09,1,,0,,0,Camera,General,"Auto scroll counter, decrements to zero"
-,$7A0A,2,,0,,0,Empty,King Post-Transform,Unused.
-Level_AScrlPosHHi,$7A0A,1,,0,,0,Camera,General,"Raster effect horizontal ""high"" position"
-,$7A0B,1,,0,,0,Empty,General,Unused.
-Level_AScrlPosH,$7A0C,1,,0,,0,Camera,General,Raster effect horizontal position
-CineKing_WandX,$7A0C,1,,0,,0,Sprites,King Post-Transform,Wand X position
-CineKing_WandY,$7A0D,1,,0,,0,Sprites,King Post-Transform,Wand Y position
-Level_AScrlPosV,$7A0D,1,,0,,0,Camera,General,Raster effect vertical position
-Level_AScrlHVel,$7A0E,1,,0,,0,Camera,General,"Auto scroll horizontal ""velocity"""
-CineKing_WandXVel,$7A0E,1,,0,,0,Sprites,King Post-Transform,Wand X velocity (4.4FP)
-CineKing_WandYVel,$7A0F,1,,0,,0,Sprites,King Post-Transform,Wand Y velocity (4.4FP)
-Level_AScrlVVel,$7A0F,1,,0,,0,Camera,General,"Auto scroll vertical ""velocity"""
-CineKing_WandXVel_Frac,$7A10,1,,0,,0,Sprites,King Post-Transform,Wand X velocity fractional accumulator
-Level_AScrlHVelFrac,$7A10,1,,0,,0,Camera,General,Auto scroll horizontal velocity fractional accumulator 
-Level_AScrlVVelFrac,$7A11,1,,0,,0,Camera,General,Auto scroll vertical velocity fractional accumulator 
-CineKing_WandYVel_Frac,$7A11,1,,0,,0,Sprites,King Post-Transform,Wand Y velocity fractional accumulator
-Level_AScrlHVelCarry,$7A12,1,,0,,0,Camera,General,'1' when last auto scroll H Velocity fraction accumulation rolled over
-Level_AScrlVVelCarry,$7A13,1,,0,,0,Camera,General,'1' when last auto scroll V Velocity fraction accumulation rolled over
-World8Tank_OnTank,$7A14,1,,0,,0,Flag,General,Set when Player is standing on tank surface in Tank level (as opposed to ground); for the illusion the tank is moving through...
-CannonFire_ID,$7A15,8,,0,,0,Sprites,General,ID of the cannon fire
-CannonFire_YHi,$7A1D,8,,0,,0,Sprites,General,Cannon fire Y Hi
-CannonFire_Y,$7A25,8,,0,,0,Sprites,General,Cannon fire Y
-CannonFire_XHi,$7A2D,8,,0,,0,Sprites,General,Cannon fire X Hi
-CannonFire_X,$7A35,8,,0,,0,Sprites,General,Cannon fire X
-CannonFire_Parent,$7A3D,8,,0,,0,Sprites,General,"Tie back to level object index of ""parent"" object"
-Splash_DisTimer,$7A45,1,,0,,0,Player,General,Player water splashes are disabled until decrements to zero; set when Player hits any bounce block
-ShellKillFlash_Cnt,$7A46,1,,0,,0,Sprites,General,"""Shell Kill Flash"" counter"
-ShellKillFlash_Y,$7A47,1,$7E1A47,0,,0,Sprites,General,"""Shell Kill Flash"" Y"
-ShellKillFlash_X,$7A48,1,,0,,0,Sprites,General,"""Shell Kill Flash"" X"
-Objects_DisPatChng,$7A49,6,,0,,0,Sprites,General,"If set, this object no longer enforces a pattern bank change"
-ObjSplash_DisTimer,$7A4F,6,,0,,0,Sprites,General,Object water/lava splashes are disabled until decrements to zero
-PlayerProj_XVelFrac,$7A55,2,,0,,0,Sprites,General,Player Projectile X velocity fractional accumulator
-CannonFire_Timer2,$7A57,8,,0,,0,Sprites,General,Cannon Fire timer (decrements to zero)
-Roulette_Unused7A5F,$7A5F,1,,0,,0,Bonus Game,General,Unused value in Roulette game
-Roulette_Unused7A5F_Delta,$7A60,1,,0,,0,Bonus Game,General,Delta value added to Roulette_Unused7A5F
-Bowser_Tiles,$7A61,2,,0,,0,Sprites,General,Bowser's detected tiles (to determine what to break)
-Bowser_Counter1,$7A63,1,,0,,0,Sprites,General,"A counter used by Bowser, decrements to zero"
-Bowser_Counter2,$7A64,1,,0,,0,Sprites,General,"A counter used by Bowser, decrements to zero"
-Bowser_Counter3,$7A65,1,,0,,0,Sprites,General,"A counter used by Bowser, random setting, decrements to zero"
-CoinShip_CoinGlowIdx,$7A66,1,,0,,0,Palettes,General,Coin Ship only: Glowing coins palette color index
-CoinShip_CoinGlowCnt,$7A67,1,,0,,0,Palettes,General,Coin Ship only: Glowing coins palette color counter
-SObjBlooperKid_OutOfWater,$7A68,8,,0,,0,Sprites,General,"Blooper kid only; if set, Blooper Kid is trying to go out of water"
-,$7A70,2,,0,,0,Empty,General,Unused.
-Object_SplashAlt,$7A72,1,,0,,0,Misc.,General,"Used to alternate the ""splash slots"" 1 and 2 as objects hit the water"
-,$7A73,109,,0,,0,Empty,General,Unused.
+Level_AScrlLoopSel,$7A04,1,$7E1A04,1,,0,Camera,General,"Currently selected ""movement loop"" (horizontal only, see AScroll_MovementLoopStart; Just a var in others?)"
+CineKing_DiagHi,$7A04,1,$7E1A04,1,,0,Level,King Post-Transform,Text high address value
+,$7A05,3,$7E1A05,3,,0,Empty,King Post-Transform,Unused.
+Level_AScrlMoveRepeat,$7A05,1,$7E1A05,1,,0,Camera,General,"Repeat current move until zero (decrements each full expiration of Level_AScrlMoveTicks); $FF when on last move, passes control to movement loop"
+Level_AScrlLoopCurMove,$7A06,1,$7E1A06,1,,0,Camera,General,"Current ""movement loop"" index (into AScroll_MovementLoop)"
+Level_AScrlSclLastDir,$7A07,1,$7E1A07,1,,0,Camera,General,"Auto scroll ""Scroll_LastDir"""
+CineKing_TimerT,$7A08,1,$7E1A08,1,,0,Sprites,King Post-Transform,Cheering Toad animation Timer
+Level_AScrlMoveTicks,$7A08,1,$7E1A08,1,,0,Camera,General,"Counts down to zero, decrements Level_AScrlMoveRepeat (goes to next ""movement"")"
+CineKing_Timer3,$7A09,1,$7E1A09,1,,0,Counter,King Post-Transform,Timer decremented every 4 ticks (does not appear to be used!)
+Level_AScrlTimer,$7A09,1,$7E1A09,1,,0,Camera,General,"Auto scroll counter, decrements to zero"
+,$7A0A,2,$7E1A0A,2,,0,Empty,King Post-Transform,Unused.
+Level_AScrlPosHHi,$7A0A,1,$7E1A0A,1,,0,Camera,General,"Raster effect horizontal ""high"" position"
+,$7A0B,1,$7E1A0B,1,,0,Empty,General,Unused.
+Level_AScrlPosH,$7A0C,1,$7E1A0C,1,,0,Camera,General,Raster effect horizontal position
+CineKing_WandX,$7A0C,1,$7E1A0C,1,,0,Sprites,King Post-Transform,Wand X position
+CineKing_WandY,$7A0D,1,$7E1A0D,1,,0,Sprites,King Post-Transform,Wand Y position
+Level_AScrlPosV,$7A0D,1,$7E1A0D,1,,0,Camera,General,Raster effect vertical position
+Level_AScrlHVel,$7A0E,1,$7E1A0E,1,,0,Camera,General,"Auto scroll horizontal ""velocity"""
+CineKing_WandXVel,$7A0E,1,$7E1A0E,1,,0,Sprites,King Post-Transform,Wand X velocity (4.4FP)
+CineKing_WandYVel,$7A0F,1,$7E1A0F,1,,0,Sprites,King Post-Transform,Wand Y velocity (4.4FP)
+Level_AScrlVVel,$7A0F,1,$7E1A0F,1,,0,Camera,General,"Auto scroll vertical ""velocity"""
+CineKing_WandXVel_Frac,$7A10,1,$7E1A10,1,,0,Sprites,King Post-Transform,Wand X velocity fractional accumulator
+Level_AScrlHVelFrac,$7A10,1,$7E1A10,1,,0,Camera,General,Auto scroll horizontal velocity fractional accumulator 
+Level_AScrlVVelFrac,$7A11,1,$7E1A11,1,,0,Camera,General,Auto scroll vertical velocity fractional accumulator 
+CineKing_WandYVel_Frac,$7A11,1,$7E1A11,1,,0,Sprites,King Post-Transform,Wand Y velocity fractional accumulator
+Level_AScrlHVelCarry,$7A12,1,$7E1A12,1,,0,Camera,General,'1' when last auto scroll H Velocity fraction accumulation rolled over
+Level_AScrlVVelCarry,$7A13,1,$7E1A13,1,,0,Camera,General,'1' when last auto scroll V Velocity fraction accumulation rolled over
+World8Tank_OnTank,$7A14,1,$7E1A14,1,,0,Flag,General,Set when Player is standing on tank surface in Tank level (as opposed to ground); for the illusion the tank is moving through...
+CannonFire_ID,$7A15,8,$7E1A15,8,,0,Sprites,General,ID of the cannon fire
+CannonFire_YHi,$7A1D,8,$7E1A1D,8,,0,Sprites,General,Cannon fire Y Hi
+CannonFire_Y,$7A25,8,$7E1A25,8,,0,Sprites,General,Cannon fire Y
+CannonFire_XHi,$7A2D,8,$7E1A2D,8,,0,Sprites,General,Cannon fire X Hi
+CannonFire_X,$7A35,8,$7E1A35,8,,0,Sprites,General,Cannon fire X
+CannonFire_Parent,$7A3D,8,$7E1A3D,8,,0,Sprites,General,"Tie back to level object index of ""parent"" object"
+Splash_DisTimer,$7A45,1,$7E1A45,1,,0,Player,General,Player water splashes are disabled until decrements to zero; set when Player hits any bounce block
+ShellKillFlash_Cnt,$7A46,1,$7E1A46,1,,0,Sprites,General,"""Shell Kill Flash"" counter"
+ShellKillFlash_Y,$7A47,1,$7E1A47,1,,0,Sprites,General,"""Shell Kill Flash"" Y"
+ShellKillFlash_X,$7A48,1,$7E1A48,1,,0,Sprites,General,"""Shell Kill Flash"" X"
+Objects_DisPatChng,$7A49,6,$7E1A49,6,,0,Sprites,General,"If set, this object no longer enforces a pattern bank change"
+ObjSplash_DisTimer,$7A4F,6,$7E1A4F,6,,0,Sprites,General,Object water/lava splashes are disabled until decrements to zero
+PlayerProj_XVelFrac,$7A55,2,$7E1A55,2,,0,Sprites,General,Player Projectile X velocity fractional accumulator
+CannonFire_Timer2,$7A57,8,$7E1A57,8,,0,Sprites,General,Cannon Fire timer (decrements to zero)
+Roulette_Unused7A5F,$7A5F,1,$7E1A5F,1,,0,Bonus Game,General,Unused value in Roulette game
+Roulette_Unused7A5F_Delta,$7A60,1,$7E1A60,1,,0,Bonus Game,General,Delta value added to Roulette_Unused7A5F
+Bowser_Tiles,$7A61,2,$7E1A61,2,,0,Sprites,General,Bowser's detected tiles (to determine what to break)
+Bowser_Counter1,$7A63,1,$7E1A63,1,,0,Sprites,General,"A counter used by Bowser, decrements to zero"
+Bowser_Counter2,$7A64,1,$7E1A64,1,,0,Sprites,General,"A counter used by Bowser, decrements to zero"
+Bowser_Counter3,$7A65,1,$7E1A65,1,,0,Sprites,General,"A counter used by Bowser, random setting, decrements to zero"
+CoinShip_CoinGlowIdx,$7A66,1,$7E1A66,1,,0,Palettes,General,Coin Ship only: Glowing coins palette color index
+CoinShip_CoinGlowCnt,$7A67,1,$7E1A67,1,,0,Palettes,General,Coin Ship only: Glowing coins palette color counter
+SObjBlooperKid_OutOfWater,$7A68,8,$7E1A68,8,,0,Sprites,General,"Blooper kid only; if set, Blooper Kid is trying to go out of water"
+,$7A70,2,$7E1A70,2,,0,Empty,General,Unused.
+Object_SplashAlt,$7A72,1,$7E1A72,1,,0,Misc.,General,"Used to alternate the ""splash slots"" 1 and 2 as objects hit the water"
+,$7A73,109,$7E1A73,141,,0,Empty,General,Unused.
 Music_Start,$7AE0,1,,0,,0,Audio,General,Music start index (beginning of this song)
 Music_End,$7AE1,1,,0,,0,Audio,General,Music end index (inclusive last index to play before loop)
 Music_Loop,$7AE2,1,,0,,0,Audio,General,Music loop index (index to start from when song reaches end)
@@ -1419,13 +1501,13 @@ Music_Sq2Bend,$7AF4,1,,0,,0,Hardware Mirror,General,Alters PAPU_FT2 for bend eff
 Music_RestH_Off,$7AF7,1,,0,,0,Audio,General,Offset added to Music_RestH_Base; typically $00 or $10 (for low time warning on compatible songs)
 ,$7AF8,7,,0,,0,Empty,General,Unused.
 PAPU_MODCTL_Copy,$7AFF,1,,0,,0,Hardware Mirror,General,Current PAPU_MODCTL register
-Level_ObjIdxStartByScreen,$7B00,16,,0,,0,Level,General,"Defines the starting index into Level_Objects for each ""screen"""
-Level_ObjectsSpawned,$7B10,48,,0,,0,Level,General,"When $80 set, object is already spawned, $00 means not"
+Level_ObjIdxStartByScreen,$7B00,16,$7E1B00,16,,0,Level,General,"Defines the starting index into Level_Objects for each ""screen"""
+Level_ObjectsSpawned,$7B10,48,$7E1B10,48,,0,Level,General,"When $80 set, object is already spawned, $00 means not"
 Level_Objects,$7B40,144,$7E1B40,144,,0,Level,General,"Object array for current level - 3 bytes per object: ID, Column, Row (C/R of tile grid, multiply by 16 for pixel location)"
 ,$7BD0,80,$7E1BD0,80,,0,Empty,General,Unused.
 Object_BufferX,$7C20,64,$7E1C20,64,,0,Sprites,General,"For certain objects that require a buffer of X values
 Buffer_Occupied determines which of the two buffers is free, if any at all. The object will hold onto it then."
-Object_BufferY,$7C60,64,,0,,0,Sprites,General,"For certain objects that require a buffer of Y values
+Object_BufferY,$7C60,64,$7E1C60,64,,0,Sprites,General,"For certain objects that require a buffer of Y values
 Buffer_Occupied determines which of the two buffers is free, if any at all. The object will hold onto it then."
 ChainChomp_ChainX1,$7CA0,5,$7E1CA0,5,,0,Sprites,General,Chain Link 1 X
 ChainChomp_ChainX2,$7CA5,5,$7E1CA5,5,,0,Sprites,General,Chain Link 2 X
@@ -1440,59 +1522,60 @@ Objects_Var11,$7CCD,5,$7E1CCD,5,,0,Sprites,General,Generic object variable 11
 Objects_Var12,$7CD2,5,$7E1CD2,5,,0,Sprites,General,Generic object variable 12
 Objects_Var13,$7CD7,5,$7E1CD7,5,,0,Sprites,General,Generic object variable 13
 Objects_Var14,$7CDC,5,$7E1CDC,5,,0,Sprites,General,Generic object variable 14
-PlayerProj_ID,$7CE1,2,,0,,0,Sprites,General,"Player projectile ID (0 = not in use, 1 = fireball, 2 = hammer, 3+ = Fireball impact ""Poof"")"
-PlayerProj_Y,$7CE3,2,,0,,0,Sprites,General,Player projectile Y
-PlayerProj_X,$7CE5,2,,0,,0,Sprites,General,Player projectile X
-PlayerProj_YVel,$7CE7,2,,0,,0,Sprites,General,"Player projectile Y Velocity (NOTE: Integer, not 4.4FP)"
-PlayerProj_XVel,$7CE9,2,,0,,0,Sprites,General,"Player projectile X Velocity (NOTE: Fireball is integer, 4.4FP for hammer ONLY)"
-Fireball_HitChkPass,$7CEB,2,,0,,0,Sprites,General,"Count of times Player's fireball has gone through hit check; when it hits 2, fireball poofs"
-PlayerProj_Cnt,$7CED,2,,0,,0,Sprites,General,Player projectile counter
-Temp_VarNP0,$7CEF,1,,0,,0,Misc.,General,A temporary not on page 0
-Lakitu_Active,$7CF0,1,,0,,0,Sprites,General,"Set while a Lakitu is active; keeps Lakitu ""alive"" even if off-screen etc."
-LevelEvent_Cnt,$7CF1,1,,0,,0,Counter,General,General purpose counter used by a couple LevelEvents
-Vert_Scroll_Off,$7CF2,1,,0,,0,Camera,General,"Vertical scroll offset, used for ""vibration"" effects"
-Level_Vibration,$7CF3,1,,0,,0,Level,General,"While greater than zero, screen vibrates (from impact of heavy fellow)"
-Player_VibeDisable,$7CF4,1,,0,,0,Player,General,"While greater than zero, Player is unable to move (from impact of heavy fellow)"
-Player_TwisterSpin,$7CF5,1,,0,,0,Player,General,"While greater than zero, Player is twirling from sand twister"
-Objects_HitCount,$7CF6,5,,0,,0,Sprites,General,"Somewhat uncommon ""HP"" used generally for bosses only (e.g. they take so many fireballs)"
-RotatingColor_Cnt,$7CFB,1,,0,,0,Palettes,General,"When non-zero, causes rainbow palettes in the background; $80 bit is used by Koopaling wand grab"
-Wand_FrameCnt,$7CFC,1,,0,,0,Counter,General,A counter that overflows to increment Wand_Frame (added to by the wand's SpecialObj_Var1)
-Wand_Frame,$7CFD,1,,0,,0,Sprites,General,Wand frame
-Wand_BounceFlag,$7CFE,1,,0,,0,Sprites,General,Tracks the recovered wand bounce; odd on first bounce
-Player_DebugNoHitFlag,$7CFF,1,,0,,0,Misc.,General,"UNUSED: (Old debug routine) When set, disables getting hurt (would be toggled by pressing SELECT; see PRG000 $C91B)"
-Map_Completions,$7D00,128,,0,,0,Overworld,General,"Stores ""rows"" of completed levels or other map alterations (e.g. rock break, mini-fortress lock removal, etc.) for a given column, from the leftmost. Rows 1-7 use decending bits from $80, and both row 8 and row 9 use bit $01. Row 8 is prioritized over row 9 should two level panels in these rows share the same column.
+PlayerProj_ID,$7CE1,2,$7E1CE1,2,,0,Sprites,General,"Player projectile ID (0 = not in use, 1 = fireball, 2 = hammer, 3+ = Fireball impact ""Poof"")"
+PlayerProj_Y,$7CE3,2,$7E1CE3,2,,0,Sprites,General,Player projectile Y
+PlayerProj_X,$7CE5,2,$7E1CE5,2,,0,Sprites,General,Player projectile X
+PlayerProj_YVel,$7CE7,2,$7E1CE7,2,,0,Sprites,General,"Player projectile Y Velocity (NOTE: Integer, not 4.4FP)"
+PlayerProj_XVel,$7CE9,2,$7E1CE9,2,,0,Sprites,General,"Player projectile X Velocity (NOTE: Fireball is integer, 4.4FP for hammer ONLY)"
+Fireball_HitChkPass,$7CEB,2,$7E1CEB,2,,0,Sprites,General,"Count of times Player's fireball has gone through hit check; when it hits 2, fireball poofs"
+PlayerProj_Cnt,$7CED,2,$7E1CED,2,,0,Sprites,General,Player projectile counter
+Temp_VarNP0,$7CEF,1,$7E1CEF,1,,0,Misc.,General,A temporary not on page 0
+Lakitu_Active,$7CF0,1,$7E1CF0,1,,0,Sprites,General,"Set while a Lakitu is active; keeps Lakitu ""alive"" even if off-screen etc."
+LevelEvent_Cnt,$7CF1,1,$7E1CF1,1,,0,Counter,General,General purpose counter used by a couple LevelEvents
+Vert_Scroll_Off,$7CF2,1,$7E1CF2,1,,0,Camera,General,"Vertical scroll offset, used for ""vibration"" effects"
+Level_Vibration,$7CF3,1,$7E1CF3,1,,0,Level,General,"While greater than zero, screen vibrates (from impact of heavy fellow)"
+Player_VibeDisable,$7CF4,1,$7E1CF4,1,,0,Player,General,"While greater than zero, Player is unable to move (from impact of heavy fellow)"
+Player_TwisterSpin,$7CF5,1,$7E1CF5,1,,0,Player,General,"While greater than zero, Player is twirling from sand twister"
+Objects_HitCount,$7CF6,5,$7E1CF6,5,,0,Sprites,General,"Somewhat uncommon ""HP"" used generally for bosses only (e.g. they take so many fireballs)"
+RotatingColor_Cnt,$7CFB,1,$7E1CFB,1,,0,Palettes,General,"When non-zero, causes rainbow palettes in the background; $80 bit is used by Koopaling wand grab"
+Wand_FrameCnt,$7CFC,1,$7E1CFC,1,,0,Counter,General,A counter that overflows to increment Wand_Frame (added to by the wand's SpecialObj_Var1)
+Wand_Frame,$7CFD,1,$7E1CFD,1,,0,Sprites,General,Wand frame
+Wand_BounceFlag,$7CFE,1,$7E1CFE,1,,0,Sprites,General,Tracks the recovered wand bounce; odd on first bounce
+Player_DebugNoHitFlag,$7CFF,1,$7E1CFF,1,,0,Misc.,General,"UNUSED: (Old debug routine) When set, disables getting hurt (would be toggled by pressing SELECT; see PRG000 $C91B)"
+Map_Completions,$7D00,128,$7E1D00,128,,0,Overworld,General,"Stores ""rows"" of completed levels or other map alterations (e.g. rock break, mini-fortress lock removal, etc.) for a given column, from the leftmost. Rows 1-7 use decending bits from $80, and both row 8 and row 9 use bit $01. Row 8 is prioritized over row 9 should two level panels in these rows share the same column.
 
 Allows a MAX of 4 map screens (64 columns total each player, 16 columns per map screen)
 $7D00-$7D3F (Mario), $7D40-$7D7F (Luigi)"
 Inventory_Items,$7D80,28,$7E1D80,28,,0,Misc.,General,"Mario, 4 rows of 7 items"
-Inventory_Cards,$7D9C,3,,0,,0,Misc.,General,"Mario, 3 cards"
-Inventory_Score,$7D9F,3,,0,,0,Misc.,General,"Mario, 3 byte score"
-Inventory_Coins,$7DA2,1,,0,,0,Misc.,General,Mario's coins
-Inventory_Items2,$7DA3,28,,0,,0,Misc.,General,"Luigi, 4 rows of 7 items"
-Inventory_Cards2,$7DBF,3,,0,,0,Misc.,General,"Luigi, 3 cards"
-Inventory_Score2,$7DC2,3,,0,,0,Misc.,General,"Luigi, 3 byte score"
-Inventory_Coins2,$7DC5,1,,0,,0,Misc.,General,Luigi's coins
-Map_Unused7DC6,$7DC6,5,,0,,0,Overworld,General,"Indexed by Map_Unused738, value used in dead routine in PRG011 @ $A2AF"
-Map_GameOver_CursorY,$7DCB,1,,0,,0,Overworld,General,Game Over popup cursor Y ($60/$68)
-,$7DCC,9,,0,,0,Empty,General,Unused.
-Map_PrevMoveDir,$7DD5,1,,0,,0,Overworld,General,Last SUCCESSFUL (allowed) movement direction on map R01 L02 D04 U08
-,$7DD6,8,,0,,0,Empty,General,Unused.
+Inventory_Cards,$7D9C,3,$7E1D9C,3,,0,Misc.,General,"Mario, 3 cards"
+Inventory_Score,$7D9F,3,$7E1D9F,3,,0,Misc.,General,"Mario, 3 byte score"
+Inventory_Coins,$7DA2,1,$7E1DA2,1,,0,Misc.,General,Mario's coins
+Inventory_Items2,$7DA3,28,$7E1DA3,28,,0,Misc.,General,"Luigi, 4 rows of 7 items"
+Inventory_Cards2,$7DBF,3,$7E1DBF,3,,0,Misc.,General,"Luigi, 3 cards"
+Inventory_Score2,$7DC2,3,$7E1DC2,3,,0,Misc.,General,"Luigi, 3 byte score"
+Inventory_Coins2,$7DC5,1,$7E1DC5,1,,0,Misc.,General,Luigi's coins
+Map_Unused7DC6,$7DC6,5,$7E1DC6,5,,0,Overworld,General,"Indexed by Map_Unused738, value used in dead routine in PRG011 @ $A2AF"
+Map_GameOver_CursorY,$7DCB,1,$7E1DCB,1,,0,Overworld,General,Game Over popup cursor Y ($60/$68)
+,$7DCC,9,$7E1DCC,9,,0,Empty,General,Unused.
+Map_PrevMoveDir,$7DD5,1,$7E1DD5,1,,0,Overworld,General,Last SUCCESSFUL (allowed) movement direction on map R01 L02 D04 U08
+,$7DD6,8,$7E1DD6,40,,0,Empty,General,Unused.
 Pal_Data,$7DDE,32,$7E1300,512,,0,Palettes,General,"Holds an entire bg/sprite palette (this is the MASTER palette, what fades target, and others may source for ""original"" colors!)"
-Level_AltLayout,$7DFE,2,,0,,0,Level,General,"Pointer to level's ""alternate"" layout (when you go into bonus pipe, etc.)"
-Level_AltObjects,$7E00,2,,0,,0,Level,General,"Pointer to level's ""alternate"" object set (when you go into bonus pipe, etc.)"
-Level_BlockGrabHitMem,$7E02,128,,0,,0,Level,General,"Records coins and 1-ups grabbed, so they don't come back if you switch areas"
-Card_ActiveSet,$7E82,18,,0,,0,Bonus Game,General,Active set of N-Spade game cards
-Tile_AttrTable,$7E94,8,,0,,0,Misc.,General,"In levels, both ""halves"" define the first tile of a quadrant to be solid. The first half is solid at the ground (i.e. Player can stand on it). The second half is solid at the head and walls (i.e. Player bumps head on it, typically ""full solidity"" when combined above)
+Level_AltLayout,$7DFE,2,$7E1DFE,3,,0,Level,General,"Pointer to level's ""alternate"" layout (when you go into bonus pipe, etc.)"
+Level_AltObjects,$7E00,2,$7E1E01,3,,0,Level,General,"Pointer to level's ""alternate"" object set (when you go into bonus pipe, etc.)"
+Level_BlockGrabHitMem,$7E02,128,$7E1E04,128,,0,Level,General,"Records coins and 1-ups grabbed, so they don't come back if you switch areas"
+Card_ActiveSet,$7E82,18,$7E1E84,18,,0,Bonus Game,General,Active set of N-Spade game cards
+Tile_AttrTable,$7E94,8,$7E1E96,8,,0,Misc.,General,"In levels, both ""halves"" define the first tile of a quadrant to be solid. The first half is solid at the ground (i.e. Player can stand on it). The second half is solid at the head and walls (i.e. Player bumps head on it, typically ""full solidity"" when combined above)
 
 On the world map, the check follows with a ""less than"", as a quick failure check (if you're in this ""range"" of tiles, but less than that value, you can't possibly be on an enterable tile). The second half is not used on the world map. (TOFIX)"
-Level_UnusedSlopesTS5,$7E9C,1,,0,,0,Level,General,"UNUSED; If set to 2, forces slopes to be enabled for Level_Tileset = 5 (plant infestation)"
+Level_UnusedSlopesTS5,$7E9C,1,$7E1E9E,1,,0,Level,General,"UNUSED; If set to 2, forces slopes to be enabled for Level_Tileset = 5 (plant infestation)"
 PlantInfest_ACnt_Max,$7E9D,1,$7E1E9F,1,,0,Level,General,"Always set to $1A in plant infestation levels, sets max value for animation counter"
 ,$7E9E,24,$7E1EA0,24,,0,Empty,General,Unused.
 LevelJctBQ_Flag,$7EB6,1,$7E1EB8,1,,0,Flag,General,"Set to '1' while in a Big Question block area, locks horizontal scrolling"
-Level_JctBackupTileset,$7EB7,1,,0,,0,Level,General,Level Junction tileset backup
-Level_AltTileset,$7EB8,1,,0,,0,Level,General,"Level's ""alternate"" tileset (when you go into bonus pipe, etc.)"
-Level_LayPtrOrig_AddrL,$7EB9,1,,0,,0,Level,General,ORIGINAL Low byte of address to tile layout
-Level_LayPtrOrig_AddrH,$7EBA,1,,0,,0,Level,General,ORIGINAL High byte of address to tile layout
+Level_JctBackupTileset,$7EB7,1,$7E1EB9,1,,0,Level,General,Level Junction tileset backup
+Level_AltTileset,$7EB8,1,$7E1EBA,1,,0,Level,General,"Level's ""alternate"" tileset (when you go into bonus pipe, etc.)"
+Level_LayPtrOrig_AddrL,$7EB9,1,$7E1EBB,1,,0,Level,General,ORIGINAL Low byte of address to tile layout
+Level_LayPtrOrig_AddrH,$7EBA,1,$7E1EBC,1,,0,Level,General,ORIGINAL High byte of address to tile layout
+SNES_Level_LayPtrOrig_AddrB,,0,$7E1EBD,1,,0,Level,General,ORIGINAL Bank byte of address to tile layout
 Level_ObjPtrOrig_AddrL,$7EBB,1,$7E023A,1,,0,Level,General,ORIGINAL Low byte of address to object set
 Level_ObjPtrOrig_AddrH,$7EBC,1,$7E023B,1,,0,Level,General,ORIGINAL High byte of address to object set
 SNES_Level_ObjPtrOrig_AddrB,,0,$7E023C,1,,0,Level,General,"ORIGINAL Bank byte of address to object set
@@ -1500,10 +1583,10 @@ SNES: Written to on toad house warp - never read"
 Level_BG_Page1_2,$7EBD,1,,0,,0,Graphics,General,Sets which bank the first and second page (2K / 64 8x8 tiles) of BG is using (see Level_BG_Pages1/2)
 Map_BorderAttrFromTiles,$7EBE,44,,0,,0,Overworld,General,Attributes collected from map tiles that get overwritten by border FIXME SIZE UNCERTAIN (TOFIX)
 Map_Unused7EEA,$7EEA,1,,0,,0,Overworld,General,"Value retrieved from LUT at initialization of world, but never used otherwise"
-Map_Objects_Y,$7EEB,14,,0,,0,Overworld,General,Y coordinate of all map objects
-Map_Objects_XLo,$7EF9,14,,0,,0,Misc.,General,X coordinate lo byte of all map objects
-Map_Objects_XHi,$7F07,14,,0,,0,Misc.,General,X coordinate hi byte of all map objects
-Map_Objects_IDs,$7F15,14,,0,,0,Overworld,General,ID of all 8 map objects (TOFIX)
+Map_Objects_Y,$7EEB,14,$7E1EED,14,,0,Overworld,General,Y coordinate of all map objects
+Map_Objects_XLo,$7EF9,14,$7E1EFB,14,,0,Misc.,General,X coordinate lo byte of all map objects
+Map_Objects_XHi,$7F07,14,$7E1F09,14,,0,Misc.,General,X coordinate hi byte of all map objects
+Map_Objects_IDs,$7F15,14,$7E1F17,14,,0,Overworld,General,ID of all 8 map objects (TOFIX)
 Map_SprRAMOffDistr,$7F23,1,,0,,0,Counter,General,A free running counter on the map only which distributes Sprite_RAM offsets to ensure visibility
 Map_2PVsGame,$7F24,1,,0,,0,Overworld,General,"Sets which ""style"" of 2P Vs game will be played"
 ,$7F25,8,,0,,0,Empty,General,Unused.
@@ -1567,3 +1650,35 @@ SNES: The table will bleed into the first two hardware registers if slots 6-7 ar
 ,$7FFF,1,,0,,0,Empty,General,Unused.
 SNES_Tile_Mem_Hi,,0,$7E4000,6480,,0,Misc.,General,"Space used to store the 16x16 ""tiles"" that make up the World Map or Level
 Used"
+SNES_SRAM_FileIndex,,0,$700004,2,,0,Save Data,General,(TOFIX)
+SNES_SaveA_World_Num,,0,$700010,1,,0,Save Data,General,(TOFIX)
+,,0,$700011,1,,0,Empty,General,Unused.
+SNES_SaveA_Player_Lives,,0,$700012,2,,0,Save Data,General,(TOFIX)
+SNES_SaveA_Map_Objects_Y,,0,$700014,14,,0,Save Data,General,"(TOFIX)
+All Map_Objects data is written simultaneously."
+SNES_SaveA_Map_Objects_XLo,,0,$700022,14,,0,Save Data,General,"(TOFIX)
+All Map_Objects data is written simultaneously."
+SNES_SaveA_Map_Objects_XHi,,0,$700030,14,,0,Save Data,General,"(TOFIX)
+All Map_Objects data is written simultaneously."
+SNES_SaveA_Map_Objects_IDs,,0,$70003E,14,,0,Save Data,General,"(TOFIX)
+All Map_Objects data is written simultaneously."
+SNES_SaveA_Map_Completions,,0,$70004C,128,,0,Save Data,General,(TOFIX)
+SNES_SaveA_Inventory_Items,,0,$7000CC,28,,0,Save Data,General,"(TOFIX)
+All Inventory data is written simultaneously."
+SNES_SaveA_Inventory_Cards,,0,$7000E8,3,,0,Save Data,General,"(TOFIX)
+All Inventory data is written simultaneously."
+SNES_SaveA_Inventory_Score,,0,$7000EB,3,,0,Save Data,General,"(TOFIX)
+All Inventory data is written simultaneously."
+SNES_SaveA_Inventory_Coins,,0,$7000EE,1,,0,Save Data,General,"(TOFIX)
+All Inventory data is written simultaneously."
+SNES_SaveA_Inventory_Items2,,0,$7000EF,28,,0,Save Data,General,"(TOFIX)
+All Inventory data is written simultaneously."
+SNES_SaveA_Inventory_Cards2,,0,$70010B,3,,0,Save Data,General,"(TOFIX)
+All Inventory data is written simultaneously."
+SNES_SaveA_Inventory_Score2,,0,$70010E,3,,0,Save Data,General,"(TOFIX)
+All Inventory data is written simultaneously."
+SNES_SaveA_Inventory_Coins2,,0,$700111,1,,0,Save Data,General,"(TOFIX)
+All Inventory data is written simultaneously."
+SNES_SaveA_Map_CoinShip,,0,$700112,1,,0,Save Data,General,(TOFIX)
+SNES_SaveA_Total_Players,,0,$700113,1,,0,Save Data,General,(TOFIX)
+SNES_SaveB_World_Num,,0,$700116,1,,0,Save Data,General,(TOFIX)

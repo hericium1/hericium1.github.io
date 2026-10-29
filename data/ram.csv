@@ -1580,48 +1580,49 @@ Level_ObjPtrOrig_AddrL,$7EBB,1,$7E023A,1,,0,Level,General,ORIGINAL Low byte of a
 Level_ObjPtrOrig_AddrH,$7EBC,1,$7E023B,1,,0,Level,General,ORIGINAL High byte of address to object set
 SNES_Level_ObjPtrOrig_AddrB,,0,$7E023C,1,,0,Level,General,"ORIGINAL Bank byte of address to object set
 SNES: Written to on toad house warp - never read"
-Level_BG_Page1_2,$7EBD,1,,0,,0,Graphics,General,Sets which bank the first and second page (2K / 64 8x8 tiles) of BG is using (see Level_BG_Pages1/2)
-Map_BorderAttrFromTiles,$7EBE,44,,0,,0,Overworld,General,Attributes collected from map tiles that get overwritten by border FIXME SIZE UNCERTAIN (TOFIX)
-Map_Unused7EEA,$7EEA,1,,0,,0,Overworld,General,"Value retrieved from LUT at initialization of world, but never used otherwise"
+,,0,$7E1EBE,1,,0,Empty,General,Unused.
+Level_BG_Page1_2,$7EBD,1,$7E1EBF,1,,0,Graphics,General,Sets which bank the first and second page (2K / 64 8x8 tiles) of BG is using (see Level_BG_Pages1/2)
+Map_BorderAttrFromTiles,$7EBE,44,$7E1EC0,44,,0,Overworld,General,Attributes collected from map tiles that get overwritten by border FIXME SIZE UNCERTAIN (TOFIX)
+Map_Unused7EEA,$7EEA,1,$7E1EEC,1,,0,Overworld,General,"Value retrieved from LUT at initialization of world, but never used otherwise"
 Map_Objects_Y,$7EEB,14,$7E1EED,14,,0,Overworld,General,Y coordinate of all map objects
 Map_Objects_XLo,$7EF9,14,$7E1EFB,14,,0,Misc.,General,X coordinate lo byte of all map objects
 Map_Objects_XHi,$7F07,14,$7E1F09,14,,0,Misc.,General,X coordinate hi byte of all map objects
 Map_Objects_IDs,$7F15,14,$7E1F17,14,,0,Overworld,General,ID of all 8 map objects (TOFIX)
-Map_SprRAMOffDistr,$7F23,1,,0,,0,Counter,General,A free running counter on the map only which distributes Sprite_RAM offsets to ensure visibility
-Map_2PVsGame,$7F24,1,,0,,0,Overworld,General,"Sets which ""style"" of 2P Vs game will be played"
-,$7F25,8,,0,,0,Empty,General,Unused.
-Map_Airship_Dest,$7F2D,1,,0,,0,Overworld,General,"Airship travel destination; 6 X/Y map coordinates defined per world, after that it just sits still"
-THouse_OpenByID,$7F2E,16,,0,,0,Level,General,UNUSED would keep track of chests opened for a given Toad House ID (THouse_ID)
-StatusBar_PMT,$7F3E,8,,0,,0,Misc.,General,Tiles that currently make up the power meter >>>>>>[P]
-StatusBar_CoinH,$7F46,1,,0,,0,Misc.,General,Status bar tile for coin MSD
-StatusBar_CoinL,$7F47,1,,0,,0,Misc.,General,Status bar tile for coin LSD
-StatusBar_LivesH,$7F48,1,,0,,0,Misc.,General,Status bar tile for lives MSD
-StatusBar_LivesL,$7F49,1,,0,,0,Misc.,General,Status bar tile for lives LSD
-StatusBar_Score,$7F4A,6,,0,,0,Misc.,General,Status bar tiles for score
-StatusBar_Time,$7F50,3,,0,,0,Misc.,General,Status bar tiles for time remaining
-Map_MusicBox_Cnt,$7F53,1,,0,,0,Overworld,General,Number of turns remaining until hammer brothers wake up (>= 1 and they're be asleep on the map)
-Level_JctYLHStart,$7F54,16,,0,,0,Level,General,Array of Y / YHi starts (TOFIX)
-Level_JctXLHStart,$7F64,16,,0,,0,Level,General,Array of X / XHi starts (TOFIX)
-Object_TileFeet2,$7F74,1,,0,,0,Sprites,General,? Difference against Object_TileFeet?
-Object_TileWall2,$7F75,1,,0,,0,Sprites,General,? Difference against Object_TileWall?
-ObjTile_DetYHi,$7F76,1,,0,,0,Sprites,General,Object tile detect Y Hi
-ObjTile_DetYLo,$7F77,1,,0,,0,Sprites,General,Object tile detect Y Lo
-ObjTile_DetXHi,$7F78,1,,0,,0,Sprites,General,Object tile detect X Hi
-ObjTile_DetXLo,$7F79,1,,0,,0,Sprites,General,Object tile detect X Lo
-Bubble_Cnt,$7F7A,3,,0,,0,Counter,General,Bubble counter value (0 = no bubble)
-WatrHit_IsSetFlag,$7F7D,1,,0,,0,Flag,General,"Set when Object_WatrHit* values are stored (but never cleared, so only once!)"
-Bubble_YHi,$7F7E,3,,0,,0,Sprites,General,Water Bubble Y Hi
-Object_WatrHitYHi,$7F81,1,,0,,0,Sprites,General,Y Hi of object that just hit water
-Bubble_Y,$7F82,3,,0,,0,Sprites,General,Water Bubble Y
-Object_WatrHitY,$7F85,1,,0,,0,Sprites,General,Y of object that just hit water
-Bubble_XHi,$7F86,3,,0,,0,Sprites,General,Water Bubble X Hi
-Object_WatrHitXHi,$7F89,1,,0,,0,Sprites,General,X Hi of object that just hit water
-Bubble_X,$7F8A,3,,0,,0,Sprites,General,Water Bubble X
-Object_WatrHitX,$7F8D,1,,0,,0,Sprites,General,X of object that just hit water
-Splash_Counter,$7F8E,3,,0,,0,Sprites,General,Water splash counter
-Splash_Y,$7F91,3,,0,,0,Sprites,General,Water splash X (TOFIX)
-Splash_X,$7F94,3,,0,,0,Sprites,General,Water splash Y (TOFIX)
-Splash_NoScrollY,$7F97,3,,0,,0,Sprites,General,"If set, flags this water splash to not display sprite Y as relative to screen scroll"
+Map_SprRAMOffDistr,$7F23,1,$7E1F25,1,,0,Counter,General,A free running counter on the map only which distributes Sprite_RAM offsets to ensure visibility
+Map_2PVsGame,$7F24,1,$7E1F26,1,,0,Overworld,General,"Sets which ""style"" of 2P Vs game will be played"
+,$7F25,8,$7E1F27,8,,0,Empty,General,Unused.
+Map_Airship_Dest,$7F2D,1,$7E1F2F,1,,0,Overworld,General,"Airship travel destination; 6 X/Y map coordinates defined per world, after that it just sits still"
+THouse_OpenByID,$7F2E,16,$7E1F31,16,,0,Level,General,UNUSED would keep track of chests opened for a given Toad House ID (THouse_ID)
+StatusBar_PMT,$7F3E,8,$7E1F40,8,,0,Misc.,General,Tiles that currently make up the power meter >>>>>>[P]
+StatusBar_CoinH,$7F46,1,$7E1F48,1,,0,Misc.,General,Status bar tile for coin MSD
+StatusBar_CoinL,$7F47,1,$7E1F49,1,,0,Misc.,General,Status bar tile for coin LSD
+StatusBar_LivesH,$7F48,1,$7E1F4A,1,,0,Misc.,General,Status bar tile for lives MSD
+StatusBar_LivesL,$7F49,1,$7E1F4B,1,,0,Misc.,General,Status bar tile for lives LSD
+StatusBar_Score,$7F4A,6,$7E1F4C,6,,0,Misc.,General,Status bar tiles for score
+StatusBar_Time,$7F50,3,$7E1F52,3,,0,Misc.,General,Status bar tiles for time remaining
+Map_MusicBox_Cnt,$7F53,1,$7E1F55,1,,0,Overworld,General,Number of turns remaining until hammer brothers wake up (>= 1 and they're be asleep on the map)
+Level_JctYLHStart,$7F54,16,$7E1F56,16,,0,Level,General,Array of Y / YHi starts (TOFIX)
+Level_JctXLHStart,$7F64,16,$7E1F66,16,,0,Level,General,Array of X / XHi starts (TOFIX)
+Object_TileFeet2,$7F74,1,$7E1F76,1,,0,Sprites,General,? Difference against Object_TileFeet?
+Object_TileWall2,$7F75,1,$7E1F77,1,,0,Sprites,General,? Difference against Object_TileWall?
+ObjTile_DetYHi,$7F76,1,$7E1F78,1,,0,Sprites,General,Object tile detect Y Hi
+ObjTile_DetYLo,$7F77,1,$7E1F79,1,,0,Sprites,General,Object tile detect Y Lo
+ObjTile_DetXHi,$7F78,1,$7E1F7A,1,,0,Sprites,General,Object tile detect X Hi
+ObjTile_DetXLo,$7F79,1,$7E1F7B,1,,0,Sprites,General,Object tile detect X Lo
+Bubble_Cnt,$7F7A,3,$7E1F7C,3,,0,Counter,General,Bubble counter value (0 = no bubble)
+WatrHit_IsSetFlag,$7F7D,1,$7E1F7F,1,,0,Flag,General,"Set when Object_WatrHit* values are stored (but never cleared, so only once!)"
+Bubble_YHi,$7F7E,3,$7E1F80,3,,0,Sprites,General,Water Bubble Y Hi
+Object_WatrHitYHi,$7F81,1,$7E1F83,1,,0,Sprites,General,Y Hi of object that just hit water
+Bubble_Y,$7F82,3,$7E1F84,3,,0,Sprites,General,Water Bubble Y
+Object_WatrHitY,$7F85,1,$7E1F87,1,,0,Sprites,General,Y of object that just hit water
+Bubble_XHi,$7F86,3,$7E1F88,3,,0,Sprites,General,Water Bubble X Hi
+Object_WatrHitXHi,$7F89,1,$7E1F8B,1,,0,Sprites,General,X Hi of object that just hit water
+Bubble_X,$7F8A,3,$7E1F8C,3,,0,Sprites,General,Water Bubble X
+Object_WatrHitX,$7F8D,1,$7E1F8F,1,,0,Sprites,General,X of object that just hit water
+Splash_Counter,$7F8E,3,$7E1F90,3,,0,Sprites,General,Water splash counter
+Splash_Y,$7F91,3,$7E1F93,3,,0,Sprites,General,Water splash X (TOFIX)
+Splash_X,$7F94,3,$7E1F96,3,,0,Sprites,General,Water splash Y (TOFIX)
+Splash_NoScrollY,$7F97,3,$7E1F99,3,,0,Sprites,General,"If set, flags this water splash to not display sprite Y as relative to screen scroll"
 BrickBust_En,$7F9A,3,$7E1F9C,3,,0,Sprites,General,"Brick bust ""Enable"" (0 = disable, 2 = brick debris, anything else = ""poof"" away)"
 BrickBust_YUpr,$7F9D,3,$7E1F9F,3,,0,Sprites,General,Brick bust upper chunks Y
 BrickBust_X,$7FA0,3,$7E1FA2,3,,0,Sprites,General,Brick bust base X
@@ -1648,8 +1649,16 @@ Roulette_Lives,$7FF7,1,$7E1FF9,1,,0,Bonus Game,General,Number of lives you are r
 Objects_IsGiant,$7FF7,8,$7E1FF9,8,,0,Sprites,General,"Set mainly for World 4 ""Giant"" enemies (but some others, like Bowser, also use it)
 SNES: The table will bleed into the first two hardware registers if slots 6-7 are used."
 ,$7FFF,1,,0,,0,Empty,General,Unused.
-SNES_Tile_Mem_Hi,,0,$7E4000,6480,,0,Misc.,General,"Space used to store the 16x16 ""tiles"" that make up the World Map or Level
-Used"
+SNES_Tile_Mem_Hi,,0,$7E4000,6480,,0,Misc.,General,"Space used to store the high bytes of the 16x16 ""tiles"" that make up the World Map or Level"
+,,0,$7E5950,1712,,0,Empty,General,Unused.
+SNES_DecompBuf_A,,0,$7E6000,8192,,0,Misc.,General,Decompression Buffer. Used for the Credits World 1-4 tilemaps.
+SNES_DecompBuf_B,,0,$7E8000,8192,,0,Misc.,General,Decompression Buffer. Used for the Credits World 5-8 tilemaps.
+(TOFIX),,,$7EA000,,,,,,(TOFIX)
+(TOFIX),,,$7EC500,,,,,,
+SNES_BGTile_Mem,,,$7F0000,3888,,,,,
+(TOFIX),,,$7F0F30,,,,,,
+SNES_DecompBuf_C,,0,$7FA500,8192,,0,Misc.,General,"Decompression Buffer, general purpose."
+(TOFIX),,,$7FC500,,,,,,
 SNES_SRAM_FileIndex,,0,$700004,2,,0,Save Data,General,(TOFIX)
 SNES_SaveA_World_Num,,0,$700010,1,,0,Save Data,General,(TOFIX)
 ,,0,$700011,1,,0,Empty,General,Unused.
